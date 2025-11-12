@@ -1,24 +1,32 @@
 import './style.css'
-import typescriptLogo from './typescript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.ts'
+import {
+  MicroPanel,
+  type BusEventDetail,
+  type FaderEventDetail,
+  type ToggleEventDetail,
+} from './microPanel.ts'
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-    </a>
-    <h1>Vite + TypeScript</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
-  </div>
-`
+const app = document.querySelector<HTMLDivElement>('#app')
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+if (!app) {
+  throw new Error('Missing #app container')
+}
+
+const panel = new MicroPanel()
+
+panel.addEventListener('toggle-change', (event) => {
+  const detail = (event as CustomEvent<ToggleEventDetail>).detail
+  console.info('toggle-change', detail)
+})
+
+panel.addEventListener('bus-change', (event) => {
+  const detail = (event as CustomEvent<BusEventDetail>).detail
+  console.info('bus-change', detail)
+})
+
+panel.addEventListener('fader-change', (event) => {
+  const detail = (event as CustomEvent<FaderEventDetail>).detail
+  console.info('fader-change', detail)
+})
+
+app.replaceChildren(panel.element)
