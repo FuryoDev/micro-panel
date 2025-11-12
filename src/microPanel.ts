@@ -64,8 +64,8 @@ export class MicroPanel extends EventTarget {
 
     panel.innerHTML = `
       <div class="surface">
-        <button type="button" class="key grey sm" data-toggle data-color="grey" data-key-id="macro" style="--col: 6 / span 1; --row: 1" data-cluster-after>MACRO</button>
-        <button type="button" class="key grey sm" data-toggle data-color="grey" data-key-id="bkgd" style="--col: 6 / span 1; --row: 2" data-cluster-after>BKGD</button>
+        <button type="button" class="key grey sm" data-toggle data-color="grey" data-key-id="macro" style="--col: 6 / span 1; --row: 1">MACRO</button>
+        <button type="button" class="key grey sm" data-toggle data-color="grey" data-key-id="bkgd" style="--col: 6 / span 1; --row: 2">BKGD</button>
 
         <button type="button" class="key lit-red" data-toggle data-color="lit-red" data-key-id="key1-on" style="--col: 8 / span 1; --row: 1">ON</button>
         <button type="button" class="key lit-amber sm" data-toggle data-color="lit-amber" data-key-id="key1" style="--col: 8 / span 1; --row: 2">KEY 1</button>
@@ -74,28 +74,28 @@ export class MicroPanel extends EventTarget {
         <button type="button" class="key lit-amber sm" data-toggle data-color="lit-amber" data-key-id="key2" style="--col: 9 / span 1; --row: 2">KEY 2</button>
 
         <button type="button" class="key lit-red" data-toggle data-color="lit-red" data-key-id="key3-on" style="--col: 10 / span 1; --row: 1">ON</button>
-        <button type="button" class="key grey sm" data-toggle data-color="grey" data-key-id="key3" style="--col: 10 / span 1; --row: 2" data-cluster-after>KEY 3</button>
+        <button type="button" class="key grey sm" data-toggle data-color="grey" data-key-id="key3" style="--col: 10 / span 1; --row: 2">KEY 3</button>
 
         <button type="button" class="key lit-red" data-toggle data-color="lit-red" data-key-id="key4-on" style="--col: 11 / span 1; --row: 1">ON</button>
-        <button type="button" class="key grey sm" data-toggle data-color="grey" data-key-id="key4" style="--col: 11 / span 1; --row: 2" data-cluster-after>KEY 4</button>
+        <button type="button" class="key grey sm" data-toggle data-color="grey" data-key-id="key4" style="--col: 11 / span 1; --row: 2">KEY 4</button>
 
-        <button type="button" class="key grey sm" data-toggle data-color="grey" data-key-id="me1" style="--col: 14 / span 1; --row: 1" data-cluster-before>M/E 1</button>
+        <button type="button" class="key grey sm" data-toggle data-color="grey" data-key-id="me1" style="--col: 14 / span 1; --row: 1">M/E 1</button>
         <button type="button" class="key lit-amber sm" data-toggle data-color="lit-amber" data-key-id="me2" style="--col: 15 / span 1; --row: 1">M/E 2</button>
         <button type="button" class="key grey sm" data-toggle data-color="grey" data-key-id="me3" style="--col: 16 / span 1; --row: 1">M/E 3</button>
-        <button type="button" class="key grey sm" data-toggle data-color="grey" data-key-id="me4" style="--col: 17 / span 1; --row: 1" data-cluster-after>M/E 4</button>
+        <button type="button" class="key grey sm" data-toggle data-color="grey" data-key-id="me4" style="--col: 17 / span 1; --row: 1">M/E 4</button>
 
-        <button type="button" class="key grey sm" data-toggle data-color="grey" data-key-id="dip" style="--col: 14 / span 1; --row: 2" data-cluster-before>DIP</button>
+        <button type="button" class="key grey sm" data-toggle data-color="grey" data-key-id="dip" style="--col: 14 / span 1; --row: 2">DIP</button>
         <button type="button" class="key grey sm" data-toggle data-color="grey" data-key-id="dve" style="--col: 15 / span 1; --row: 2">DVE</button>
-        <button type="button" class="key grey sm" data-toggle data-color="grey" data-key-id="sting" style="--col: 16 / span 1; --row: 2" data-cluster-after>STING</button>
+        <button type="button" class="key grey sm" data-toggle data-color="grey" data-key-id="sting" style="--col: 16 / span 1; --row: 2">STING</button>
 
-        <button type="button" class="key lit-amber sm" data-toggle data-color="lit-amber" data-key-id="mix" style="--col: 14 / span 1; --row: 3" data-cluster-before>MIX</button>
+        <button type="button" class="key lit-amber sm" data-toggle data-color="lit-amber" data-key-id="mix" style="--col: 14 / span 1; --row: 3">MIX</button>
         <button type="button" class="key grey sm" data-toggle data-color="grey" data-key-id="wipe" style="--col: 15 / span 1; --row: 3">WIPE</button>
-        <button type="button" class="key grey sm" data-toggle data-color="grey" data-key-id="arm" style="--col: 16 / span 1; --row: 3" data-cluster-after>ARM</button>
+        <button type="button" class="key grey sm" data-toggle data-color="grey" data-key-id="arm" style="--col: 16 / span 1; --row: 3">ARM</button>
 
         <button type="button" class="key grey sm" data-toggle data-color="grey" data-key-id="shift" style="--col: 12 / span 1; --row: 4">SHIFT</button>
         <button type="button" class="key grey sm" data-toggle data-color="grey" data-key-id="prev-trans" style="--col: 12 / span 1; --row: 6">PREV<br>TRANS</button>
-        <button type="button" class="key grey sm" data-toggle data-color="grey" data-key-id="cut" style="--col: 14 / span 1; --row: 6" data-cluster-before>CUT</button>
-        <button type="button" class="key lit-red pill" data-toggle data-color="lit-red" data-key-id="auto" style="--col: 15 / span 1; --row: 6" data-cluster-after>AUTO</button>
+        <button type="button" class="key grey sm" data-toggle data-color="grey" data-key-id="cut" style="--col: 14 / span 1; --row: 6">CUT</button>
+        <button type="button" class="key lit-red pill" data-toggle data-color="lit-red" data-key-id="auto" style="--col: 15 / span 1; --row: 6">AUTO</button>
 
         <div class="fader-wrap" style="--col: 19 / span 4; --row: 2 / span 6">
           <div class="fader-slot" role="slider" aria-label="Transition fader" aria-valuemin="0" aria-valuemax="1" aria-valuenow="0.5">
@@ -108,7 +108,7 @@ export class MicroPanel extends EventTarget {
         </div>
 
         <button type="button" class="key lit-amber sm" data-toggle data-color="lit-amber" data-key-id="dsk1-tie" style="--col: 22 / span 1; --row: 2">DSK 1<br>TIE</button>
-        <button type="button" class="key lit-amber sm" data-toggle data-color="lit-amber" data-key-id="dsk2-tie" style="--col: 24 / span 1; --row: 2" data-cluster-after>DSK 2<br>TIE</button>
+        <button type="button" class="key lit-amber sm" data-toggle data-color="lit-amber" data-key-id="dsk2-tie" style="--col: 24 / span 1; --row: 2">DSK 2<br>TIE</button>
 
         <button type="button" class="key lit-red sm" data-toggle data-color="lit-red" data-key-id="dsk1-cut" style="--col: 22 / span 1; --row: 4">DSK 1<br>CUT</button>
         <button type="button" class="key grey sm" data-toggle data-color="grey" data-key-id="dsk1-auto" style="--col: 22 / span 1; --row: 5">DSK 1<br>AUTO</button>
@@ -125,9 +125,9 @@ export class MicroPanel extends EventTarget {
         <button type="button" class="key grey" data-group="program" data-key-id="program-7" style="--col: 10 / span 1; --row: 3">7</button>
         <button type="button" class="key grey" data-group="program" data-key-id="program-8" style="--col: 11 / span 1; --row: 3">8</button>
         <button type="button" class="key grey" data-group="program" data-key-id="program-9" style="--col: 12 / span 1; --row: 3">9</button>
-        <button type="button" class="key grey" data-group="program" data-key-id="program-10" style="--col: 13 / span 1; --row: 3" data-cluster-after>10</button>
+        <button type="button" class="key grey" data-group="program" data-key-id="program-10" style="--col: 13 / span 1; --row: 3">10</button>
 
-        <button type="button" class="key grey" data-group="preview" data-key-id="preview-1" style="--col: 4 / span 1; --row: 5" data-cluster-before>1</button>
+        <button type="button" class="key grey" data-group="preview" data-key-id="preview-1" style="--col: 4 / span 1; --row: 5">1</button>
         <button type="button" class="key grey" data-group="preview" data-key-id="preview-2" style="--col: 5 / span 1; --row: 5">2</button>
         <button type="button" class="key lit-green" data-group="preview" data-key-id="preview-3" style="--col: 6 / span 1; --row: 5">3</button>
         <button type="button" class="key grey" data-group="preview" data-key-id="preview-4" style="--col: 7 / span 1; --row: 5">4</button>
@@ -136,7 +136,7 @@ export class MicroPanel extends EventTarget {
         <button type="button" class="key grey" data-group="preview" data-key-id="preview-7" style="--col: 10 / span 1; --row: 5">7</button>
         <button type="button" class="key grey" data-group="preview" data-key-id="preview-8" style="--col: 11 / span 1; --row: 5">8</button>
         <button type="button" class="key grey" data-group="preview" data-key-id="preview-9" style="--col: 12 / span 1; --row: 5">9</button>
-        <button type="button" class="key grey" data-group="preview" data-key-id="preview-10" style="--col: 13 / span 1; --row: 5" data-cluster-after>10</button>
+        <button type="button" class="key grey" data-group="preview" data-key-id="preview-10" style="--col: 13 / span 1; --row: 5">10</button>
       </div>
     `
 

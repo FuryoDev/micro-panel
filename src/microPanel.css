@@ -5,7 +5,6 @@
   --key-radius: 10px;
   --panel-padding: 32px;
   --inner-gap: 6px;
-  --cluster-gap: 28px;
   --key-font-size: 12px;
 }
 
@@ -118,14 +117,6 @@
     0 0 12px rgba(74, 232, 118, 0.4),
     inset 0 -6px 14px rgba(0, 0, 0, 0.5),
     inset 0 2px 0 rgba(255, 255, 255, 0.26);
-}
-
-.key[data-cluster-before] {
-  margin-left: var(--cluster-gap);
-}
-
-.key[data-cluster-after] {
-  margin-right: var(--cluster-gap);
 }
 
 .fader-wrap {
