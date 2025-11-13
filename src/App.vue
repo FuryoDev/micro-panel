@@ -26,7 +26,7 @@ interface ScenesResponse {
   layers?: unknown
 }
 
-const API_URL = '/api/scenes'
+const API_URL = 'http://10.1.0.47:31342/api/scenes'
 const POLL_INTERVAL = 3000
 
 const layers = ref<SceneLayer[]>([])
