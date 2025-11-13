@@ -126,12 +126,20 @@ async function loadScenes() {
 
   isFetching.value = true
   try {
-    const response = await fetch(API_URL, { method: 'GET' })
+    const response = await fetch(API_URL, {
+      method: 'GET',
+      mode: 'cors',
+      credentials: 'include',
+      cache: 'no-store',
+      headers: {
+        Accept: 'application/json, text/plain;q=0.9, */*;q=0.8',
+      },
+    })
     if (!response.ok) {
       throw new Error(`Erreur ${response.status}`)
     }
 
-    const payload = (await response.json()) as ScenesResponse | UnknownRecord | unknown
+    const payload = await parseResponsePayload(response)
     const parsedLayers = parseLayers(payload)
 
     layers.value = parsedLayers
@@ -144,6 +152,46 @@ async function loadScenes() {
     isFetching.value = false
     isInitialLoading.value = false
   }
+}
+
+async function parseResponsePayload(response: Response): Promise<ScenesResponse | UnknownRecord | unknown> {
+  const contentType = response.headers.get('content-type') ?? ''
+
+  if (contentType.includes('application/json')) {
+    try {
+      return (await response.clone().json()) as ScenesResponse | UnknownRecord | unknown
+    } catch (error) {
+      console.warn('parseResponsePayload: JSON.parse failed, falling back to text mode', error)
+    }
+  }
+
+  const text = await response.text()
+  if (!text.trim()) {
+    throw new Error('Réponse vide renvoyée par le serveur')
+  }
+
+  const sanitized = sanitizeJsonText(text)
+
+  try {
+    return JSON.parse(sanitized) as ScenesResponse | UnknownRecord | unknown
+  } catch (error) {
+    console.error('parseResponsePayload: unable to parse payload', error, { text })
+    throw new Error('Réponse invalide reçue du serveur')
+  }
+}
+
+function sanitizeJsonText(text: string): string {
+  const trimmed = text.trim()
+
+  if (!trimmed) return ''
+
+  // Some controllers expose relaxed JSON (single quotes, trailing commas).
+  // We try to fix the most common issues before handing it to JSON.parse.
+  return trimmed
+    .replace(/\r\n?/g, '\n')
+    .replace(/([\{\[,]\s*)'([^'\n]*)'(?=\s*[:\}\],])/g, '$1"$2"')
+    .replace(/:\s*'([^'\n]*)'/g, ': "$1"')
+    .replace(/,\s*([}\]])/g, '$1')
 }
 
 function parseLayers(payload: unknown): SceneLayer[] {
