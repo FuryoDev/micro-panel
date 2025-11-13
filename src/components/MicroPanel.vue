@@ -109,6 +109,8 @@ const programSelection = ref<string>('program-4')
 const previewSelection = ref<string>('preview-3')
 const faderValue = ref(0.5)
 
+const buttonsPerPage = 10
+
 // Offset pour la pagination des bus (0 = boutons 1-10, 10 = boutons 11-20)
 const programOffset = ref(0)
 const previewOffset = ref(0)
@@ -127,11 +129,11 @@ const faderSlot = ref<HTMLDivElement | null>(null)
 
 // Boutons visibles (10 boutons à la fois)
 const visibleProgramButtons = computed(() =>
-    programButtons.slice(programOffset.value, programOffset.value + 10)
+    programButtons.slice(programOffset.value, programOffset.value + buttonsPerPage)
 )
 
 const visiblePreviewButtons = computed(() =>
-    previewButtons.slice(previewOffset.value, previewOffset.value + 10)
+    previewButtons.slice(previewOffset.value, previewOffset.value + buttonsPerPage)
 )
 
 function keyClasses(active: boolean, activeColor: KeyColor, options?: { size?: 'sm'; pill?: boolean }) {
@@ -143,18 +145,39 @@ function keyClasses(active: boolean, activeColor: KeyColor, options?: { size?: '
   ].filter(Boolean)
 }
 
+function advanceOffset(offset: typeof programOffset, buttons: number[]) {
+  if (!buttons.length) {
+    offset.value = 0
+    return
+  }
+
+  offset.value = (offset.value + buttonsPerPage) % buttons.length
+}
+
 function onToggle(id: string) {
   if (!(id in toggleState)) return
+
+  if (id === 'shift') {
+    advanceOffset(programOffset, programButtons)
+    const isActive = programOffset.value !== 0
+    toggleState[id] = isActive
+    const color = toggleColors[id] ?? 'grey'
+    emit('toggle-change', { id, active: isActive, color: isActive ? color : 'grey' })
+    return
+  }
+
+  if (id === 'prev-trans') {
+    advanceOffset(previewOffset, previewButtons)
+    const isActive = previewOffset.value !== 0
+    toggleState[id] = isActive
+    const color = toggleColors[id] ?? 'grey'
+    emit('toggle-change', { id, active: isActive, color: isActive ? color : 'grey' })
+    return
+  }
+
   const color = toggleColors[id] ?? 'grey'
   const next = !toggleState[id]
   toggleState[id] = next
-
-  // Gestion spéciale pour SHIFT et PREV TRANS
-  if (id === 'shift') {
-    programOffset.value = next ? 10 : 0
-  } else if (id === 'prev-trans') {
-    previewOffset.value = next ? 10 : 0
-  }
 
   emit('toggle-change', {
     id,
@@ -384,12 +407,9 @@ defineExpose({
 
         <div class="board-slot board-slot--program">
           <div class="bus-container">
-            <div
-                class="group group--bus"
-                :style="{ transform: `translateX(-${programOffset * 100}%)` }"
-            >
+            <div class="group group--bus">
               <button
-                  v-for="number in programButtons"
+                  v-for="number in visibleProgramButtons"
                   :key="`program-${number}`"
                   type="button"
                   :class="busClasses('program', `program-${number}`)"
@@ -404,12 +424,9 @@ defineExpose({
 
         <div class="board-slot board-slot--preview">
           <div class="bus-container">
-            <div
-                class="group group--bus"
-                :style="{ transform: `translateX(-${previewOffset * 100}%)` }"
-            >
+            <div class="group group--bus">
               <button
-                  v-for="number in previewButtons"
+                  v-for="number in visiblePreviewButtons"
                   :key="`preview-${number}`"
                   type="button"
                   :class="busClasses('preview', `preview-${number}`)"
