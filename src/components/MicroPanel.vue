@@ -102,12 +102,16 @@ const toggleColors: Record<string, KeyColor> = {
   'dsk2-auto': 'grey',
 }
 
-const programButtons = Array.from({ length: 10 }, (_, index) => index + 1)
-const previewButtons = Array.from({ length: 10 }, (_, index) => index + 1)
+const programButtons = Array.from({ length: 20 }, (_, index) => index + 1)
+const previewButtons = Array.from({ length: 20 }, (_, index) => index + 1)
 
 const programSelection = ref<string>('program-4')
 const previewSelection = ref<string>('preview-3')
 const faderValue = ref(0.5)
+
+// Offset pour la pagination des bus (0 = boutons 1-10, 10 = boutons 11-20)
+const programOffset = ref(0)
+const previewOffset = ref(0)
 
 const state = reactive<MicroPanelState>({
   toggles: toggleState,
@@ -120,6 +124,15 @@ const faderStepCount = 10
 
 const litStepCount = computed(() => Math.round(faderValue.value * faderStepCount))
 const faderSlot = ref<HTMLDivElement | null>(null)
+
+// Boutons visibles (10 boutons à la fois)
+const visibleProgramButtons = computed(() =>
+    programButtons.slice(programOffset.value, programOffset.value + 10)
+)
+
+const visiblePreviewButtons = computed(() =>
+    previewButtons.slice(previewOffset.value, previewOffset.value + 10)
+)
 
 function keyClasses(active: boolean, activeColor: KeyColor, options?: { size?: 'sm'; pill?: boolean }) {
   return [
@@ -135,6 +148,14 @@ function onToggle(id: string) {
   const color = toggleColors[id] ?? 'grey'
   const next = !toggleState[id]
   toggleState[id] = next
+
+  // Gestion spéciale pour SHIFT et PREV TRANS
+  if (id === 'shift') {
+    programOffset.value = next ? 10 : 0
+  } else if (id === 'prev-trans') {
+    previewOffset.value = next ? 10 : 0
+  }
+
   emit('toggle-change', {
     id,
     active: next,
@@ -236,77 +257,83 @@ defineExpose({
   <div class="panel">
     <div class="surface">
       <div class="board">
-        <div class="board-slot board-slot--main">
+        <div class="board-slot board-slot--top-left">
           <div class="group group--column">
             <button
-              type="button"
-              :class="keyClasses(toggleState.macro, toggleColors.macro, { size: 'sm' })"
-              :aria-pressed="toggleState.macro"
-              @click="onToggle('macro')"
+                type="button"
+                :class="keyClasses(toggleState.macro, toggleColors.macro, { size: 'sm' })"
+                :aria-pressed="toggleState.macro"
+                @click="onToggle('macro')"
             >
               MACRO
             </button>
             <button
-              type="button"
-              :class="keyClasses(toggleState.bkgd, toggleColors.bkgd, { size: 'sm' })"
-              :aria-pressed="toggleState.bkgd"
-              @click="onToggle('bkgd')"
+                type="button"
+                :class="keyClasses(toggleState.bkgd, toggleColors.bkgd, { size: 'sm' })"
+                :aria-pressed="toggleState.bkgd"
+                @click="onToggle('bkgd')"
             >
               BKGD
             </button>
           </div>
+        </div>
 
+        <div class="board-slot board-slot--keyers">
           <div class="group group--keyers">
             <button
-              v-for="id in ['key1-on', 'key2-on', 'key3-on', 'key4-on']"
-              :key="id"
-              type="button"
-              :class="keyClasses(toggleState[id], toggleColors[id])"
-              :aria-pressed="toggleState[id]"
-              @click="onToggle(id)"
+                v-for="id in ['key1-on', 'key2-on', 'key3-on', 'key4-on']"
+                :key="id"
+                type="button"
+                :class="keyClasses(toggleState[id], toggleColors[id])"
+                :aria-pressed="toggleState[id]"
+                @click="onToggle(id)"
             >
               ON
             </button>
             <button
-              v-for="id in ['key1', 'key2', 'key3', 'key4']"
-              :key="id"
-              type="button"
-              :class="keyClasses(toggleState[id], toggleColors[id], { size: 'sm' })"
-              :aria-pressed="toggleState[id]"
-              @click="onToggle(id)"
+                v-for="id in ['key1', 'key2', 'key3', 'key4']"
+                :key="id"
+                type="button"
+                :class="keyClasses(toggleState[id], toggleColors[id], { size: 'sm' })"
+                :aria-pressed="toggleState[id]"
+                @click="onToggle(id)"
             >
               {{ id.toUpperCase().replace('KEY', 'KEY ') }}
             </button>
           </div>
+        </div>
 
-          <div class="group group--effects">
+        <div class="board-slot board-slot--effects">
+          <div class="group group--effects-row1">
             <button
-              v-for="id in ['me1', 'me2', 'me3', 'me4']"
-              :key="id"
-              type="button"
-              :class="keyClasses(toggleState[id], toggleColors[id], { size: 'sm' })"
-              :aria-pressed="toggleState[id]"
-              @click="onToggle(id)"
+                v-for="id in ['me1', 'me2', 'me3', 'me4']"
+                :key="id"
+                type="button"
+                :class="keyClasses(toggleState[id], toggleColors[id], { size: 'sm' })"
+                :aria-pressed="toggleState[id]"
+                @click="onToggle(id)"
             >
               {{ id.toUpperCase().replace('ME', 'M/E ') }}
             </button>
+          </div>
+          <div class="group group--effects-row2">
             <button
-              v-for="id in ['dip', 'dve', 'sting']"
-              :key="id"
-              type="button"
-              :class="keyClasses(toggleState[id], toggleColors[id], { size: 'sm' })"
-              :aria-pressed="toggleState[id]"
-              @click="onToggle(id)"
+                v-for="id in ['dip', 'dve', 'sting']"
+                :key="id"
+                type="button"
+                :class="keyClasses(toggleState[id], toggleColors[id], { size: 'sm' })"
+                :aria-pressed="toggleState[id]"
+                @click="onToggle(id)"
             >
               {{ id.toUpperCase() }}
             </button>
             <button
-              v-for="id in ['mix', 'wipe', 'arm']"
-              :key="id"
-              type="button"
-              :class="keyClasses(toggleState[id], toggleColors[id], { size: 'sm' })"
-              :aria-pressed="toggleState[id]"
-              @click="onToggle(id)"
+                v-for="id in ['mix', 'wipe', 'arm']"
+                :key="id"
+                type="button"
+                :class="keyClasses(toggleState[id], toggleColors[id], { size: 'sm' })"
+                :aria-pressed="toggleState[id]"
+                @click="onToggle(id)"
             >
               {{ id.toUpperCase() }}
             </button>
@@ -314,96 +341,107 @@ defineExpose({
         </div>
 
         <div class="board-slot board-slot--transition">
-          <div class="transition-stacks">
-            <div class="stack">
-              <button
+          <div class="group group--column">
+            <button
                 type="button"
                 :class="keyClasses(toggleState.shift, toggleColors.shift, { size: 'sm' })"
                 :aria-pressed="toggleState.shift"
                 @click="onToggle('shift')"
-              >
-                SHIFT
-              </button>
-              <button
+            >
+              SHIFT
+            </button>
+            <button
                 type="button"
                 :class="keyClasses(toggleState['prev-trans'], toggleColors['prev-trans'], { size: 'sm' })"
                 :aria-pressed="toggleState['prev-trans']"
                 @click="onToggle('prev-trans')"
-              >
-                PREV<br />TRANS
-              </button>
-            </div>
-            <div class="stack">
-              <button
+            >
+              PREV<br />TRANS
+            </button>
+          </div>
+        </div>
+
+        <div class="board-slot board-slot--cut-auto">
+          <div class="group group--column">
+            <button
                 type="button"
                 :class="keyClasses(toggleState.cut, toggleColors.cut, { size: 'sm' })"
                 :aria-pressed="toggleState.cut"
                 @click="onToggle('cut')"
-              >
-                CUT
-              </button>
-              <button
+            >
+              CUT
+            </button>
+            <button
                 type="button"
                 :class="keyClasses(toggleState.auto, toggleColors.auto, { pill: true })"
                 :aria-pressed="toggleState.auto"
                 @click="onToggle('auto')"
+            >
+              AUTO
+            </button>
+          </div>
+        </div>
+
+        <div class="board-slot board-slot--program">
+          <div class="bus-container">
+            <div
+                class="group group--bus"
+                :style="{ transform: `translateX(-${programOffset * 100}%)` }"
+            >
+              <button
+                  v-for="number in programButtons"
+                  :key="`program-${number}`"
+                  type="button"
+                  :class="busClasses('program', `program-${number}`)"
+                  :aria-pressed="programSelection === `program-${number}`"
+                  @click="onBusClick('program', `program-${number}`)"
               >
-                AUTO
+                {{ number }}
               </button>
             </div>
           </div>
         </div>
 
-        <div class="board-slot board-slot--program">
-          <div class="group group--bus">
-            <button
-              v-for="number in programButtons"
-              :key="`program-${number}`"
-              type="button"
-              :class="busClasses('program', `program-${number}`)"
-              :aria-pressed="programSelection === `program-${number}`"
-              @click="onBusClick('program', `program-${number}`)"
-            >
-              {{ number }}
-            </button>
-          </div>
-        </div>
-
         <div class="board-slot board-slot--preview">
-          <div class="group group--bus">
-            <button
-              v-for="number in previewButtons"
-              :key="`preview-${number}`"
-              type="button"
-              :class="busClasses('preview', `preview-${number}`)"
-              :aria-pressed="previewSelection === `preview-${number}`"
-              @click="onBusClick('preview', `preview-${number}`)"
+          <div class="bus-container">
+            <div
+                class="group group--bus"
+                :style="{ transform: `translateX(-${previewOffset * 100}%)` }"
             >
-              {{ number }}
-            </button>
+              <button
+                  v-for="number in previewButtons"
+                  :key="`preview-${number}`"
+                  type="button"
+                  :class="busClasses('preview', `preview-${number}`)"
+                  :aria-pressed="previewSelection === `preview-${number}`"
+                  @click="onBusClick('preview', `preview-${number}`)"
+              >
+                {{ number }}
+              </button>
+            </div>
           </div>
         </div>
 
         <div class="board-slot board-slot--fader">
           <div class="group group--fader">
             <div
-              ref="faderSlot"
-              class="fader-slot"
-              role="slider"
-              aria-label="Transition fader"
-              aria-valuemin="0"
-              aria-valuemax="1"
-              :aria-valuenow="faderValue.toFixed(2)"
-              :style="{ '--value': faderValue.toString() }"
-              @pointerdown="onFaderPointerDown"
-              @pointermove="onFaderPointerMove"
-              @pointerup="onFaderPointerUp"
+                ref="faderSlot"
+                class="fader-slot"
+                role="slider"
+                aria-label="Transition fader"
+                aria-valuemin="0"
+                aria-valuemax="1"
+                :aria-valuenow="faderValue.toFixed(2)"
+                :style="{ '--value': faderValue.toString() }"
+                @pointerdown="onFaderPointerDown"
+                @pointermove="onFaderPointerMove"
+                @pointerup="onFaderPointerUp"
             >
               <div class="fader-meter">
                 <div
-                  v-for="index in faderStepCount"
-                  :key="`meter-${index}`"
-                  :class="['fader-step', { lit: index <= litStepCount }]"
+                    v-for="index in faderStepCount"
+                    :key="`meter-${index}`"
+                    :class="['fader-step', { lit: index <= litStepCount }]"
                 ></div>
               </div>
               <div class="fader-line"></div>
@@ -416,18 +454,18 @@ defineExpose({
       <div class="side">
         <div class="group group--column">
           <button
-            type="button"
-            :class="keyClasses(toggleState['dsk1-tie'], toggleColors['dsk1-tie'], { size: 'sm' })"
-            :aria-pressed="toggleState['dsk1-tie']"
-            @click="onToggle('dsk1-tie')"
+              type="button"
+              :class="keyClasses(toggleState['dsk1-tie'], toggleColors['dsk1-tie'], { size: 'sm' })"
+              :aria-pressed="toggleState['dsk1-tie']"
+              @click="onToggle('dsk1-tie')"
           >
             DSK 1<br />TIE
           </button>
           <button
-            type="button"
-            :class="keyClasses(toggleState['dsk2-tie'], toggleColors['dsk2-tie'], { size: 'sm' })"
-            :aria-pressed="toggleState['dsk2-tie']"
-            @click="onToggle('dsk2-tie')"
+              type="button"
+              :class="keyClasses(toggleState['dsk2-tie'], toggleColors['dsk2-tie'], { size: 'sm' })"
+              :aria-pressed="toggleState['dsk2-tie']"
+              @click="onToggle('dsk2-tie')"
           >
             DSK 2<br />TIE
           </button>
@@ -435,18 +473,18 @@ defineExpose({
 
         <div class="group group--column">
           <button
-            type="button"
-            :class="keyClasses(toggleState['dsk1-cut'], toggleColors['dsk1-cut'], { size: 'sm' })"
-            :aria-pressed="toggleState['dsk1-cut']"
-            @click="onToggle('dsk1-cut')"
+              type="button"
+              :class="keyClasses(toggleState['dsk1-cut'], toggleColors['dsk1-cut'], { size: 'sm' })"
+              :aria-pressed="toggleState['dsk1-cut']"
+              @click="onToggle('dsk1-cut')"
           >
             DSK 1<br />CUT
           </button>
           <button
-            type="button"
-            :class="keyClasses(toggleState['dsk1-auto'], toggleColors['dsk1-auto'], { size: 'sm' })"
-            :aria-pressed="toggleState['dsk1-auto']"
-            @click="onToggle('dsk1-auto')"
+              type="button"
+              :class="keyClasses(toggleState['dsk1-auto'], toggleColors['dsk1-auto'], { size: 'sm' })"
+              :aria-pressed="toggleState['dsk1-auto']"
+              @click="onToggle('dsk1-auto')"
           >
             DSK 1<br />AUTO
           </button>
@@ -454,18 +492,18 @@ defineExpose({
 
         <div class="group group--column">
           <button
-            type="button"
-            :class="keyClasses(toggleState['dsk2-cut'], toggleColors['dsk2-cut'], { size: 'sm' })"
-            :aria-pressed="toggleState['dsk2-cut']"
-            @click="onToggle('dsk2-cut')"
+              type="button"
+              :class="keyClasses(toggleState['dsk2-cut'], toggleColors['dsk2-cut'], { size: 'sm' })"
+              :aria-pressed="toggleState['dsk2-cut']"
+              @click="onToggle('dsk2-cut')"
           >
             DSK 2<br />CUT
           </button>
           <button
-            type="button"
-            :class="keyClasses(toggleState['dsk2-auto'], toggleColors['dsk2-auto'], { size: 'sm' })"
-            :aria-pressed="toggleState['dsk2-auto']"
-            @click="onToggle('dsk2-auto')"
+              type="button"
+              :class="keyClasses(toggleState['dsk2-auto'], toggleColors['dsk2-auto'], { size: 'sm' })"
+              :aria-pressed="toggleState['dsk2-auto']"
+              @click="onToggle('dsk2-auto')"
           >
             DSK 2<br />AUTO
           </button>
@@ -509,12 +547,12 @@ defineExpose({
   padding: var(--panel-padding);
   border-radius: var(--panel-radius);
   background:
-    radial-gradient(160% 140% at 34% -12%, #1a1b1d 0 62%, #0c0c0d 100%),
-    linear-gradient(#0a0b0c, #0a0b0c);
+      radial-gradient(160% 140% at 34% -12%, #1a1b1d 0 62%, #0c0c0d 100%),
+      linear-gradient(#0a0b0c, #0a0b0c);
   box-shadow:
-    inset 0 10px 20px rgba(255, 255, 255, 0.04),
-    inset 0 -12px 22px rgba(0, 0, 0, 0.55),
-    0 28px 50px rgba(0, 0, 0, 0.65);
+      inset 0 10px 20px rgba(255, 255, 255, 0.04),
+      inset 0 -12px 22px rgba(0, 0, 0, 0.55),
+      0 28px 50px rgba(0, 0, 0, 0.65);
   position: relative;
   color: #0f0f10;
 }
@@ -522,48 +560,49 @@ defineExpose({
 .surface {
   margin-top: 18px;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: auto auto;
   column-gap: 36px;
   align-items: start;
 }
 
-
 .board {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: repeat(3, 1fr);
-  grid-column-gap: 9px;
-  grid-row-gap: 0px;
+  grid-template-columns: auto auto auto auto auto auto auto;
+  grid-template-rows: auto auto auto;
+  gap: 9px;
   align-items: start;
-  justify-content: start;
 }
 
-.board-slot {
-  justify-self: start;
+.board-slot--top-left {
+  grid-area: 1 / 1 / 2 / 2;
 }
 
-.board-slot--main {
-  grid-area: 1 / 2 / 2 / 5;
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: max-content;
-  column-gap: var(--group-gap);
-  align-items: start;
+.board-slot--keyers {
+  grid-area: 1 / 2 / 2 / 3;
+}
+
+.board-slot--effects {
+  grid-area: 1 / 3 / 2 / 4;
+  display: flex;
+  flex-direction: column;
+  gap: var(--inner-gap);
 }
 
 .board-slot--transition {
-  grid-area: 1 / 5 / 4 / 6;
-  display: flex;
-  align-items: flex-start;
+  grid-area: 1 / 4 / 2 / 5;
+}
+
+.board-slot--cut-auto {
+  grid-area: 1 / 5 / 2 / 6;
 }
 
 .board-slot--program {
-  grid-area: 2 / 2 / 3 / 5;
+  grid-area: 2 / 1 / 3 / 6;
   margin-top: var(--section-gap);
 }
 
 .board-slot--preview {
-  grid-area: 3 / 2 / 4 / 5;
+  grid-area: 3 / 1 / 4 / 6;
   margin-top: var(--inner-gap);
 }
 
@@ -572,7 +611,12 @@ defineExpose({
   display: flex;
   justify-content: center;
   align-items: stretch;
-  justify-self: center;
+  margin-left: 16px;
+}
+
+.bus-container {
+  overflow: hidden;
+  width: 100%;
 }
 
 .side {
@@ -596,26 +640,20 @@ defineExpose({
   grid-auto-rows: var(--key-size);
 }
 
-.group--effects {
+.group--effects-row1 {
+  display: grid;
   grid-template-columns: repeat(4, var(--key-size));
-  grid-auto-rows: var(--key-size);
-}
-
-.group--effects button:nth-child(n + 5) {
-  grid-column: span 1;
-}
-
-.transition-stacks {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: max-content;
-  column-gap: var(--inner-gap);
-  align-items: start;
-}
-
-.stack {
-  display: grid;
   gap: var(--inner-gap);
+}
+
+.group--effects-row2 {
+  display: grid;
+  grid-template-columns: repeat(3, var(--key-size));
+  gap: var(--inner-gap);
+}
+
+.group--effects-row2 button:nth-child(n + 4) {
+  grid-column: span 1;
 }
 
 .group--fader {
@@ -629,6 +667,8 @@ defineExpose({
   display: flex;
   gap: var(--inner-gap);
   flex-wrap: nowrap;
+  transition: transform 0.3s ease-out;
+  will-change: transform;
 }
 
 .board-slot--program .group--bus,
@@ -651,10 +691,11 @@ defineExpose({
   user-select: none;
   cursor: pointer;
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.24),
-    inset 0 -4px 10px rgba(0, 0, 0, 0.55),
-    0 5px 12px rgba(0, 0, 0, 0.35);
+      inset 0 1px 0 rgba(255, 255, 255, 0.24),
+      inset 0 -4px 10px rgba(0, 0, 0, 0.55),
+      0 5px 12px rgba(0, 0, 0, 0.35);
   transition: transform 40ms ease, filter 120ms ease;
+  flex-shrink: 0;
 }
 
 .key:active {
@@ -687,27 +728,27 @@ defineExpose({
   color: #251010;
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.28);
   box-shadow:
-    0 0 12px rgba(255, 70, 70, 0.35),
-    inset 0 -6px 14px rgba(0, 0, 0, 0.5),
-    inset 0 2px 0 rgba(255, 255, 255, 0.26);
+      0 0 12px rgba(255, 70, 70, 0.35),
+      inset 0 -6px 14px rgba(0, 0, 0, 0.5),
+      inset 0 2px 0 rgba(255, 255, 255, 0.26);
 }
 
 .key.lit-amber {
   background: radial-gradient(circle at 50% 35%, #ffd87f, #ffc443 62%, #b26f08);
   color: #332100;
   box-shadow:
-    0 0 11px rgba(255, 200, 90, 0.4),
-    inset 0 -6px 14px rgba(0, 0, 0, 0.5),
-    inset 0 2px 0 rgba(255, 255, 255, 0.26);
+      0 0 11px rgba(255, 200, 90, 0.4),
+      inset 0 -6px 14px rgba(0, 0, 0, 0.5),
+      inset 0 2px 0 rgba(255, 255, 255, 0.26);
 }
 
 .key.lit-green {
   background: radial-gradient(circle at 50% 35%, #86ffa2, #41e46c 60%, #118139);
   color: #0f2a14;
   box-shadow:
-    0 0 12px rgba(74, 232, 118, 0.4),
-    inset 0 -6px 14px rgba(0, 0, 0, 0.5),
-    inset 0 2px 0 rgba(255, 255, 255, 0.26);
+      0 0 12px rgba(74, 232, 118, 0.4),
+      inset 0 -6px 14px rgba(0, 0, 0, 0.5),
+      inset 0 2px 0 rgba(255, 255, 255, 0.26);
 }
 
 .fader-slot {
@@ -718,8 +759,8 @@ defineExpose({
   border-radius: 14px;
   background: linear-gradient(#121213, #080809);
   box-shadow:
-    inset 0 9px 20px rgba(0, 0, 0, 0.82),
-    inset 0 -10px 22px rgba(0, 0, 0, 0.65);
+      inset 0 9px 20px rgba(0, 0, 0, 0.82),
+      inset 0 -10px 22px rgba(0, 0, 0, 0.65);
   position: relative;
   touch-action: none;
 }
@@ -742,9 +783,9 @@ defineExpose({
   border-radius: 10px;
   background: linear-gradient(#2a2a2b, #0e0e0f);
   box-shadow:
-    inset 0 9px 12px rgba(255, 255, 255, 0.06),
-    inset 0 -12px 16px rgba(0, 0, 0, 0.72),
-    0 10px 22px rgba(0, 0, 0, 0.6);
+      inset 0 9px 12px rgba(255, 255, 255, 0.06),
+      inset 0 -12px 16px rgba(0, 0, 0, 0.72),
+      0 10px 22px rgba(0, 0, 0, 0.6);
   transform: translate(-50%, -50%);
   cursor: grab;
   touch-action: none;
@@ -778,7 +819,7 @@ defineExpose({
   opacity: 0.95;
   background: linear-gradient(90deg, #5cf1ff, #00c1ff);
   box-shadow:
-    0 0 6px rgba(92, 241, 255, 0.5),
-    inset 0 0 4px rgba(0, 0, 0, 0.35);
+      0 0 6px rgba(92, 241, 255, 0.5),
+      inset 0 0 4px rgba(0, 0, 0, 0.35);
 }
 </style>
