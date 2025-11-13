@@ -125,7 +125,6 @@ const faderStepCount = 10
 const litStepCount = computed(() => Math.round(faderValue.value * faderStepCount))
 const faderSlot = ref<HTMLDivElement | null>(null)
 
-// Boutons visibles (10 boutons à la fois)
 const visibleProgramButtons = computed(() =>
     programButtons.slice(programOffset.value, programOffset.value + 10)
 )
@@ -597,11 +596,13 @@ defineExpose({
 }
 
 .board-slot--program {
+  max-width: 655px;
   grid-area: 2 / 1 / 3 / 6;
   margin-top: var(--section-gap);
 }
 
 .board-slot--preview {
+  max-width: 655px;
   grid-area: 3 / 1 / 4 / 6;
   margin-top: var(--inner-gap);
 }
