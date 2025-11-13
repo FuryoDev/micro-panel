@@ -236,7 +236,7 @@ defineExpose({
   <div class="panel">
     <div class="surface">
       <div class="board">
-        <div class="panel-row panel-row--top">
+        <div class="board-slot board-slot--main">
           <div class="group group--column">
             <button
               type="button"
@@ -311,8 +311,10 @@ defineExpose({
               {{ id.toUpperCase() }}
             </button>
           </div>
+        </div>
 
-          <div class="group group--transition">
+        <div class="board-slot board-slot--transition">
+          <div class="transition-stacks">
             <div class="stack">
               <button
                 type="button"
@@ -350,7 +352,39 @@ defineExpose({
               </button>
             </div>
           </div>
+        </div>
 
+        <div class="board-slot board-slot--program">
+          <div class="group group--bus">
+            <button
+              v-for="number in programButtons"
+              :key="`program-${number}`"
+              type="button"
+              :class="busClasses('program', `program-${number}`)"
+              :aria-pressed="programSelection === `program-${number}`"
+              @click="onBusClick('program', `program-${number}`)"
+            >
+              {{ number }}
+            </button>
+          </div>
+        </div>
+
+        <div class="board-slot board-slot--preview">
+          <div class="group group--bus">
+            <button
+              v-for="number in previewButtons"
+              :key="`preview-${number}`"
+              type="button"
+              :class="busClasses('preview', `preview-${number}`)"
+              :aria-pressed="previewSelection === `preview-${number}`"
+              @click="onBusClick('preview', `preview-${number}`)"
+            >
+              {{ number }}
+            </button>
+          </div>
+        </div>
+
+        <div class="board-slot board-slot--fader">
           <div class="group group--fader">
             <div
               ref="faderSlot"
@@ -375,36 +409,6 @@ defineExpose({
               <div class="fader-line"></div>
               <div class="fader-knob"></div>
             </div>
-          </div>
-        </div>
-
-        <div class="panel-row panel-row--bus">
-          <div class="group group--bus">
-            <button
-              v-for="number in programButtons"
-              :key="`program-${number}`"
-              type="button"
-              :class="busClasses('program', `program-${number}`)"
-              :aria-pressed="programSelection === `program-${number}`"
-              @click="onBusClick('program', `program-${number}`)"
-            >
-              {{ number }}
-            </button>
-          </div>
-        </div>
-
-        <div class="panel-row panel-row--bus">
-          <div class="group group--bus">
-            <button
-              v-for="number in previewButtons"
-              :key="`preview-${number}`"
-              type="button"
-              :class="busClasses('preview', `preview-${number}`)"
-              :aria-pressed="previewSelection === `preview-${number}`"
-              @click="onBusClick('preview', `preview-${number}`)"
-            >
-              {{ number }}
-            </button>
           </div>
         </div>
       </div>
@@ -523,10 +527,52 @@ defineExpose({
   align-items: start;
 }
 
+
 .board {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-column-gap: 9px;
+  grid-row-gap: 0px;
+  align-items: start;
+  justify-content: start;
+}
+
+.board-slot {
+  justify-self: start;
+}
+
+.board-slot--main {
+  grid-area: 1 / 2 / 2 / 5;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: max-content;
+  column-gap: var(--group-gap);
+  align-items: start;
+}
+
+.board-slot--transition {
+  grid-area: 1 / 5 / 4 / 6;
   display: flex;
-  flex-direction: column;
-  row-gap: var(--section-gap);
+  align-items: flex-start;
+}
+
+.board-slot--program {
+  grid-area: 2 / 2 / 3 / 5;
+  margin-top: var(--section-gap);
+}
+
+.board-slot--preview {
+  grid-area: 3 / 2 / 4 / 5;
+  margin-top: var(--inner-gap);
+}
+
+.board-slot--fader {
+  grid-area: 1 / 6 / 4 / 7;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  justify-self: center;
 }
 
 .side {
@@ -534,13 +580,6 @@ defineExpose({
   flex-direction: column;
   align-items: center;
   gap: var(--section-gap);
-}
-
-.panel-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--group-gap);
-  align-items: flex-start;
 }
 
 .group {
@@ -566,10 +605,12 @@ defineExpose({
   grid-column: span 1;
 }
 
-.group--transition {
-  display: flex;
-  align-items: flex-end;
-  gap: var(--inner-gap);
+.transition-stacks {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: max-content;
+  column-gap: var(--inner-gap);
+  align-items: start;
 }
 
 .stack {
@@ -580,12 +621,19 @@ defineExpose({
 .group--fader {
   display: flex;
   align-items: center;
+  justify-content: center;
+  height: 100%;
 }
 
 .group--bus {
   display: flex;
   gap: var(--inner-gap);
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+}
+
+.board-slot--program .group--bus,
+.board-slot--preview .group--bus {
+  justify-content: flex-start;
 }
 
 .key {
