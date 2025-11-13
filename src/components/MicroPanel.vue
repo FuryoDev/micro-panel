@@ -524,9 +524,11 @@ defineExpose({
 }
 
 .board {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(4, max-content) max-content;
+  column-gap: var(--group-gap);
   row-gap: var(--section-gap);
+  align-items: start;
 }
 
 .side {
@@ -537,10 +539,22 @@ defineExpose({
 }
 
 .panel-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--group-gap);
-  align-items: flex-start;
+  display: contents;
+}
+
+.panel-row--top > .group {
+  align-self: start;
+}
+
+.panel-row--top > .group--fader {
+  grid-column: 5;
+  align-self: stretch;
+  justify-self: center;
+}
+
+.panel-row--bus > .group {
+  grid-column: 1 / span 4;
+  justify-self: start;
 }
 
 .group {
