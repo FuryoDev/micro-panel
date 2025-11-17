@@ -26,7 +26,7 @@ interface ScenesResponse {
   layers?: unknown
 }
 
-const API_URL = 'http://10.41.40.130:1234/scenes'
+const API_URL = '/api/scenes'
 const POLL_INTERVAL = 3000
 
 const layers = ref<SceneLayer[]>([])
@@ -126,15 +126,7 @@ async function loadScenes() {
 
   isFetching.value = true
   try {
-    const response = await fetch(API_URL, {
-      method: 'GET',
-      mode: 'cors',
-      credentials: 'include',
-      cache: 'no-store',
-      headers: {
-        Accept: 'application/json, text/plain;q=0.9, */*;q=0.8',
-      },
-    })
+    const response = await fetch(API_URL)
     if (!response.ok) {
       throw new Error(`Erreur ${response.status}`)
     }
@@ -195,88 +187,12 @@ function sanitizeJsonText(text: string): string {
 }
 
 function parseLayers(payload: unknown): SceneLayer[] {
-  // Si la payload est un tableau, on regarde si ça ressemble à une liste de "scenes"
-  if (Array.isArray(payload)) {
-    const scenes = payload as UnknownRecord[]
-
-    const looksLikeScenes = scenes.every(
-        (item) => item && typeof item === 'object' && Array.isArray((item as UnknownRecord).actions),
-    )
-
-    if (looksLikeScenes) {
-      // Cas Pixotope : tableau de scènes, chaque scène a un tableau "actions"
-      const parsedScenes: SceneLayer[] = []
-
-      scenes.forEach((rawScene, sceneIndex) => {
-        const sceneRecord = rawScene as UnknownRecord
-
-        const rawId = sceneRecord.uuid ?? sceneRecord.id
-        const id =
-            typeof rawId === 'string' && rawId.trim().length > 0 ? rawId : `scene-${sceneIndex}`
-
-        const nameCandidate =
-            typeof sceneRecord.name === 'string' && sceneRecord.name.trim().length > 0
-                ? sceneRecord.name
-                : id
-        const name = nameCandidate
-
-        const actionsSource = Array.isArray(sceneRecord.actions)
-            ? (sceneRecord.actions as UnknownRecord[])
-            : []
-
-        const buttons: SceneButton[] = actionsSource
-            .map((rawAction, actionIndex) => {
-              if (!rawAction || typeof rawAction !== 'object') return null
-
-              const actionRecord = rawAction as UnknownRecord
-
-              const rawButtonId = actionRecord.uuid ?? actionRecord.id
-              const buttonId =
-                  typeof rawButtonId === 'string' && rawButtonId.trim().length > 0
-                      ? rawButtonId
-                      : `${id}-btn-${actionIndex}`
-
-              const label =
-                  typeof actionRecord.name === 'string' && actionRecord.name.trim().length > 0
-                      ? (actionRecord.name as string)
-                      : buttonId
-
-              const state =
-                  typeof actionRecord.state === 'string' && actionRecord.state.trim().length > 0
-                      ? (actionRecord.state as string)
-                      : undefined
-
-              const button: SceneButton = {
-                id: buttonId,
-                label,
-                state,
-                // pas de couleur / target layer pour l'instant
-                raw: actionRecord,
-              }
-
-              return button
-            })
-            .filter((b): b is SceneButton => Boolean(b))
-
-        parsedScenes.push({
-          id,
-          name,
-          buttons,
-          raw: sceneRecord,
-        })
-      })
-
-      return parsedScenes
-    }
-  }
-
-  // Fallback : ton comportement générique d’origine
   const maybeResponse = payload as ScenesResponse
   const rawLayers = Array.isArray(maybeResponse?.layers)
-      ? maybeResponse.layers
-      : Array.isArray(payload)
-          ? (payload as unknown[])
-          : []
+    ? maybeResponse.layers
+    : Array.isArray(payload)
+      ? (payload as unknown[])
+      : []
 
   const parsed: SceneLayer[] = []
 
@@ -288,71 +204,71 @@ function parseLayers(payload: unknown): SceneLayer[] {
     const id = typeof rawId === 'string' && rawId.trim().length > 0 ? rawId : `layer-${layerIndex}`
 
     const nameCandidate = [layerRecord.name, layerRecord.label, layerRecord.title].find(
-        (value): value is string => typeof value === 'string' && value.trim().length > 0,
+      (value): value is string => typeof value === 'string' && value.trim().length > 0,
     )
     const name = nameCandidate ?? id
 
     const buttonsSource = Array.isArray(layerRecord.buttons) ? layerRecord.buttons : []
 
     const buttons: SceneButton[] = buttonsSource
-        .map((rawButton, buttonIndex) => {
-          if (!rawButton || typeof rawButton !== 'object') return null
+      .map((rawButton, buttonIndex) => {
+        if (!rawButton || typeof rawButton !== 'object') return null
 
-          const buttonRecord = rawButton as UnknownRecord
-          const rawButtonId = buttonRecord.id
-          const buttonId =
-              typeof rawButtonId === 'string' && rawButtonId.trim().length > 0
-                  ? rawButtonId
-                  : `${id}-btn-${buttonIndex}`
+        const buttonRecord = rawButton as UnknownRecord
+        const rawButtonId = buttonRecord.id
+        const buttonId =
+          typeof rawButtonId === 'string' && rawButtonId.trim().length > 0
+            ? rawButtonId
+            : `${id}-btn-${buttonIndex}`
 
-          const labelCandidate = [
-            buttonRecord.label,
-            buttonRecord.text,
-            buttonRecord.name,
-            buttonRecord.title,
-          ].find((value): value is string => typeof value === 'string' && value.trim().length > 0)
-          const label = labelCandidate ?? buttonId
+        const labelCandidate = [
+          buttonRecord.label,
+          buttonRecord.text,
+          buttonRecord.name,
+          buttonRecord.title,
+        ].find((value): value is string => typeof value === 'string' && value.trim().length > 0)
+        const label = labelCandidate ?? buttonId
 
-          const stateCandidate = [
-            buttonRecord.state,
-            buttonRecord.status,
-            buttonRecord.mode,
-            buttonRecord.value,
-          ].find((value): value is string => typeof value === 'string' && value.trim().length > 0)
+        const stateCandidate = [
+          buttonRecord.state,
+          buttonRecord.status,
+          buttonRecord.mode,
+          buttonRecord.value,
+        ].find((value): value is string => typeof value === 'string' && value.trim().length > 0)
 
-          const colorCandidate =
-              typeof buttonRecord.color === 'string' && buttonRecord.color.trim().length > 0
-                  ? buttonRecord.color
-                  : undefined
+        const colorCandidate =
+          typeof buttonRecord.color === 'string' && buttonRecord.color.trim().length > 0
+            ? buttonRecord.color
+            : undefined
 
-          const targetLayerIdCandidate = [
-            buttonRecord.targetLayerId,
-            buttonRecord.target_layer_id,
-            buttonRecord.layerId,
-            buttonRecord.layer_id,
-          ].find((value): value is string => typeof value === 'string' && value.trim().length > 0)
+        const targetLayerIdCandidate = [
+          buttonRecord.targetLayerId,
+          buttonRecord.target_layer_id,
+          buttonRecord.layerId,
+          buttonRecord.layer_id,
+        ].find((value): value is string => typeof value === 'string' && value.trim().length > 0)
 
-          const targetLayerNameCandidate = [
-            buttonRecord.targetLayerName,
-            buttonRecord.target_layer_name,
-            buttonRecord.target,
-            buttonRecord.layerName,
-            buttonRecord.layer_name,
-          ].find((value): value is string => typeof value === 'string' && value.trim().length > 0)
+        const targetLayerNameCandidate = [
+          buttonRecord.targetLayerName,
+          buttonRecord.target_layer_name,
+          buttonRecord.target,
+          buttonRecord.layerName,
+          buttonRecord.layer_name,
+        ].find((value): value is string => typeof value === 'string' && value.trim().length > 0)
 
-          const button: SceneButton = {
-            id: buttonId,
-            label,
-            state: stateCandidate,
-            color: colorCandidate,
-            targetLayerId: targetLayerIdCandidate,
-            targetLayerName: targetLayerNameCandidate,
-            raw: buttonRecord,
-          }
+        const button: SceneButton = {
+          id: buttonId,
+          label,
+          state: stateCandidate,
+          color: colorCandidate,
+          targetLayerId: targetLayerIdCandidate,
+          targetLayerName: targetLayerNameCandidate,
+          raw: buttonRecord,
+        }
 
-          return button
-        })
-        .filter((button): button is SceneButton => Boolean(button))
+        return button
+      })
+      .filter((button): button is SceneButton => Boolean(button))
 
     parsed.push({
       id,
@@ -364,7 +280,6 @@ function parseLayers(payload: unknown): SceneLayer[] {
 
   return parsed
 }
-
 
 function normalizeKey(value: unknown): string {
   if (typeof value !== 'string') return ''
