@@ -26,7 +26,8 @@ interface ScenesResponse {
   layers?: unknown
 }
 
-const API_URL = 'http://10.41.40.130:1234/scenes'
+// NOTE : on passe par un proxy Vite => voir vite.config.ts
+const API_URL = '/api/scenes'
 const POLL_INTERVAL = 3000
 
 const layers = ref<SceneLayer[]>([])
@@ -121,22 +122,18 @@ watch(delegationTargets, (targets) => {
   }
 })
 
+// =====================
+//  HTTP : loadScenes
+// =====================
 async function loadScenes() {
   if (isFetching.value) return
 
   isFetching.value = true
   try {
-    const response = await fetch(API_URL, {
-      method: 'GET',
-      mode: 'cors',
-      credentials: 'include',
-      cache: 'no-store',
-      headers: {
-        Accept: 'application/json, text/plain;q=0.9, */*;q=0.8',
-      },
-    })
+    const response = await fetch(API_URL)
+
     if (!response.ok) {
-      throw new Error(`Erreur ${response.status}`)
+      throw new Error(`HTTP ${response.status}`)
     }
 
     const payload = await parseResponsePayload(response)
@@ -147,55 +144,24 @@ async function loadScenes() {
     errorMessage.value = null
   } catch (error) {
     console.error('loadScenes', error)
-    errorMessage.value = "Impossible de récupérer les scènes."
+    errorMessage.value = 'Impossible de récupérer les scènes.'
   } finally {
     isFetching.value = false
     isInitialLoading.value = false
   }
 }
 
-async function parseResponsePayload(response: Response): Promise<ScenesResponse | UnknownRecord | unknown> {
-  const contentType = response.headers.get('content-type') ?? ''
-
-  if (contentType.includes('application/json')) {
-    try {
-      return (await response.clone().json()) as ScenesResponse | UnknownRecord | unknown
-    } catch (error) {
-      console.warn('parseResponsePayload: JSON.parse failed, falling back to text mode', error)
-    }
-  }
-
-  const text = await response.text()
-  if (!text.trim()) {
-    throw new Error('Réponse vide renvoyée par le serveur')
-  }
-
-  const sanitized = sanitizeJsonText(text)
-
-  try {
-    return JSON.parse(sanitized) as ScenesResponse | UnknownRecord | unknown
-  } catch (error) {
-    console.error('parseResponsePayload: unable to parse payload', error, { text })
-    throw new Error('Réponse invalide reçue du serveur')
-  }
+async function parseResponsePayload(response: Response): Promise<unknown> {
+  // L’API renvoie du JSON propre => on simplifie
+  return response.json()
 }
 
-function sanitizeJsonText(text: string): string {
-  const trimmed = text.trim()
-
-  if (!trimmed) return ''
-
-  // Some controllers expose relaxed JSON (single quotes, trailing commas).
-  // We try to fix the most common issues before handing it to JSON.parse.
-  return trimmed
-    .replace(/\r\n?/g, '\n')
-    .replace(/([\{\[,]\s*)'([^'\n]*)'(?=\s*[:\}\],])/g, '$1"$2"')
-    .replace(/:\s*'([^'\n]*)'/g, ': "$1"')
-    .replace(/,\s*([}\]])/g, '$1')
-}
+// =====================
+//  Parsing des layers
+// =====================
 
 function parseLayers(payload: unknown): SceneLayer[] {
-  // Si la payload est un tableau, on regarde si ça ressemble à une liste de "scenes"
+  // Cas Pixotope : tableau de scènes, chaque scène a un tableau "actions"
   if (Array.isArray(payload)) {
     const scenes = payload as UnknownRecord[]
 
@@ -204,7 +170,6 @@ function parseLayers(payload: unknown): SceneLayer[] {
     )
 
     if (looksLikeScenes) {
-      // Cas Pixotope : tableau de scènes, chaque scène a un tableau "actions"
       const parsedScenes: SceneLayer[] = []
 
       scenes.forEach((rawScene, sceneIndex) => {
@@ -250,7 +215,6 @@ function parseLayers(payload: unknown): SceneLayer[] {
                 id: buttonId,
                 label,
                 state,
-                // pas de couleur / target layer pour l'instant
                 raw: actionRecord,
               }
 
@@ -270,7 +234,7 @@ function parseLayers(payload: unknown): SceneLayer[] {
     }
   }
 
-  // Fallback : ton comportement générique d’origine
+  // Fallback : payload.layers ou payload[]
   const maybeResponse = payload as ScenesResponse
   const rawLayers = Array.isArray(maybeResponse?.layers)
       ? maybeResponse.layers
@@ -285,7 +249,8 @@ function parseLayers(payload: unknown): SceneLayer[] {
 
     const layerRecord = rawLayer as UnknownRecord
     const rawId = layerRecord.id
-    const id = typeof rawId === 'string' && rawId.trim().length > 0 ? rawId : `layer-${layerIndex}`
+    const id =
+        typeof rawId === 'string' && rawId.trim().length > 0 ? rawId : `layer-${layerIndex}`
 
     const nameCandidate = [layerRecord.name, layerRecord.label, layerRecord.title].find(
         (value): value is string => typeof value === 'string' && value.trim().length > 0,
@@ -365,16 +330,19 @@ function parseLayers(payload: unknown): SceneLayer[] {
   return parsed
 }
 
+// =====================
+//  Helpers UI
+// =====================
 
 function normalizeKey(value: unknown): string {
   if (typeof value !== 'string') return ''
   return value
-    .toString()
-    .trim()
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
+      .toString()
+      .trim()
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '')
 }
 
 function resolveTargetLayerId(button: SceneButton): string | undefined {
@@ -517,12 +485,7 @@ onBeforeUnmount(() => {
         <span class="indicator-dot" aria-hidden="true" />
         <span class="indicator-text">{{ syncStatusText }}</span>
         <span v-if="formattedSyncTime" class="indicator-meta">{{ formattedSyncTime }}</span>
-        <button
-          class="ghost-button"
-          type="button"
-          @click="refreshNow"
-          :disabled="isFetching"
-        >
+        <button class="ghost-button" type="button" @click="refreshNow" :disabled="isFetching">
           Rafraîchir
         </button>
       </div>
@@ -538,28 +501,32 @@ onBeforeUnmount(() => {
 
     <section v-else class="panel-grid" :style="{ '--button-count': Math.max(columnCount, 1) }">
       <article
-        v-for="layer in visibleLayers"
-        :key="layer.id"
-        class="panel-row"
-        :class="{ 'is-delegation': layer.id === delegationLayer?.id }"
+          v-for="layer in visibleLayers"
+          :key="layer.id"
+          class="panel-row"
+          :class="{ 'is-delegation': layer.id === delegationLayer?.id }"
       >
         <div class="layer-title">{{ layer.name }}</div>
         <div class="layer-buttons">
           <button
-            v-for="button in layer.buttons"
-            :key="button.id"
-            class="panel-button"
-            :class="[
+              v-for="button in layer.buttons"
+              :key="button.id"
+              class="panel-button"
+              :class="[
               `variant-${buttonVariant(button)}`,
               {
-                'is-selected': layer.id === delegationLayer?.id && isDelegationButtonSelected(button),
-                'is-linkable': layer.id === delegationLayer?.id && Boolean(delegationTargets.get(button.id)),
+                'is-selected':
+                  layer.id === delegationLayer?.id && isDelegationButtonSelected(button),
+                'is-linkable':
+                  layer.id === delegationLayer?.id && Boolean(delegationTargets.get(button.id)),
               },
             ]"
-            type="button"
-            :aria-pressed="layer.id === delegationLayer?.id ? isDelegationButtonSelected(button) : undefined"
-            :title="buttonTitle(layer, button)"
-            @click="handleButtonClick(layer, button)"
+              type="button"
+              :aria-pressed="
+              layer.id === delegationLayer?.id ? isDelegationButtonSelected(button) : undefined
+            "
+              :title="buttonTitle(layer, button)"
+              @click="handleButtonClick(layer, button)"
           >
             <span class="button-label">{{ button.label }}</span>
           </button>
