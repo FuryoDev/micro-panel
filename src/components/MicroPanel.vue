@@ -1,10 +1,3 @@
-<!--
-Intégration rapide :
-1. Montez l'application (voir main.ts), puis injectez vos données via window.MicroPanelUI.setScenes(payload).
-2. Mettez à jour les indicateurs de synchronisation/patch avec setSyncState et setPatchState.
-3. Abonnez-vous aux interactions utilisateur via onButtonTrigger et onRefreshRequest pour appeler votre backend.
--->
-
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
 
