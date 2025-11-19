@@ -1,10 +1,21 @@
+<!--
+Intégration rapide :
+1. Montez l'application (voir main.ts), puis injectez vos données via window.MicroPanelUI.setScenes(payload).
+2. Mettez à jour les indicateurs de synchronisation/patch avec setSyncState et setPatchState.
+3. Abonnez-vous aux interactions utilisateur via onButtonTrigger et onRefreshRequest pour appeler votre backend.
+-->
+
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
 
 type UnknownRecord = Record<string, unknown>
 type DateInput = Date | string | number | null | undefined
 
+type LayerKind = 'delegation' | 'source' | 'snapshots' | 'macros'
 type ButtonVariant = 'muted' | 'active' | 'preview' | 'warning' | 'danger' | 'light'
+
+const PAGE_SIZE = 31
+const PAGE_LABELS = ['1st', '2nd', '3rd']
 
 interface SceneButton {
   id: string
@@ -14,6 +25,8 @@ interface SceneButton {
   targetLayerId?: string
   targetLayerName?: string
   raw?: UnknownRecord
+  meta?: UnknownRecord
+  disabled?: boolean
 }
 
 interface SceneLayer {
@@ -22,6 +35,33 @@ interface SceneLayer {
   buttons: SceneButton[]
   raw?: UnknownRecord
   sticky?: boolean
+  kind?: LayerKind
+  sceneId?: string
+  pages?: SceneButton[][]
+  pageIndex?: number
+  pageCount?: number
+  hasPager?: boolean
+  meta?: UnknownRecord
+}
+
+interface ParsedLayerDefinition {
+  id: string
+  name: string
+  path: string
+  sources: string[]
+  state: { sourceA?: string | null; sourceB?: string | null }
+  raw: UnknownRecord
+  hasSourceA: boolean
+  hasSourceB: boolean
+}
+
+interface ParsedScene {
+  id: string
+  name: string
+  raw: UnknownRecord
+  layers: ParsedLayerDefinition[]
+  snapshots: SceneButton[]
+  macros: SceneButton[]
 }
 
 interface ScenesResponse {
@@ -34,7 +74,6 @@ interface PanelButtonEvent {
   buttonId: string
   buttonLabel: string
   nextState?: string
-  targetLayerId?: string
   rawButton?: UnknownRecord
   rawLayer?: UnknownRecord
 }
@@ -69,8 +108,9 @@ declare global {
 }
 
 const rawPayload = ref<unknown | null>(null)
+const scenes = ref<ParsedScene[]>([])
 const layers = ref<SceneLayer[]>([])
-const activeLayerIds = ref<Set<string>>(new Set())
+const selectedSceneId = ref<string | null>(null)
 const lastUpdated = ref<Date | null>(null)
 const lastPushedAt = ref<Date | null>(null)
 const isInitialLoading = ref(true)
@@ -82,53 +122,12 @@ const syncStatusOverrideText = ref<string | null>(null)
 const syncStatusOverrideClass = ref<'is-ok' | 'is-busy' | 'is-error' | null>(null)
 const refreshHandler = ref<(() => void) | null>(null)
 const buttonEventHandler = ref<((event: PanelButtonEvent) => void) | null>(null)
-const delegationLayer = computed(() => layers.value[0] ?? null)
+const pageIndexCache = new Map<string, number>()
+
+const delegationLayer = computed(() => layers.value.find((layer) => layer.kind === 'delegation') ?? null)
 const hasRefreshHandler = computed(() => Boolean(refreshHandler.value))
-
-const layerById = computed(() => {
-  const map = new Map<string, SceneLayer>()
-  for (const layer of layers.value) {
-    map.set(layer.id, layer)
-  }
-  return map
-})
-
-const layerByName = computed(() => {
-  const map = new Map<string, SceneLayer>()
-  for (const layer of layers.value) {
-    map.set(normalizeKey(layer.name), layer)
-  }
-  return map
-})
-
-const columnCount = computed(() => {
-  return layers.value.reduce((max, layer) => Math.max(max, layer.buttons.length), 1)
-})
-
-const delegationTargets = computed(() => {
-  const map = new Map<string, string>()
-  const layer = delegationLayer.value
-  if (!layer) return map
-  for (const button of layer.buttons) {
-    const targetId = resolveTargetLayerId(button)
-    if (targetId) {
-      map.set(button.id, targetId)
-    }
-  }
-  return map
-})
-
-const visibleLayers = computed(() => {
-  const delegationId = delegationLayer.value?.id
-  const activeIds = activeLayerIds.value
-
-  return layers.value.filter((layer) => {
-    if (delegationId && layer.id === delegationId) return true
-    if (layer.sticky) return true
-    return activeIds.has(layer.id)
-  })
-})
-
+const columnCount = computed(() => PAGE_SIZE + 1)
+const visibleLayers = computed(() => layers.value)
 const hasVisibleLayers = computed(() => visibleLayers.value.length > 0)
 
 const syncStatusText = computed(() => {
@@ -165,24 +164,19 @@ const formattedPushTime = computed(() => {
   }).format(lastPushedAt.value)
 })
 
-watch(delegationTargets, (targets) => {
-  const allowed = new Set(targets.values())
-  const next = new Set<string>()
-  for (const id of activeLayerIds.value) {
-    if (allowed.has(id)) {
-      next.add(id)
-    }
-  }
-  if (next.size !== activeLayerIds.value.size) {
-    activeLayerIds.value = next
-  }
+watch(selectedSceneId, (sceneId) => {
+  layers.value = buildVisibleLayers(scenes.value, sceneId)
 })
 
 function applyScenesPayload(payload: unknown, meta?: { updatedAt?: DateInput }) {
   rawPayload.value = payload ?? null
-  layers.value = parseLayers(payload)
-  syncActiveLayersFromDelegation()
-  lastUpdated.value = coerceDate(meta?.updatedAt) ?? (layers.value.length > 0 ? new Date() : lastUpdated.value)
+  const parsed = parseScenesPayload(payload)
+  scenes.value = parsed
+  if (!selectedSceneId.value || !parsed.some((scene) => scene.id === selectedSceneId.value)) {
+    selectedSceneId.value = parsed[0]?.id ?? null
+  }
+  layers.value = buildVisibleLayers(parsed, selectedSceneId.value)
+  lastUpdated.value = coerceDate(meta?.updatedAt) ?? (parsed.length > 0 ? new Date() : lastUpdated.value)
   isInitialLoading.value = false
   errorMessage.value = null
 }
@@ -232,12 +226,23 @@ function applyPatchState(state: PatchStatePayload) {
 }
 
 function handleButtonClick(layer: SceneLayer, button: SceneButton) {
-  if (delegationLayer.value && layer.id === delegationLayer.value.id) {
-    toggleDelegationTarget(button)
+  if (button.disabled) return
+
+  if (layer.kind === 'delegation') {
+    selectScene(button.id)
+    notifyButtonEvent(layer, button, 'active')
     return
   }
 
-  toggleLayerButton(button, layer)
+  if (layer.kind === 'source') {
+    activateSourceButton(layer, button)
+    notifyButtonEvent(layer, button, 'active')
+    return
+  }
+
+  if (layer.kind === 'snapshots' || layer.kind === 'macros') {
+    notifyButtonEvent(layer, button, undefined)
+  }
 }
 
 function notifyButtonEvent(layer: SceneLayer, button: SceneButton, nextState: string | undefined) {
@@ -250,121 +255,65 @@ function notifyButtonEvent(layer: SceneLayer, button: SceneButton, nextState: st
     buttonId: button.id,
     buttonLabel: button.label,
     nextState,
-    targetLayerId: resolveTargetLayerId(button),
-    rawButton: button.raw,
+    rawButton: button,
     rawLayer: layer.raw,
   })
 }
 
-function toggleDelegationTarget(button: SceneButton) {
-  const targetId = resolveTargetLayerId(button)
-  if (!targetId) return
-
-  const next = new Set(activeLayerIds.value)
-  const isActive = next.has(targetId)
-
-  if (isActive) {
-    next.delete(targetId)
-  } else {
-    next.add(targetId)
-  }
-
-  activeLayerIds.value = next
-
-  const nextState = isActive ? undefined : 'active'
-  updateButtonState(delegationLayer.value, button, nextState)
-  if (delegationLayer.value) {
-    notifyButtonEvent(delegationLayer.value, button, nextState)
-  }
+function selectScene(sceneId: string) {
+  if (!sceneId || sceneId === selectedSceneId.value) return
+  selectedSceneId.value = sceneId
 }
 
-function toggleLayerButton(button: SceneButton, layer: SceneLayer) {
-  const nextState = button.state ? undefined : 'active'
-  updateButtonState(layer, button, nextState)
-  updateRawPayloadState(button.id, nextState ?? null)
-  notifyButtonEvent(layer, button, nextState)
-}
+function activateSourceButton(layer: SceneLayer, button: SceneButton) {
+  if (!layer.pages || layer.pages.length === 0) return
+  const meta = button.meta ?? layer.meta
+  if (!meta || meta.kind !== 'source') return
 
-function updateButtonState(
-    layer: SceneLayer | null,
-    button: SceneButton,
-    nextState: string | undefined,
-) {
-  if (!layer) return
+  const value = typeof meta.value === 'string' && meta.value.trim().length > 0
+      ? meta.value.trim()
+      : typeof button.label === 'string'
+          ? button.label.trim()
+          : ''
+  if (!value) return
 
-  const updatedLayers = layers.value.map((candidate) => {
-    if (candidate.id !== layer.id) return candidate
-
-    return {
-      ...candidate,
-      buttons: candidate.buttons.map((btn) =>
-          btn.id === button.id
-              ? {
-                ...btn,
-                state: nextState,
-              }
-              : btn,
-      ),
-    }
-  })
-
-  layers.value = updatedLayers
-}
-
-function updateRawPayloadState(buttonId: string, nextState: string | null) {
-  const payload = rawPayload.value
-  if (!Array.isArray(payload)) return
-
-  payload.forEach((item) => {
-    if (!item || typeof item !== 'object') return
-    const record = item as UnknownRecord
-
-    const collections = [
-      record.actions,
-      record.snapshots,
-      record.macros,
-      (record as UnknownRecord).buttons,
-    ]
-
-    collections.forEach((collection) => {
-      if (!Array.isArray(collection)) return
-
-      collection.forEach((entry) => {
-        if (!entry || typeof entry !== 'object') return
-        const entryRecord = entry as UnknownRecord
-        const rawId = entryRecord.uuid ?? entryRecord.id
-
-        if (rawId === buttonId) {
-          entryRecord.state = nextState
-        }
-      })
+  layer.pages.forEach((page) => {
+    page.forEach((candidate) => {
+      candidate.state = candidate.id === button.id ? 'active' : undefined
     })
   })
-}
 
-function syncActiveLayersFromDelegation() {
-  const delegation = delegationLayer.value
-  if (!delegation) return
+  const activeIndex = layer.pageIndex ?? 0
+  if (layer.pages[activeIndex]) {
+    layer.buttons = layer.pages[activeIndex]
+  }
 
-  const next = new Set<string>()
-  delegation.buttons.forEach((button) => {
-    if (!isButtonToggledOn(button)) return
-    const targetId = resolveTargetLayerId(button)
-    if (targetId) {
-      next.add(targetId)
-    }
-  })
-
-  if (next.size > 0) {
-    activeLayerIds.value = next
-  } else {
-    const firstTarget = delegation.buttons[0]
-        ? resolveTargetLayerId(delegation.buttons[0])
-        : undefined
-    if (firstTarget) {
-      activeLayerIds.value = new Set([firstTarget])
+  const scene = scenes.value.find((candidate) => candidate.id === meta.sceneId)
+  const parsedLayer = scene?.layers.find((entry) => entry.id === meta.layerId)
+  if (parsedLayer) {
+    if (meta.sourceKey === 'sourceA') {
+      parsedLayer.state.sourceA = value
+    } else if (meta.sourceKey === 'sourceB') {
+      parsedLayer.state.sourceB = value
     }
   }
+
+  if (meta.layerState && typeof meta.layerState === 'object') {
+    meta.layerState[meta.sourceKey] = value
+  }
+}
+
+function cycleLayerPage(layer: SceneLayer) {
+  if (!layer.pages || layer.pages.length === 0) return
+  const nextIndex = ((layer.pageIndex ?? 0) + 1) % layer.pages.length
+  layer.pageIndex = nextIndex
+  pageIndexCache.set(layer.id, nextIndex)
+  layer.buttons = layer.pages[nextIndex]
+}
+
+function pagerLabel(layer: SceneLayer): string {
+  const index = layer.pageIndex ?? 0
+  return PAGE_LABELS[index] ?? `${index + 1}th`
 }
 
 function normalizeKey(value: unknown): string {
@@ -376,31 +325,6 @@ function normalizeKey(value: unknown): string {
       .normalize('NFD')
       .replace(/[^a-z0-9]+/g, '-')
       .replace(/^-+|-+$/g, '')
-}
-
-function resolveTargetLayerId(button: SceneButton): string | undefined {
-  if (button.targetLayerId && layerById.value.has(button.targetLayerId)) {
-    return button.targetLayerId
-  }
-
-  if (button.targetLayerName) {
-    const layer = layerByName.value.get(normalizeKey(button.targetLayerName))
-    if (layer && layer.id !== delegationLayer.value?.id) {
-      return layer.id
-    }
-  }
-
-  const layerFromLabel = layerByName.value.get(normalizeKey(button.label))
-  if (layerFromLabel && layerFromLabel.id !== delegationLayer.value?.id) {
-    return layerFromLabel.id
-  }
-
-  return undefined
-}
-
-function isDelegationButtonSelected(button: SceneButton): boolean {
-  const targetId = delegationTargets.value.get(button.id)
-  return targetId ? activeLayerIds.value.has(targetId) : false
 }
 
 function isButtonToggledOn(button: SceneButton): boolean {
@@ -466,313 +390,336 @@ function formatRelativeTime(date: Date): string {
 }
 
 function buttonTitle(layer: SceneLayer, button: SceneButton): string {
-  const details: string[] = [button.label]
-  if (button.state) details.push(`État : ${button.state}`)
-  const targetId = resolveTargetLayerId(button)
-  if (targetId) {
-    const targetLayer = layerById.value.get(targetId)
-    if (targetLayer) {
-      details.push(`Affiche : ${targetLayer.name}`)
-    }
+  const details: string[] = []
+  if (layer.kind === 'delegation') {
+    details.push(`Scene ${button.label}`)
+  } else if (layer.kind === 'source') {
+    details.push(`${layer.name} → ${button.label}`)
+  } else {
+    details.push(button.label)
   }
-  return details.join('\n')
+  if (button.state) {
+    details.push(`État : ${button.state}`)
+  }
+  return details.filter(Boolean).join('\n')
 }
 
 function refreshNow() {
   refreshHandler.value?.()
 }
 
-function parseLayers(payload: unknown): SceneLayer[] {
-  const snapshotButtons: SceneButton[] = []
-  const macroButtons: SceneButton[] = []
+function parseScenesPayload(payload: unknown): ParsedScene[] {
+  if (!Array.isArray(payload)) return []
 
-  if (Array.isArray(payload)) {
-    const scenes = payload as UnknownRecord[]
-
-    const looksLikeScenes = scenes.every(
-        (item) => item && typeof item === 'object' && Array.isArray((item as UnknownRecord).actions),
-    )
-
-    if (looksLikeScenes) {
-      const parsedScenes: SceneLayer[] = []
-      const delegationButtons: SceneButton[] = []
-
-      scenes.forEach((rawScene, sceneIndex) => {
+  return (payload as unknown[])
+      .map((rawScene, sceneIndex) => {
+        if (!rawScene || typeof rawScene !== 'object') return null
         const sceneRecord = rawScene as UnknownRecord
-
-        const rawId = sceneRecord.uuid ?? sceneRecord.id
-        const id =
-            typeof rawId === 'string' && rawId.trim().length > 0 ? rawId : `scene-${sceneIndex}`
-
+        const rawId = sceneRecord.uuid ?? sceneRecord.id ?? `scene-${sceneIndex}`
+        const id = typeof rawId === 'string' ? rawId : `scene-${sceneIndex}`
         const nameCandidate =
             typeof sceneRecord.name === 'string' && sceneRecord.name.trim().length > 0
                 ? sceneRecord.name
                 : id
         const name = nameCandidate
 
-        const tally = typeof sceneRecord.tally === 'number' ? (sceneRecord.tally as number) : 0
+        const parsedLayers = parseSceneLayers(sceneRecord)
+        const snapshots = parseSceneButtons(sceneRecord.snapshots, `${id}-snapshot`)
+        const macros = parseSceneButtons(sceneRecord.macros, `${id}-macro`)
 
-        const actionsSource = Array.isArray(sceneRecord.actions)
-            ? (sceneRecord.actions as UnknownRecord[])
-            : []
-
-        const buttons: SceneButton[] = actionsSource
-            .map((rawAction, actionIndex) => {
-              if (!rawAction || typeof rawAction !== 'object') return null
-
-              const actionRecord = rawAction as UnknownRecord
-
-              const rawButtonId = actionRecord.uuid ?? actionRecord.id
-              const buttonId =
-                  typeof rawButtonId === 'string' && rawButtonId.trim().length > 0
-                      ? rawButtonId
-                      : `${id}-btn-${actionIndex}`
-
-              const label =
-                  typeof actionRecord.name === 'string' && actionRecord.name.trim().length > 0
-                      ? (actionRecord.name as string)
-                      : buttonId
-
-              const state =
-                  typeof actionRecord.state === 'string' && actionRecord.state.trim().length > 0
-                      ? (actionRecord.state as string)
-                      : undefined
-
-              const button: SceneButton = {
-                id: buttonId,
-                label,
-                state,
-                raw: actionRecord,
-              }
-
-              return button
-            })
-            .filter((b): b is SceneButton => Boolean(b))
-
-        parsedScenes.push({
+        return {
           id,
           name,
-          buttons,
           raw: sceneRecord,
-        })
+          layers: parsedLayers,
+          snapshots,
+          macros,
+        }
+      })
+      .filter((scene): scene is ParsedScene => Boolean(scene))
+}
 
-        delegationButtons.push({
+function parseSceneLayers(sceneRecord: UnknownRecord): ParsedLayerDefinition[] {
+  const rawLayers = Array.isArray(sceneRecord.layers) ? sceneRecord.layers : []
+
+  return rawLayers
+      .map((rawLayer, layerIndex) => {
+        if (!rawLayer || typeof rawLayer !== 'object') return null
+        const layerRecord = rawLayer as UnknownRecord
+        const rawUuid = layerRecord.uuid ?? layerRecord.id ?? `layer-${layerIndex}`
+        const id = typeof rawUuid === 'string' ? rawUuid : `layer-${layerIndex}`
+        const path = typeof layerRecord.path === 'string' ? layerRecord.path : ''
+        const nameCandidate = [layerRecord.name, layerRecord.label, layerRecord.title].find(
+            (value): value is string => typeof value === 'string' && value.trim().length > 0,
+        )
+        const name = nameCandidate ?? id
+        const sources = Array.isArray(layerRecord.sources)
+            ? (layerRecord.sources as unknown[]).map((entry) =>
+                typeof entry === 'string'
+                    ? entry
+                    : typeof entry === 'number'
+                        ? `${entry}`
+                        : '',
+            )
+            : []
+        const hasSourceA = Object.prototype.hasOwnProperty.call(layerRecord, 'sourceA')
+        const hasSourceB = Object.prototype.hasOwnProperty.call(layerRecord, 'sourceB')
+        const state = {
+          sourceA:
+              typeof layerRecord.sourceA === 'string' && layerRecord.sourceA.trim().length > 0
+                  ? (layerRecord.sourceA as string)
+                  : null,
+          sourceB:
+              typeof layerRecord.sourceB === 'string' && layerRecord.sourceB.trim().length > 0
+                  ? (layerRecord.sourceB as string)
+                  : null,
+        }
+
+        return {
           id,
-          label: name,
-          state: tally > 0 ? 'program' : undefined,
-          targetLayerId: id,
-          raw: sceneRecord,
-        })
-
-        const rawSnapshots = Array.isArray(sceneRecord.snapshots)
-            ? (sceneRecord.snapshots as UnknownRecord[])
-            : []
-        rawSnapshots.forEach((snap, snapIndex) => {
-          if (!snap || typeof snap !== 'object') return
-
-          const snapRecord = snap as UnknownRecord
-          const snapIdCandidate = snapRecord.uuid ?? snapRecord.id ?? `${id}-snapshot-${snapIndex}`
-          const snapId =
-              typeof snapIdCandidate === 'string' ? snapIdCandidate : `${id}-snapshot-${snapIndex}`
-          const snapNameCandidate =
-              snapRecord.name ?? snapRecord.label ?? snapRecord.title ?? snapId
-          const snapLabel =
-              typeof snapNameCandidate === 'string' ? snapNameCandidate : snapId
-
-          snapshotButtons.push({
-            id: snapId,
-            label: snapLabel,
-            state:
-                typeof snapRecord.state === 'string' ? (snapRecord.state as string) : undefined,
-            raw: snapRecord,
-          })
-        })
-
-        const rawMacros = Array.isArray(sceneRecord.macros)
-            ? (sceneRecord.macros as UnknownRecord[])
-            : []
-        rawMacros.forEach((macro, macroIndex) => {
-          if (!macro || typeof macro !== 'object') return
-
-          const macroRecord = macro as UnknownRecord
-          const macroIdCandidate =
-              macroRecord.uuid ?? macroRecord.id ?? `${id}-macro-${macroIndex}`
-          const macroId =
-              typeof macroIdCandidate === 'string' ? macroIdCandidate : `${id}-macro-${macroIndex}`
-          const macroNameCandidate =
-              macroRecord.name ?? macroRecord.label ?? macroRecord.title ?? macroId
-          const macroLabel =
-              typeof macroNameCandidate === 'string' ? macroNameCandidate : macroId
-
-          macroButtons.push({
-            id: macroId,
-            label: macroLabel,
-            state:
-                typeof macroRecord.state === 'string' && macroRecord.state.trim().length > 0
-                    ? (macroRecord.state as string)
-                    : undefined,
-            raw: macroRecord,
-          })
-        })
+          name,
+          path,
+          sources,
+          state,
+          raw: layerRecord,
+          hasSourceA,
+          hasSourceB,
+        }
       })
+      .filter((layer): layer is ParsedLayerDefinition => Boolean(layer))
+}
 
-      const result: SceneLayer[] = []
+function parseSceneButtons(collection: unknown, fallbackPrefix: string): SceneButton[] {
+  if (!Array.isArray(collection)) return []
+  return (collection as UnknownRecord[])
+      .map((entry, index) => {
+        if (!entry || typeof entry !== 'object') return null
+        const rawEntry = entry as UnknownRecord
+        const rawId = rawEntry.uuid ?? rawEntry.id ?? `${fallbackPrefix}-${index}`
+        const id = typeof rawId === 'string' ? rawId : `${fallbackPrefix}-${index}`
+        const nameCandidate =
+            rawEntry.name ?? rawEntry.label ?? rawEntry.title ?? rawEntry.text ?? id
+        const label = typeof nameCandidate === 'string' ? nameCandidate : id
+        const state =
+            typeof rawEntry.state === 'string' && rawEntry.state.trim().length > 0
+                ? (rawEntry.state as string)
+                : undefined
 
-      if (delegationButtons.length > 0) {
-        result.push({
-          id: 'delegation',
-          name: 'Delegation',
-          buttons: delegationButtons,
-          raw: { type: 'delegation' },
-          sticky: true,
-        })
-      }
-
-      result.push(...parsedScenes)
-
-      if (snapshotButtons.length > 0) {
-        result.push({
-          id: 'snapshots',
-          name: 'Snapshots',
-          buttons: snapshotButtons,
-          raw: { type: 'snapshots' },
-          sticky: true,
-        })
-      }
-
-      result.push({
-        id: 'macros',
-        name: 'Macros',
-        buttons: macroButtons,
-        raw: { type: 'macros' },
-        sticky: true,
+        return {
+          id,
+          label,
+          state,
+          raw: rawEntry,
+        }
       })
+      .filter((button): button is SceneButton => Boolean(button))
+}
 
-      return result
+function buildVisibleLayers(parsedScenes: ParsedScene[], sceneId: string | null): SceneLayer[] {
+  if (parsedScenes.length === 0) return []
+  const result: SceneLayer[] = []
+
+  const activeScene = parsedScenes.find((scene) => scene.id === sceneId) ?? parsedScenes[0]
+
+  result.push(buildDelegationLayer(parsedScenes, activeScene.id))
+
+  activeScene.layers.forEach((layer) => {
+    const layerState = {
+      ...layer.raw,
+      uuid: layer.raw.uuid ?? layer.id,
+      sourceA: layer.state.sourceA ?? null,
+      sourceB: layer.state.sourceB ?? null,
     }
-  }
 
-  const maybeResponse = payload as ScenesResponse
-  const rawLayers = Array.isArray(maybeResponse?.layers)
-      ? maybeResponse.layers
-      : Array.isArray(payload)
-          ? (payload as unknown[])
-          : []
-
-  const parsed: SceneLayer[] = []
-
-  rawLayers.forEach((rawLayer, layerIndex) => {
-    if (!rawLayer || typeof rawLayer !== 'object') return
-
-    const layerRecord = rawLayer as UnknownRecord
-    const rawId = layerRecord.id
-    const id =
-        typeof rawId === 'string' && rawId.trim().length > 0 ? rawId : `layer-${layerIndex}`
-
-    const nameCandidate = [layerRecord.name, layerRecord.label, layerRecord.title].find(
-        (value): value is string => typeof value === 'string' && value.trim().length > 0,
-    )
-    const name = nameCandidate ?? id
-
-    const buttonsSource = Array.isArray(layerRecord.buttons) ? layerRecord.buttons : []
-
-    const buttons: SceneButton[] = buttonsSource
-        .map((rawButton, buttonIndex) => {
-          if (!rawButton || typeof rawButton !== 'object') return null
-
-          const buttonRecord = rawButton as UnknownRecord
-          const rawButtonId = buttonRecord.id
-          const buttonId =
-              typeof rawButtonId === 'string' && rawButtonId.trim().length > 0
-                  ? rawButtonId
-                  : `${id}-btn-${buttonIndex}`
-
-          const labelCandidate = [
-            buttonRecord.label,
-            buttonRecord.text,
-            buttonRecord.name,
-            buttonRecord.title,
-          ].find(
-              (value): value is string => typeof value === 'string' && value.trim().length > 0,
-          )
-          const label = labelCandidate ?? buttonId
-
-          const stateCandidate = [
-            buttonRecord.state,
-            buttonRecord.status,
-            buttonRecord.mode,
-            buttonRecord.value,
-          ].find(
-              (value): value is string => typeof value === 'string' && value.trim().length > 0,
-          )
-
-          const colorCandidate =
-              typeof buttonRecord.color === 'string' && buttonRecord.color.trim().length > 0
-                  ? buttonRecord.color
-                  : undefined
-
-          const targetLayerIdCandidate = [
-            buttonRecord.targetLayerId,
-            buttonRecord.target_layer_id,
-            buttonRecord.layerId,
-            buttonRecord.layer_id,
-          ].find(
-              (value): value is string => typeof value === 'string' && value.trim().length > 0,
-          )
-
-          const targetLayerNameCandidate = [
-            buttonRecord.targetLayerName,
-            buttonRecord.target_layer_name,
-            buttonRecord.target,
-            buttonRecord.layerName,
-            buttonRecord.layer_name,
-          ].find(
-              (value): value is string => typeof value === 'string' && value.trim().length > 0,
-          )
-
-          const button: SceneButton = {
-            id: buttonId,
-            label,
-            state: stateCandidate,
-            color: colorCandidate,
-            targetLayerId: targetLayerIdCandidate,
-            targetLayerName: targetLayerNameCandidate,
-            raw: buttonRecord,
-          }
-
-          return button
-        })
-        .filter((button): button is SceneButton => Boolean(button))
-
-    parsed.push({
-      id,
-      name,
-      buttons,
-      raw: layerRecord,
-    })
+    if (layer.hasSourceA || (!layer.hasSourceA && !layer.hasSourceB)) {
+      result.push(buildSourceRow(activeScene, layer, 'sourceA', layerState))
+    }
+    if (layer.hasSourceB) {
+      result.push(buildSourceRow(activeScene, layer, 'sourceB', layerState))
+    }
   })
 
-  if (snapshotButtons.length > 0) {
-    parsed.push({
-      id: 'snapshots',
-      name: 'Snapshots',
-      buttons: snapshotButtons,
-      raw: { type: 'snapshots' },
-      sticky: true,
-    })
+  result.push(buildSnapshotsLayer(activeScene))
+  result.push(buildMacrosLayer(activeScene))
+
+  return result
+}
+
+function buildDelegationLayer(parsedScenes: ParsedScene[], activeSceneId: string): SceneLayer {
+  return {
+    id: 'delegation',
+    name: 'Delegation',
+    kind: 'delegation',
+    sticky: true,
+    buttons: parsedScenes.map((scene) => ({
+      id: scene.id,
+      label: scene.name,
+      state: scene.id === activeSceneId ? 'program' : undefined,
+      raw: scene.raw,
+    })),
+    raw: { type: 'delegation' },
+  }
+}
+
+function buildLayerLabel(layer: ParsedLayerDefinition): string {
+  const parts = [layer.path, layer.name].filter((value) => typeof value === 'string' && value.trim().length > 0)
+  const base = parts.join(' ').trim()
+  return base.length > 0 ? base : layer.name
+}
+
+function buildSourceRow(
+    scene: ParsedScene,
+    layer: ParsedLayerDefinition,
+    sourceKey: 'sourceA' | 'sourceB',
+    layerState: UnknownRecord,
+): SceneLayer {
+  const baseLabel = buildLayerLabel(layer)
+  const suffix = layer.hasSourceA && layer.hasSourceB
+      ? sourceKey === 'sourceA'
+          ? ' - A'
+          : ' - B'
+      : ''
+  const rowId = `${scene.id}:${layer.id}:${sourceKey}`
+  const selectedValue = layer.state[sourceKey] ?? null
+  const pages = buildPagedButtons(
+      rowId,
+      scene.id,
+      layer.id,
+      sourceKey,
+      layer.sources,
+      selectedValue,
+      layerState,
+  )
+  const cachedIndex = pageIndexCache.get(rowId) ?? 0
+  const pageIndex = Math.min(cachedIndex, pages.length - 1)
+
+  return {
+    id: rowId,
+    name: `${baseLabel}${suffix}`,
+    kind: 'source',
+    sceneId: scene.id,
+    buttons: pages[pageIndex] ?? [],
+    pages,
+    pageIndex,
+    pageCount: pages.length,
+    hasPager: true,
+    raw: layer.raw,
+    meta: {
+      kind: 'source',
+      sceneId: scene.id,
+      layerId: layer.id,
+      sourceKey,
+      layerState,
+    },
+  }
+}
+
+function buildPagedButtons(
+    rowId: string,
+    sceneId: string,
+    layerId: string,
+    sourceKey: 'sourceA' | 'sourceB',
+    sources: string[],
+    selectedValue: string | null,
+    layerState: UnknownRecord,
+): SceneButton[][] {
+  const totalPages = Math.max(PAGE_LABELS.length, 1)
+  const totalSlots = totalPages * PAGE_SIZE
+  const entries = [...sources]
+  while (entries.length < totalSlots) {
+    entries.push('')
   }
 
-  if (macroButtons.length > 0 || !parsed.some((layer) => layer.id === 'macros')) {
-    parsed.push({
-      id: 'macros',
-      name: 'Macros',
-      buttons: macroButtons,
-      raw: { type: 'macros' },
-      sticky: true,
+  const pages: SceneButton[][] = []
+  for (let pageIndex = 0; pageIndex < totalPages; pageIndex += 1) {
+    const offset = pageIndex * PAGE_SIZE
+    const subset = entries.slice(offset, offset + PAGE_SIZE)
+    const pageButtons = subset.map((label, index) => {
+      const normalizedLabel = typeof label === 'string' ? label.trim() : ''
+      const value = normalizedLabel || ''
+      return {
+        id: `${rowId}-btn-${offset + index}`,
+        label: value || '\u00a0',
+        state: value && selectedValue && value === selectedValue ? 'active' : undefined,
+        raw: { value },
+        meta: {
+          kind: 'source',
+          sceneId,
+          layerId,
+          sourceKey,
+          value,
+          layerState,
+        },
+        disabled: !value,
+      }
     })
+    pages.push(pageButtons)
   }
 
-  return parsed
+  return pages
+}
+
+function buildSnapshotsLayer(scene: ParsedScene): SceneLayer {
+  const buttons = padButtons(
+      scene.snapshots.map((button) => ({
+        ...button,
+        meta: {
+          kind: 'snapshot',
+          sceneId: scene.id,
+          uuid: button.id,
+        },
+      })),
+      `${scene.id}-snapshot-placeholder`,
+  )
+
+  return {
+    id: `snapshots-${scene.id}`,
+    name: 'Snapshots',
+    kind: 'snapshots',
+    buttons,
+    sticky: true,
+    raw: { type: 'snapshots' },
+  }
+}
+
+function buildMacrosLayer(scene: ParsedScene): SceneLayer {
+  const buttons = padButtons(
+      scene.macros.map((button) => ({
+        ...button,
+        meta: {
+          kind: 'macro',
+          sceneId: scene.id,
+          uuid: button.id,
+        },
+      })),
+      `${scene.id}-macro-placeholder`,
+  )
+
+  return {
+    id: `macros-${scene.id}`,
+    name: 'Macros',
+    kind: 'macros',
+    buttons,
+    sticky: true,
+    raw: { type: 'macros' },
+  }
+}
+
+function padButtons(buttons: SceneButton[], prefix: string): SceneButton[] {
+  const result = [...buttons]
+  while (result.length < PAGE_SIZE) {
+    result.push(createPlaceholderButton(`${prefix}-${result.length}`))
+  }
+  return result.slice(0, PAGE_SIZE)
+}
+
+function createPlaceholderButton(id: string): SceneButton {
+  return {
+    id,
+    label: '\u00a0',
+    disabled: true,
+    raw: { kind: 'placeholder' },
+  }
 }
 
 const bridge: PanelIntegrationBridge = {
@@ -797,6 +744,7 @@ if (typeof window !== 'undefined') {
   window.MicroPanelUI = bridge
 }
 </script>
+
 
 <template>
   <main class="panel-shell">
@@ -863,23 +811,33 @@ if (typeof window !== 'undefined') {
               `variant-${buttonVariant(button)}`,
               {
                 'is-selected':
-                  layer.id === delegationLayer?.id
-                    ? isDelegationButtonSelected(button)
-                    : isButtonToggledOn(button),
-                'is-linkable':
-                  layer.id === delegationLayer?.id && Boolean(delegationTargets.get(button.id)),
+                  layer.kind === 'delegation'
+                    ? button.state === 'program'
+                    : layer.kind === 'source' && isButtonToggledOn(button),
               },
             ]"
               type="button"
+              :disabled="button.disabled"
               :aria-pressed="
-              layer.id === delegationLayer?.id
-                ? isDelegationButtonSelected(button)
-                : isButtonToggledOn(button)
+              layer.kind === 'delegation' || layer.kind === 'source'
+                ? isButtonToggledOn(button)
+                : undefined
             "
               :title="buttonTitle(layer, button)"
               @click="handleButtonClick(layer, button)"
           >
             <span class="button-label">{{ button.label }}</span>
+          </button>
+
+          <button
+              v-if="layer.kind === 'source' && layer.hasPager"
+              :key="`${layer.id}-pager`"
+              class="panel-button pager-button variant-warning"
+              type="button"
+              :title="`Changer de page (${pagerLabel(layer)})`"
+              @click="cycleLayerPage(layer)"
+          >
+            <span class="button-label">{{ pagerLabel(layer) }}</span>
           </button>
         </div>
       </article>
@@ -1022,7 +980,6 @@ if (typeof window !== 'undefined') {
 }
 
 .layer-title {
-  margin-left: 12px;
   padding-right: 8px;
   font-size: 12px;
   font-weight: 500;
@@ -1061,13 +1018,43 @@ if (typeof window !== 'undefined') {
   box-shadow: 0 0 0 2px #f1c40f, inset 0 0 4px rgba(0, 0, 0, 0.8);
 }
 
-.panel-button.is-linkable::after {
-  content: '';
-  position: absolute;
-}
-
 .button-label {
   pointer-events: none;
 }
 
+.pager-button {
+  font-weight: 600;
+}
+
+/* Variantes “façon switcher” */
+
+.variant-muted {
+  background: #262626;
+  color: #a0a0a0;
+}
+
+.variant-active {
+  background: #f0f0f0;
+  color: #111;
+}
+
+.variant-preview {
+  background: #d0d0d0;
+  color: #111;
+}
+
+.variant-warning {
+  background: #f1c40f;
+  color: #111;
+}
+
+.variant-danger {
+  background: #e74c3c;
+  color: #fff;
+}
+
+.variant-light {
+  background: #ffffff;
+  color: #111;
+}
 </style>
