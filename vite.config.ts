@@ -2,7 +2,6 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
 // IMPORTANT : Ceci permet de bypass CORS en dev.
-// Le frontend fait fetch('/api/scenes') → Vite → contrôleur Pixotope
 export default defineConfig({
   plugins: [vue()],
   server: {

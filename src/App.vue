@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 
 type UnknownRecord = Record<string, unknown>
 
@@ -27,9 +27,7 @@ interface ScenesResponse {
   layers?: unknown
 }
 
-// NOTE : on passe par un proxy Vite => voir vite.config.ts
 const API_URL = '/api/scenes'
-const POLL_INTERVAL = 3000
 
 const rawPayload = ref<unknown | null>(null)
 const isPatching = ref(false)
@@ -42,8 +40,6 @@ const lastUpdated = ref<Date | null>(null)
 const isInitialLoading = ref(true)
 const isFetching = ref(false)
 const errorMessage = ref<string | null>(null)
-
-let pollTimer: ReturnType<typeof setInterval> | null = null
 
 const delegationLayer = computed(() => layers.value[0] ?? null)
 
@@ -65,6 +61,19 @@ const layerByName = computed(() => {
 
 const columnCount = computed(() => {
   return layers.value.reduce((max, layer) => Math.max(max, layer.buttons.length), 1)
+})
+
+const delegationTargets = computed(() => {
+  const map = new Map<string, string>()
+  const layer = delegationLayer.value
+  if (!layer) return map
+  for (const button of layer.buttons) {
+    const targetId = resolveTargetLayerId(button)
+    if (targetId) {
+      map.set(button.id, targetId)
+    }
+  }
+  return map
 })
 
 const visibleLayers = computed(() => {
@@ -112,19 +121,6 @@ const formattedPushTime = computed(() => {
   }).format(lastPushedAt.value)
 })
 
-const delegationTargets = computed(() => {
-  const map = new Map<string, string>()
-  const layer = delegationLayer.value
-  if (!layer) return map
-  for (const button of layer.buttons) {
-    const targetId = resolveTargetLayerId(button)
-    if (targetId) {
-      map.set(button.id, targetId)
-    }
-  }
-  return map
-})
-
 watch(delegationTargets, (targets) => {
   const allowed = new Set(targets.values())
   const next = new Set<string>()
@@ -138,9 +134,6 @@ watch(delegationTargets, (targets) => {
   }
 })
 
-// =====================
-//  HTTP : loadScenes
-// =====================
 async function loadScenes() {
   if (isFetching.value) return
 
@@ -170,19 +163,14 @@ async function loadScenes() {
 }
 
 async function parseResponsePayload(response: Response): Promise<unknown> {
-  // L’API renvoie du JSON propre => on simplifie
   return response.json()
 }
 
-// =====================
-//  Parsing des layers
-// =====================
 
 function parseLayers(payload: unknown): SceneLayer[] {
   const snapshotButtons: SceneButton[] = []
   const macroButtons: SceneButton[] = []
 
-  // Cas Pixotope : tableau de scènes, chaque scène a un tableau "actions"
   if (Array.isArray(payload)) {
     const scenes = payload as UnknownRecord[]
 
@@ -192,6 +180,7 @@ function parseLayers(payload: unknown): SceneLayer[] {
 
     if (looksLikeScenes) {
       const parsedScenes: SceneLayer[] = []
+      const delegationButtons: SceneButton[] = []
 
       scenes.forEach((rawScene, sceneIndex) => {
         const sceneRecord = rawScene as UnknownRecord
@@ -205,6 +194,8 @@ function parseLayers(payload: unknown): SceneLayer[] {
                 ? sceneRecord.name
                 : id
         const name = nameCandidate
+
+        const tally = typeof sceneRecord.tally === 'number' ? (sceneRecord.tally as number) : 0
 
         const actionsSource = Array.isArray(sceneRecord.actions)
             ? (sceneRecord.actions as UnknownRecord[])
@@ -250,53 +241,82 @@ function parseLayers(payload: unknown): SceneLayer[] {
           raw: sceneRecord,
         })
 
+        delegationButtons.push({
+          id,
+          label: name,
+          state: tally > 0 ? 'program' : undefined,
+          targetLayerId: id,
+          raw: sceneRecord,
+        })
+
         const rawSnapshots = Array.isArray(sceneRecord.snapshots)
-          ? (sceneRecord.snapshots as UnknownRecord[])
-          : []
+            ? (sceneRecord.snapshots as UnknownRecord[])
+            : []
         rawSnapshots.forEach((snap, snapIndex) => {
           if (!snap || typeof snap !== 'object') return
 
           const snapRecord = snap as UnknownRecord
           const snapIdCandidate = snapRecord.uuid ?? snapRecord.id ?? `${id}-snapshot-${snapIndex}`
-          const snapId = typeof snapIdCandidate === 'string' ? snapIdCandidate : `${id}-snapshot-${snapIndex}`
-          const snapNameCandidate = snapRecord.name ?? snapRecord.label ?? snapRecord.title ?? snapId
-          const snapLabel = typeof snapNameCandidate === 'string' ? snapNameCandidate : snapId
+          const snapId =
+              typeof snapIdCandidate === 'string' ? snapIdCandidate : `${id}-snapshot-${snapIndex}`
+          const snapNameCandidate =
+              snapRecord.name ?? snapRecord.label ?? snapRecord.title ?? snapId
+          const snapLabel =
+              typeof snapNameCandidate === 'string' ? snapNameCandidate : snapId
 
           snapshotButtons.push({
             id: snapId,
             label: snapLabel,
-            state: typeof snapRecord.state === 'string' ? (snapRecord.state as string) : undefined,
+            state:
+                typeof snapRecord.state === 'string' ? (snapRecord.state as string) : undefined,
             raw: snapRecord,
           })
         })
 
         const rawMacros = Array.isArray(sceneRecord.macros)
-          ? (sceneRecord.macros as UnknownRecord[])
-          : []
+            ? (sceneRecord.macros as UnknownRecord[])
+            : []
         rawMacros.forEach((macro, macroIndex) => {
           if (!macro || typeof macro !== 'object') return
 
           const macroRecord = macro as UnknownRecord
-          const macroIdCandidate = macroRecord.uuid ?? macroRecord.id ?? `${id}-macro-${macroIndex}`
+          const macroIdCandidate =
+              macroRecord.uuid ?? macroRecord.id ?? `${id}-macro-${macroIndex}`
           const macroId =
-            typeof macroIdCandidate === 'string' ? macroIdCandidate : `${id}-macro-${macroIndex}`
-          const macroNameCandidate = macroRecord.name ?? macroRecord.label ?? macroRecord.title ?? macroId
-          const macroLabel = typeof macroNameCandidate === 'string' ? macroNameCandidate : macroId
+              typeof macroIdCandidate === 'string' ? macroIdCandidate : `${id}-macro-${macroIndex}`
+          const macroNameCandidate =
+              macroRecord.name ?? macroRecord.label ?? macroRecord.title ?? macroId
+          const macroLabel =
+              typeof macroNameCandidate === 'string' ? macroNameCandidate : macroId
 
           macroButtons.push({
             id: macroId,
             label: macroLabel,
             state:
-              typeof macroRecord.state === 'string' && macroRecord.state.trim().length > 0
-                ? (macroRecord.state as string)
-                : undefined,
+                typeof macroRecord.state === 'string' && macroRecord.state.trim().length > 0
+                    ? (macroRecord.state as string)
+                    : undefined,
             raw: macroRecord,
           })
         })
       })
 
+      const result: SceneLayer[] = []
+
+      if (delegationButtons.length > 0) {
+        result.push({
+          id: 'delegation',
+          name: 'Delegation',
+          buttons: delegationButtons,
+          raw: { type: 'delegation' },
+          sticky: true,
+        })
+      }
+
+      result.push(...parsedScenes)
+
       if (snapshotButtons.length > 0) {
-        parsedScenes.push({
+        result.push({
           id: 'snapshots',
           name: 'Snapshots',
           buttons: snapshotButtons,
@@ -305,29 +325,18 @@ function parseLayers(payload: unknown): SceneLayer[] {
         })
       }
 
-      if (macroButtons.length > 0) {
-        parsedScenes.push({
-          id: 'macros',
-          name: 'Macros',
-          buttons: macroButtons,
-          raw: { type: 'macros' },
-          sticky: true,
-        })
-      } else {
-        parsedScenes.push({
-          id: 'macros',
-          name: 'Macros',
-          buttons: [],
-          raw: { type: 'macros' },
-          sticky: true,
-        })
-      }
+      result.push({
+        id: 'macros',
+        name: 'Macros',
+        buttons: macroButtons,
+        raw: { type: 'macros' },
+        sticky: true,
+      })
 
-      return parsedScenes
+      return result
     }
   }
 
-  // Fallback : payload.layers ou payload[]
   const maybeResponse = payload as ScenesResponse
   const rawLayers = Array.isArray(maybeResponse?.layers)
       ? maybeResponse.layers
@@ -368,7 +377,9 @@ function parseLayers(payload: unknown): SceneLayer[] {
             buttonRecord.text,
             buttonRecord.name,
             buttonRecord.title,
-          ].find((value): value is string => typeof value === 'string' && value.trim().length > 0)
+          ].find(
+              (value): value is string => typeof value === 'string' && value.trim().length > 0,
+          )
           const label = labelCandidate ?? buttonId
 
           const stateCandidate = [
@@ -376,7 +387,9 @@ function parseLayers(payload: unknown): SceneLayer[] {
             buttonRecord.status,
             buttonRecord.mode,
             buttonRecord.value,
-          ].find((value): value is string => typeof value === 'string' && value.trim().length > 0)
+          ].find(
+              (value): value is string => typeof value === 'string' && value.trim().length > 0,
+          )
 
           const colorCandidate =
               typeof buttonRecord.color === 'string' && buttonRecord.color.trim().length > 0
@@ -388,7 +401,9 @@ function parseLayers(payload: unknown): SceneLayer[] {
             buttonRecord.target_layer_id,
             buttonRecord.layerId,
             buttonRecord.layer_id,
-          ].find((value): value is string => typeof value === 'string' && value.trim().length > 0)
+          ].find(
+              (value): value is string => typeof value === 'string' && value.trim().length > 0,
+          )
 
           const targetLayerNameCandidate = [
             buttonRecord.targetLayerName,
@@ -396,7 +411,9 @@ function parseLayers(payload: unknown): SceneLayer[] {
             buttonRecord.target,
             buttonRecord.layerName,
             buttonRecord.layer_name,
-          ].find((value): value is string => typeof value === 'string' && value.trim().length > 0)
+          ].find(
+              (value): value is string => typeof value === 'string' && value.trim().length > 0,
+          )
 
           const button: SceneButton = {
             id: buttonId,
@@ -443,9 +460,7 @@ function parseLayers(payload: unknown): SceneLayer[] {
   return parsed
 }
 
-// =====================
 //  Helpers UI
-// =====================
 
 function normalizeKey(value: unknown): string {
   if (typeof value !== 'string') return ''
@@ -568,9 +583,9 @@ function toggleDelegationTarget(button: SceneButton) {
   }
 
   activeLayerIds.value = next
-  updateButtonState(delegationLayer.value, button, isActive ? undefined : 'active')
-  updateRawPayloadState(button.id, isActive ? null : 'active')
-  void pushStateToApi()
+
+  const nextState = isActive ? undefined : 'active'
+  updateButtonState(delegationLayer.value, button, nextState)
 }
 
 function toggleLayerButton(button: SceneButton, layer: SceneLayer) {
@@ -580,7 +595,11 @@ function toggleLayerButton(button: SceneButton, layer: SceneLayer) {
   void pushStateToApi()
 }
 
-function updateButtonState(layer: SceneLayer | null, button: SceneButton, nextState: string | undefined) {
+function updateButtonState(
+    layer: SceneLayer | null,
+    button: SceneButton,
+    nextState: string | undefined,
+) {
   if (!layer) return
 
   const updatedLayers = layers.value.map((candidate) => {
@@ -589,12 +608,12 @@ function updateButtonState(layer: SceneLayer | null, button: SceneButton, nextSt
     return {
       ...candidate,
       buttons: candidate.buttons.map((btn) =>
-        btn.id === button.id
-          ? {
-              ...btn,
-              state: nextState,
-            }
-          : btn,
+          btn.id === button.id
+              ? {
+                ...btn,
+                state: nextState,
+              }
+              : btn,
       ),
     }
   })
@@ -653,9 +672,11 @@ async function pushStateToApi() {
     }
 
     lastPushedAt.value = new Date()
+
+    await loadScenes()
   } catch (error) {
     console.error('pushStateToApi', error)
-    patchError.value = 'Impossible de synchroniser l’état.'
+    patchError.value = "Impossible de synchroniser l’état."
   } finally {
     isPatching.value = false
   }
@@ -676,6 +697,13 @@ function syncActiveLayersFromDelegation() {
 
   if (next.size > 0) {
     activeLayerIds.value = next
+  } else {
+    const firstTarget = delegation.buttons[0]
+        ? resolveTargetLayerId(delegation.buttons[0])
+        : undefined
+    if (firstTarget) {
+      activeLayerIds.value = new Set([firstTarget])
+    }
   }
 }
 
@@ -698,16 +726,6 @@ function refreshNow() {
 
 onMounted(() => {
   void loadScenes()
-  pollTimer = setInterval(() => {
-    void loadScenes()
-  }, POLL_INTERVAL)
-})
-
-onBeforeUnmount(() => {
-  if (pollTimer) {
-    clearInterval(pollTimer)
-    pollTimer = null
-  }
 })
 </script>
 
@@ -715,9 +733,10 @@ onBeforeUnmount(() => {
   <main class="panel-shell">
     <header class="panel-header">
       <div>
-        <h1 class="panel-title">Scene Controller</h1>
-        <p class="panel-subtitle">Interface de délégation et de pilotage des layers</p>
+        <h1 class="panel-title">Kairos Scenes</h1>
+        <p class="panel-subtitle">Délégation et pilotage des scènes</p>
       </div>
+
       <div class="sync-indicator" :class="syncStatusClass">
         <span class="indicator-dot" aria-hidden="true" />
         <span class="indicator-text">{{ syncStatusText }}</span>
@@ -726,6 +745,7 @@ onBeforeUnmount(() => {
           Rafraîchir
         </button>
       </div>
+
       <div class="patch-indicator" :class="{ 'is-busy': isPatching, 'is-error': Boolean(patchError) }">
         <span v-if="isPatching">Envoi des modifications…</span>
         <span v-else-if="patchError">{{ patchError }}</span>
@@ -742,14 +762,24 @@ onBeforeUnmount(() => {
       <p>Aucune scène disponible.</p>
     </section>
 
-    <section v-else class="panel-grid" :style="{ '--button-count': Math.max(columnCount, 1) }">
+    <section
+        v-else
+        class="panel-grid"
+        :style="{ '--button-count': Math.max(columnCount, 1) }"
+    >
       <article
           v-for="layer in visibleLayers"
           :key="layer.id"
           class="panel-row"
-          :class="{ 'is-delegation': layer.id === delegationLayer?.id }"
+          :class="{
+          'is-delegation': layer.id === delegationLayer?.id,
+          'is-sticky': layer.sticky,
+        }"
       >
-        <div class="layer-title">{{ layer.name }}</div>
+        <div class="layer-title">
+          {{ layer.id === 'delegation' ? 'Delegation' : layer.name }}
+        </div>
+
         <div class="layer-buttons">
           <button
               v-for="button in layer.buttons"
@@ -782,3 +812,218 @@ onBeforeUnmount(() => {
     </section>
   </main>
 </template>
+
+<style scoped>
+.panel-shell {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 16px;
+  background: #111;
+  color: #e0e0e0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.panel-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.panel-subtitle {
+  margin: 2px 0 0;
+  font-size: 12px;
+  color: #aaa;
+}
+
+.sync-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  background: #1f1f1f;
+}
+
+.sync-indicator .indicator-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.sync-indicator.is-ok .indicator-dot {
+  background: #3fb950;
+}
+
+.sync-indicator.is-busy .indicator-dot {
+  background: #f1c40f;
+}
+
+.sync-indicator.is-error .indicator-dot {
+  background: #e74c3c;
+}
+
+.sync-indicator .indicator-text {
+  white-space: nowrap;
+}
+
+.sync-indicator .indicator-meta {
+  color: #888;
+}
+
+.ghost-button {
+  border: 1px solid #444;
+  background: transparent;
+  color: #ccc;
+  border-radius: 999px;
+  font-size: 11px;
+  padding: 2px 10px;
+  cursor: pointer;
+}
+
+.ghost-button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.patch-indicator {
+  font-size: 11px;
+  color: #bbb;
+}
+
+.patch-indicator.is-busy {
+  color: #f1c40f;
+}
+
+.patch-indicator.is-error {
+  color: #e74c3c;
+}
+
+.panel-placeholder {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #888;
+  font-size: 14px;
+}
+
+.panel-grid {
+  margin-top: 8px;
+  padding: 8px;
+  background: #181818;
+  border-radius: 4px;
+  border: 1px solid #2a2a2a;
+  overflow-x: auto;
+  box-shadow: inset 0 0 0 1px #000;
+}
+
+.panel-row {
+  display: grid;
+  grid-template-columns: 140px repeat(var(--button-count), 44px);
+  align-items: center;
+  column-gap: 4px;
+  row-gap: 4px;
+  padding: 4px 0;
+}
+
+.panel-row + .panel-row {
+  border-top: 1px solid #202020;
+}
+
+.panel-row.is-delegation {
+  margin-bottom: 6px;
+  border-bottom: 1px solid #303030;
+}
+
+.layer-title {
+  padding-right: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #ccc;
+  text-align: left;
+}
+
+.layer-buttons {
+  display: contents;
+}
+
+.panel-button {
+  width: 44px;
+  height: 44px;
+  border-radius: 4px;
+  border: 1px solid #2f2f2f;
+  background: #262626;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.6);
+  color: #d0d0d0;
+  font-size: 9px;
+  line-height: 1.1;
+  padding: 2px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  white-space: normal;
+}
+
+.panel-button:hover {
+  border-color: #555;
+}
+
+.panel-button.is-selected {
+  box-shadow: 0 0 0 2px #f1c40f, inset 0 0 4px rgba(0, 0, 0, 0.8);
+}
+
+.panel-button.is-linkable::after {
+  content: '';
+  position: absolute;
+}
+
+.button-label {
+  pointer-events: none;
+}
+
+/* Variantes “façon switcher” */
+
+.variant-muted {
+  background: #262626;
+  color: #a0a0a0;
+}
+
+.variant-active {
+  background: #f0f0f0;
+  color: #111;
+}
+
+.variant-preview {
+  background: #d0d0d0;
+  color: #111;
+}
+
+.variant-warning {
+  background: #f1c40f;
+  color: #111;
+}
+
+.variant-danger {
+  background: #e74c3c;
+  color: #fff;
+}
+
+.variant-light {
+  background: #ffffff;
+  color: #111;
+}
+</style>
