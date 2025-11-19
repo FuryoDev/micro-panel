@@ -1,10 +1,3 @@
-<!--
-Intégration rapide :
-1. Montez l'application (voir main.ts), puis injectez vos données via window.MicroPanelUI.setScenes(payload).
-2. Mettez à jour les indicateurs de synchronisation/patch avec setSyncState et setPatchState.
-3. Abonnez-vous aux interactions utilisateur via onButtonTrigger et onRefreshRequest pour appeler votre backend.
--->
-
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
 
@@ -89,7 +82,6 @@ const syncStatusOverrideText = ref<string | null>(null)
 const syncStatusOverrideClass = ref<'is-ok' | 'is-busy' | 'is-error' | null>(null)
 const refreshHandler = ref<(() => void) | null>(null)
 const buttonEventHandler = ref<((event: PanelButtonEvent) => void) | null>(null)
-
 const delegationLayer = computed(() => layers.value[0] ?? null)
 const hasRefreshHandler = computed(() => Boolean(refreshHandler.value))
 
@@ -1030,6 +1022,7 @@ if (typeof window !== 'undefined') {
 }
 
 .layer-title {
+  margin-left: 12px;
   padding-right: 8px;
   font-size: 12px;
   font-weight: 500;
@@ -1077,35 +1070,4 @@ if (typeof window !== 'undefined') {
   pointer-events: none;
 }
 
-/* Variantes “façon switcher” */
-
-.variant-muted {
-  background: #262626;
-  color: #a0a0a0;
-}
-
-.variant-active {
-  background: #f0f0f0;
-  color: #111;
-}
-
-.variant-preview {
-  background: #d0d0d0;
-  color: #111;
-}
-
-.variant-warning {
-  background: #f1c40f;
-  color: #111;
-}
-
-.variant-danger {
-  background: #e74c3c;
-  color: #fff;
-}
-
-.variant-light {
-  background: #ffffff;
-  color: #111;
-}
 </style>

@@ -137,12 +137,6 @@ function useMockScenes() {
   border-bottom: 1px solid #222;
 }
 
-.app-title {
-  margin: 0;
-  font-size: 16px;
-  color: #e0e0e0;
-}
-
 .mock-button {
   padding: 6px 14px;
   border-radius: 999px;
