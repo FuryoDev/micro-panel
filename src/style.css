@@ -28,10 +28,7 @@ body {
 
 #app {
   width: 100%;
-  max-width: 1920px;
-  display: flex;
-  justify-content: center;
-  padding: 48px 32px 64px;
+  margin: 10vh;
 }
 
 .panel-shell {
