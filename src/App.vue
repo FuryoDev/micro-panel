@@ -1,7 +1,14 @@
+<!--
+Guide d'intégration rapide :
+1. Montez l'application (voir main.ts), puis injectez vos données via window.MicroPanelUI.setScenes(payload).
+2. Mettez à jour les indicateurs de synchronisation/patch avec setSyncState et setPatchState.
+3. Abonnez-vous aux interactions utilisateur via onButtonTrigger et onRefreshRequest pour appeler votre backend.
+-->
 <script setup lang="ts">
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 
 type UnknownRecord = Record<string, unknown>
+type DateInput = Date | string | number | null | undefined
 
 type ButtonVariant = 'muted' | 'active' | 'preview' | 'warning' | 'danger' | 'light'
 
@@ -27,21 +34,63 @@ interface ScenesResponse {
   layers?: unknown
 }
 
-const API_URL = '/api/scenes'
+interface PanelButtonEvent {
+  layerId: string
+  layerName: string
+  buttonId: string
+  buttonLabel: string
+  nextState?: string
+  targetLayerId?: string
+  rawButton?: UnknownRecord
+  rawLayer?: UnknownRecord
+}
+
+interface SyncStatePayload {
+  isFetching?: boolean
+  isInitialLoading?: boolean
+  errorMessage?: string | null
+  lastUpdated?: DateInput
+  statusText?: string | null
+  statusClass?: 'is-ok' | 'is-busy' | 'is-error' | null
+}
+
+interface PatchStatePayload {
+  isPatching?: boolean
+  patchError?: string | null
+  lastPushedAt?: DateInput
+}
+
+interface PanelIntegrationBridge {
+  setScenes: (payload: unknown, meta?: { updatedAt?: DateInput }) => void
+  setSyncState: (state: SyncStatePayload) => void
+  setPatchState: (state: PatchStatePayload) => void
+  onRefreshRequest: (handler: (() => void) | null) => void
+  onButtonTrigger: (handler: ((event: PanelButtonEvent) => void) | null) => void
+}
+
+declare global {
+  interface Window {
+    MicroPanelUI?: PanelIntegrationBridge
+  }
+}
 
 const rawPayload = ref<unknown | null>(null)
-const isPatching = ref(false)
-const patchError = ref<string | null>(null)
-const lastPushedAt = ref<Date | null>(null)
-
 const layers = ref<SceneLayer[]>([])
 const activeLayerIds = ref<Set<string>>(new Set())
 const lastUpdated = ref<Date | null>(null)
+const lastPushedAt = ref<Date | null>(null)
 const isInitialLoading = ref(true)
 const isFetching = ref(false)
 const errorMessage = ref<string | null>(null)
+const isPatching = ref(false)
+const patchError = ref<string | null>(null)
+const syncStatusOverrideText = ref<string | null>(null)
+const syncStatusOverrideClass = ref<'is-ok' | 'is-busy' | 'is-error' | null>(null)
+const refreshHandler = ref<(() => void) | null>(null)
+const buttonEventHandler = ref<((event: PanelButtonEvent) => void) | null>(null)
 
 const delegationLayer = computed(() => layers.value[0] ?? null)
+const hasRefreshHandler = computed(() => Boolean(refreshHandler.value))
 
 const layerById = computed(() => {
   const map = new Map<string, SceneLayer>()
@@ -90,6 +139,7 @@ const visibleLayers = computed(() => {
 const hasVisibleLayers = computed(() => visibleLayers.value.length > 0)
 
 const syncStatusText = computed(() => {
+  if (syncStatusOverrideText.value) return syncStatusOverrideText.value
   if (errorMessage.value) return errorMessage.value
   if (isFetching.value && !lastUpdated.value) return 'Synchronisation en cours…'
   if (isFetching.value) return 'Mise à jour…'
@@ -98,6 +148,7 @@ const syncStatusText = computed(() => {
 })
 
 const syncStatusClass = computed(() => {
+  if (syncStatusOverrideClass.value) return syncStatusOverrideClass.value
   if (errorMessage.value) return 'is-error'
   if (isFetching.value) return 'is-busy'
   return 'is-ok'
@@ -134,38 +185,309 @@ watch(delegationTargets, (targets) => {
   }
 })
 
-async function loadScenes() {
-  if (isFetching.value) return
+function applyScenesPayload(payload: unknown, meta?: { updatedAt?: DateInput }) {
+  rawPayload.value = payload ?? null
+  layers.value = parseLayers(payload)
+  syncActiveLayersFromDelegation()
+  lastUpdated.value = coerceDate(meta?.updatedAt) ?? (layers.value.length > 0 ? new Date() : lastUpdated.value)
+  isInitialLoading.value = false
+  errorMessage.value = null
+}
 
-  isFetching.value = true
-  try {
-    const response = await fetch(API_URL)
-
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}`)
+function coerceDate(value: DateInput): Date | null {
+  if (value instanceof Date) return value
+  if (typeof value === 'string' || typeof value === 'number') {
+    const parsed = new Date(value)
+    if (!Number.isNaN(parsed.getTime())) {
+      return parsed
     }
+  }
+  return null
+}
 
-    const payload = await parseResponsePayload(response)
-    const parsedLayers = parseLayers(payload)
-
-    layers.value = parsedLayers
-    rawPayload.value = payload
-    syncActiveLayersFromDelegation()
-    lastUpdated.value = new Date()
-    errorMessage.value = null
-  } catch (error) {
-    console.error('loadScenes', error)
-    errorMessage.value = 'Impossible de récupérer les scènes.'
-  } finally {
-    isFetching.value = false
-    isInitialLoading.value = false
+function applySyncState(state: SyncStatePayload) {
+  if ('isFetching' in state && typeof state.isFetching === 'boolean') {
+    isFetching.value = state.isFetching
+  }
+  if ('isInitialLoading' in state && typeof state.isInitialLoading === 'boolean') {
+    isInitialLoading.value = state.isInitialLoading
+  }
+  if ('errorMessage' in state) {
+    errorMessage.value = state.errorMessage ?? null
+  }
+  if ('lastUpdated' in state) {
+    lastUpdated.value = coerceDate(state.lastUpdated) ?? null
+  }
+  if ('statusText' in state) {
+    syncStatusOverrideText.value = state.statusText ?? null
+  }
+  if ('statusClass' in state) {
+    syncStatusOverrideClass.value = state.statusClass ?? null
   }
 }
 
-async function parseResponsePayload(response: Response): Promise<unknown> {
-  return response.json()
+function applyPatchState(state: PatchStatePayload) {
+  if ('isPatching' in state && typeof state.isPatching === 'boolean') {
+    isPatching.value = state.isPatching
+  }
+  if ('patchError' in state) {
+    patchError.value = state.patchError ?? null
+  }
+  if ('lastPushedAt' in state) {
+    lastPushedAt.value = coerceDate(state.lastPushedAt)
+  }
 }
 
+function handleButtonClick(layer: SceneLayer, button: SceneButton) {
+  if (delegationLayer.value && layer.id === delegationLayer.value.id) {
+    toggleDelegationTarget(button)
+    return
+  }
+
+  toggleLayerButton(button, layer)
+}
+
+function notifyButtonEvent(layer: SceneLayer, button: SceneButton, nextState: string | undefined) {
+  const handler = buttonEventHandler.value
+  if (!handler) return
+
+  handler({
+    layerId: layer.id,
+    layerName: layer.name,
+    buttonId: button.id,
+    buttonLabel: button.label,
+    nextState,
+    targetLayerId: resolveTargetLayerId(button),
+    rawButton: button.raw,
+    rawLayer: layer.raw,
+  })
+}
+
+function toggleDelegationTarget(button: SceneButton) {
+  const targetId = resolveTargetLayerId(button)
+  if (!targetId) return
+
+  const next = new Set(activeLayerIds.value)
+  const isActive = next.has(targetId)
+
+  if (isActive) {
+    next.delete(targetId)
+  } else {
+    next.add(targetId)
+  }
+
+  activeLayerIds.value = next
+
+  const nextState = isActive ? undefined : 'active'
+  updateButtonState(delegationLayer.value, button, nextState)
+  if (delegationLayer.value) {
+    notifyButtonEvent(delegationLayer.value, button, nextState)
+  }
+}
+
+function toggleLayerButton(button: SceneButton, layer: SceneLayer) {
+  const nextState = button.state ? undefined : 'active'
+  updateButtonState(layer, button, nextState)
+  updateRawPayloadState(button.id, nextState ?? null)
+  notifyButtonEvent(layer, button, nextState)
+}
+
+function updateButtonState(
+    layer: SceneLayer | null,
+    button: SceneButton,
+    nextState: string | undefined,
+) {
+  if (!layer) return
+
+  const updatedLayers = layers.value.map((candidate) => {
+    if (candidate.id !== layer.id) return candidate
+
+    return {
+      ...candidate,
+      buttons: candidate.buttons.map((btn) =>
+          btn.id === button.id
+              ? {
+                ...btn,
+                state: nextState,
+              }
+              : btn,
+      ),
+    }
+  })
+
+  layers.value = updatedLayers
+}
+
+function updateRawPayloadState(buttonId: string, nextState: string | null) {
+  const payload = rawPayload.value
+  if (!Array.isArray(payload)) return
+
+  payload.forEach((item) => {
+    if (!item || typeof item !== 'object') return
+    const record = item as UnknownRecord
+
+    const collections = [
+      record.actions,
+      record.snapshots,
+      record.macros,
+      (record as UnknownRecord).buttons,
+    ]
+
+    collections.forEach((collection) => {
+      if (!Array.isArray(collection)) return
+
+      collection.forEach((entry) => {
+        if (!entry || typeof entry !== 'object') return
+        const entryRecord = entry as UnknownRecord
+        const rawId = entryRecord.uuid ?? entryRecord.id
+
+        if (rawId === buttonId) {
+          entryRecord.state = nextState
+        }
+      })
+    })
+  })
+}
+
+function syncActiveLayersFromDelegation() {
+  const delegation = delegationLayer.value
+  if (!delegation) return
+
+  const next = new Set<string>()
+  delegation.buttons.forEach((button) => {
+    if (!isButtonToggledOn(button)) return
+    const targetId = resolveTargetLayerId(button)
+    if (targetId) {
+      next.add(targetId)
+    }
+  })
+
+  if (next.size > 0) {
+    activeLayerIds.value = next
+  } else {
+    const firstTarget = delegation.buttons[0]
+        ? resolveTargetLayerId(delegation.buttons[0])
+        : undefined
+    if (firstTarget) {
+      activeLayerIds.value = new Set([firstTarget])
+    }
+  }
+}
+
+function normalizeKey(value: unknown): string {
+  if (typeof value !== 'string') return ''
+  return value
+      .toString()
+      .trim()
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '')
+}
+
+function resolveTargetLayerId(button: SceneButton): string | undefined {
+  if (button.targetLayerId && layerById.value.has(button.targetLayerId)) {
+    return button.targetLayerId
+  }
+
+  if (button.targetLayerName) {
+    const layer = layerByName.value.get(normalizeKey(button.targetLayerName))
+    if (layer && layer.id !== delegationLayer.value?.id) {
+      return layer.id
+    }
+  }
+
+  const layerFromLabel = layerByName.value.get(normalizeKey(button.label))
+  if (layerFromLabel && layerFromLabel.id !== delegationLayer.value?.id) {
+    return layerFromLabel.id
+  }
+
+  return undefined
+}
+
+function isDelegationButtonSelected(button: SceneButton): boolean {
+  const targetId = delegationTargets.value.get(button.id)
+  return targetId ? activeLayerIds.value.has(targetId) : false
+}
+
+function isButtonToggledOn(button: SceneButton): boolean {
+  const normalized = normalizeKey(button.state)
+  if (!normalized) return false
+  return normalized !== 'off' && normalized !== 'inactive'
+}
+
+function buttonVariant(button: SceneButton): ButtonVariant {
+  const normalized = normalizeKey(button.state ?? button.color)
+
+  switch (normalized) {
+    case 'active':
+    case 'on':
+    case 'program':
+    case 'pgm':
+    case 'selected':
+    case 'enabled':
+    case 'live':
+      return 'active'
+    case 'preview':
+    case 'pvw':
+    case 'armed':
+    case 'ready':
+    case 'standby':
+    case 'white':
+    case 'light':
+      return 'preview'
+    case 'warning':
+    case 'attention':
+    case 'pending':
+    case 'yellow':
+    case 'caution':
+      return 'warning'
+    case 'error':
+    case 'danger':
+    case 'fault':
+    case 'critical':
+    case 'red':
+      return 'danger'
+    case 'highlight':
+    case 'focus':
+    case 'bright':
+      return 'light'
+    default:
+      return 'muted'
+  }
+}
+
+function formatRelativeTime(date: Date): string {
+  const diffSeconds = Math.max(0, Math.round((Date.now() - date.getTime()) / 1000))
+  if (diffSeconds < 2) return "à l'instant"
+  if (diffSeconds < 60) return `il y a ${diffSeconds} s`
+
+  const diffMinutes = Math.floor(diffSeconds / 60)
+  if (diffMinutes < 60) return `il y a ${diffMinutes} min`
+
+  const diffHours = Math.floor(diffMinutes / 60)
+  if (diffHours < 24) return `il y a ${diffHours} h`
+
+  const diffDays = Math.floor(diffHours / 24)
+  return `il y a ${diffDays} j`
+}
+
+function buttonTitle(layer: SceneLayer, button: SceneButton): string {
+  const details: string[] = [button.label]
+  if (button.state) details.push(`État : ${button.state}`)
+  const targetId = resolveTargetLayerId(button)
+  if (targetId) {
+    const targetLayer = layerById.value.get(targetId)
+    if (targetLayer) {
+      details.push(`Affiche : ${targetLayer.name}`)
+    }
+  }
+  return details.join('\n')
+}
+
+function refreshNow() {
+  refreshHandler.value?.()
+}
 
 function parseLayers(payload: unknown): SceneLayer[] {
   const snapshotButtons: SceneButton[] = []
@@ -460,273 +782,27 @@ function parseLayers(payload: unknown): SceneLayer[] {
   return parsed
 }
 
-//  Helpers UI
-
-function normalizeKey(value: unknown): string {
-  if (typeof value !== 'string') return ''
-  return value
-      .toString()
-      .trim()
-      .toLowerCase()
-      .normalize('NFD')
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/^-+|-+$/g, '')
+const bridge: PanelIntegrationBridge = {
+  setScenes: (payload, meta) => {
+    applyScenesPayload(payload, meta)
+  },
+  setSyncState: (state) => {
+    applySyncState(state)
+  },
+  setPatchState: (state) => {
+    applyPatchState(state)
+  },
+  onRefreshRequest: (handler) => {
+    refreshHandler.value = handler ?? null
+  },
+  onButtonTrigger: (handler) => {
+    buttonEventHandler.value = handler ?? null
+  },
 }
 
-function resolveTargetLayerId(button: SceneButton): string | undefined {
-  if (button.targetLayerId && layerById.value.has(button.targetLayerId)) {
-    return button.targetLayerId
-  }
-
-  if (button.targetLayerName) {
-    const layer = layerByName.value.get(normalizeKey(button.targetLayerName))
-    if (layer && layer.id !== delegationLayer.value?.id) {
-      return layer.id
-    }
-  }
-
-  const layerFromLabel = layerByName.value.get(normalizeKey(button.label))
-  if (layerFromLabel && layerFromLabel.id !== delegationLayer.value?.id) {
-    return layerFromLabel.id
-  }
-
-  return undefined
+if (typeof window !== 'undefined') {
+  window.MicroPanelUI = bridge
 }
-
-function isDelegationButtonSelected(button: SceneButton): boolean {
-  const targetId = delegationTargets.value.get(button.id)
-  return targetId ? activeLayerIds.value.has(targetId) : false
-}
-
-function isButtonToggledOn(button: SceneButton): boolean {
-  const normalized = normalizeKey(button.state)
-  if (!normalized) return false
-  return normalized !== 'off' && normalized !== 'inactive'
-}
-
-function buttonVariant(button: SceneButton): ButtonVariant {
-  const normalized = normalizeKey(button.state ?? button.color)
-
-  switch (normalized) {
-    case 'active':
-    case 'on':
-    case 'program':
-    case 'pgm':
-    case 'selected':
-    case 'enabled':
-    case 'live':
-      return 'active'
-    case 'preview':
-    case 'pvw':
-    case 'armed':
-    case 'ready':
-    case 'standby':
-    case 'white':
-    case 'light':
-      return 'preview'
-    case 'warning':
-    case 'attention':
-    case 'pending':
-    case 'yellow':
-    case 'caution':
-      return 'warning'
-    case 'error':
-    case 'danger':
-    case 'fault':
-    case 'critical':
-    case 'red':
-      return 'danger'
-    case 'highlight':
-    case 'focus':
-    case 'bright':
-      return 'light'
-    default:
-      return 'muted'
-  }
-}
-
-function formatRelativeTime(date: Date): string {
-  const diffSeconds = Math.max(0, Math.round((Date.now() - date.getTime()) / 1000))
-  if (diffSeconds < 2) return "à l'instant"
-  if (diffSeconds < 60) return `il y a ${diffSeconds} s`
-
-  const diffMinutes = Math.floor(diffSeconds / 60)
-  if (diffMinutes < 60) return `il y a ${diffMinutes} min`
-
-  const diffHours = Math.floor(diffMinutes / 60)
-  if (diffHours < 24) return `il y a ${diffHours} h`
-
-  const diffDays = Math.floor(diffHours / 24)
-  return `il y a ${diffDays} j`
-}
-
-function handleButtonClick(layer: SceneLayer, button: SceneButton) {
-  if (delegationLayer.value && layer.id === delegationLayer.value.id) {
-    toggleDelegationTarget(button)
-    return
-  }
-
-  toggleLayerButton(button, layer)
-}
-
-function toggleDelegationTarget(button: SceneButton) {
-  const targetId = resolveTargetLayerId(button)
-  if (!targetId) return
-
-  const next = new Set(activeLayerIds.value)
-  const isActive = next.has(targetId)
-
-  if (isActive) {
-    next.delete(targetId)
-  } else {
-    next.add(targetId)
-  }
-
-  activeLayerIds.value = next
-
-  const nextState = isActive ? undefined : 'active'
-  updateButtonState(delegationLayer.value, button, nextState)
-}
-
-function toggleLayerButton(button: SceneButton, layer: SceneLayer) {
-  const nextState = button.state ? undefined : 'active'
-  updateButtonState(layer, button, nextState)
-  updateRawPayloadState(button.id, nextState ?? null)
-  void pushStateToApi()
-}
-
-function updateButtonState(
-    layer: SceneLayer | null,
-    button: SceneButton,
-    nextState: string | undefined,
-) {
-  if (!layer) return
-
-  const updatedLayers = layers.value.map((candidate) => {
-    if (candidate.id !== layer.id) return candidate
-
-    return {
-      ...candidate,
-      buttons: candidate.buttons.map((btn) =>
-          btn.id === button.id
-              ? {
-                ...btn,
-                state: nextState,
-              }
-              : btn,
-      ),
-    }
-  })
-
-  layers.value = updatedLayers
-}
-
-function updateRawPayloadState(buttonId: string, nextState: string | null) {
-  const payload = rawPayload.value
-  if (!Array.isArray(payload)) return
-
-  payload.forEach((item) => {
-    if (!item || typeof item !== 'object') return
-    const record = item as UnknownRecord
-
-    const collections = [
-      record.actions,
-      record.snapshots,
-      record.macros,
-      (record as UnknownRecord).buttons,
-    ]
-
-    collections.forEach((collection) => {
-      if (!Array.isArray(collection)) return
-
-      collection.forEach((entry) => {
-        if (!entry || typeof entry !== 'object') return
-        const entryRecord = entry as UnknownRecord
-        const rawId = entryRecord.uuid ?? entryRecord.id
-
-        if (rawId === buttonId) {
-          entryRecord.state = nextState
-        }
-      })
-    })
-  })
-}
-
-async function pushStateToApi() {
-  if (!rawPayload.value || isPatching.value) return
-
-  isPatching.value = true
-  patchError.value = null
-
-  try {
-    const response = await fetch(API_URL, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(rawPayload.value),
-    })
-
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}`)
-    }
-
-    lastPushedAt.value = new Date()
-
-    await loadScenes()
-  } catch (error) {
-    console.error('pushStateToApi', error)
-    patchError.value = "Impossible de synchroniser l’état."
-  } finally {
-    isPatching.value = false
-  }
-}
-
-function syncActiveLayersFromDelegation() {
-  const delegation = delegationLayer.value
-  if (!delegation) return
-
-  const next = new Set<string>()
-  delegation.buttons.forEach((button) => {
-    if (!isButtonToggledOn(button)) return
-    const targetId = resolveTargetLayerId(button)
-    if (targetId) {
-      next.add(targetId)
-    }
-  })
-
-  if (next.size > 0) {
-    activeLayerIds.value = next
-  } else {
-    const firstTarget = delegation.buttons[0]
-        ? resolveTargetLayerId(delegation.buttons[0])
-        : undefined
-    if (firstTarget) {
-      activeLayerIds.value = new Set([firstTarget])
-    }
-  }
-}
-
-function buttonTitle(layer: SceneLayer, button: SceneButton): string {
-  const details: string[] = [button.label]
-  if (button.state) details.push(`État : ${button.state}`)
-  const targetId = resolveTargetLayerId(button)
-  if (targetId) {
-    const targetLayer = layerById.value.get(targetId)
-    if (targetLayer) {
-      details.push(`Affiche : ${targetLayer.name}`)
-    }
-  }
-  return details.join('\n')
-}
-
-function refreshNow() {
-  void loadScenes()
-}
-
-onMounted(() => {
-  void loadScenes()
-})
 </script>
 
 <template>
@@ -741,7 +817,12 @@ onMounted(() => {
         <span class="indicator-dot" aria-hidden="true" />
         <span class="indicator-text">{{ syncStatusText }}</span>
         <span v-if="formattedSyncTime" class="indicator-meta">{{ formattedSyncTime }}</span>
-        <button class="ghost-button" type="button" @click="refreshNow" :disabled="isFetching">
+        <button
+            class="ghost-button"
+            type="button"
+            @click="refreshNow"
+            :disabled="isFetching || !hasRefreshHandler"
+        >
           Rafraîchir
         </button>
       </div>
