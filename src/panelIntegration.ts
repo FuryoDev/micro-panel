@@ -48,7 +48,8 @@ type MetaCandidate = {
   uuid?: unknown
 }
 
-const API_SCENES_ENDPOINT = '/api/scenes'
+const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL ?? '/api').replace(/\/$/, '')
+const API_SCENES_ENDPOINT = `${API_BASE_URL}/scenes`
 let isIntegrationSetup = false
 
 export function setupPanelIntegration() {
