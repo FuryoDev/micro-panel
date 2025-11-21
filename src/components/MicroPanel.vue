@@ -847,7 +847,7 @@ if (typeof window !== 'undefined') {
         <div class="camera-frame">
           <iframe
               title="Flux vidéo en direct"
-              src="http://10.41.39.153/live/index.html"
+              src="/camera/live/index.html"
               allowfullscreen
               loading="lazy"
           />
