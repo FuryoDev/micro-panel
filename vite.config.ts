@@ -1,28 +1,21 @@
-import { defineConfig, loadEnv } from 'vite'
+import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
-function createProxyConfig(target: string) {
-  const sanitizedTarget = target.replace(/\/$/, '')
-  return {
-    '/api': {
-      target: sanitizedTarget,
-      changeOrigin: true,
-      rewrite: (path: string) => path.replace(/^\/api/, ''),
+export default defineConfig({
+  plugins: [vue()],
+  server: {
+    proxy: {
+      '/api/scenes': {
+        target: 'http://10.41.40.130:1234',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/scenes/, '/scenes'),
+        configure: (proxy) => {
+          proxy.on('proxyRes', (proxyRes) => {
+            proxyRes.headers['Access-Control-Allow-Origin'] = '*'
+            proxyRes.headers['Access-Control-Allow-Methods'] = 'GET,POST,PATCH,PUT,DELETE,OPTIONS'
+          })
+        },
+      },
     },
-  }
-}
-
-export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, process.cwd(), '')
-  const proxyTarget = env.VITE_PROXY_TARGET || env.VITE_API_BASE_URL || 'http://10.41.40.130:1234'
-
-  return {
-    plugins: [vue()],
-    server: {
-      proxy: createProxyConfig(proxyTarget),
-    },
-    preview: {
-      proxy: createProxyConfig(proxyTarget),
-    },
-  }
+  },
 })
