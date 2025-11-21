@@ -6,10 +6,10 @@ function createProxyConfig(apiTarget: string, cameraTarget: string) {
   const sanitizedCameraTarget = cameraTarget.replace(/\/$/, '')
 
   return {
-    '/api': {
+    '/api/scenes': {
       target: sanitizedApiTarget,
       changeOrigin: true,
-      rewrite: (path: string) => path.replace(/^\/api/, ''),
+      rewrite: (path: string) => path.replace(/^\/api\/scenes/, '/scenes'),
     },
     '/camera': {
       target: sanitizedCameraTarget,
