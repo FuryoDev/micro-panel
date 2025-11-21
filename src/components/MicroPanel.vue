@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
 type UnknownRecord = Record<string, unknown>
 type DateInput = Date | string | number | null | undefined
@@ -117,11 +117,17 @@ const refreshHandler = ref<(() => void) | null>(null)
 const buttonEventHandler = ref<((event: PanelButtonEvent) => void) | null>(null)
 const pageIndexCache = new Map<string, number>()
 
+const CAMERA_SNAPSHOT_URL = '/camera/cgi-bin/view.cgi?action=snapshot'
+const cameraTick = ref(0)
+let cameraTimer: number | null = null
+
 const delegationLayer = computed(() => layers.value.find((layer) => layer.kind === 'delegation') ?? null)
 const hasRefreshHandler = computed(() => Boolean(refreshHandler.value))
 const columnCount = computed(() => PAGE_SIZE + 1)
 const visibleLayers = computed(() => layers.value)
 const hasVisibleLayers = computed(() => visibleLayers.value.length > 0)
+
+const cameraSnapshotSrc = computed(() => `${CAMERA_SNAPSHOT_URL}&n=${cameraTick.value}`)
 
 const syncStatusText = computed(() => {
   if (syncStatusOverrideText.value) return syncStatusOverrideText.value
@@ -203,6 +209,21 @@ function applySyncState(state: SyncStatePayload) {
   }
   if ('statusClass' in state) {
     syncStatusOverrideClass.value = state.statusClass ?? null
+  }
+}
+
+function startCameraSnapshotLoop() {
+  stopCameraSnapshotLoop()
+  cameraTick.value = Date.now()
+  cameraTimer = window.setInterval(() => {
+    cameraTick.value = Date.now()
+  }, 1000)
+}
+
+function stopCameraSnapshotLoop() {
+  if (cameraTimer) {
+    clearInterval(cameraTimer)
+    cameraTimer = null
   }
 }
 
@@ -733,6 +754,14 @@ const bridge: PanelIntegrationBridge = {
   },
 }
 
+onMounted(() => {
+  startCameraSnapshotLoop()
+})
+
+onBeforeUnmount(() => {
+  stopCameraSnapshotLoop()
+})
+
 if (typeof window !== 'undefined') {
   window.MicroPanelUI = bridge
 }
@@ -741,100 +770,122 @@ if (typeof window !== 'undefined') {
 
 <template>
   <main class="panel-shell">
-    <header class="panel-header">
-      <div>
-        <h1 class="panel-title">Kairos Scenes</h1>
-        <p class="panel-subtitle">Délégation et pilotage des scènes</p>
-      </div>
+    <div class="panel-layout">
+      <section class="panel-controls">
+        <header class="panel-header">
+          <div>
+            <h1 class="panel-title">Kairos Scenes</h1>
+            <p class="panel-subtitle">Délégation et pilotage des scènes</p>
+          </div>
 
-      <div class="sync-indicator" :class="syncStatusClass">
-        <span class="indicator-dot" aria-hidden="true" />
-        <span class="indicator-text">{{ syncStatusText }}</span>
-        <span v-if="formattedSyncTime" class="indicator-meta">{{ formattedSyncTime }}</span>
-        <button
-            class="ghost-button"
-            type="button"
-            @click="refreshNow"
-            :disabled="isFetching || !hasRefreshHandler"
+          <div class="sync-indicator" :class="syncStatusClass">
+            <span class="indicator-dot" aria-hidden="true" />
+            <span class="indicator-text">{{ syncStatusText }}</span>
+            <span v-if="formattedSyncTime" class="indicator-meta">{{ formattedSyncTime }}</span>
+            <button
+                class="ghost-button"
+                type="button"
+                @click="refreshNow"
+                :disabled="isFetching || !hasRefreshHandler"
+            >
+              Rafraîchir
+            </button>
+          </div>
+
+          <div class="patch-indicator" :class="{ 'is-busy': isPatching, 'is-error': Boolean(patchError) }">
+            <span v-if="isPatching">Envoi des modifications…</span>
+            <span v-else-if="patchError">{{ patchError }}</span>
+            <span v-else-if="lastPushedAt">État envoyé à {{ formattedPushTime }}</span>
+            <span v-else>État prêt</span>
+          </div>
+        </header>
+
+        <section v-if="!hasVisibleLayers && isInitialLoading" class="panel-placeholder">
+          <p>Chargement des scènes…</p>
+        </section>
+
+        <section v-else-if="!hasVisibleLayers" class="panel-placeholder">
+          <p>Aucune scène disponible.</p>
+        </section>
+
+        <section
+            v-else
+            class="panel-grid"
+            :style="{ '--button-count': Math.max(columnCount, 1) }"
         >
-          Rafraîchir
-        </button>
-      </div>
-
-      <div class="patch-indicator" :class="{ 'is-busy': isPatching, 'is-error': Boolean(patchError) }">
-        <span v-if="isPatching">Envoi des modifications…</span>
-        <span v-else-if="patchError">{{ patchError }}</span>
-        <span v-else-if="lastPushedAt">État envoyé à {{ formattedPushTime }}</span>
-        <span v-else>État prêt</span>
-      </div>
-    </header>
-
-    <section v-if="!hasVisibleLayers && isInitialLoading" class="panel-placeholder">
-      <p>Chargement des scènes…</p>
-    </section>
-
-    <section v-else-if="!hasVisibleLayers" class="panel-placeholder">
-      <p>Aucune scène disponible.</p>
-    </section>
-
-    <section
-        v-else
-        class="panel-grid"
-        :style="{ '--button-count': Math.max(columnCount, 1) }"
-    >
-      <article
-          v-for="layer in visibleLayers"
-          :key="layer.id"
-          class="panel-row"
-          :class="{
-          'is-delegation': layer.id === delegationLayer?.id,
-          'is-sticky': layer.sticky,
-        }"
-      >
-        <div class="layer-title">
-          {{ layer.id === 'delegation' ? 'Delegation' : layer.name }}
-        </div>
-
-        <div class="layer-buttons">
-          <button
-              v-for="button in layer.buttons"
-              :key="button.id"
-              class="panel-button"
-              :class="[
-              `variant-${buttonVariant(button)}`,
-              {
-                'is-selected':
-                  layer.kind === 'delegation'
-                    ? button.state === 'program'
-                    : layer.kind === 'source' && isButtonToggledOn(button),
-              },
-            ]"
-              type="button"
-              :disabled="button.disabled"
-              :aria-pressed="
-              layer.kind === 'delegation' || layer.kind === 'source'
-                ? isButtonToggledOn(button)
-                : undefined
-            "
-              :title="buttonTitle(layer, button)"
-              @click="handleButtonClick(layer, button)"
+          <article
+              v-for="layer in visibleLayers"
+              :key="layer.id"
+              class="panel-row"
+              :class="{
+              'is-delegation': layer.id === delegationLayer?.id,
+              'is-sticky': layer.sticky,
+            }"
           >
-            <span class="button-label">{{ button.label }}</span>
-          </button>
+            <div class="layer-title">
+              {{ layer.id === 'delegation' ? 'Delegation' : layer.name }}
+            </div>
 
-          <button
-              v-if="layer.kind === 'source' && layer.hasPager"
-              :key="`${layer.id}-pager`"
-              class="panel-button pager-button variant-warning"
-              type="button"
-              :title="`Changer de page (${pagerLabel(layer)})`"
-              @click="cycleLayerPage(layer)"
-          >
-            <span class="button-label">{{ pagerLabel(layer) }}</span>
-          </button>
+            <div class="layer-buttons">
+              <button
+                  v-for="button in layer.buttons"
+                  :key="button.id"
+                  class="panel-button"
+                  :class="[
+                  `variant-${buttonVariant(button)}`,
+                  {
+                    'is-selected':
+                      layer.kind === 'delegation'
+                        ? button.state === 'program'
+                        : layer.kind === 'source' && isButtonToggledOn(button),
+                  },
+                ]"
+                  type="button"
+                  :disabled="button.disabled"
+                  :aria-pressed="
+                  layer.kind === 'delegation' || layer.kind === 'source'
+                    ? isButtonToggledOn(button)
+                    : undefined
+                "
+                  :title="buttonTitle(layer, button)"
+                  @click="handleButtonClick(layer, button)"
+              >
+                <span class="button-label">{{ button.label }}</span>
+              </button>
+
+              <button
+                  v-if="layer.kind === 'source' && layer.hasPager"
+                  :key="`${layer.id}-pager`"
+                  class="panel-button pager-button variant-warning"
+                  type="button"
+                  :title="`Changer de page (${pagerLabel(layer)})`"
+                  @click="cycleLayerPage(layer)"
+              >
+                <span class="button-label">{{ pagerLabel(layer) }}</span>
+              </button>
+            </div>
+          </article>
+        </section>
+      </section>
+
+      <aside class="camera-preview">
+        <div class="camera-header">
+          <div class="camera-title-block">
+            <span class="camera-title">Live caméra</span>
+            <p class="camera-caption">Aperçu automatique depuis 10.41.39.153</p>
+          </div>
+          <span class="camera-meta">Snapshot proxy</span>
         </div>
-      </article>
-    </section>
+        <div class="camera-frame">
+          <img
+              :src="cameraSnapshotSrc"
+              alt="Flux caméra (rafraîchi chaque seconde)"
+              class="camera-player"
+          />
+        </div>
+        <p class="camera-hint">Flux MJPEG proxy : /camera/cgi-bin/view.cgi?action=snapshot</p>
+      </aside>
+    </div>
   </main>
 </template>
 
@@ -848,6 +899,19 @@ if (typeof window !== 'undefined') {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   min-height: 100vh;
   box-sizing: border-box;
+}
+
+.panel-layout {
+  display: grid;
+  grid-template-columns: 1fr minmax(340px, 480px);
+  gap: 16px;
+  align-items: start;
+}
+
+.panel-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .panel-header {
@@ -1050,4 +1114,72 @@ if (typeof window !== 'undefined') {
   background: #ffffff;
   color: #111;
 }
+
+  .camera-preview {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01));
+    border: 1px solid #1f1f1f;
+    border-radius: 12px;
+    padding: 12px;
+    box-shadow: inset 0 0 0 1px #000;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .camera-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: #cfcfcf;
+  }
+
+  .camera-title-block {
+    display: grid;
+    gap: 4px;
+  }
+
+  .camera-title {
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  .camera-caption {
+    margin: 0;
+    color: #aaa;
+    font-size: 12px;
+  }
+
+  .camera-meta {
+    color: #888;
+    background: #161616;
+    border-radius: 999px;
+    padding: 4px 10px;
+  }
+
+  .camera-frame {
+    aspect-ratio: 16 / 9;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #1f1f1f;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.3);
+    background: radial-gradient(circle at center, rgba(79, 70, 229, 0.12), rgba(0, 0, 0, 0.5));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .camera-player {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background: #0a0a0a;
+  }
+
+  .camera-hint {
+    margin: 0;
+    font-size: 12px;
+    color: #999;
+  }
 </style>
