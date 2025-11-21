@@ -1,0 +1,3036 @@
+@CHARSET "UTF-8";
+
+.setup_mediaOverIp_main_title_label>* {
+    vertical-align: middle;
+    display: table-cell;
+}
+
+.setup_mediaOverIp_main_title_label {
+    position: absolute;
+    left: 33px;
+    top: 5px;
+    cursor: default;
+    text-align: center;
+    font-size: large;
+    background-color: rgb(70, 70, 71);
+}
+
+.setup_mediaOverIP_menu_label>* {
+    vertical-align: middle;
+    display: table-cell;
+}
+
+.setup_mediaOverIP_menu_label {
+    position: absolute;
+    left: 24px;
+    top: 5px;
+    cursor: default;
+    text-align: center;
+    font-size: large;
+    background-color: rgb(70, 70, 71);
+}
+
+.setup_mediaOverIP_settingStatus_btn {
+    position: absolute;
+    top: 54px;
+    left: 20px;
+    width: 240px;
+    height: 30px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+
+.setup_mediaOverIP_settingStatus_btn_Line {
+    position: absolute;
+    top: 113px;
+    left: 20px;
+}
+
+.setup_mediaOverIP_st2110_btn {
+    position: absolute;
+    top: 145px;
+    left: 20px;
+    width: 240px;
+    height: 29px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+
+.setup_mediaOverIP_st2110_btn_Line {
+    position: absolute;
+    top: 174px;
+    left: 20px;
+}
+
+.setup_mediaOverIP_st2110_tx_btn {
+    position: absolute;
+    top: 175px;
+    left: 20px;
+    width: 240px;
+    height: 29px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+
+.setup_mediaOverIP_st2110_tx_btn_Line {
+    position: absolute;
+    top: 204px;
+    left: 20px;
+}
+
+.setup_mediaOverIP_jpeg_xs_tx_off_btn {
+    position: absolute;
+    top: 175px;
+    left: 20px;
+    width: 240px;
+    height: 29px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+.setup_mediaOverIP_jpeg_xs_tx_off_btn_Line {
+    position: absolute;
+    top: 204px;
+    left: 20px;
+}
+.setup_mediaOverIP_jpeg_xs_rx_off_btn {
+    position: absolute;
+    top: 205px;
+    left: 20px;
+    width: 240px;
+    height: 29px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+.setup_mediaOverIP_jpeg_xs_rx_off_btn_Line {
+    position: absolute;
+    top: 234px;
+    left: 20px;
+}
+.setup_mediaOverIP_ptp_off_btn {
+    position: absolute;
+    top: 175px;
+    left: 20px;
+    width: 240px;
+    height: 29px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+
+.setup_mediaOverIP_st2110_rx_btn {
+    position: absolute;
+    top: 205px;
+    left: 20px;
+    width: 240px;
+    height: 29px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+
+.setup_mediaOverIP_st2110_rx_btn_Line {
+    position: absolute;
+    top: 234px;
+    left: 20px;
+}
+
+.setup_mediaOverIP_jpeg_xs_tx_btn {
+    position: absolute;
+    top: 235px;
+    left: 20px;
+    width: 240px;
+    height: 29px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+
+.setup_mediaOverIP_jpeg_xs_tx_btn_Line {
+    position: absolute;
+    top: 264px;
+    left: 20px;
+}
+
+.setup_mediaOverIP_jpeg_xs_rx_btn {
+    position: absolute;
+    top: 265px;
+    left: 20px;
+    width: 240px;
+    height: 29px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+
+.setup_mediaOverIP_jpeg_xs_rx_btn_Line {
+    position: absolute;
+    top: 294px;
+    left: 20px;
+}
+.setup_mediaOverIP_ptp_SDPMode_btn {
+    position: absolute;
+    top: 295px;
+    left: 20px;
+    width: 240px;
+    height: 29px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+.setup_mediaOverIP_ptp_btn {
+    position: absolute;
+    top: 235px;
+    left: 20px;
+    width: 240px;
+    height: 29px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+.setup_mediaOverIP_ptp_SDPMode_btn_Line {
+    position: absolute;
+    top: 324px;
+    left: 20px;
+}
+.setup_mediaOverIP_ptp_btn_Line {
+    position: absolute;
+    top: 264px;
+    left: 20px;
+}
+
+.setup_mediaOverIP_nmos_SFPMode_btn {
+    position: absolute;
+    top: 325px;
+    left: 20px;
+    width: 240px;
+    height: 29px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+.setup_mediaOverIP_nmos_btn {
+    position: absolute;
+    top: 266px;
+    left: 20px;
+    width: 240px;
+    height: 29px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+
+.setup_mediaOverIP_nmos_btn_SFPMode_Line {
+    position: absolute;
+    top: 354px;
+    left: 20px;
+}
+.setup_mediaOverIP_nmos_btn_Line {
+    position: absolute;
+    top: 354px;
+    left: 20px;
+}
+
+.setup_mediaOverIp_settingStatus_st2110_title {
+    position: absolute;
+    left: 20px;
+    width: 98%;
+    height: 30px;
+    line-height: 2px;
+    display: table;
+    font-size: large;
+    text-align: left;
+    top: 25px;
+    background-color: rgb(70, 70, 71);
+}
+
+.setup_mediaOverIp_settingStatus_st2110_title>p {
+    position: absolute;
+    top: -5px;
+    left: 33px;
+}
+
+.setup_mediaOverIp_settingStatus_st2110_port_title {
+    position: absolute;
+    left: 220px;
+    width: 98%;
+    height: 30px;
+    line-height: 2px;
+    display: table;
+    font-size: large;
+    text-align: left;
+    top: 25px;
+    background-color: rgb(70, 70, 71);
+}
+
+.setup_mediaOverIp_settingStatus_st2110_port_title>p {
+    position: absolute;
+    top: -5px;
+    left: 33px;
+}
+
+.setup_mediaOverIp_settingStatus_jpeg_xs_title {
+    position: absolute;
+    left: 420px;
+    width: 98%;
+    height: 30px;
+    line-height: 2px;
+    display: table;
+    font-size: large;
+    text-align: left;
+    top: 25px;
+    background-color: rgb(70, 70, 71);
+}
+
+.setup_mediaOverIp_settingStatus_jpeg_xs_title>p {
+    position: absolute;
+    top: -5px;
+    left: 33px;
+}
+
+.setup_mediaOverIp_settingStatus_st2110_value {
+    position: absolute;
+    left: 20px;
+    width: 98%;
+    height: 30px;
+    line-height: 2px;
+    display: table;
+    padding-left: 54px;
+    font-size: large;
+    text-align: left;
+    top: 68px;
+}
+
+.setup_mediaOverIp_settingStatus_st2110_port_value {
+    position: absolute;
+    left: 220px;
+    width: 98%;
+    height: 30px;
+    line-height: 2px;
+    display: table;
+    padding-left: 54px;
+    font-size: large;
+    text-align: left;
+    top: 68px;
+}
+.setup_mediaOverIp_settingStatus_jpeg_xs_value {
+    position: absolute;
+    left: 420px;
+    width: 98%;
+    height: 30px;
+    line-height: 2px;
+    display: table;
+    padding-left: 54px;
+    font-size: large;
+    text-align: left;
+    top: 68px;
+}
+#setup_mediaOverIp_settingStatus_main_video_tx{
+    position: absolute;
+    left: 20px;
+    top: 120px;
+    width: 98%;
+    height: 32px;
+    font-size:large;
+    background-color: rgb(70, 70, 71);
+}
+#setup_mediaOverIp_settingStatus_off_ptp{
+    position: absolute;
+    left: 20px;
+    top: 120px;
+    width: 98%;
+    height: 32px;
+    font-size:large;
+    background-color: rgb(70, 70, 71);
+}
+
+#setup_mediaOverIp_settingStatus_crop_video_tx{
+    position: absolute;
+    left: 20px;
+    top: 215px;
+    width: 98%;
+    height: 32px;
+    font-size:large;
+    background-color: rgb(70, 70, 71);
+}
+
+#setup_mediaOverIp_settingStatus_off_nmos{
+    position: absolute;
+    left: 20px;
+    top: 215px;
+    width: 98%;
+    height: 32px;
+    font-size:large;
+    background-color: rgb(70, 70, 71);
+}
+#setup_mediaOverIp_settingStatus_monitor_video_tx{
+    position: absolute;
+    left: 20px;
+    top: 310px;
+    width: 98%;
+    height: 32px;
+    font-size:large;
+    background-color: rgb(70, 70, 71);
+}
+
+#setup_mediaOverIp_settingStatus_mic1_audio_tx{
+    position: absolute;
+    left: 20px;
+    top: 408px;
+    width: 98%;
+    height: 32px;
+    font-size:large;
+    background-color: rgb(70, 70, 71);
+}
+#setup_mediaOverIp_settingStatus_mic2_audio_tx{
+    position: absolute;
+    left: 20px;
+    top: 506px;
+    width: 98%;
+    height: 32px;
+    font-size:large;
+    background-color: rgb(70, 70, 71);
+}
+#setup_mediaOverIp_settingStatus_return_video_rx{
+    position: absolute;
+    left: 20px;
+    top: 604px;
+    width: 98%;
+    height: 32px;
+    font-size:large;
+    background-color: rgb(70, 70, 71);
+}
+#setup_mediaOverIp_settingStatus_ptp{
+    position: absolute;
+    left: 20px;
+    top: 699px;
+    width: 98%;
+    height: 32px;
+    font-size:large;
+    background-color: rgb(70, 70, 71);
+}
+#setup_mediaOverIp_settingStatus_jpeg_xs_tx{
+    position: absolute;
+    left: 20px;
+    top: 115px;
+    width: 98%;
+    height: 32px;
+    font-size:large;
+    background-color: rgb(70, 70, 71);
+}
+
+#setup_mediaOverIp_settingStatus_jepg_mic1_audio_tx{
+    position: absolute;
+    left: 20px;
+    top: 205px;
+    width: 98%;
+    height: 32px;
+    font-size:large;
+    background-color: rgb(70, 70, 71);
+}
+
+#setup_mediaOverIp_settingStatus_jepg_mic2_audio_tx{
+    position: absolute;
+    left: 20px;
+    top: 285px;
+    width: 98%;
+    height: 32px;
+    font-size:large;
+    background-color: rgb(70, 70, 71);
+}
+
+#setup_mediaOverIp_settingStatus_jpeg_xs_rx{
+    position: absolute;
+    left: 20px;
+    top: 205px;
+    width: 98%;
+    height: 32px;
+    font-size:large;
+    background-color: rgb(70, 70, 71);
+}
+#setup_mediaOverIp_settingStatus_jpeg_on_ptp{
+    position: absolute;
+    left: 20px;
+    top: 295px;
+    width: 98%;
+    height: 32px;
+    font-size:large;
+    background-color: rgb(70, 70, 71);
+}
+#setup_mediaOverIp_settingStatus_nmos{
+    position: absolute;
+    left: 20px;
+    top: 794px;
+    width: 98%;
+    height: 32px;
+    font-size:large;
+    background-color: rgb(70, 70, 71);
+}
+#setup_mediaOverIp_settingStatus_jpeg_on_nmos{
+    position: absolute;
+    left: 20px;
+    top: 395px;
+    width: 98%;
+    height: 32px;
+    font-size:large;
+    background-color: rgb(70, 70, 71);
+}
+#setup_mediaOverIp_settingStatus_nmos_master_enable{
+    position: absolute;
+    left: 20px;
+    top: 889px;
+    width: 98%;
+    height: 32px;
+    font-size:large;
+    background-color: rgb(70, 70, 71);
+}
+#setup_mediaOverIp_settingStatus_jpeg_on_nmos_master_enable{
+    position: absolute;
+    left: 20px;
+    top: 475px;
+    width: 98%;
+    height: 32px;
+    font-size:large;
+    background-color: rgb(70, 70, 71);
+}
+
+.setup_mediaOverIp_settingJpeg_xs_tx_name {
+    position: absolute;
+    left: 0px;
+    top: 1px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    padding-left: 33px;
+    font-size: large;
+}
+
+.setup_mediaOverIp_settingJpeg_xs_tx_name>p {
+    position: absolute;
+    top: -5px;
+    left: 33px;
+}
+
+.setup_mediaOverIp_settingJpeg_xs_tx_video_select{
+    position: absolute;
+    left: 200px;
+    top: 0px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+
+.setup_mediaOverIp_settingJpeg_xs_tx_video_select>p {
+    position: absolute;
+    top: -4px;
+    left: 33px;
+}
+
+.setup_mediaOverIp_settingJpeg_xs_tx_destination_address {
+    position: absolute;
+    left: 400px;
+    top: 0px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+
+.setup_mediaOverIp_settingJpeg_xs_tx_destination_address>p {
+    position: absolute;
+    top: -4px;
+    left: 33px;
+}
+
+.setup_mediaOverIp_settingJpeg_xs_tx_destination_port {
+    position: absolute;
+    left: 600px;
+    top: 0px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+
+.setup_mediaOverIp_settingJpeg_xs_tx_destination_port>p {
+    position: absolute;
+    top: -4px;
+    left: 33px;
+}
+
+.setup_mediaOverIp_settingJpeg_xs_tx_format {
+    position: absolute;
+    left: 800px;
+    top: 0px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+
+.setup_mediaOverIp_settingJpeg_xs_tx_format>p {
+    position: absolute;
+    top: -4px;
+    left: 33px;
+}
+
+.setup_mediaOverIp_settingJpeg_xs_tx_compression_rate {
+    position: absolute;
+    left: 1000px;
+    top: 0px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+
+.setup_mediaOverIp_settingJpeg_xs_tx_compression_rate>p {
+    position: absolute;
+    top: -4px;
+    left: 33px;
+}
+
+.setup_mediaOverIp_settingJpeg_xs_tx_name_value {
+    position: absolute;
+    left: 54px;
+    top: 45px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+
+.setup_mediaOverIp_settingJpeg_xs_tx_video_select_value{
+    position: absolute;
+    left: 254px;
+    top: 45px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+
+.setup_mediaOverIp_settingJpeg_xs_tx_destination_address_value {
+    position: absolute;
+    left: 448px;
+    top: 45px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+
+.setup_mediaOverIp_settingJpeg_xs_tx_destination_port_value {
+    position: absolute;
+    left: 654px;
+    top: 45px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+
+.setup_mediaOverIp_settingJpeg_xs_tx_format_value {
+    position: absolute;
+    left: 861px;
+    top: 45px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+
+.setup_mediaOverIp_settingJpeg_xs_tx_compression_rate_value {
+    position: absolute;
+    left: 1068px;
+    top: 45px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+
+
+.setup_mediaOverIp_settingJpeg_xs_rx_name {
+    position: absolute;
+    left: 0px;
+    top: 1px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    padding-left: 33px;
+    font-size: large;
+}
+
+.setup_mediaOverIp_settingJpeg_xs_rx_name>p {
+    position: absolute;
+    top: -5px;
+    left: 33px;
+}
+
+.setup_mediaOverIp_settingJpeg_xs_rx_destination_address {
+    position: absolute;
+    left: 200px;
+    top: 0px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+
+.setup_mediaOverIp_settingJpeg_xs_rx_destination_address>p {
+    position: absolute;
+    top: -5px;
+    left: 33px;
+}
+
+.setup_mediaOverIp_settingJpeg_xs_rx_destination_port {
+    position: absolute;
+    left: 600px;
+    top: 0px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+
+.setup_mediaOverIp_settingJpeg_xs_rx_destination_port>p {
+    position: absolute;
+    top: -5px;
+    left: 33px;
+}
+
+.setup_mediaOverIp_settingJpeg_xs_rx_source_address {
+    position: absolute;
+    left: 400px;
+    top: 0px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+.setup_mediaOverIp_settingJpeg_xs_rx_source_address>p {
+    position: absolute;
+    top: -4px;
+    left: 33px;
+}
+
+.setup_mediaOverIp_settingJpeg_xs_rx_Status {
+    position: absolute;
+    left: 820px;
+    top: 0px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+
+.setup_mediaOverIp_settingJpeg_xs_rx_Status>p {
+    position: absolute;
+    top: -4px;
+    left: 33px;
+}
+
+.setup_mediaOverIp_settingJpeg_xs_rx_bit_rate {
+    position: absolute;
+    left: 990px;
+    top: 0px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+
+.setup_mediaOverIp_settingJpeg_xs_rx_bit_rate>p {
+    position: absolute;
+    top: -4px;
+    left: 33px;
+}
+
+.setup_mediaOverIp_settingJpeg_xs_rx_format {
+    position: absolute;
+    left: 1160px;
+    top: 0px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+
+.setup_mediaOverIp_settingJpeg_xs_rx_format>p {
+    position: absolute;
+    top: -4px;
+    left: 33px;
+}
+
+.setup_mediaOverIp_settingJpeg_xs_rx_frame_rate {
+    position: absolute;
+    left: 1330px;
+    top: 0px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+
+.setup_mediaOverIp_settingJpeg_xs_rx_frame_rate>p {
+    position: absolute;
+    top: -4px;
+    left: 33px;
+}
+
+.setup_mediaOverIp_settingJpeg_xs_rx_name_value {
+    position: absolute;
+    left: 54px;
+    top: 45px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+
+.setup_mediaOverIp_settingJpeg_xs_rx_destination_address_value {
+    position: absolute;
+    left: 254px;
+    top: 45px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+
+.setup_mediaOverIp_settingJpeg_xs_rx_source_address_value {
+    position: absolute;
+    left: 454px;
+    top: 45px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+
+.setup_mediaOverIp_settingJpeg_xs_rx_destination_port_value {
+    position: absolute;
+    left: 654px;
+    top: 45px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+
+.setup_mediaOverIp_settingJpeg_xs_rx_Status_value {
+    position: absolute;
+    left: 861px;
+    top: 45px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+
+.setup_mediaOverIp_settingJpeg_xs_rx_bit_rate_value {
+    position: absolute;
+    left: 1050px;
+    top: 45px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+
+.setup_mediaOverIp_settingJpeg_xs_rx_format_value {
+    position: absolute;
+    left: 1200px;
+    top: 45px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+
+.setup_mediaOverIp_settingJpeg_xs_rx_frame_rate_value {
+    position: absolute;
+    left: 1380px;
+    top: 45px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+
+.setup_mediaOverIp_settingStatus_tx_name {
+    position: absolute;
+    left: 0px;
+    top: 1px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    padding-left: 33px;
+    font-size: large;
+}
+
+.setup_mediaOverIp_settingStatus_tx_name>p {
+    position: absolute;
+    top: -5px;
+    left: 33px;
+}
+
+.setup_mediaOverIp_settingStatus_tx_destination_address {
+    position: absolute;
+    left: 200px;
+    top: 0px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+
+.setup_mediaOverIp_settingStatus_tx_destination_address>p {
+    position: absolute;
+    top: -5px;
+    left: 33px;
+}
+
+
+.setup_mediaOverIp_settingStatus_nmos_master_main_video {
+    position: absolute;
+    left: 200px;
+    top: 0px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+
+.setup_mediaOverIp_settingStatus_nmos_master_main_video>p {
+    position: absolute;
+    top: -4px;
+    left: 33px;
+}
+.setup_mediaOverIp_settingStatus_nmos_status {
+    position: absolute;
+    left: 200px;
+    top: 0px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+
+.setup_mediaOverIp_settingStatus_nmos_status>p {
+    position: absolute;
+    top: -4px;
+    left: 33px;
+}
+.setup_mediaOverIp_settingStatus_tx_ptp_status {
+    position: absolute;
+    left: 200px;
+    top: 0px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+
+.setup_mediaOverIp_settingStatus_tx_ptp_status>p {
+    position: absolute;
+    top: -4px;
+    left: 33px;
+}
+.setup_mediaOverIp_settingStatus_tx_ptp_domain {
+    position: absolute;
+    left: 400px;
+    top: 0px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+
+.setup_mediaOverIp_settingStatus_tx_ptp_domain>p {
+    position: absolute;
+    top: -4px;
+    left: 33px;
+}
+.setup_mediaOverIp_settingStatus_tx_name_value {
+    position: absolute;
+    left: 54px;
+    top: 45px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+.setup_mediaOverIp_settingStatus_tx_destination_address_value {
+    position: absolute;
+    left: 254px;
+    top: 45px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+.setup_mediaOverIp_settingStatus_nmos_master_main_video_value {
+    position: absolute;
+    left: 260px;
+    top: 45px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+.setup_mediaOverIp_settingStatus_nmos_status_value {
+    position: absolute;
+    left: 254px;
+    top: 45px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+.setup_mediaOverIp_settingStatus_tx_ptp_status_value{
+    position: absolute;
+    left: 254px;
+    top: 45px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+.setup_mediaOverIp_settingStatus_tx_destination_port {
+    position: absolute;
+    left: 400px;
+    top: 0px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+
+.setup_mediaOverIp_settingStatus_tx_destination_port>p {
+    position: absolute;
+    top: -5px;
+    left: 33px;
+}
+.setup_mediaOverIp_settingStatus_nmos_master_crop_video {
+    position: absolute;
+    left: 400px;
+    top: 0px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+
+.setup_mediaOverIp_settingStatus_nmos_master_crop_video>p {
+    position: absolute;
+    top: -4px;
+    left: 33px;
+}
+
+.setup_mediaOverIp_settingStatus_nmos_IS04_port {
+    position: absolute;
+    left: 400px;
+    top: 0px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+
+.setup_mediaOverIp_settingStatus_nmos_IS04_port>p {
+    position: absolute;
+    top: -4px;
+    left: 33px;
+}
+.setup_mediaOverIp_settingStatus_tx_return_destination_port {
+    position: absolute;
+    left: 600px;
+    top: 0px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+
+.setup_mediaOverIp_settingStatus_tx_return_destination_port>p {
+    position: absolute;
+    top: -5px;
+    left: 33px;
+}
+.setup_mediaOverIp_settingStatus_tx_source_address_value {
+    position: absolute;
+    left: 454px;
+    top: 45px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+.setup_mediaOverIp_settingStatus_tx_destination_port_value {
+    position: absolute;
+    left: 448px;
+    top: 45px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+.setup_mediaOverIp_settingStatus_nmos_master_crop_video_value {
+    position: absolute;
+    left: 448px;
+    top: 45px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+.setup_mediaOverIp_settingStatus_nmos_IS04_port_value {
+    position: absolute;
+    left: 448px;
+    top: 45px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+.setup_mediaOverIp_settingStatus_tx_ptp_domain_value {
+    position: absolute;
+    left: 448px;
+    top: 45px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+.setup_mediaOverIp_settingStatus_tx_return_destination_port_value {
+    position: absolute;
+    left: 654px;
+    top: 45px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+.setup_mediaOverIp_settingStatus_tx_format {
+    position: absolute;
+    left: 600px;
+    top: 0px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+
+.setup_mediaOverIp_settingStatus_tx_format>p {
+    position: absolute;
+    top: -5px;
+    left: 33px;
+}
+.setup_mediaOverIp_settingStatus_nmos_master_monitor_video {
+    position: absolute;
+    left: 600px;
+    top: 0px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+
+.setup_mediaOverIp_settingStatus_nmos_master_monitor_video>p {
+    position: absolute;
+    top: -4px;
+    left: 33px;
+}
+.setup_mediaOverIp_settingStatus_nmos_master_mic1_audio {
+    position: absolute;
+    left: 820px;
+    top: 0px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+
+.setup_mediaOverIp_settingStatus_nmos_master_mic1_audio>p {
+    position: absolute;
+    top: -4px;
+    left: 33px;
+}
+.setup_mediaOverIp_settingStatus_nmos_master_mic2_audio {
+    position: absolute;
+    left: 990px;
+    top: 0px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+.setup_mediaOverIp_settingStatus_nmos_master_mic2_audio>p {
+    position: absolute;
+    top: -4px;
+    left: 33px;
+}
+.setup_mediaOverIp_settingStatus_nmos_master_return_video_rx {
+    position: absolute;
+    left: 1160px;
+    top: 0px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+.setup_mediaOverIp_settingStatus_nmos_master_return_video_rx>p {
+    position: absolute;
+    top: -4px;
+    left: 33px;
+}
+.setup_mediaOverIp_settingStatus_nmos_IS05_port {
+    position: absolute;
+    left: 600px;
+    top: 0px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+
+.setup_mediaOverIp_settingStatus_nmos_IS05_port>p {
+    position: absolute;
+    top: -4px;
+    left: 33px;
+}
+.setup_mediaOverIp_settingStatus_nmos_RDS_IP_Address {
+    position: absolute;
+    left: 820px;
+    top: 0px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+
+.setup_mediaOverIp_settingStatus_nmos_RDS_IP_Address>p {
+    position: absolute;
+    top: -4px;
+    left: 33px;
+}
+.setup_mediaOverIp_settingStatus_nmos_RDS_Port {
+    position: absolute;
+    left: 990px;
+    top: 0px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+
+.setup_mediaOverIp_settingStatus_nmos_RDS_Port>p {
+    position: absolute;
+    top: -4px;
+    left: 33px;
+}
+.setup_mediaOverIp_settingStatus_tx_ptp_grandmaster_id {
+    position: absolute;
+    left: 600px;
+    top: 0px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+
+.setup_mediaOverIp_settingStatus_tx_ptp_grandmaster_id>p {
+    position: absolute;
+    top: -5px;
+    left: 33px;
+}
+.setup_mediaOverIp_settingStatus_tx_source_address {
+    position: absolute;
+    left: 400px;
+    top: 0px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+.setup_mediaOverIp_settingStatus_tx_source_address>p {
+    position: absolute;
+    top: -4px;
+    left: 33px;
+}
+.setup_mediaOverIp_settingStatus_return_tx_detection {
+    position: absolute;
+    left: 820px;
+    top: 0px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+
+.setup_mediaOverIp_settingStatus_return_tx_detection>p {
+    position: absolute;
+    top: -4px;
+    left: 33px;
+}
+.setup_mediaOverIp_settingStatus_return_tx_sampling_rate {
+    position: absolute;
+    left: 990px;
+    top: 0px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+
+.setup_mediaOverIp_settingStatus_return_tx_sampling_rate>p {
+    position: absolute;
+    top: -4px;
+    left: 33px;
+}
+.setup_mediaOverIp_settingStatus_return_tx_width {
+    position: absolute;
+    left: 1160px;
+    top: 0px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+
+.setup_mediaOverIp_settingStatus_return_tx_width>p {
+    position: absolute;
+    top: -4px;
+    left: 33px;
+}
+.setup_mediaOverIp_settingStatus_return_tx_height {
+    position: absolute;
+    left: 1330px;
+    top: 0px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+
+.setup_mediaOverIp_settingStatus_return_tx_height>p {
+    position: absolute;
+    top: -4px;
+    left: 33px;
+}
+.setup_mediaOverIp_settingStatus_tx_format_value {
+    position: absolute;
+    left: 654px;
+    top: 45px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+.setup_mediaOverIp_settingStatus_nmos_master_monitor_video_value {
+    position: absolute;
+    left: 654px;
+    top: 45px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+.setup_mediaOverIp_settingStatus_nmos_master_mic2_audio_value {
+    position: absolute;
+    left: 1050px;
+    top: 45px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+.setup_mediaOverIp_settingStatus_nmos_master_mic1_audio_value {
+    position: absolute;
+    left: 861px;
+    top: 45px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+.setup_mediaOverIp_settingStatus_nmos_master_return_video_rx_value {
+    position: absolute;
+    left: 1200px;
+    top: 45px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+
+.setup_mediaOverIp_settingStatus_nmos_IS05_port_value {
+    position: absolute;
+    left: 654px;
+    top: 45px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+.setup_mediaOverIp_settingStatus_nmos_RDS_IP_Address_value {
+    position: absolute;
+    left: 861px;
+    top: 45px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+.setup_mediaOverIp_settingStatus_nmos_RDS_Port_value {
+    position: absolute;
+    left: 1050px;
+    top: 45px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+.setup_mediaOverIp_settingStatus_tx_ptp_grandmaster_id_value{
+    position: absolute;
+    left: 654px;
+    top: 45px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+.setup_mediaOverIp_settingStatus_tx_return_detection_value {
+    position: absolute;
+    left: 861px;
+    top: 45px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+.setup_mediaOverIp_settingStatus_tx_sampling_rate_value {
+    position: absolute;
+    left: 1050px;
+    top: 45px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+.setup_mediaOverIp_settingStatus_tx_width_value {
+    position: absolute;
+    left: 1200px;
+    top: 45px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+.setup_mediaOverIp_settingStatus_tx_height_value {
+    position: absolute;
+    left: 1380px;
+    top: 45px;
+    width: 20%;
+    height: 30px;
+    line-height: 2px;
+    font-size: large;
+}
+#setup_mediaOverIp_settingStatus_main{
+    position: absolute;
+    top: 30px;
+    left: 294px;
+    width: 100%;
+    height: 1200px;
+    color: rgb(191, 191, 191);
+    background-color: rgb(0, 0, 0);
+    border-bottom: 1px solid rgb(70, 70, 71);
+}
+/**
+ * st2110 set button
+ */
+ .setup_mediaOverIp_St2110_set_button {
+    position: absolute;
+    top: 220px;
+    left: 19px;
+    width: 142px;
+    height: 32px;
+    font-size: large;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: center;
+    z-index: 9999;
+}
+/**
+ * ST2110 radio button
+ */
+ .setup_mediaOverIp_St2110_On_label {
+    position: absolute;
+    top: 12px;
+    left: 59px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+
+.setup_mediaOverIp_St2110_Off_label {
+    position: absolute;
+    top: 12px;
+    left: 196px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+
+.setup_mediaOverIp_St2110_On_radio, .setup_mediaOverIp_St2110_Off_radio {
+    position: absolute;
+    top: 24px;
+}
+
+.setup_mediaOverIp_St2110_On_radio {
+    left: 19px;
+}
+
+.setup_mediaOverIp_St2110_Off_radio {
+    left: 156px;
+}
+
+.setup_mediaOverIp_St2110_Line {
+    position: absolute;
+    top: 78px;
+    left: 20px;
+    width: 1320px;
+}
+.setup_mediaOverIp_St2110_port_Line {
+    position: absolute;
+    top: 149px;
+    left: 20px;
+    width: 1320px;
+}
+.setup_mediaOverIP_St2110_title_label {
+    position: absolute;
+    top: 12px;
+    left: 33px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIP_St2110_port_title_label {
+    position: absolute;
+    top: 82px;
+    left: 33px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIP_St2110_port_msg_label {
+    position: absolute;
+    top: 82px;
+    left: 289px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIp_St2110_st2110_port{
+    position: absolute;
+    top: 100px;
+    left: 19px;
+    width: 240px;
+    font-size: large;
+    height: 24px;
+}
+.setup_mediaOverIP_St2110_tx_main_video_label {
+    position: absolute;
+    top: 12px;
+    left: 33px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIP_St2110_tx_main_video_format_label{
+    position: absolute;
+    top: 62px;
+    left: 54px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIP_St2110_tx_main_video_destination_address_label{
+    position: absolute;
+    top: 112px;
+    left: 54px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIP_St2110_tx_main_video_destination_port_label{
+    position: absolute;
+    top: 162px;
+    left: 54px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+
+.setup_mediaOverIP_St2110_tx_crop_video_label {
+    position: absolute;
+    top: 212px;
+    left: 33px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIP_St2110_tx_crop_video_format_label {
+    position: absolute;
+    top: 262px;
+    left: 54px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIP_St2110_tx_crop_video_destination_address_label {
+    position: absolute;
+    top: 312px;
+    left: 54px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIP_St2110_tx_crop_video_destination_port_label {
+    position: absolute;
+    top: 362px;
+    left: 54px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+
+.setup_mediaOverIP_St2110_tx_monitor_video_label {
+    position: absolute;
+    top: 412px;
+    left: 33px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIP_St2110_tx_monitor_video_format_label {
+    position: absolute;
+    top: 462px;
+    left: 54px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIP_St2110_tx_monitor_video_destination_address_label {
+    position: absolute;
+    top: 512px;
+    left: 54px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+
+.setup_mediaOverIP_St2110_tx_monitor_video_destination_port_label {
+    position: absolute;
+    top: 562px;
+    left: 54px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+
+.setup_mediaOverIP_St2110_tx_mic1_audio_label {
+    position: absolute;
+    top: 612px;
+    left: 33px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIP_St2110_tx_mic1_audio_destination_address_label {
+    position: absolute;
+    top: 662px;
+    left: 54px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+
+.setup_mediaOverIP_St2110_tx_mic1_audio_destination_port_label {
+    position: absolute;
+    top: 712px;
+    left: 54px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+
+.setup_mediaOverIP_St2110_tx_mic2_audio_label {
+    position: absolute;
+    top: 762px;
+    left: 33px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIP_St2110_tx_mic2_audio_destination_address_label {
+    position: absolute;
+    top: 812px;
+    left: 54px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+
+.setup_mediaOverIP_St2110_tx_mic2_audio_destination_port_label {
+    position: absolute;
+    top: 862px;
+    left: 54px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIP_St2110_tx_main_video_format_Line {
+    position: absolute;
+    top: 118px;
+    left: 54px;
+    width: 1320px;
+}
+.setup_mediaOverIP_St2110_tx_main_video_destination_address_Line {
+    position: absolute;
+    top: 168px;
+    left: 54px;
+    width: 1320px;
+}
+
+.setup_mediaOverIP_St2110_tx_main_video_destination_port_Line {
+    position: absolute;
+    top: 218px;
+    left: 54px;
+    width: 1320px;
+}
+
+.setup_mediaOverIP_St2110_tx_crop_video_format_Line {
+    position: absolute;
+    top: 318px;
+    left: 54px;
+    width: 1320px;
+}
+.setup_mediaOverIP_St2110_tx_crop_video_destination_address_Line {
+    position: absolute;
+    top: 368px;
+    left: 54px;
+    width: 1320px;
+}
+
+.setup_mediaOverIP_St2110_tx_crop_video_destination_port_Line {
+    position: absolute;
+    top: 418px;
+    left: 54px;
+    width: 1320px;
+}
+
+.setup_mediaOverIP_St2110_tx_monitor_video_format_Line {
+    position: absolute;
+    top: 518px;
+    left: 54px;
+    width: 1320px;
+}
+.setup_mediaOverIP_St2110_tx_monitor_video_destination_address_Line {
+    position: absolute;
+    top: 568px;
+    left: 54px;
+    width: 1320px;
+}
+
+.setup_mediaOverIP_St2110_tx_monitor_video_destination_port_Line {
+    position: absolute;
+    top: 618px;
+    left: 54px;
+    width: 1320px;
+}
+
+.setup_mediaOverIP_St2110_tx_mic1_audio_destination_address_Line {
+    position: absolute;
+    top: 718px;
+    left: 54px;
+    width: 1320px;
+}
+
+.setup_mediaOverIP_St2110_tx_mic1_audio_destination_port_Line {
+    position: absolute;
+    top: 768px;
+    left: 54px;
+    width: 1320px;
+}
+
+.setup_mediaOverIP_St2110_tx_mic2_audio_destination_address_Line {
+    position: absolute;
+    top: 868px;
+    left: 54px;
+    width: 1320px;
+}
+
+.setup_mediaOverIP_St2110_tx_mic2_audio_destination_port_Line {
+    position: absolute;
+    top: 918px;
+    left: 54px;
+    width: 1320px;
+}
+.setup_mediaOverIP_St2110_tx_main_video_Line {
+    top: 50px;
+    left: 45px;
+    height: 170px;
+    z-index: 2;
+}
+.setup_mediaOverIP_St2110_tx_crop_video_Line {
+    top: 250px;
+    left: 45px;
+    height: 170px;
+    z-index: 2;
+}
+.setup_mediaOverIP_St2110_tx_monitor_video_Line {
+    top: 450px;
+    left: 45px;
+    height: 170px;
+    z-index: 2;
+}
+.setup_mediaOverIP_St2110_tx_mic1_audio_Line {
+    top: 650px;
+    left: 45px;
+    height: 120px;
+    z-index: 2;
+}
+.setup_mediaOverIP_St2110_tx_mic2_audio_Line {
+    top: 800px;
+    left: 45px;
+    height: 120px;
+    z-index: 2;
+}
+/**
+ * St2110_tx set button
+ */
+ .setup_mediaOverIp_St2110_tx_set_button {
+    position: absolute;
+    top: 950px;
+    left: 19px;
+    width: 142px;
+    height: 32px;
+    font-size: large;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: center;
+    z-index: 9999;
+}
+.setup_mediaOverIP_St2110_tx_main_video_format_select{
+    position: absolute;
+    top: 76px;
+    left: 19px;
+    width: 200px;
+    font-size: large;
+}
+.setup_mediaOverIP_St2110_tx_main_video_destination_address{
+    position: absolute;
+    top: 126px;
+    left: 19px;
+    width: 240px;
+    font-size: large;
+    height: 24px;
+}
+.setup_mediaOverIP_St2110_tx_main_video_destination_port{
+    position: absolute;
+    top: 176px;
+    left: 19px;
+    width: 240px;
+    font-size: large;
+    height: 24px;
+}
+.setup_mediaOverIP_St2110_tx_crop_video_format_select{
+    position: absolute;
+    top: 276px;
+    left: 19px;
+    width: 200px;
+    font-size: large;
+}
+.setup_mediaOverIP_St2110_tx_crop_video_destination_address{
+    position: absolute;
+    top: 326px;
+    left: 19px;
+    width: 240px;
+    font-size: large;
+    height: 24px;
+}
+.setup_mediaOverIP_St2110_tx_crop_video_destination_port{
+    position: absolute;
+    top: 376px;
+    left: 19px;
+    width: 240px;
+    font-size: large;
+    height: 24px;
+}
+.setup_mediaOverIP_St2110_tx_monitor_video_format_select{
+    position: absolute;
+    top: 476px;
+    left: 19px;
+    width: 200px;
+    font-size: large;
+}
+.setup_mediaOverIP_St2110_tx_monitor_video_destination_address{
+    position: absolute;
+    top: 526px;
+    left: 19px;
+    width: 240px;
+    font-size: large;
+    height: 24px;
+}
+.setup_mediaOverIP_St2110_tx_monitor_video_destination_port{
+    position: absolute;
+    top: 576px;
+    left: 19px;
+    width: 240px;
+    font-size: large;
+    height: 24px;
+}
+.setup_mediaOverIP_St2110_tx_mic1_audio_destination_address{
+    position: absolute;
+    top: 676px;
+    left: 19px;
+    width: 240px;
+    font-size: large;
+    height: 24px;
+}
+.setup_mediaOverIP_St2110_tx_mic1_audio_destination_port{
+    position: absolute;
+    top: 726px;
+    left: 19px;
+    width: 240px;
+    font-size: large;
+    height: 24px;
+}
+
+.setup_mediaOverIP_St2110_tx_mic2_audio_destination_address{
+    position: absolute;
+    top: 826px;
+    left: 19px;
+    width: 240px;
+    font-size: large;
+    height: 24px;
+}
+.setup_mediaOverIP_St2110_tx_mic2_audio_destination_port{
+    position: absolute;
+    top: 876px;
+    left: 19px;
+    width: 240px;
+    font-size: large;
+    height: 24px;
+}
+.setup_mediaOverIP_St2110_tx_main_video_destination_port_msg_label {
+    position: absolute;
+    top: 162px;
+    left: 289px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIP_St2110_tx_crop_video_destination_port_msg_label{
+    position: absolute;
+    top: 362px;
+    left: 289px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIP_St2110_tx_monitor_video_destination_port_msg_label{
+    position: absolute;
+    top: 562px;
+    left: 289px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIP_St2110_tx_mic1_audio_destination_port_msg_label{
+    position: absolute;
+    top: 712px;
+    left: 289px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIP_St2110_tx_mic2_audio_destination_port_msg_label{
+    position: absolute;
+    top: 862px;
+    left: 289px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIP_St2110_rx_main_video_label {
+    position: absolute;
+    top: 12px;
+    left: 33px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIP_St2110_rx_main_video_format_label{
+    position: absolute;
+    top: 62px;
+    left: 54px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIP_St2110_rx_main_video_format_select{
+    position: absolute;
+    top: 76px;
+    left: 19px;
+    width: 200px;
+    font-size: large;
+}
+.setup_mediaOverIP_St2110_rx_main_video_destination_address_label{
+    position: absolute;
+    top: 112px;
+    left: 54px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIP_St2110_rx_main_video_destination_address{
+    position: absolute;
+    top: 126px;
+    left: 19px;
+    width: 240px;
+    font-size: large;
+    height: 24px;
+}
+.setup_mediaOverIP_St2110_rx_main_video_destination_port_label{
+    position: absolute;
+    top: 214px;
+    left: 54px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIP_St2110_rx_main_video_destination_port{
+    position: absolute;
+    top: 226px;
+    left: 19px;
+    width: 240px;
+    font-size: large;
+}
+.setup_mediaOverIP_St2110_rx_main_video_source_address{
+    position: absolute;
+    top: 176px;
+    left: 19px;
+    width: 240px;
+    font-size: large;
+    height: 24px;
+}
+.setup_mediaOverIP_St2110_rx_main_video_source_address_label{
+    position: absolute;
+    top: 168px;
+    left: 54px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIP_St2110_rx_main_video_destination_port_msg_label {
+    position: absolute;
+    top: 212px;
+    left: 289px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIP_St2110_rx_main_video_format_Line {
+    position: absolute;
+    top: 118px;
+    left: 54px;
+    width: 1320px;
+}
+.setup_mediaOverIP_St2110_rx_main_video_destination_address_Line {
+    position: absolute;
+    top: 168px;
+    left: 54px;
+    width: 1320px;
+}
+.setup_mediaOverIP_St2110_rx_main_video_destination_port_Line {
+    position: absolute;
+    top: 268px;
+    left: 54px;
+    width: 1320px;
+}
+.setup_mediaOverIP_St2110_rx_main_video_source_address_Line {
+    position: absolute;
+    top: 218px;
+    left: 54px;
+    width: 1320px;
+}
+.setup_mediaOverIP_St2110_rx_main_video_Line {
+    top: 50px;
+    left: 45px;
+    height: 216px;
+    z-index: 2;
+}
+/**
+ * St2110_tx set button
+ */
+ .setup_mediaOverIp_St2110_rx_set_button {
+    position: absolute;
+    top: 290px;
+    left: 19px;
+    width: 142px;
+    height: 32px;
+    font-size: large;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: center;
+    z-index: 9999;
+}
+/*lijiaming*/
+.setup_mediaOverIp_jpeg_xs_tx_main_video_label {
+    position: absolute;
+    top: 12px;
+    left: 33px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIP_Jpeg_xs_tx_main_video_select_label{
+    position: absolute;
+    top: 62px;
+    left: 54px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIP_Jpeg_xs_tx_main_video_select{
+    position: absolute;
+    top: 76px;
+    left: 19px;
+    width: 200px;
+    font-size: large;
+}
+.setup_mediaOverIP_Jpeg_xs_tx_main_video_format_label{
+    position: absolute;
+    top: 112px;
+    left: 54px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIP_Jpeg_xs_tx_main_video_format_select{
+    position: absolute;
+    top: 123px;
+    left: 19px;
+    width: 200px;
+    font-size: large;
+}
+.setup_mediaOverIP_jpeg_xs_tx_Compression_rate_main_video_format_label{
+    position: absolute;
+    top: 161px;
+    left: 54px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIP_jpeg_xs_tx_Compression_rate_main_video_format_select{
+    position: absolute;
+    top: 173px;
+    left: 19px;
+    width: 200px;
+    font-size: large;
+}
+.setup_mediaOverIP_jpeg_xs_tx_main_video_destination_address_label{
+    position: absolute;
+    top: 213px;
+    left: 54px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIP_jpeg_xs_tx_main_video_destination_address{
+    position: absolute;
+    top: 226px;
+    left: 19px;
+    width: 240px;
+    font-size: large;
+    height: 24px;
+}
+.setup_mediaOverIP_Jpeg_xs_tx_main_video_destination_port_label{
+    position: absolute;
+    top: 263px;
+    left: 54px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIP_Jpeg_xs_tx_main_video_destination_port{
+    position: absolute;
+    top: 276px;
+    left: 19px;
+    width: 240px;
+    font-size: large;
+    height: 24px;
+}
+.setup_mediaOverIP_Jpeg_xs_tx_main_video_destination_port_msg_label {
+    position: absolute;
+    top: 260px;
+    left: 289px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+
+.setup_mediaOverIp_jpeg_xs_tx_crop_video_label {
+    position: absolute;
+    top: 313px;
+    left: 33px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIP_Jpeg_xs_tx_crop_video_select_label{
+    position: absolute;
+    top: 363px;
+    left: 54px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIP_Jpeg_xs_tx_crop_video_select{
+    position: absolute;
+    top: 377px;
+    left: 19px;
+    width: 200px;
+    font-size: large;
+}
+.setup_mediaOverIP_Jpeg_xs_tx_crop_video_format_label{
+    position: absolute;
+    top: 413px;
+    left: 54px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIP_Jpeg_xs_tx_crop_video_format_select{
+    position: absolute;
+    top: 424px;
+    left: 19px;
+    width: 200px;
+    font-size: large;
+}
+.setup_mediaOverIP_jpeg_xs_tx_Compression_rate_crop_video_format_label{
+    position: absolute;
+    top: 463px;
+    left: 54px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIP_jpeg_xs_tx_Compression_rate_crop_video_format_select{
+    position: absolute;
+    top: 471px;
+    left: 19px;
+    width: 200px;
+    font-size: large;
+}
+.setup_mediaOverIP_jpeg_xs_tx_crop_video_destination_address_label{
+    position: absolute;
+    top: 513px;
+    left: 54px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIP_jpeg_xs_tx_crop_video_destination_address{
+    position: absolute;
+    top: 523px;
+    left: 19px;
+    width: 240px;
+    font-size: large;
+    height: 24px;
+}
+.setup_mediaOverIP_Jpeg_xs_tx_crop_video_destination_port_label{
+    position: absolute;
+    top: 563px;
+    left: 54px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIP_Jpeg_xs_tx_crop_video_destination_port{
+    position: absolute;
+    top: 576px;
+    left: 19px;
+    width: 240px;
+    font-size: large;
+    height: 24px;
+}
+.setup_mediaOverIP_Jpeg_xs_tx_crop_video_destination_port_msg_label {
+    position: absolute;
+    top: 560px;
+    left: 289px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+/**
+ * Jpeg_xs_tx set button
+ */
+ .setup_mediaOverIp_Jpeg_xs_tx_set_button {
+    position: absolute;
+    top: 338px;
+    left: 19px;
+    width: 142px;
+    height: 32px;
+    font-size: large;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: center;
+    z-index: 9999;
+}
+.setup_mediaOverIP_Jpeg_xs_tx_main_video_select_Line {
+    position: absolute;
+    top: 118px;
+    left: 54px;
+    width: 1320px;
+}
+.setup_mediaOverIP_Jpeg_xs_tx_main_video_format_Line {
+    position: absolute;
+    top: 168px;
+    left: 54px;
+    width: 1320px;
+}
+.setup_mediaOverIP_Jpeg_xs_tx_main_video_compression_rate_Line {
+    position: absolute;
+    top: 218px;
+    left: 54px;
+    width: 1320px;
+}
+.setup_mediaOverIP_Jpeg_xs_tx_main_video_destination_address_Line{
+    position: absolute;
+    top: 268px;
+    left: 54px;
+    width: 1320px;
+}
+.setup_mediaOverIP_Jpeg_xs_tx_main_video_destination_port_Line {
+    position: absolute;
+    top: 318px;
+    left: 54px;
+    width: 1320px;
+}
+.setup_mediaOverIP_Jpeg_xs_tx_main_video_Line {
+    top: 57px;
+    left: 45px;
+    height: 261px;
+    z-index: 2;
+}
+
+
+.setup_mediaOverIp_Jpeg_xs_tx_set_button {
+    position: absolute;
+    top: 340px;
+    left: 19px;
+    width: 142px;
+    height: 32px;
+    font-size: large;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: center;
+    z-index: 9999;
+}
+.setup_mediaOverIP_Jpeg_xs_tx_crop_video_select_Line {
+    position: absolute;
+    top: 418px;
+    left: 54px;
+    width: 1320px;
+}
+.setup_mediaOverIP_Jpeg_xs_tx_crop_video_format_Line {
+    position: absolute;
+    top: 468px;
+    left: 54px;
+    width: 1320px;
+}
+.setup_mediaOverIP_Jpeg_xs_tx_crop_video_compression_rate_Line {
+    position: absolute;
+    top: 518px;
+    left: 54px;
+    width: 1320px;
+}
+.setup_mediaOverIP_Jpeg_xs_tx_crop_video_destination_address_Line{
+    position: absolute;
+    top: 568px;
+    left: 54px;
+    width: 1320px;
+}
+.setup_mediaOverIP_Jpeg_xs_tx_crop_video_destination_port_Line {
+    position: absolute;
+    top: 618px;
+    left: 54px;
+    width: 1320px;
+}
+.setup_mediaOverIP_Jpeg_xs_tx_crop_video_Line {
+    top: 358px;
+    left: 45px;
+    height: 261px;
+    z-index: 2;
+}
+
+
+
+
+/*22222*/
+.setup_mediaOverIP_Jpeg_xs_rx_main_video_label {
+    position: absolute;
+    top: 12px;
+    left: 33px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIP_Jpeg_xs_rx_main_video_format_label{
+    position: absolute;
+    top: 62px;
+    left: 54px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIP_Jpeg_xs_rx_main_video_format_select{
+    position: absolute;
+    top: 76px;
+    left: 19px;
+    width: 200px;
+    font-size: large;
+}
+
+.setup_mediaOverIP_Jpeg_xs_rx_main_video_destination_address_label{
+    position: absolute;
+    top: 112px;
+    left: 54px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIP_Jpeg_xs_rx_main_video_destination_address{
+    position: absolute;
+    top: 126px;
+    left: 19px;
+    width: 240px;
+    font-size: large;
+    height: 24px;
+}
+.setup_mediaOverIP_Jpeg_xs_rx_main_video_source_address_label{
+    position: absolute;
+    top: 168px;
+    left: 54px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIP_Jpeg_xs_rx_main_video_destination_port_msg_label {
+    position: absolute;
+    top: 212px;
+    left: 289px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIP_Jpeg_xs_rx_main_video_source_address{
+    position: absolute;
+    top: 176px;
+    left: 19px;
+    width: 240px;
+    font-size: large;
+    height: 24px;
+}
+.setup_mediaOverIP_Jpeg_xs_rx_main_video_destination_port_label{
+    position: absolute;
+    top: 214px;
+    left: 54px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIP_Jpeg_xs_rx_main_video_destination_port{
+    position: absolute;
+    top: 226px;
+    left: 19px;
+    width: 240px;
+    font-size: large;
+}
+
+/**
+ * Jpeg_xs_rx set button
+ */
+ .setup_mediaOverIp_Jpeg_xs_rx_set_button {
+    position: absolute;
+    top: 290px;
+    left: 19px;
+    width: 142px;
+    height: 32px;
+    font-size: large;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: center;
+    z-index: 9999;
+}
+
+
+.setup_mediaOverIP_Jpeg_xs_rx_main_video_format_Line {
+    position: absolute;
+    top: 118px;
+    left: 54px;
+    width: 1320px;
+}
+.setup_mediaOverIP_Jpeg_xs_rx_main_video_destination_address_Line {
+    position: absolute;
+    top: 168px;
+    left: 54px;
+    width: 1320px;
+}
+.setup_mediaOverIP_Jpeg_xs_rx_main_video_destination_port_Line {
+    position: absolute;
+    top: 268px;
+    left: 54px;
+    width: 1320px;
+}
+.setup_mediaOverIP_Jpeg_xs_rx_main_video_source_address_Line {
+    position: absolute;
+    top: 218px;
+    left: 54px;
+    width: 1320px;
+}
+.setup_mediaOverIP_Jpeg_xs_rx_main_video_Line {
+    top: 50px;
+    left: 45px;
+    height: 216px;
+    z-index: 2;
+}
+
+
+
+
+
+
+
+
+
+
+.setup_mediaOverIP_ptp_domain_title_label {
+    position: absolute;
+    top: 12px;
+    left: 33px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIP_ptp_sync_signal_title_label {
+    position: absolute;
+    top: 88px;
+    left: 33px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIP_ptp_sync_signal_value_title_label {
+    position: absolute;
+    top: 88px;
+    left: 19px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIP_ptp_domain{
+    position: absolute;
+    top: 28px;
+    left: 19px;
+    width: 240px;
+    font-size: large;
+    height: 24px;
+}
+/**
+ * ptp set button
+ */
+ .setup_mediaOverIp_ptp_set_button {
+    position: absolute;
+    top: 220px;
+    left: 19px;
+    width: 142px;
+    height: 32px;
+    font-size: large;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: center;
+    z-index: 9999;
+}
+.setup_mediaOverIp_ptp_domain_Line {
+    position: absolute;
+    top: 78px;
+    left: 20px;
+    width: 1320px;
+}
+.setup_mediaOverIp_ptp_sync_signal_Line {
+    position: absolute;
+    top: 149px;
+    left: 20px;
+    width: 1320px;
+}
+.setup_mediaOverIP_nmos_control_title_label {
+    position: absolute;
+    top: 12px;
+    left: 33px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+
+/**
+ * ST2110 radio button
+ */
+ .setup_mediaOverIp_nmos_control_On_label {
+    position: absolute;
+    top: 12px;
+    left: 59px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+
+.setup_mediaOverIp_nmos_control_Off_label {
+    position: absolute;
+    top: 12px;
+    left: 196px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+
+.setup_mediaOverIp_nmos_control_On_radio, .setup_mediaOverIp_nmos_control_Off_radio {
+    position: absolute;
+    top: 24px;
+}
+
+.setup_mediaOverIp_nmos_control_On_radio {
+    left: 19px;
+}
+
+.setup_mediaOverIp_nmos_control_Off_radio {
+    left: 156px;
+}
+
+.setup_mediaOverIP_nmos_status_title_label {
+    position: absolute;
+    top: 82px;
+    left: 33px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIP_nmos_status_value_label {
+    position: absolute;
+    top: 82px;
+    left: 19px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+
+.setup_mediaOverIp_nmos_rediscovery_button {
+    position: absolute;
+    top: 95px;
+    left: 290px;
+    width: 120px;
+    height: 30px;
+    display: table;
+    font-size: large;
+    text-align: center;
+}
+
+.setup_mediaOverIP_nmos_control_Line {
+    position: absolute;
+    top: 78px;
+    left: 20px;
+    width: 1320px;
+}
+.setup_mediaOverIP_nmos_status_Line {
+    position: absolute;
+    top: 149px;
+    left: 20px;
+    width: 1320px;
+}
+.setup_mediaOverIP_nmos_is04_port_Line {
+    position: absolute;
+    top: 219px;
+    left: 20px;
+    width: 1320px;
+}
+.setup_mediaOverIP_nmos_is05_port_Line {
+    position: absolute;
+    top: 289px;
+    left: 20px;
+    width: 1320px;
+}
+.setup_mediaOverIP_nmos_label_setting_Line {
+    position: absolute;
+    top: 359px;
+    left: 20px;
+    width: 1320px;
+}
+.setup_mediaOverIP_nmos_label_prefix_Line {
+    position: absolute;
+    top: 442px;
+    left: 20px;
+    width: 1320px;
+}
+.setup_mediaOverIP_nmos_discovery_Line {
+    position: absolute;
+    top: 512px;
+    left: 20px;
+    width: 1320px;
+}
+.setup_mediaOverIP_nmos_is04_port_title_label {
+    position: absolute;
+    top: 152px;
+    left: 33px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIp_nmos_is04_port_port{
+    position: absolute;
+    top: 170px;
+    left: 19px;
+    width: 240px;
+    font-size: large;
+    height: 24px;
+}
+
+.setup_mediaOverIP_nmos_is05_port_title_label {
+    position: absolute;
+    top: 222px;
+    left: 33px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIP_nmos_label_setting_title_label {
+    position: absolute;
+    top: 296px;
+    left: 33px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIp_nmos_is05_port_port{
+    position: absolute;
+    top: 240px;
+    left: 19px;
+    width: 240px;
+    font-size: large;
+    height: 24px;
+}
+/**
+ * ST2110 radio button
+ */
+ .setup_mediaOverIp_nmos_label_setting_Auto_label {
+    position: absolute;
+    top: 296px;
+    left: 59px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+
+.setup_mediaOverIp_nmos_label_setting_Manual_label {
+    position: absolute;
+    top: 296px;
+    left: 196px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+
+.setup_mediaOverIp_nmos_label_setting_Auto_radio, .setup_mediaOverIp_nmos_label_setting_Manual_radio {
+    position: absolute;
+    top: 306px;
+}
+
+.setup_mediaOverIp_nmos_label_setting_Auto_radio {
+    left: 19px;
+}
+
+.setup_mediaOverIp_nmos_label_setting_Manual_radio {
+    left: 156px;
+}
+.setup_mediaOverIP_nmos_label_prefix_title_label {
+    position: absolute;
+    top: 372px;
+    left: 33px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIP_nmos_discovery_title_label {
+    position: absolute;
+    top: 448px;
+    left: 33px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIp_nmos_label_prefix{
+    position: absolute;
+    top: 390px;
+    left: 19px;
+    width: 240px;
+    font-size: large;
+    height: 24px;
+}
+/**
+ * nmos set button
+ */
+ .setup_mediaOverIp_nmos_set_button {
+    position: absolute;
+    top: 546px;
+    left: 19px;
+    width: 142px;
+    height: 32px;
+    font-size: large;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: center;
+    z-index: 9999;
+}
+
+/**
+ * nmos control radio button
+ */
+ .setup_mediaOverIp_nmos_discovery_Auto_label {
+    position: absolute;
+    top: 455px;
+    left: 59px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+
+.setup_mediaOverIp_nmos_discovery_mDNS_label {
+    position: absolute;
+    top: 455px;
+    left: 196px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIp_nmos_discovery_uniDNS_label {
+    position: absolute;
+    top: 455px;
+    left: 346px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIp_nmos_discovery_Auto_radio, .setup_mediaOverIp_nmos_discovery_mDNS_radio, .setup_mediaOverIp_nmos_discovery_uniDNS_radio {
+    position: absolute;
+    top: 463px;
+}
+
+.setup_mediaOverIp_nmos_discovery_Auto_radio {
+    left: 19px;
+}
+
+.setup_mediaOverIp_nmos_discovery_mDNS_radio {
+    left: 156px;
+}
+.setup_mediaOverIp_nmos_discovery_uniDNS_radio {
+    left: 306px;
+}
+.setup_mediaOverIP_nmos_is04_port_msg_label {
+    position: absolute;
+    top: 149px;
+    left: 289px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_mediaOverIP_nmos_is05_port_msg_label {
+    position: absolute;
+    top: 219px;
+    left: 289px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}

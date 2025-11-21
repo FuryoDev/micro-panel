@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>ATEM Micro Panel – HTML Layout</title>
+<style>
+  :root{
+    --panel-w: 1220px;
+    --btn: 54px;            /* square key size */
+    --gap: 10px;            /* spacing between keys */
+    --radius: 10px;         /* button corner radius */
+    --font: 12px;
+    --panel-radius: 22px;
+  }
+
+  body{
+    background: radial-gradient(1200px 500px at 50% 10%, #1c1c1c, #0f0f10);
+    min-height:100dvh; display:grid; place-items:center; margin:0;
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji","Segoe UI Emoji";
+    color:#ddd;
+  }
+
+  /* PANEL */
+  .panel{
+    width: min(95vw, var(--panel-w));
+    padding: 28px 28px 32px;
+    border-radius: var(--panel-radius);
+    background:
+      radial-gradient(120% 120% at 30% -10%, #1a1a1c 0 60%, #0c0c0d 100%),
+      linear-gradient(#0b0b0c, #0b0b0c);
+    box-shadow:
+      inset 0 8px 18px rgba(255,255,255,0.04),
+      inset 0 -8px 18px rgba(0,0,0,0.5),
+      0 18px 40px rgba(0,0,0,0.6);
+    position: relative;
+  }
+
+  .brand{
+    position:absolute; top:14px; right:26px; opacity:.85; font-size:13px;
+    letter-spacing:.2px;
+  }
+  .title{
+    position:absolute; top:14px; left:26px; opacity:.85; font-size:16px;
+    letter-spacing:.2px;
+  }
+
+  /* GRID SURFACE
+     24x8 grid gives enough anchors to match the photo closely.
+  */
+  .surface{
+    display:grid;
+    grid-template-columns: repeat(24, minmax(24px, 1fr));
+    grid-auto-rows: var(--btn);
+    gap: var(--gap);
+    margin-top: 30px;
+    align-items:center;
+  }
+
+  /* BUTTONS */
+  .key{
+    height: var(--btn);
+    border-radius: var(--radius);
+    display:grid; place-items:center;
+    font-weight:600; font-size: var(--font);
+    line-height:1; text-align:center;
+    user-select:none;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.25),
+      inset 0 -3px 8px rgba(0,0,0,.55),
+      0 4px 8px rgba(0,0,0,.35);
+    background:
+      linear-gradient(#efefef,#dbdbdb 55%,#cfcfcf);
+    color:#111;
+  }
+  .sm{ font-size:10px; }
+  .pill{ border-radius: 9px; height: calc(var(--btn) - 6px); margin:auto 0; }
+
+  /* states/colors (approximate glow to mirror backlit caps) */
+  .red{
+    background: radial-gradient(circle at 50% 35%, #ff6f6f, #ff3b3b 60%, #b11818);
+    color:#220;
+    text-shadow: 0 1px 0 rgba(0,0,0,.25);
+    box-shadow:
+      0 0 10px rgba(255,60,60,.45),
+      inset 0 -6px 12px rgba(0,0,0,.45),
+      inset 0 2px 0 rgba(255,255,255,.25);
+  }
+  .amber{
+    background: radial-gradient(circle at 50% 35%, #ffd77a, #ffbf3b 60%, #b36f06);
+    color:#261b00;
+    box-shadow:
+      0 0 10px rgba(255,191,59,.4),
+      inset 0 -6px 12px rgba(0,0,0,.45),
+      inset 0 2px 0 rgba(255,255,255,.25);
+  }
+  .green{
+    background: radial-gradient(circle at 50% 35%, #83ff9a, #3be26a 60%, #14803a);
+    color:#06240f;
+    box-shadow:
+      0 0 10px rgba(59,226,106,.45),
+      inset 0 -6px 12px rgba(0,0,0,.45),
+      inset 0 2px 0 rgba(255,255,255,.25);
+  }
+  .grey{ background: linear-gradient(#f1f1f1,#e7e7e7 60%,#d6d6d6); }
+
+  /* FADER (vertical) */
+  .fader-wrap{
+    grid-column: 16 / span 3; grid-row: 2 / span 5;
+    display:grid; align-items:center; justify-items:center;
+  }
+  .fader-slot{
+    width: 70px; height: 300px;
+    border-radius: 12px;
+    background: linear-gradient(#131313,#0b0b0b);
+    box-shadow:
+      inset 0 8px 18px rgba(0,0,0,.8),
+      inset 0 -8px 18px rgba(0,0,0,.6);
+    position:relative;
+    display:grid; place-items:center;
+  }
+  .fader-line{
+    position:absolute; left: 50%; top: 18px; bottom: 18px;
+    width: 3px; transform:translateX(-50%);
+    background: linear-gradient(#1f1f1f, #0e0e0e);
+    border-radius:2px;
+  }
+  .fader-knob{
+    width: 38px; height: 74px; border-radius:10px;
+    background: linear-gradient(#2b2b2b,#0f0f0f);
+    box-shadow:
+      inset 0 8px 10px rgba(255,255,255,.06),
+      inset 0 -10px 14px rgba(0,0,0,.7),
+      0 8px 18px rgba(0,0,0,.6);
+    position:absolute; /* visually around middle */
+    top: 48%;
+    transform: translateY(-50%);
+  }
+
+  /* Utility to place an element at a grid cell block */
+  [style*="--c"]{ grid-column: var(--c); }
+  [style*="--r"]{ grid-row: var(--r); }
+
+  /* tiny helper labels beneath fader (tick marks) */
+  .ticks{
+    position:absolute; left:calc(50% + 12px); top:24px; bottom:24px; width:16px;
+    display:flex; flex-direction:column; justify-content:space-between;
+    opacity:.6; font-size:10px;
+  }
+
+  /* Responsive: squeeze a bit on narrow screens */
+  @media (max-width: 1100px){
+    :root{ --btn: 48px; }
+  }
+  @media (max-width: 900px){
+    :root{ --btn: 42px; --gap: 8px; }
+  }
+</style>
+</head>
+<body>
+  <div class="panel">
+    <div class="title">ATEM Micro Panel</div>
+    <div class="brand">Blackmagicdesign</div>
+
+    <!-- 24×? grid surface -->
+    <div class="surface">
+
+      <!-- ===== TOP-LEFT MACRO/BKGD & KEY 1..4 with ON caps ===== -->
+      <div class="key sm grey"  style="--c: 6 / span 1; --r: 1">MACRO</div>
+      <div class="key sm grey"  style="--c: 6 / span 1; --r: 2">BKGD</div>
+
+      <div class="key red"       style="--c: 8 / span 1; --r: 1">ON</div>
+      <div class="key amber sm"  style="--c: 8 / span 1; --r: 2">KEY 1</div>
+
+      <div class="key red"       style="--c: 9 / span 1; --r: 1">ON</div>
+      <div class="key amber sm"  style="--c: 9 / span 1; --r: 2">KEY 2</div>
+
+      <div class="key red"       style="--c: 10 / span 1; --r: 1">ON</div>
+      <div class="key grey sm"   style="--c: 10 / span 1; --r: 2">KEY 3</div>
+
+      <div class="key red"       style="--c: 11 / span 1; --r: 1">ON</div>
+      <div class="key grey sm"   style="--c: 11 / span 1; --r: 2">KEY 4</div>
+
+      <!-- ===== TOP CENTER: M/E 1..4 ===== -->
+      <div class="key grey sm"   style="--c: 14 / span 1; --r: 1">M/E 1</div>
+      <div class="key amber sm"  style="--c: 15 / span 1; --r: 1">M/E 2</div>
+      <div class="key grey sm"   style="--c: 16 / span 1; --r: 1">M/E 3</div>
+      <div class="key grey sm"   style="--c: 17 / span 1; --r: 1">M/E 4</div>
+
+      <!-- DIP / DVE / STING (under M/E) -->
+      <div class="key grey sm"   style="--c: 14 / span 1; --r: 2">DIP</div>
+      <div class="key grey sm"   style="--c: 15 / span 1; --r: 2">DVE</div>
+      <div class="key grey sm"   style="--c: 16 / span 1; --r: 2">STING</div>
+
+      <!-- MIX / WIPE / ARM (row below) -->
+      <div class="key amber sm"  style="--c: 14 / span 1; --r: 3">MIX</div>
+      <div class="key grey sm"   style="--c: 15 / span 1; --r: 3">WIPE</div>
+      <div class="key grey sm"   style="--c: 16 / span 1; --r: 3">ARM</div>
+
+      <!-- SHIFT (left middle), PREV TRANS & CUT -->
+      <div class="key grey sm"   style="--c: 12 / span 1; --r: 4">SHIFT</div>
+      <div class="key grey sm"   style="--c: 12 / span 1; --r: 6">PREV<br>TRANS</div>
+      <div class="key grey sm"   style="--c: 14 / span 1; --r: 6">CUT</div>
+
+      <!-- BIG AUTO key -->
+      <div class="key red pill"  style="--c: 15 / span 1; --r: 6">AUTO</div>
+
+      <!-- ===== VERTICAL FADER ===== -->
+      <div class="fader-wrap">
+        <div class="fader-slot">
+          <div class="fader-line"></div>
+          <div class="fader-knob" aria-hidden="true"></div>
+          <div class="ticks" aria-hidden="true">
+            <span>▲</span><span></span><span></span><span></span><span>▼</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== RIGHT CLUSTER: DSK TIE / CUT / AUTO ===== -->
+      <div class="key amber sm" style="--c: 20 / span 1; --r: 2">DSK 1<br>TIE</div>
+      <div class="key amber sm" style="--c: 22 / span 1; --r: 2">DSK 2<br>TIE</div>
+
+      <div class="key red sm"   style="--c: 20 / span 1; --r: 4">DSK 1<br>CUT</div>
+      <div class="key grey sm"  style="--c: 20 / span 1; --r: 5">DSK 1<br>AUTO</div>
+
+      <div class="key red sm"   style="--c: 22 / span 1; --r: 4">DSK 2<br>CUT</div>
+      <div class="key grey sm"  style="--c: 22 / span 1; --r: 5">DSK 2<br>AUTO</div>
+
+      <!-- ===== PROGRAM ROW (top long row: 1..10, with 4 red) ===== -->
+      <div class="key grey" style="--c: 4 / span 1; --r: 3">1</div>
+      <div class="key grey" style="--c: 5 / span 1; --r: 3">2</div>
+      <div class="key grey" style="--c: 6 / span 1; --r: 3">3</div>
+      <div class="key red"  style="--c: 7 / span 1; --r: 3">4</div>
+      <div class="key grey" style="--c: 8 / span 1; --r: 3">5</div>
+      <div class="key grey" style="--c: 9 / span 1; --r: 3">6</div>
+      <div class="key grey" style="--c: 10 / span 1; --r: 3">7</div>
+      <div class="key grey" style="--c: 11 / span 1; --r: 3">8</div>
+      <div class="key grey" style="--c: 12 / span 1; --r: 3">9</div>
+      <div class="key grey" style="--c: 13 / span 1; --r: 3">10</div>
+
+      <!-- ===== PREVIEW ROW (bottom long row: 1..10, with 3 green) ===== -->
+      <div class="key grey"  style="--c: 4 / span 1; --r: 5">1</div>
+      <div class="key grey"  style="--c: 5 / span 1; --r: 5">2</div>
+      <div class="key green" style="--c: 6 / span 1; --r: 5">3</div>
+      <div class="key grey"  style="--c: 7 / span 1; --r: 5">4</div>
+      <div class="key grey"  style="--c: 8 / span 1; --r: 5">5</div>
+      <div class="key grey"  style="--c: 9 / span 1; --r: 5">6</div>
+      <div class="key grey"  style="--c: 10 / span 1; --r: 5">7</div>
+      <div class="key grey"  style="--c: 11 / span 1; --r: 5">8</div>
+      <div class="key grey"  style="--c: 12 / span 1; --r: 5">9</div>
+      <div class="key grey"  style="--c: 13 / span 1; --r: 5">10</div>
+
+    </div>
+  </div>
+</body>
+</html>

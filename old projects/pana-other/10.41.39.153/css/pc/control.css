@@ -1,0 +1,566 @@
+@CHARSET "UTF-8";
+
+tbody::-webkit-scrollbar-thumb {
+    background: rgb(50, 50, 50);
+    border-radius: 15px;
+}
+
+tbody::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+tbody::-webkit-scrollbar-track {
+    background: rgb(150, 150, 150);
+    border-radius: 0px;
+}
+
+body {
+    margin: 0;
+    background-color: black;
+    user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    white-space: nowrap;
+    font-family: 'Arial';
+    color: rgb(218, 218, 218);
+    touch-action: none;
+}
+
+#base {
+    height: 941px;
+    background-color: rgb(0, 0, 0);
+    z-index: 9998;
+}
+
+#pic {
+    z-index: 9999;
+}
+
+#WebVideoImgA {
+
+    z-index: 9999;
+}
+
+#view_gui {
+}
+
+#main_gui {
+}
+
+#setting_gui {
+}
+
+#base_header {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 48px;
+    display: table;
+    border-bottom: 1px solid rgb(70, 70, 71);
+    background-color: rgb(0, 0, 0);
+    z-index: 99999;
+}
+#header_center {
+    position: absolute;
+    left: 50%;
+}
+
+#camera_controller_gui{
+    position: absolute;
+    z-index: 999;
+    top: 80px;
+    width: 558px;
+    height: 1097px;
+    background-color: rgb(29, 29, 31);
+    right:0px;
+}
+#audio_level_meter{
+    position: absolute;
+    height: 439px;
+    width: 100%;
+    background-image: url(parts/audiolevelmeter_container.png);
+    background-size: 100%,100%;
+}
+.audio_level_meter_title{
+    position: absolute;
+    width: 100%;
+    top: 6px;
+    font-size: 22px;
+    text-align: center;
+}
+.audio_level_meter_ch1{
+    position: absolute;
+    top: 365px;
+    left: 150px;
+    font-size: 22px;
+    text-align: center;
+}
+.audio_level_meter_ch2{
+    position: absolute;
+    top: 365px;
+    left: 370px;
+    font-size: 22px;
+    text-align: center;
+}
+#audio_setting_status{
+    position: absolute;
+    top:450px;
+    height: 672px;
+    width: 100%;
+    /* background-image: url(parts/settingstatus_container.png); */
+    background-size: 100%,100%;
+}
+.audio_setting_status_title{
+    position: absolute;
+    width: 100%;
+    display: block;
+    height: 35px;
+    line-height: 150%;
+    font-size: 22px;
+    text-align: center;
+    background-color: #464647;
+}
+.audio_setting_status_audio{
+    position: absolute;
+    top: 65px;
+    left: 15px;
+    font-size: 22px;
+    text-align: center;
+}
+.audio_setting_status_audio1{
+    position: absolute;
+    top: 142px;
+    left: 45px;
+    font-size: 22px;
+    text-align: center;
+}
+.audio_setting_status_input_type{
+    position: absolute;
+    top: 219px;
+    left: 45px;
+    font-size: 22px;
+    text-align: center;
+}
+.audio_setting_status_volume_level{
+    position: absolute;
+    top: 300px;
+    left: 45px;
+    font-size: 22px;
+    text-align: center;
+}
+.audio_setting_status_plugin_power{
+    position: absolute;
+    top: 380px;
+    left: 45px;
+    font-size: 22px;
+    text-align: center;
+}
+.audio_setting_status_audio_over_ip{
+    position: absolute;
+    top: 460px;
+    left: 15px;
+    font-size: 22px;
+    text-align: center;
+}
+.audio_setting_status_audio_transmission{
+    position: absolute;
+    top: 537px;
+    left: 45px;
+    font-size: 22px;
+    text-align: center;
+}
+.audio_setting_status_audio_bit_rate{
+    position: absolute;
+    top: 614px;
+    left: 45px;
+    font-size: 22px;
+    text-align: center;
+}
+
+.live_txt_audio_bit_rate,
+.live_txt_audio_transmission,
+.live_txt_plugin_power,
+.live_txt_volume_level,
+.live_txt_input_type,
+.live_txt_audio{
+    position: absolute;
+    left: 300px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.live_txt_audio{
+    top: 130px;
+}
+.live_txt_audio_bit_rate{
+    top: 605px;
+}
+.live_txt_audio_transmission{
+    top: 526px;
+}
+.live_txt_plugin_power{
+    top: 368px;
+}
+.live_txt_volume_level{
+    top: 288px;
+}
+.live_txt_input_type{
+    top: 210px;
+}
+.audio_level_gauge_gray{
+    width: 95px;
+    height: 27px;
+    background-image: url(parts/gauge_gray.png);
+    background-size: 100%,100%;
+}
+.audio_level_gauge_red{
+    width: 95px;
+    height: 27px;
+    background-image: url(parts/gauge_red.png);
+    background-size: 100%,100%;
+}
+#audio_level_ch1_9{
+    position: absolute;
+    top: 81px;
+    left: 125px;
+}
+#audio_level_ch1_8{
+    position: absolute;
+    top: 112px;
+    left: 125px;
+}
+#audio_level_ch1_7{
+    position: absolute;
+    top: 143px;
+    left: 125px;
+}
+#audio_level_ch1_6{
+    position: absolute;
+    top: 173px;
+    left: 125px;
+}
+#audio_level_ch1_5{
+    position: absolute;
+    top: 204px;
+    left: 125px;
+}
+#audio_level_ch1_4{
+    position: absolute;
+    top: 235px;
+    left: 125px;
+}
+#audio_level_ch1_3{
+    position: absolute;
+    top: 266px;
+    left: 125px;
+}
+#audio_level_ch1_2{
+    position: absolute;
+    top: 296px;
+    left: 125px;
+}
+#audio_level_ch1_1{
+    position: absolute;
+    top: 327px;
+    left: 125px;
+}
+/*ch2*/
+#audio_level_ch2_9{
+    position: absolute;
+    top: 81px;
+    left: 340px;
+}
+#audio_level_ch2_8{
+    position: absolute;
+    top: 112px;
+    left: 340px;
+}
+#audio_level_ch2_7{
+    position: absolute;
+    top: 143px;
+    left: 340px;
+}
+#audio_level_ch2_6{
+    position: absolute;
+    top: 173px;
+    left: 340px;
+}
+#audio_level_ch2_5{
+    position: absolute;
+    top: 204px;
+    left: 340px;
+}
+#audio_level_ch2_4{
+    position: absolute;
+    top: 235px;
+    left: 340px;
+}
+#audio_level_ch2_3{
+    position: absolute;
+    top: 266px;
+    left: 340px;
+}
+#audio_level_ch2_2{
+    position: absolute;
+    top: 296px;
+    left: 340px;
+}
+#audio_level_ch2_1{
+    position: absolute;
+    top: 327px;
+    left: 340px;
+}
+
+#audio_level_gui{
+    position: absolute;
+    z-index: 9999;
+    top: 50px;
+    width: 558px;
+    height: 1097px;
+    right:0px;
+    background-color: rgb(0, 0, 0);
+}
+
+#camera_controller_gui_open {
+    position: absolute;
+    z-index: 999;
+    top: 50px;
+    width: 558px;
+    height: 1130px;
+    background-color: rgb(29, 29, 31);
+    right:0px;
+}
+
+#camera_controller_gui_ptz {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 0px;
+    height: 0px;
+    background-color: rgb(29, 29, 31);
+}
+
+.TableSetupMargin {
+    position: absolute;
+    z-index: 10;
+}
+
+#gui_camera {
+    position: absolute;
+    left: 0px;
+    top: 50px;
+    text-align: center;
+    width: 944px;
+}
+
+#gui_title {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+
+.txt_activate_fail {
+    position: absolute;
+    left: 99px;
+    top: 476px;
+    width: 290px;
+    height: 26px;
+    display: table;
+    text-align: center;
+}
+
+.on {
+    color: rgb(217, 217, 217);
+}
+
+.off {
+    color: rgb(217, 217, 217);
+}
+
+.disable {
+    color: rgb(102, 102, 102);
+}
+
+.on_hover {
+    color: rgb(255, 255, 255);
+}
+
+.off_hover {
+    color: rgb(255, 255, 255);
+}
+
+/* input type = number の際にスピンボタンを非表示とする */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+select::-ms-expand {
+    display: none;
+}
+
+.html-body-overflow {
+    overflow-x: hidden;
+    overflow-y: hidden;
+    position:fixed;
+    /* min-width: 1923px; */
+}
+#preset_input_area_99{
+    width: 135px!important;
+}
+#input_list_area_99{
+    left: 31px !important;
+}
+
+#audio_setting_status_container{
+    position: absolute;
+    display: flex;
+    height: 95%;
+    width: 50%;
+    flex-direction: column;
+    /* grid-template-columns: repeat(2,5fr);
+    grid-template-rows: repeat(7,91px);
+    grid-auto-flow: row;
+    grid-template-areas:
+        'a b'
+        'c d'
+        'e f'
+        'g h'
+        'i j'
+        'k l'
+        'm n'; */
+    margin-top: 35px;
+    align-items: center;
+    justify-items: center;
+    border: #464647 solid 1px;
+    background-color: black;
+    /* grid-row-gap: 1px; */
+}
+
+.child_audio{
+    grid-area: a;
+}
+.child_audio_input_1{
+    grid-area: c;
+}
+.child_mic_gain_1{
+    grid-area: e;
+    justify-items: center;
+}
+.child_line_level_1{
+    grid-area: g;
+    justify-items: center;
+}
+.child_audio_input_2{
+    grid-area: i;
+}
+.child_mic_gain_2{
+    grid-area: k;
+    justify-items: center;
+}
+.child_line_level_2{
+    grid-area: m;
+    justify-items: center;
+}
+.child_audio, 
+.child_audio_input_1, 
+.child_mic_gain_1, 
+.child_line_level_1, 
+.child_audio_input_2, 
+.child_mic_gain_2, 
+.child_line_level_2{
+    width: 100%;
+    height: 100%;
+    background-color: #1d1d1f;
+    border-bottom: #464647 solid 1px;
+    display: flex;
+    align-items: center;
+}
+
+#audio_setting_status_container_value{
+    position: absolute;
+    display: flex;
+    height: 95%;
+    width: 50%;
+    left:50%;
+    flex-direction: column;
+    /* grid-template-columns: repeat(2,5fr);
+    grid-template-rows: repeat(7,91px);
+    grid-auto-flow: row;
+    grid-template-areas:
+        'a b'
+        'c d'
+        'e f'
+        'g h'
+        'i j'
+        'k l'
+        'm n'; */
+    margin-top: 35px;
+    align-items: center;
+    justify-items: center;
+    border: #464647 solid 1px;
+    background-color: black;
+    /* grid-row-gap: 1px; */
+}
+
+.child_audio_value{
+    grid-area: b;
+}
+.child_audio_input_1_value{
+    grid-area: d;
+}
+.child_mic_gain_1_value{
+    grid-area: f;
+}
+.child_line_level_1_value{
+    grid-area: h;
+}
+.child_audio_input_2_value{
+    grid-area: j;
+}
+.child_mic_gain_2_value{
+    grid-area: l;
+}
+.child_line_level_2_value{
+    grid-area: n;
+}
+
+.child_audio_value,
+.child_audio_input_1_value,
+.child_mic_gain_1_value,
+.child_line_level_1_value,
+.child_audio_input_2_value,
+.child_mic_gain_2_value,
+.child_line_level_2_value{
+    border-bottom: #464647 solid 1px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#audio_setting_status_container div span{
+    padding-left: 25px;
+}
+.child_mic_gain_1 > span{
+    margin-left: 90px;
+}
+.child_line_level_1 > span{
+    margin-left: 90px;
+}
+.child_mic_gain_2 > span{
+    margin-left: 90px;
+}
+.child_line_level_2 > span{
+    margin-left: 90px;
+}

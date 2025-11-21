@@ -1,0 +1,22 @@
+@CHARSET "UTF-8";
+
+.window span {
+    top: 12%;
+}
+
+.src_button span {
+    top: 86%;
+}
+
+.auto_cut span {
+    top: 36%;
+}
+
+.trans span {
+    top: 35%;
+}
+
+.time span {
+    top: 15%;
+}
+

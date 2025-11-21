@@ -1,0 +1,4157 @@
+@CHARSET "UTF-8";
+
+/**
+ * base
+ */
+div.CssConfirmDialog {
+    width: 400px;
+    position: absolute;
+    top: 160px;
+    left: 320px;
+    z-index: 99999;
+    background-color: rgb(70, 70, 71);
+    border: ridge #ffffff;
+    visibility: collapse;
+}
+
+td.CssConfirmDialogButton {
+    margin-right: auto;
+    margin-left: auto;
+    width: 26%;
+}
+
+tr.CssConfirmDialogTr {}
+
+#tbl_format {
+    background-color: #FFFFFF;
+    position: absolute;
+    left: 150px;
+    top: 300px;
+    display: none;
+    font-family: "Verdana";
+}
+
+div.CssConfirmDialogOverlay {
+    opacity: 0.4;
+    filter: alpha(opacity=40);
+    -ms-filter: "alpha(opacity=40)";
+    -khtml-opacity: 0.4;
+    -moz-opacity: 0.4;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 1170px;
+    background-color: rgb(0, 0, 0);
+    z-index: 999999999998;
+}
+
+div#dialog-message {
+    font-size: 10pt;
+}
+
+.btn_basic_system {
+    position: absolute;
+    top: 90px;
+    left: 30px;
+    width: 200px;
+    height: 26px;
+    font-size: 13px;
+    text-align: left;
+    display: table;
+}
+
+.btn_date_time {
+    position: absolute;
+    top: 115px;
+    left: 30px;
+    width: 200px;
+    height: 26px;
+    font-size: 13px;
+    text-align: left;
+    display: table;
+}
+
+.btn_live_page {
+    position: absolute;
+    top: 140px;
+    left: 30px;
+    width: 200px;
+    height: 26px;
+    font-size: 13px;
+    text-align: left;
+    display: table;
+}
+
+.btn_sd_memory_card {
+    position: absolute;
+    top: 165px;
+    left: 30px;
+    width: 200px;
+    height: 26px;
+    font-size: 13px;
+    text-align: left;
+    display: table;
+}
+
+.setup_Situation {
+    position: absolute;
+    top: 35px;
+    left: 30px;
+    width: 200px;
+    height: 26px;
+    font-size: 13px;
+    text-align: left;
+    display: table;
+}
+
+.setup_Situation>*,
+.btn_basic_system>*,
+.btn_date_time>*,
+.btn_live_page>*,
+.btn_sd_memory_card>* {
+    display: table-cell;
+    vertical-align: middle;
+    cursor: default;
+}
+
+.setup_Situation.off,
+.btn_basic_system.off,
+.btn_date_time.off,
+.btn_live_page.off,
+.btn_sd_memory_card.off {
+    color: rgb(217, 217, 217);
+    background-image: url(parts/tab_top_R_normal.png);
+    background-size: 100% 100%;
+}
+
+.setup_Situation.on,
+.btn_basic_system.on,
+.btn_date_time.on,
+.btn_live_page.on,
+.btn_sd_memory_card.on {
+    color: rgb(255, 255, 255);
+    background-image: url(parts/tab_top_R_normal.png);
+    background-size: 100% 100%;
+}
+
+.setup_Situation.disable,
+.btn_basic_system.disable,
+.btn_date_time.disable,
+.btn_live_page.disable,
+.btn_sd_memory_card.disable {
+    color: rgb(102, 102, 102);
+    background-image: url(parts/tab_top_R_disable.png);
+    background-size: 100% 100%;
+}
+
+.setup_Situation.on_hover,
+.btn_basic_system.on_hover,
+.btn_date_time.on_hover,
+.btn_live_page.on_hover,
+.btn_sd_memory_card.on_hover {
+    color: rgb(255, 255, 255);
+    background-image: url(parts/tab_top_R_normal.png);
+    background-size: 100% 100%;
+}
+
+.setup_Situation.off_hover,
+.btn_basic_system.off_hover,
+.btn_date_time.off_hover,
+.btn_live_page.off_hover,
+.btn_sd_memory_card.off_hover {
+    color: rgb(255, 255, 255);
+    background-image: url(parts/tab_top_R_onMouse.png);
+    background-size: 100% 100%;
+}
+
+#priorityModeDiv,
+#setup_dateTime_main,
+#setup_livePage_main,
+#sdMemoryCard {
+    position: absolute;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+}
+
+#setup_dateTime_main,
+#setup_livePage_main,
+#sdMemoryCard {
+    display: none;
+}
+
+#id_status {
+    position: absolute;
+    width: 745px;
+    top: 100px;
+    left: 505px;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 16px;
+}
+
+/**
+ * Priority mode
+ */
+.txt_basic_priority_mode {
+    position: absolute;
+    top: 30px;
+    left: 20px;
+    width: 200px;
+    height: 28px;
+    display: table;
+    font-size: 13px;
+    text-align: right;
+}
+
+#basic_IP {
+    position: absolute;
+    top: 40px;
+    left: 250px;
+    width: 100px;
+    height: 28px;
+    display: table;
+    font-size: 9pt;
+    text-align: left;
+}
+
+.setting_line_priority_mode {
+    top: 10px;
+    left: 10px;
+    position: absolute;
+    width: 1100px;
+    height: 1px;
+    background-color: rgb(70, 70, 71);
+    z-index: 10;
+}
+
+/**
+ * Date&Time
+ */
+.setup_dateTime_auto_label,
+.setup_dateTime_manual_label,
+.setup_dateTime_pc_label,
+.setup_dateTime_ntp_label,
+.setup_dateTime_date_time_label,
+.setup_dateTime_time_zone_label {
+    position: absolute;
+    left: 130px;
+    width: 200px;
+    height: 35px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+
+.setup_dateTime_auto_label {
+    top: 12px;
+    left: 33px;
+    width: 100px;
+}
+
+.setup_dateTime_manual_label {
+    top: 165px;
+    left: 33px;
+    width: 100px;
+}
+
+.setup_dateTime_pc_label {
+    top: 12px;
+}
+
+.setup_dateTime_ntp_label {
+    top: 90px;
+}
+
+.setup_dateTime_date_time_label {
+    top: 165px;
+}
+
+.setup_dateTime_time_zone_label {
+    top: 245px;
+}
+
+.radio_basic_date_display_on,
+.radio_basic_date_display_off {
+    position: absolute;
+    width: 70px;
+    height: 35px;
+    top: 52px;
+    display: table;
+    font-size: 13px;
+    text-align: left;
+}
+
+.radio_basic_date_display_on {
+    left: 320px;
+}
+
+.radio_basic_date_display_off {
+    left: 450px;
+}
+
+.btn_basic_date_execute {
+    position: absolute;
+    left: 19px;
+    top: 30px;
+    width: 142px;
+    height: 32px;
+    font-size: large;
+    text-align: center;
+    display: table;
+}
+
+.btn_basic_date_execute>p {
+    position: absolute;
+    top: -13px;
+    left: 33px;
+}
+
+.btn_basic_date_ntp {
+    position: absolute;
+    left: 19px;
+    top: 90px;
+    width: 75px;
+    height: 28px;
+    font-size: large;
+    text-align: center;
+    display: table;
+}
+
+.select_basic_date_manual_date_time {
+    position: absolute;
+    left: 320px;
+    top: 175px;
+    font-size: 13px;
+    text-align: center;
+    display: table;
+}
+
+#basicTimeZone {
+    position: absolute;
+    left: 320px;
+    top: 193px;
+    font-size: 13px;
+    text-align: center;
+    display: table;
+}
+
+#date_time_div_select_date {
+    position: absolute;
+    left: 320px;
+    top: 156px;
+    font-size: 13px;
+    text-align: center;
+    display: table;
+}
+
+.btn_basic_date_set {
+    position: absolute;
+    left: 319px;
+    top: 110px;
+    width: 142px;
+    height: 32px;
+    font-size: large;
+    text-align: center;
+    display: table;
+}
+
+.btn_basic_date_set>p {
+    position: absolute;
+    top: -12px;
+    left: 54px;
+}
+
+/**
+ * Live page
+ */
+.setup_livePage_camera_title_lable,
+.setup_livePage_automatic_lable,
+.setup_livePage_smoother_lable {
+    position: absolute;
+    left: 30px;
+    width: 270px;
+    display: table;
+    font-size: large;
+}
+
+.setup_livePage_camera_title_lable {
+    top: 11px;
+}
+
+.setup_livePage_automatic_lable {
+    top: 82px;
+}
+
+.setup_livePage_smoother_lable {
+    top: 160px;
+}
+
+.setup_livePage_cam_title_text {
+    position: absolute;
+    width: 375px;
+    height: 24px;
+    top: 27px;
+    left: 19px;
+    font-size: large;
+}
+
+.radio_basic_livepage_automatic_on,
+.radio_basic_livepage_automatic_off {
+    position: absolute;
+    width: 70px;
+    height: 35px;
+    top: 75px;
+    display: table;
+    font-size: 13px;
+    text-align: left;
+}
+
+.radio_basic_livepage_smoother_on,
+.radio_basic_livepage_smoother_off {
+    position: absolute;
+    width: 70px;
+    height: 35px;
+    top: 137px;
+    display: table;
+    font-size: 13px;
+    text-align: left;
+}
+
+.radio_basic_livepage_automatic_off,
+.radio_basic_livepage_smoother_off {
+    left: 450px;
+}
+
+.radio_basic_livepage_automatic_on,
+.radio_basic_livepage_smoother_on {
+    left: 550px;
+}
+
+.btn_basic_livepage_set {
+    position: absolute;
+    left: 319px;
+    top: 105px;
+    width: 142px;
+    height: 32px;
+    font-size: large;
+    text-align: center;
+    display: table;
+}
+
+.btn_basic_livepage_set>p {
+    position: absolute;
+    top: -12px;
+    left: 54px;
+}
+
+.btn_system_frequency_set {
+    position: absolute;
+    left: 319px;
+    top: 127px;
+    width: 142px;
+    height: 32px;
+    font-size: large;
+    text-align: center;
+    display: table;
+    z-index: 2;
+}
+.btn_system_two_labels_set {
+    position: absolute;
+    left: 319px;
+    top: 210px;
+    width: 142px;
+    height: 32px;
+    font-size: large;
+    text-align: center;
+    display: table;
+    z-index: 2;
+}
+.btn_system_level_gauge_set_execute {
+    position: absolute;
+    left: 319px;
+    top: 56px;
+    width: 142px;
+    height: 32px;
+    font-size: large;
+    text-align: center;
+    display: table;
+    z-index: 2;
+}
+.btn_system_level_gauge_reset_execute {
+    position: absolute;
+    left: 319px;
+    top: 136px;
+    width: 142px;
+    height: 32px;
+    font-size: large;
+    text-align: center;
+    display: table;
+    z-index: 2;
+}
+
+/*
+ * button common
+ */
+.btn_basic_date_execute>*,
+.btn_basic_date_set>*,
+.btn_basic_livepage_set>*,
+.btn_system_frequency_set>*,
+.btn_system_two_labels_set>*,
+.btn_system_level_gauge_set_execute>*,
+.btn_system_level_gauge_reset_execute>* {
+    display: table-cell;
+    vertical-align: middle;
+    cursor: default;
+}
+
+.btn_basic_date_execute.off,
+.btn_basic_date_set.off,
+.btn_basic_livepage_set.off,
+.btn_system_frequency_set.off,
+.btn_system_two_labels_set.off,
+.btn_system_level_gauge_set_execute.off,
+.btn_system_level_gauge_reset_execute.off,
+.btn_basic_sdmemorycard_execute.off {
+    color: rgb(217, 217, 217);
+    background-image: url(parts/setup_menu_btn_set_normal.png);
+    background-size: 100% 100%;
+}
+
+.btn_basic_date_execute.on,
+.btn_basic_date_set.on,
+.btn_basic_livepage_set.on,
+.btn_system_frequency_set.on,
+.btn_system_two_labels_set.on,
+.btn_system_level_gauge_set_execute.on,
+.btn_system_level_gauge_reset_execute.on,
+.btn_basic_sdmemorycard_execute.on {
+    color: rgb(217, 217, 217);
+    background-image: url(parts/setup_menu_btn_set_pressed.png);
+    background-size: 100% 100%;
+}
+
+.btn_basic_date_execute.disable,
+.btn_basic_date_set.disable,
+.btn_basic_livepage_set.disable,
+.btn_system_frequency_set.disable,
+.btn_system_two_labels_set.disable,
+.btn_system_level_gauge_set_execute.disable,
+.btn_system_level_gauge_reset_execute.disable,
+.btn_basic_sdmemorycard_execute.disable {
+    color: rgb(102, 102, 102);
+    background-image: url(parts/setup_menu_btn_set_disable.png);
+    background-size: 100% 100%;
+}
+
+.btn_basic_date_execute.on_hover,
+.btn_basic_date_set.on_hover,
+.btn_basic_livepage_set.on_hover,
+.btn_system_frequency_set.on_hover,
+.btn_system_two_labels_set.on_hover,
+.btn_system_level_gauge_set_execute.on_hover,
+.btn_system_level_gauge_reset_execute.on_hover,
+.btn_basic_sdmemorycard_execute.on_hover {
+    color: rgb(255, 255, 255);
+    background-image: url(parts/setup_menu_btn_set_pressed.png);
+    background-size: 100% 100%;
+}
+
+.btn_basic_date_execute.off_hover,
+.btn_basic_date_set.off_hover,
+.btn_basic_livepage_set.off_hover,
+.btn_system_frequency_set.off_hover,
+.btn_system_two_labels_set.off_hover,
+.btn_system_level_gauge_set_execute.off_hover,
+.btn_system_level_gauge_reset_execute.off_hover,
+.btn_basic_sdmemorycard_execute.off_hover {
+    color: rgb(255, 255, 255);
+    background-image: url(parts/setup_menu_btn_set_onmouse.png);
+    background-size: 100% 100%;
+}
+
+.div_Setting {
+    position: absolute;
+    background-color: rgb(45, 45, 48);
+    width: 200px;
+    height: 850px;
+    z-index: 9;
+}
+
+.txt_pri_mode {
+    position: absolute;
+    top: -30px;
+    left: 5px;
+    width: 200px;
+    height: 28px;
+    display: table;
+    font-size: 13px;
+    text-align: left;
+    z-index: 10;
+}
+
+iframe.DispNone {
+    display: none;
+    width: 0px;
+    height: 0px;
+}
+
+.displayNone {
+    display: none;
+}
+
+#setup_basic_div input {
+    background-color: rgb(0, 0, 0);
+    color: rgb(191, 191, 191);
+    border: 1px rgb(70, 70, 71) double;
+    padding: 0px 0px 0px 5px;
+}
+
+#setup_basic_div>* {
+    display: table-cell;
+    vertical-align: middle;
+    cursor: default;
+}
+
+.livePageDivInnerLine1 {
+    position: absolute;
+    height: 1.5px;
+    width: 98%;
+    top: 108px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+}
+
+.livePageDivInnerLine2 {
+    position: absolute;
+    height: 1px;
+    width: 98%;
+    top: 190px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+}
+
+.livePageDivInnerLine3 {
+    position: absolute;
+    height: 1.5px;
+    width: 98%;
+    top: 267px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+}
+
+.setup_livePage_camera_title_lable p,
+.setup_livePage_automatic_lable p,
+.setup_livePage_smoother_lable p {
+    white-space: normal;
+}
+
+/*date&time*/
+.setup_dateTime_title {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 28px;
+    line-height: 28px;
+    width: 100%;
+    background-color: rgb(70, 70, 71);
+    font-size: large;
+}
+
+.setup_dateTime_title>p {
+    position: absolute;
+    top: -20px;
+    left: 33px;
+}
+
+.setup_dateTime_title_2 {
+    position: absolute;
+    top: 0px;
+    left: 1210px;
+    height: 28px;
+    line-height: 28px;
+    width: 398px;
+    background-color: rgb(70, 70, 71);
+}
+
+.setup_dateTime_labels {
+    position: absolute;
+    top: 29px;
+    left: 0px;
+    height: 1100px;
+    width: 300px;
+    background-color: rgb(29, 29, 31);
+}
+
+.setup_dateTime_form {
+    position: absolute;
+    top: 29px;
+    left: 301px;
+    height: 850px;
+    width: 1210px;
+}
+
+.setup_dateTime_btn_set_area {
+    position: absolute;
+    top: 245px;
+    height: 40px;
+    width: 1000px;
+}
+
+.setup_dateTime_labels_line1 {
+    position: absolute;
+    top: 80px;
+    left: 80px;
+    height: 30px;
+    width: 1px;
+    background: rgb(218, 218, 218);
+}
+
+.setup_dateTime_labels_line2 {
+    position: absolute;
+    top: 120px;
+    left: 90px;
+    height: 30px;
+    width: 1px;
+    background: rgb(218, 218, 218);
+}
+
+.setup_dateTime_labels_line3 {
+    position: absolute;
+    top: 150px;
+    left: 100px;
+    height: 30px;
+    width: 1px;
+    background: rgb(218, 218, 218);
+}
+
+.setup_dateTime_hour_select,
+.setup_dateTime_min_select,
+.setup_dateTime_sec_select,
+.setup_dateTime_month_select,
+.setup_dateTime_day_select,
+.setup_dateTime_year_select {
+    position: absolute;
+    top: 180px;
+    width: 80px;
+    font-size: large;
+}
+
+.setup_dateTime_hour_select {
+    left: 545px;
+}
+
+.setup_dateTime_min_select {
+    left: 695px;
+}
+
+.setup_dateTime_sec_select {
+    left: 845px;
+}
+
+.setup_dateTime_month_select {
+    left: 245px;
+}
+
+.setup_dateTime_day_select {
+    left: 395px;
+}
+
+.setup_dateTime_year_select {
+    left: 75px;
+}
+
+.setup_dateTime_timezone_select {
+    position: absolute;
+    top: 255px;
+    left: 19px;
+    font-size: large;
+    width: 580px;
+}
+
+.setup_dateTime_year_label,
+.setup_dateTime_month_label,
+.setup_dateTime_day_label,
+.setup_dateTime_hour_label,
+.setup_dateTime_min_label,
+.setup_dateTime_sec_label {
+    position: absolute;
+    top: 165px;
+    width: 30px;
+    height: 35px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+
+.setup_dateTime_year_label {
+    left: 19px;
+}
+
+.setup_dateTime_month_label {
+    left: 180px;
+}
+
+.setup_dateTime_day_label {
+    left: 350px;
+}
+
+.setup_dateTime_hour_label {
+    left: 500px;
+}
+
+.setup_dateTime_min_label {
+    left: 650px;
+}
+
+.setup_dateTime_sec_label {
+    left: 800px;
+}
+
+/*Live page*/
+.setup_livePage_title {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 28px;
+    line-height: 28px;
+    width: 100%;
+    background-color: rgb(70, 70, 71);
+    font-size: large;
+}
+
+.setup_livePage_title>p {
+    position: absolute;
+    top: -20px;
+    left: 33px;
+}
+
+.setup_livePage_title_2 {
+    position: absolute;
+    top: 0px;
+    left: 1210px;
+    height: 28px;
+    line-height: 28px;
+    width: 398px;
+    background-color: rgb(70, 70, 71);
+}
+
+.setup_livePage_labels {
+    position: absolute;
+    top: 29px;
+    left: 0px;
+    height: 1100px;
+    width: 300px;
+    background-color: rgb(29, 29, 31);
+}
+
+.setup_livePage_form {
+    position: absolute;
+    top: 29px;
+    left: 301px;
+    height: 850px;
+    width: 1210px;
+}
+
+.setup_livePage_btn_set_area {
+    position: absolute;
+    top: 180px;
+    height: 40px;
+    width: 10px;
+}
+
+/**********************SYSTEM***********************/
+#setup_system_other_form {
+    position: absolute;
+    height: 1100px;
+    width: 100%;
+    top: 30px;
+    left: 300px;
+    background: rgb(0, 0, 0);
+    z-index: 1;
+}
+
+#div_system_menu {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 280px;
+    height: 1130px;
+    color: rgb(191, 191, 191);
+    background-color: rgb(29, 29, 31);
+}
+
+.system_title {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 280px;
+    height: 29px;
+    cursor: default;
+    text-align: center;
+    font-size: large;
+    background-color: rgb(70, 70, 71);
+}
+
+.system_title>P {
+    position: absolute;
+    top: -13px;
+    left: 24px;
+}
+
+.basic_system_title {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 30px;
+    cursor: default;
+    font-size: large;
+    background-color: rgb(70, 70, 71);
+    z-index: 3;
+}
+
+.basic_system_title>P {
+    position: absolute;
+    top: -13px;
+    left: 33px;
+}
+
+.basic_system_title>* {
+    display: table-cell;
+    vertical-align: middle;
+    cursor: default;
+}
+
+/* ***************Text******************** */
+.setting_basic_system_format {
+    position: absolute;
+    left: 33px;
+    top: 61px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+
+.setting_basic_system_second_label {
+    position: absolute;
+    left: 33px;
+    top: 59px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+
+.setting_basic_system_v_log_label {
+    position: absolute;
+    left: 33px;
+    top: 125px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+
+.setting_basic_system_bar_label {
+    position: absolute;
+    left: 80px;
+    top: 125px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+
+.setting_basic_system_level_gauge_reset_label {
+    position: absolute;
+    left: 33px;
+    top: 123px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+
+.setting_basic_system_third_label {
+    position: absolute;
+    left: 80px;
+    top: 220px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+
+.setting_basic_system_tally_r{
+    position: absolute;
+    left: 50px;
+    top: 299px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+.setting_basic_system_tally_g{
+    position: absolute;
+    left: 50px;
+    top: 381px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+.setting_basic_system_tally_y{
+    position: absolute;
+    left: 50px;
+    top: 461px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+
+.setting_basic_system_tally_brightness{
+    position: absolute;
+    left: 33px;
+    top: 122px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+
+.setting_basic_system_tally_guard{
+    position: absolute;
+    left: 33px;
+    top: 536px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+.setting_basic_system_tally_external_output{
+    position: absolute;
+    left: 33px;
+    top: 616px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+.setting_basic_system_tally_output1{
+    position: absolute;
+    left: 50px;
+    top: 701px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+.setting_basic_system_tally_output2{
+    position: absolute;
+    left: 50px;
+    top: 781px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+
+/* ***************Menu Text******************** */
+.div_system_menu_status {
+    position: absolute;
+    top: 53px;
+    left: 20px;
+    width: 240px;
+    height: 30px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+
+.div_system_menu_frequency {
+    position: absolute;
+    top: 145px;
+    left: 20px;
+    width: 240px;
+    height: 30px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+
+.div_system_menu_format {
+    position: absolute;
+    top: 175px;
+    left: 20px;
+    width: 240px;
+    height: 30px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+
+.div_system_menu_sfp_mode {
+    position: absolute;
+    top: 205px;
+    left: 20px;
+    width: 240px;
+    height: 28px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+
+.div_system_menu_vlog {
+    position: absolute;
+    top: 235px;
+    left: 20px;
+    width: 240px;
+    height: 30px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+.div_system_menu_vlog.isUE163 {
+    position: absolute;
+    top: 205px;
+    left: 20px;
+    width: 240px;
+    height: 30px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+.div_system_menu_hdr {
+    position: absolute;
+    top: 265px;
+    left: 20px;
+    width: 240px;
+    height: 30px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+.div_system_menu_hdr.isUE163 {
+    position: absolute;
+    top: 235px;
+    left: 20px;
+    width: 240px;
+    height: 30px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+
+.div_system_menu_gamut {
+    position: absolute;
+    top: 295px;
+    left: 20px;
+    width: 240px;
+    height: 30px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+.div_system_menu_gamut.isUE163 {
+    position: absolute;
+    top: 265px;
+    left: 20px;
+    width: 240px;
+    height: 30px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+.div_system_menu_shooting_mode {
+    position: absolute;
+    top: 325px;
+    left: 20px;
+    width: 240px;
+    height: 30px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+.div_system_menu_shooting_mode.isUE163 {
+    position: absolute;
+    top: 295px;
+    left: 20px;
+    width: 240px;
+    height: 30px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+.div_system_menu_serial_connection {
+    position: absolute;
+    top: 355px;
+    left: 20px;
+    width: 240px;
+    height: 30px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+.div_system_menu_serial_connection.isUE163 {
+    position: absolute;
+    top: 325px;
+    left: 20px;
+    width: 240px;
+    height: 30px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+
+.div_system_menu_bar {
+    position: absolute;
+    top: 385px;
+    left: 20px;
+    width: 240px;
+    height: 30px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+.div_system_menu_bar.isUE163 {
+    position: absolute;
+    top: 355px;
+    left: 20px;
+    width: 240px;
+    height: 30px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+.div_system_menu_level_gauge {
+    position: absolute;
+    top: 415px;
+    left: 20px;
+    width: 240px;
+    height: 30px;
+    font-size: 11pt;
+    text-align: center;
+    display: none !important;
+}
+
+.div_system_menu_tally {
+    position: absolute;
+    top: 415px;
+    left: 20px;
+    width: 240px;
+    height: 30px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+.div_system_menu_tally.isUE163 {
+    position: absolute;
+    top: 385px;
+    left: 20px;
+    width: 240px;
+    height: 30px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+.div_system_menu_sync_signal {
+    position: absolute;
+    top: 445px;
+    left: 20px;
+    width: 240px;
+    height: 30px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+.div_system_menu_sync_signal.isUE163 {
+    position: absolute;
+    top: 415px;
+    left: 20px;
+    width: 240px;
+    height: 30px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+
+.div_system_menu_bar_id {
+    position: absolute;
+    top: 475px;
+    left: 20px;
+    width: 240px;
+    height: 30px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+.div_system_menu_bar_id.isUE163 {
+    position: absolute;
+    top: 445px;
+    left: 20px;
+    width: 240px;
+    height: 30px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+
+.setting_basic_system_frequency {
+    position: absolute;
+    left: 33px;
+    top: 61px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+
+/*****************Radio*****************/
+.setting_basic_system_frequency59_94Hz_radio,
+.setting_basic_system_v_log_Off_radio,
+.setting_basic_system_v_log_paint_sw_Off_radio,
+.setting_basic_system_sfp_mode_12G_Output_radio,
+.setting_basic_system_hdr_Off_radio,
+.setting_basic_system_gamut_NORMAL_radio,
+.setting_basic_system_shooting_mode_Normal_radio,
+.setting_basic_system_serial_connection_9600bps_radio,
+.setting_basic_system_bar_Off_radio,
+.setting_basic_system_bar_color_type_Type1_radio,
+.setting_basic_system_tone_Off_radio,
+.setting_basic_system_level_gauge_Off_radio,
+.setting_basic_system_tally_Disable_radio {
+    left: 319px;
+    z-index: 2;
+}
+.setting_basic_system_frequency60Hz_radio {
+    left: 760px;
+    z-index: 2;
+}
+.setting_basic_system_v_log_Off_radio,
+.setting_basic_system_sfp_mode_12G_Output_radio,
+.setting_basic_system_frequency60Hz_radio,
+.setting_basic_system_frequency59_94Hz_radio,
+.setting_basic_system_hdr_Off_radio,
+.setting_basic_system_gamut_NORMAL_radio,
+.setting_basic_system_shooting_mode_Normal_radio,
+.setting_basic_system_serial_connection_9600bps_radio,
+.setting_basic_system_bar_Off_radio,
+.setting_basic_system_level_gauge_Off_radio,
+.setting_basic_system_tally_Disable_radio {
+    top: 53px;
+}
+
+.setting_basic_system_v_log_paint_sw_Off_radio,
+.setting_basic_system_bar_color_type_Type1_radio {
+    top: 135px;
+}
+
+.setting_basic_system_tone_Off_radio {
+    top: 217px;
+}
+
+.setting_basic_system_bar_color_type_Type3_radio {
+    left: 660px;
+    top: 135px;
+    z-index: 2;
+}
+
+.setting_basic_system_bar_color_type_Type3_label {
+    position: absolute;
+    left: 700px;
+    top: 142px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+
+.setting_basic_system_bar_color_type_Type4_radio {
+    left: 830px;
+    top: 135px;
+    z-index: 2;
+}
+
+.setting_basic_system_bar_color_type_Type4_label {
+    position: absolute;
+    left: 870px;
+    top: 142px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+
+.setting_basic_system_bar_color_type_Type5_radio {
+    left: 1000px;
+    top: 135px;
+    z-index: 2;
+}
+
+.setting_basic_system_bar_color_type_Type5_label {
+    position: absolute;
+    left: 1050px;
+    top: 142px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+
+.setting_basic_system_frequency59_94Hz_label,
+.setting_basic_system_v_log_Off_label,
+.setting_basic_system_v_log_paint_sw_Off_label,
+.setting_basic_system_sfp_mode_12G_Output_label,
+.setting_basic_system_hdr_Off_label,
+.setting_basic_system_gamut_NORMAL_label,
+.setting_basic_system_shooting_mode_Normal_label,
+.setting_basic_system_serial_connection_9600bps_label,
+.setting_basic_system_bar_Off_label,
+.setting_basic_system_bar_color_type_Type1_label,
+.setting_basic_system_tone_Off_label,
+.setting_basic_system_level_gauge_Off_label,
+.setting_basic_system_tally_Disable_label {
+    position: absolute;
+    left: 356px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+
+.setting_basic_system_frequency60Hz_label {
+    position: absolute;
+    left: 797px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+.setting_basic_system_v_log_Off_label,
+.setting_basic_system_sfp_mode_12G_Output_label,
+.setting_basic_system_frequency60Hz_label,
+.setting_basic_system_frequency59_94Hz_label,
+.setting_basic_system_hdr_Off_label,
+.setting_basic_system_gamut_NORMAL_label,
+.setting_basic_system_shooting_mode_Normal_label,
+.setting_basic_system_serial_connection_9600bps_label,
+.setting_basic_system_bar_Off_label,
+.setting_basic_system_level_gauge_Off_label,
+.setting_basic_system_tally_Disable_label {
+    top: 60px;
+}
+
+.setting_basic_system_v_log_paint_sw_Off_label {
+    top: 125px;
+}
+.setting_basic_system_bar_color_type_Type1_label,
+.setting_basic_system_bar_color_type_Type2_label {
+    top: 142px;
+}
+.setting_basic_system_tone_Off_label,
+.setting_basic_system_tone_On_label {
+    top: 225px;
+}
+
+.setting_basic_system_v_log_On_radio,
+.setting_basic_system_v_log_paint_sw_On_radio,
+.setting_basic_system_sfp_mode_ST2110_radio,
+.setting_basic_system_hdr_On_radio,
+.setting_basic_system_gamut_WIDE_G2_radio,
+.setting_basic_system_shooting_mode_Low_Light_radio,
+.setting_basic_system_bar_On_radio,
+.setting_basic_system_bar_color_type_Type2_radio,
+.setting_basic_system_tone_On_radio,
+.setting_basic_system_level_gauge_On_radio,
+.setting_basic_system_tally_Enable_radio {
+    position: absolute;
+    top: 53px;
+    left: 490px;
+    z-index: 2;
+}
+
+
+.setting_basic_system_sfp_mode_ST2110_JPEG_XS_radio{
+    position: absolute;
+    top: 53px;
+    left: 649px;
+    z-index: 2;
+}
+
+.setting_basic_system_v_log_paint_sw_On_radio,
+.setting_basic_system_bar_color_type_Type2_radio {
+    top: 135px;
+}
+
+.setting_basic_system_tone_On_radio {
+    top: 217px;
+}
+
+.setting_basic_system_v_log_On_label,
+.setting_basic_system_v_log_paint_sw_On_label,
+.setting_basic_system_sfp_mode_ST2110_label,
+.setting_basic_system_hdr_On_label,
+.setting_basic_system_gamut_WIDE_G2_label,
+.setting_basic_system_shooting_mode_Low_Light_label,
+.setting_basic_system_bar_On_label,
+.setting_basic_system_bar_color_type_Type2_label,
+.setting_basic_system_tone_On_label,
+.setting_basic_system_level_gauge_On_label,
+.setting_basic_system_tally_Enable_label {
+    position: absolute;
+    left: 533px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+
+.setting_basic_system_v_log_On_label,
+.setting_basic_system_sfp_mode_ST2110_label,
+.setting_basic_system_hdr_On_label,
+.setting_basic_system_gamut_WIDE_G2_label,
+.setting_basic_system_shooting_mode_Low_Light_label,
+.setting_basic_system_bar_On_label,
+.setting_basic_system_level_gauge_On_label,
+.setting_basic_system_tally_Enable_label {
+    top: 60px;
+}
+
+
+.setting_basic_system_sfp_mode_ST2110_JPEG_XS_label{
+    position: absolute;
+    left: 693px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+
+.setting_basic_system_sfp_mode_ST2110_JPEG_XS_label{
+    top: 41px;
+}
+
+.setting_basic_system_v_log_paint_sw_On_label {
+    top: 125px;
+}
+
+.setting_basic_system_frequency50Hz_radio {
+    position: absolute;
+    top: 53px;
+    left: 430px;
+    z-index: 2;
+}
+
+.setting_basic_system_frequency50Hz_label {
+    position: absolute;
+    left: 465px;
+    top: 60px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+
+.setting_basic_system_frequency24Hz_radio {
+    position: absolute;
+    top: 53px;
+    left: 539px;
+    z-index: 2;
+}
+
+.setting_basic_system_frequency24Hz_label {
+    position: absolute;
+    left: 575px;
+    top: 61px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+
+.setting_basic_system_frequency23_98Hz_radio {
+    position: absolute;
+    left: 649px;
+    top: 53px;
+    z-index: 2;
+}
+
+.setting_basic_system_frequency23_98Hz_label {
+    position: absolute;
+    left: 685px;
+    top: 60px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+
+.setting_basic_system_serial_connection_38400bps_radio {
+    position: absolute;
+    top: 53px;
+    left: 455px;
+    z-index: 2;
+}
+
+.setting_basic_system_serial_connection_38400bps_label {
+    position: absolute;
+    left: 495px;
+    top: 60px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+
+.setting_basic_system_serial_connection_115200bps_radio {
+    position: absolute;
+    top: 53px;
+    left: 600px;
+    z-index: 2;
+}
+
+.setting_basic_system_serial_connection_115200bps_label {
+    position: absolute;
+    left: 635px;
+    top: 60px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+
+.setting_basic_system_tally_r_Unlimit_radio,
+.setting_basic_system_tally_r_Limit_radio {
+    top: 296px;
+}
+
+.setting_basic_system_tally_g_Limit_radio,
+.setting_basic_system_tally_g_Unlimit_radio {
+    top: 381px;
+}
+
+.setting_basic_system_tally_y_Limit_radio,
+.setting_basic_system_tally_y_Unlimit_radio {
+    top: 461px;
+}
+
+.setting_basic_system_tally_r_Unlimit_radio,
+.setting_basic_system_tally_g_Unlimit_radio,
+.setting_basic_system_tally_y_Unlimit_radio {
+    left: 319px;
+    z-index: 2;
+}
+.setting_basic_system_tally_r_Limit_radio,
+.setting_basic_system_tally_g_Limit_radio,
+.setting_basic_system_tally_y_Limit_radio {
+    left: 490px;
+    z-index: 2;
+}
+
+.setting_basic_system_tally_r_Unlimit_label,
+.setting_basic_system_tally_r_Limit_label {
+    top: 286px;
+}
+
+.setting_basic_system_tally_g_Limit_label,
+.setting_basic_system_tally_g_Unlimit_label {
+    top: 371px;
+}
+.setting_basic_system_tally_y_Limit_label,
+.setting_basic_system_tally_y_Unlimit_label {
+    top: 451px;
+}
+
+.setting_basic_system_tally_r_Unlimit_label,
+.setting_basic_system_tally_y_Unlimit_label,
+.setting_basic_system_tally_g_Unlimit_label {
+    left: 356px;
+    z-index: 2;
+    position: absolute;
+    font-size: large;
+}
+
+.setting_basic_system_tally_r_Limit_label,
+.setting_basic_system_tally_y_Limit_label,
+.setting_basic_system_tally_g_Limit_label {
+    left: 527px;
+    z-index: 2;
+    position: absolute;
+    font-size: large;
+}
+
+.setting_basic_system_tally_guard_Off_radio {
+    top: 534px;
+    left: 319px;
+    z-index: 2;
+}
+
+.setting_basic_system_tally_guard_Off_label {
+    position: absolute;
+    left: 356px;
+    top: 526px;
+    font-size: large;
+    z-index: 2;
+}
+.setting_basic_system_tally_guard_On_radio {
+    top: 534px;
+    left: 490px;
+    z-index: 2;
+}
+
+.setting_basic_system_tally_guard_On_label {
+    position: absolute;
+    left: 527px;
+    top: 526px;
+    font-size: large;
+    z-index: 2;
+}
+
+.setting_basic_system_tally_output1_Off_radio {
+    top: 696px;
+    left: 319px;
+    z-index: 2;
+}
+
+.setting_basic_system_tally_output1_Off_label {
+    position: absolute;
+    left: 356px;
+    top: 686px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+.setting_basic_system_tally_output1_R-Tally_radio {
+    top: 696px;
+    left: 490px;
+    z-index: 2;
+}
+
+.setting_basic_system_tally_output1_R-Tally_label {
+    position: absolute;
+    left: 527px;
+    top: 686px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+.setting_basic_system_tally_output1_G-Tally_radio {
+    top: 696px;
+    left: 660px;
+    z-index: 2;
+}
+
+.setting_basic_system_tally_output1_G-Tally_label {
+    position: absolute;
+    left: 700px;
+    top: 686px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+.setting_basic_system_tally_output1_Y-Tally_radio {
+    top: 696px;
+    left: 830px;
+    z-index: 2;
+}
+
+.setting_basic_system_tally_output1_Y-Tally_label {
+    position: absolute;
+    left: 870px;
+    top: 686px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+.setting_basic_system_tally_output2_Off_radio {
+    position: absolute;
+    top: 776px;
+    left: 319px;
+    z-index: 2;
+}
+
+.setting_basic_system_tally_output2_Off_label {
+    position: absolute;
+    left: 356px;
+    top: 766px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+.setting_basic_system_tally_output2_R-Tally_radio {
+    top: 776px;
+    left: 490px;
+    z-index: 2;
+}
+
+.setting_basic_system_tally_output2_R-Tally_label {
+    position: absolute;
+    left: 527px;
+    top: 766px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+.setting_basic_system_tally_output2_G-Tally_radio {
+    top: 776px;
+    left: 660px;
+    z-index: 2;
+}
+
+.setting_basic_system_tally_output2_G-Tally_label {
+    position: absolute;
+    left: 700px;
+    top: 766px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+.setting_basic_system_tally_output2_Y-Tally_radio {
+    top: 776px;
+    left: 830px;
+    z-index: 2;
+}
+
+.setting_basic_system_tally_output2_Y-Tally_label {
+    position: absolute;
+    left: 870px;
+    top: 766px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+
+/********************line***********************/
+.systemDivInnerLine0 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top: 45px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemDivInnerLine1 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top: 109px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+
+.systemDivInnerLine2 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top: 190px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+
+.systemDivInnerLine2_Bar  {
+    top: 190px;
+    left: 65px;
+}
+
+.systemDivInnerLine2_ver  {
+    top: 120px;
+    left: 51px;
+    height: 140px;
+}
+
+.systemDivInnerLine2_5 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top: 261px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemDivInnerLine2_5.isUE163 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top: 161px;
+    left: 58px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+
+.systemDivInnerLine2_GenLock {
+    left: 58px;
+}
+
+.systemDivInnerLine2_ver_Gen {
+    top: 176px;
+    left: 41px;
+    height: 160px;
+}
+.systemDivInnerLine2_ver_Gen.isUE163 {
+    top: 76px;
+    left: 41px;
+    height: 160px;
+}
+
+.systemDivInnerLine3 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top: 271px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+
+.systemDivInnerLine3_5 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top: 352px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemDivInnerLine3_5.isUE163 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top: 252px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemDivInnerLine4 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top: 352px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemDivInnerLine5 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top: 423px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemDivInnerLine6 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top: 504px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemDivInnerLine7 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top: 585px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemDivInnerLine8 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top: 666px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemDivInnerLine9 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top: 747px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemDivInnerLine10 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top: 828px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemDivInnerLine11 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top: 909px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemDivInnerLine12 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top:990px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemDivInnerLine13 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top:1071px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemDivInnerLine14 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top:1071px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemDivInnerLine15 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top:1152px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemDivInnerLine16 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top:1233px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemDivInnerLine17 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top:1314px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemDivInnerLine18 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top:1395px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemDivInnerLine19 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top:1476px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemDivInnerLine19_ue163 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top:1396px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemDivInnerLine20 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top:1567px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemDivInnerLine21 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top:1648px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemDivInnerLine22 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top:1729px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemDivInnerLine23 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top:1810px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemDivInnerLine23_ue163{
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top:1730px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+
+}
+.systemDivInnerLine24 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top:1891px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemDivInnerLine24 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top:1811px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemDivInnerLine25 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top:1972px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemDivInnerLine25_ue163{
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top:1892px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemDivInnerLine26 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top:2053px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemDivInnerLine26_ue163{
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top:1973px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemDivInnerLine27 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top:2144px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemDivInnerLine27_ue163{
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top:2064px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+
+.systemDivInnerLine28 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top:2234px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemDivInnerLine28_ue163{
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top:2154px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+
+.systemDivInnerLine_signals_output {
+    left: 52px;
+}
+
+/********************special line  81***********************/
+.setting_basic_system_tally_1_Line { 
+    top: 256px;
+    left: 35px;
+    height: 250px;
+}
+.setting_basic_system_tally_2_Line {
+    top: 271px;
+    left: 45px;
+}
+.setting_basic_system_tally_3_Line {
+    top: 351px;
+    left: 45px;
+}
+.setting_basic_system_tally_4_Line {
+    top: 431px;
+    left: 45px;
+}
+.setting_basic_system_tally_5_Line {
+    top: 506px;
+    left: 45px;
+}
+.setting_basic_system_tally_6_Line {
+    top: 649px;
+    left: 35px;
+    height: 180px;
+}
+.setting_basic_system_tally_7_Line {
+    top: 666px;
+    left: 45px;
+}
+.setting_basic_system_tally_8_Line {
+    top: 747px;
+    left: 45px;
+}
+.setting_basic_system_tally_9_Line {
+    top: 828px;
+    left: 45px;
+}
+.setting_basic_system_tally_11_Line {
+    top: 585px;
+    left: 20px;
+}
+.setting_basic_system_tally_10_Line {
+    top: 189px;
+    left: 20px;
+}
+
+.system_title>*,
+.setting_basic_system_format>*,
+.setting_basic_system_second_label>*,
+.setting_basic_system_third_label>*,
+.setting_basic_system_tally_r>*,
+.setting_basic_system_tally_g>*,
+.setting_basic_system_tally_y>*,
+.setting_basic_system_tally_guard>*,
+.setting_basic_system_tally_external_output>*,
+.setting_basic_system_tally_output1>*,
+.setting_basic_system_tally_output2>*,
+.setting_basic_system_frequency>*,
+.setting_basic_system_sfp_mode_12G_Output_label>*,
+.setting_basic_system_sfp_mode_ST2110_label>*,
+.setting_basic_system_sfp_mode_ST2110_JPEG_XS_label,
+.setting_basic_system_v_log_Off_label>*,
+.setting_basic_system_v_log_On_label>*,
+.setting_basic_system_v_log_paint_sw_Off_label,
+.setting_basic_system_v_log_paint_sw_On_label,
+.setting_basic_system_frequency23_98Hz_label>*,
+.setting_basic_system_frequency24Hz_label>*,
+.setting_basic_system_frequency50Hz_label>*,
+.setting_basic_system_frequency60Hz_label>*,
+.setting_basic_system_frequency59_94Hz_label>*,
+.setting_basic_system_hdr_Off_label>*,
+.setting_basic_system_gamut_NORMAL_label>*,
+.setting_basic_system_shooting_mode_Normal_label>*,
+.setting_basic_system_hdr_On_label>*,
+.setting_basic_system_gamut_WIDE_G2_label>*,
+.setting_basic_system_shooting_mode_Low_Light_label>*,
+.setting_basic_system_serial_connection_9600bps_label>*,
+.setting_basic_system_serial_connection_38400bps_label>*,
+.setting_basic_system_serial_connection_115200bps_label>*,
+.setting_basic_system_bar_Off_label>*,
+.setting_basic_system_bar_On_label>*,
+.setting_basic_system_bar_color_type_Type1_label>*,
+.setting_basic_system_bar_color_type_Type2_label>*,
+.setting_basic_system_bar_color_type_Type3_label>*,
+.setting_basic_system_bar_color_type_Type4_label>*,
+.setting_basic_system_bar_color_type_Type5_label>*,
+.setting_basic_system_tone_Off_label>*,
+.setting_basic_system_tone_On_label>*,
+.setting_basic_system_level_gauge_Off_label>*,
+.setting_basic_system_level_gauge_On_label>*,
+.setting_basic_system_tally_Disable_label>*,
+.setting_basic_system_tally_Enable_label>* {
+    vertical-align: middle;
+    display: table-cell;
+}
+
+/********************select***********************/
+.setup_system_fomat_select {
+    position: absolute;
+    top: 53px;
+    left: 319px;
+    z-index: 2;
+    font-size: large;
+    width: 200px;
+}
+
+
+.host_auth_setting {
+    position: absolute;
+    left: 20px;
+    top: 40px;
+    width: 1719px;
+    height: 28px;
+    cursor: default;
+    text-align: left;
+    font-size: 16px;
+    background-color: rgb(70, 70, 71);
+}
+
+.host_auth_setting_status {
+    position: absolute;
+    left: 54px;
+    top: 70px;
+    height: 28px;
+    cursor: default;
+    text-align: left;
+    font-size: 16px;
+}
+
+
+.host_auth_setting_status_ip {
+    position: absolute;
+    left: 20px;
+    top: 120px;
+    width: 400px;
+    height: 28px;
+    cursor: default;
+    text-align: -webkit-right;
+    font-size: 16px;
+    background-color: rgb(70, 70, 71);
+}
+
+.host_auth_setting_status_level {
+    position: absolute;
+    left: 420px;
+    top: 120px;
+    width: 600px;
+    height: 28px;
+    cursor: default;
+    text-align: -webkit-center;
+    font-size: large;
+    background-color: rgb(70, 70, 71);
+}
+
+.setting_basic_system_status_frequency {
+    position: absolute;
+    top: 52px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+    height: 30px;
+    line-height: 2px;
+    left: 20px;
+    width: 96%;
+    display: table;
+    text-align: left;
+    padding-left: 33px;
+    background-color: rgb(70, 70, 71);
+}
+
+.setting_basic_system_status_frequency>p {
+    position: absolute;
+    top: -5px;
+    left: 33px;
+}
+
+.setting_basic_system_status_frequency_value {
+    position: absolute;
+    left: 74px;
+    top: 95px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    line-height: 2px;
+    z-index: 2;
+}
+
+.setting_basic_system_status_format {
+    position: absolute;
+    left: 20px;
+    top: 147px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+    height: 30px;
+    line-height: 2px;
+    width: 96%;
+    display: table;
+    text-align: left;
+    padding-left: 33px;
+    background-color: rgb(70, 70, 71);
+}
+
+.setting_basic_system_status_format>p {
+    position: absolute;
+    top: -5px;
+    left: 33px;
+}
+
+.setting_basic_system_status_format_value {
+    position: absolute;
+    left: 74px;
+    top: 190px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    line-height: 2px;
+    z-index: 2;
+}
+
+.setting_basic_system_status_format>*,
+.setting_basic_system_status_frequency>*,
+.host_auth_setting_status_level>*,
+.host_auth_setting_status_ip>*,
+.host_auth_setting_status>*,
+.host_auth_setting>* {
+    vertical-align: middle;
+    display: table-cell;
+}
+
+#setting_basic_system_status_area {
+    position: absolute;
+    width: 100%;
+    top: 95px;
+}
+
+#setting_basic_system_status_area_part {
+    position: absolute;
+    width: 100%;
+    top: -95px;
+}
+
+#setting_basic_system {
+    position: absolute;
+    top: 0px;
+    left: 294px;
+    width: 1720px;
+    height: 1130px;
+    color: rgb(191, 191, 191);
+    background-color: rgb(29, 29, 31);
+}
+
+#setting_basic_system_labels {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 1130px;
+    color: rgb(191, 191, 191);
+    background-color: black;
+}
+
+.div_system_menu_frequency_Line {
+    position: absolute;
+    top: 175px;
+    left: 20px;
+}
+
+.div_system_menu_format_Line {
+    position: absolute;
+    top: 205px;
+    left: 20px;
+}
+
+.div_system_menu_sfp_mode_Line {
+    position: absolute;
+    top: 234px;
+    left: 20px;
+}
+
+.div_system_menu_vlog_Line {
+    position: absolute;
+    top: 265px;
+    left: 20px;
+}
+
+.div_system_menu_vlog_Line.isUE163 {
+    position: absolute;
+    top: 235px;
+    left: 20px;
+}
+
+.div_system_menu_hdr_Line {
+    position: absolute;
+    top: 295px;
+    left: 20px;
+}
+.div_system_menu_hdr_Line.isUE163 {
+    position: absolute;
+    top: 265px;
+    left: 20px;
+}
+
+.div_system_menu_gamut_Line {
+    position: absolute;
+    top: 325px;
+    left: 20px;
+}
+.div_system_menu_gamut_Line.isUE163 {
+    position: absolute;
+    top: 295px;
+    left: 20px;
+}
+
+.div_system_menu_shooting_mode_Line {
+    position: absolute;
+    top: 355px;
+    left: 20px;
+}
+.div_system_menu_shooting_mode_Line.isUE163 {
+    position: absolute;
+    top: 325px;
+    left: 20px;
+}
+
+.div_system_menu_serial_connection_Line {
+    position: absolute;
+    top: 385px;
+    left: 20px;
+}
+.div_system_menu_serial_connection_Line.isUE163 {
+    position: absolute;
+    top: 355px;
+    left: 20px;
+}
+.div_system_menu_bar_Line {
+    position: absolute;
+    top: 415px;
+    left: 20px;
+}
+.div_system_menu_bar_Line.isUE163 {
+    position: absolute;
+    top: 385px;
+    left: 20px;
+}
+.div_system_menu_level_gauge_Line {
+    position: absolute;
+    top: 445px;
+    left: 20px;
+    display: none !important;
+}
+.div_system_menu_level_gauge_Line.isUE163 {
+    position: absolute;
+    top: 415px;
+    left: 20px;
+    display: none !important;
+}
+.div_system_menu_tally_Line {
+    position: absolute;
+    top: 445px;
+    left: 20px;
+}
+.div_system_menu_tally_Line.isUE163 {
+    position: absolute;
+    top: 415px;
+    left: 20px;
+}
+.div_system_menu_sync_signal_Line {
+    position: absolute;
+    top: 475px;
+    left: 20px;
+}
+.div_system_menu_sync_signal_Line.isUE163 {
+    position: absolute;
+    top: 445px;
+    left: 20px;
+}
+.setup_dateTime_auto_label_Line {
+    position: absolute;
+    top: 55px;
+    left: 40px;
+    height: 90px;
+}
+
+.setup_dateTime_manual_label_Line {
+    position: absolute;
+    top: 210px;
+    left: 40px;
+    height: 90px;
+}
+
+.setup_dateTime_ntp_label_Line {
+    position: absolute;
+    top: 108px;
+    left: 50px;
+    width: 1350px;
+}
+
+.setup_dateTime_pc_label_Line {
+    position: absolute;
+    top: 185px;
+    left: 50px;
+    width: 1350px;
+}
+
+.setup_dateTime_date_time_label_Line {
+    position: absolute;
+    top: 262px;
+    left: 50px;
+    width: 1350px;
+}
+
+.setup_dateTime_end_label_Line {
+    position: absolute;
+    top: 339px;
+    left: 50px;
+    width: 1350px;
+}
+
+.radio_plugin_download_On_radio {
+    position: absolute;
+    top: 104px;
+    left: 19px;
+}
+
+.radio_plugin_download_On_label {
+    position: absolute;
+    top: 93px;
+    font-size: large;
+    left: 61px;
+}
+
+.radio_plugin_download_Off_radio {
+    position: absolute;
+    top: 104px;
+    left: 129px;
+}
+
+.radio_plugin_download_Off_label {
+    position: absolute;
+    top: 93px;
+    font-size: large;
+    left: 171px;
+}
+
+.radio_plugin_disp_On_radio {
+    position: absolute;
+    top: 182px;
+    left: 19px;
+}
+
+.radio_plugin_disp_On_label {
+    position: absolute;
+    top: 170px;
+    font-size: large;
+    left: 61px;
+}
+
+.radio_plugin_disp_Off_radio {
+    position: absolute;
+    top: 182px;
+    left: 129px;
+}
+
+.radio_plugin_disp_Off_label {
+    position: absolute;
+    top: 170px;
+    font-size: large;
+    left: 171px;
+}
+
+.setup_system {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 1719px;
+    height: 2100px;
+}
+
+.setup_system_other_form {
+    position: absolute;
+    height: 1350px;
+    width: 100%;
+    top: 0px;
+    left: 300px;
+    background: rgb(0, 0, 0);
+    z-index: 1;
+}
+
+.setup_basic_system_brightness_slider {
+    top: 140px;
+    left: 319px;
+    z-index: 3;
+}
+.setup_basic_system_h_phase_coarse_slider {
+    top: 190px;
+    left: 319px;
+    z-index: 3;
+}
+.setup_basic_system_h_phase_coarse_slider.isUE163 {
+    top: 90px;
+    left: 319px;
+    z-index: 3;
+}
+.setup_basic_system_h_phase_fine_slider {
+    top: 290px;
+    left: 319px;
+    z-index: 3;
+}
+.setup_basic_system_h_phase_fine_slider.isUE163 {
+    top: 190px;
+    left: 319px;
+    z-index: 3;
+}
+.setup_basic_system_bar_id1_position_v_slider {
+    top: 218px;
+    left: 319px;
+    z-index: 3;
+}
+
+.setup_basic_system_bar_id1_position_h_slider {
+    top: 296px;
+    left: 319px;
+    z-index: 3;
+}
+
+.setup_basic_system_bar_id2_position_v_slider {
+    top: 452px;
+    left: 319px;
+    z-index: 3;
+}
+
+.setup_basic_system_bar_id2_position_h_slider {
+    top: 530px;
+    left: 319px;
+    z-index: 3;
+}
+
+.setup_basic_system_bar_offset_v_slider {
+    top: 697px;
+    left: 319px;
+    z-index: 3;
+}
+
+.setup_basic_system_bar_offset_h_slider {
+    top: 775px;
+    left: 319px;
+    z-index: 3;
+}
+
+.setting_basic_system_bar_id_title {
+    position: absolute;
+    left: 33px;
+    top: 61px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+.setting_basic_system_ref_signal_title {
+    position: absolute;
+    left: 33px;
+    top: 61px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+
+.setting_basic_system_brightness_title {
+    position: absolute;
+    left: 33px;
+    top: 127px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+
+.setting_basic_system_genlock_title {
+    position: absolute;
+    left: 33px;
+    top: 127px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+.setting_basic_system_genlock_title.isUE163 {
+    position: absolute;
+    left: 33px;
+    top: 27px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+.setting_basic_system_h_phase_coarse_title {
+    position: absolute;
+    left: 73px;
+    top: 180px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+.setting_basic_system_h_phase_coarse_title.isUE163 {
+    position: absolute;
+    left: 73px;
+    top: 80px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+.setting_basic_system_h_phase_fine_title {
+    position: absolute;
+    left: 73px;
+    top: 280px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+.setting_basic_system_h_phase_fine_title.isUE163 {
+    position: absolute;
+    left: 73px;
+    top: 180px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+.setting_basic_system_bar_id1_position_v_title{
+    position: absolute;
+    left: 33px;
+    top: 201px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+.setting_basic_system_bar_id1_position_h_title{
+    position: absolute;
+    left: 33px;
+    top: 285px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+.setting_basic_system_bar_id1_title{
+    position: absolute;
+    left: 33px;
+    top: 364px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+.setting_basic_system_bar_id2_position_v_title{
+    position: absolute;
+    left: 33px;
+    top: 441px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+.setting_basic_system_bar_id2_position_h_title{
+    position: absolute;
+    left: 33px;
+    top: 521px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+.setting_basic_system_bar_id2_title{
+    position: absolute;
+    left: 33px;
+    top: 600px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+.setup_basic_system_bar_offset_v_title{
+    position: absolute;
+    left: 33px;
+    top: 685px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+.setup_basic_system_bar_offset_h_title{
+    position: absolute;
+    left: 33px;
+    top: 761px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+.setting_basic_system_bar_idOn_label {
+    position: absolute;
+    top: 60px;
+    left: 527px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    vertical-align: middle;
+    display: table-cell;
+    z-index: 2;
+}
+
+.setting_basic_system_bar_idOff_label {
+    position: absolute;
+    top: 60px;
+    left: 356px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    vertical-align: middle;
+    display: table-cell;
+    z-index: 2;
+}
+.setting_basic_system_ref_signalPTP_label {
+    position: absolute;
+    top: 60px;
+    left: 640px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    vertical-align: middle;
+    display: table-cell;
+    z-index: 2;
+}
+
+.setting_basic_system_ref_signalBBS_TRI-LEVEL_SYNC_label {
+    position: absolute;
+    top: 60px;
+    left: 356px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    vertical-align: middle;
+    display: table-cell;
+    z-index: 2;
+}
+.setting_basic_system_ref_signal_title>*,
+.setting_basic_system_ref_signalBBS_TRI-LEVEL_SYNC_label>*,
+.setting_basic_system_ref_signalPTP_label>*,
+.setting_basic_system_bar_id_title>*,
+.setting_basic_system_bar_idOff_label>*,
+.setting_basic_system_bar_idOn_label>* {
+    vertical-align: middle;
+    display: table-cell;
+}
+
+.setting_basic_system_bar_idOff_radio {
+    position: absolute;
+    top: 53px;
+    left: 319px;
+    z-index: 2;
+}
+
+.setting_basic_system_bar_idOn_radio {
+    position: absolute;
+    top: 53px;
+    left: 490px;
+    z-index: 2;
+}
+
+.setting_basic_system_ref_signalBBS_TRI-LEVEL_SYNC_radio {
+    position: absolute;
+    top: 53px;
+    left: 319px;
+    z-index: 2;
+}
+
+.setting_basic_system_ref_signalPTP_radio {
+    position: absolute;
+    top: 53px;
+    left: 600px;
+    z-index: 2;
+}
+
+.setting_basic_system_bar_id1_input {
+    position: absolute;
+    top: 380px;
+    left: 319px;
+    width: 300px;
+    font-size: large;
+    z-index: 3;
+}
+
+
+.setting_basic_system_bar_id2_input {
+    position: absolute;
+    top: 617px;
+    left: 319px;
+    width: 300px;
+    font-size: large;
+    z-index: 3;
+}
+#setup_system_pan_form {
+    position: absolute;
+    top: -29px;
+}
+
+.setup_system_pan_tilt_title {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 30px;
+    line-height: 28px;
+    width: 100%;
+    background-color: rgb(70, 70, 71);
+    font-size:  large;
+    z-index: 3;
+}
+.setup_system_pan_tilt_title >p{
+    position: absolute;
+    top: -18px;
+    left: 33px;
+}
+/*
+    system pan/tilt
+*/
+#setup_system_pan_part_form{
+    top: -210px;
+    position: absolute;
+}
+#setup_system_pan_other_form{
+    position: absolute;
+    top: 369px;
+}
+
+/* .setting_basic_system_install {
+    position: absolute;
+    left: 33px;
+    top: 60px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+.setting_basic_system_install > *{
+    vertical-align: middle;
+    display: table-cell;
+}
+
+.setting_basic_system_install_Line{
+    position: absolute;
+    top:  -5px;
+    left: 37px;
+    height: 145px;
+}
+.setting_basic_system_install_labels_Line{
+    position: absolute;
+    top: 80px;
+    left: 20px;
+    width: 1280px;
+}
+.setting_basic_system_install_flip_labels_Line{
+    position: absolute;
+    top: 143px;
+    left: 37px;
+    height: 130px;
+} */
+#setting_basic_system_pan{
+    position: absolute;
+    width: 100%;
+}
+#setting_basic_system_pan_scroll {
+    position: absolute;
+    width: 100%;
+    height: 1100px;
+    z-index: 2;
+}
+.setting_basic_system_pan_inner{
+    position: absolute;
+    left: 30px;
+    width: 100%;
+    height: 1650px;
+    border-bottom: 1px solid rgb(70, 70, 71);
+    overflow: hidden;
+}
+#setup_system_pan_tilt_labels{
+    position: absolute;
+    top: 30px;
+    left: 0px;
+    width: 300px;
+    height: 2000px;
+    background-color: rgb(29, 29, 31);
+}
+#setup_system_pan_tilt_form {
+    position: absolute;
+    top: 30px;
+    left: 300px;
+    /* width: 1726px; */
+    height: 2000px;
+}
+.btn_system_pan_set {
+    position: absolute;
+    left: 19px;
+    top: 1320px;
+    width: 142px;
+    height: 32px;
+    font-size: large;
+    text-align: center;
+    display: table;
+    z-index: 2;
+}
+.btn_system_pan_set > * {
+    display: table-cell;
+    vertical-align: middle;
+    cursor: default;
+}
+
+
+.btn_system_pan_set.off {
+    color: rgb(217, 217, 217);
+    background-image: url(parts/setup_menu_btn_set_normal.png);
+    background-size: 100% 100%;
+}
+
+
+.btn_system_pan_set.on {
+    color: rgb(217, 217, 217);
+    background-image: url(parts/setup_menu_btn_set_pressed.png);
+    background-size: 100% 100%;
+}
+
+
+.btn_system_pan_set.disable {
+    color: rgb(102, 102, 102);
+    background-image: url(parts/btn_cameraController_slider_none_disable.png);
+    background-size: 100% 100%;
+}
+
+
+.btn_system_pan_set.on_hover {
+    color: rgb(255, 255, 255);
+    background-image: url(parts/setup_menu_btn_set_pressed.png);
+    background-size: 100% 100%;
+}
+
+.btn_system_pan_set.off_hover {
+    color: rgb(255, 255, 255);
+    background-image: url(parts/setup_menu_btn_set_onmouse.png);
+    background-size: 100% 100%;
+}
+
+.setting_basic_system_install {
+    position: absolute;
+    top: 20px;
+    left: 33px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setting_basic_system_status_smart_picture{
+    position: absolute;
+    top: 101px;
+    left: 33px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setting_basic_system_status_smart_mode{
+    position: absolute;
+    top: 182px;
+    left: 53px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left; 
+}
+.setting_basic_system_status_smart_flip{
+    position: absolute;
+    top: 263px;
+    left: 53px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left; 
+}
+.setting_basic_system_p_t_speed{
+    position: absolute;
+    top: 344px;
+    left: 33px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left; 
+}
+.setting_basic_system_p_t_acceleration_setting{
+    position: absolute;
+    top: 425px;
+    left: 33px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left; 
+}
+.setting_basic_system_p_t_acceleration{
+    position: absolute;
+    top: 506px;
+    left: 53px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left; 
+}
+.setting_basic_rise_s_curve{
+    position: absolute;
+    top: 587px;
+    left: 73px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left; 
+}
+.setting_basic_fall_curve{
+    position: absolute;
+    top: 668px;
+    left: 73px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left; 
+}
+.setting_basic_rise_acceleration{
+    position: absolute;
+    top: 749px;
+    left: 73px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left; 
+}
+.setting_basic_fall_acceleration{
+    position: absolute;
+    top: 830px;
+    left: 73px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left; 
+}
+.setting_basic_system_speed_with_zoom{
+    position: absolute;
+    top: 911px;
+    left: 33px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left; 
+}
+.setting_basic_system_focus_adjust{
+    position: absolute;
+    top: 992px;
+    left: 33px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left; 
+}
+.setting_basic_system_privacy_mode{
+    position: absolute;
+    top: 1073px;
+    left: 33px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left; 
+}
+.setting_basic_system_power_on_position{
+    position: absolute;
+    top: 1154px;
+    left: 33px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left; 
+}
+.setting_basic_system_preset_number{
+    position: absolute;
+    top: 1235px;
+    left: 33px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left; 
+}
+/********************line***********************/
+.systemPanTiltLine0 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top: 40px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemPanTiltLine1 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top: 109px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+
+.systemPanTiltLine2 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top: 190px;
+    left: 50px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+
+.systemPanTiltLine2_5 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top: 261px;
+    left: 50px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemPanTiltLine3 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top: 271px;
+    left: 50px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+
+.systemPanTiltLine3_5 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top: 352px;
+    left: 50px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemPanTiltLine4 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top: 352px;
+    left: 50px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemPanTiltLine5 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top: 433px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemPanTiltLine6 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top: 514px;
+    left: 50px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemPanTiltLine7 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top: 595px;
+    left: 50px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemPanTiltLine8 {
+    position: absolute;
+    height: 1px;
+    width: 95%;
+    top: 676px;
+    left: 50px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemPanTiltLine9 {
+    position: absolute;
+    height: 1px;
+    width: 95%;
+    top: 757px;
+    left: 50px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemPanTiltLine10 {
+    position: absolute;
+    height: 1px;
+    width: 95%;
+    top: 838px;
+    left: 50px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemPanTiltLine11 {
+    position: absolute;
+    height: 1px;
+    width: 95%;
+    top: 919px;
+    left: 50px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemPanTiltLine12 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top:1000px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemPanTiltLine13 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top:1081px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemPanTiltLine14 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top:1162px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemPanTiltLine15 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top:1243px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemPanTiltLine16 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top:1324px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemPanTiltLine17 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top:1395px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemPanTiltLine18 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top:1476px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemPanTiltLine19 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top:1567px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemPanTiltLine20 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top:1648px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemPanTiltLine21 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top:1729px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemPanTiltLine22 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top:1810px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemPanTiltLine23 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top:1891px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemPanTiltLine24 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top:1972px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemPanTiltLine25 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top:2053px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemPanTiltLine26 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top:2144px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemPanTiltLine27 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top:2225px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.systemPanTiltLine28 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top:2306px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.setting_basic_system_pan_tilt_smart_picture_Line {
+    top: 191px;
+    left: 35px;
+    height: 164px;
+    z-index: 2;
+}
+.setting_basic_system_pan_tilt_acceleration_Line {
+    top: 514px;
+    left: 35px;
+    height: 407px;
+    z-index: 2;
+}
+/********************special line***********************/
+.setting_basic_system_pan_installDesktop_radio{
+    left: 19px;
+    z-index: 2;
+}
+.setting_basic_system_pan_installDesktop_label{
+    position: absolute;
+    left: 59px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+.setting_basic_system_pan_installHanging_radio{
+    position: absolute;
+    top: 53px;
+    left: 149px;
+    z-index: 2;
+}
+.setting_basic_system_pan_installHanging_label{
+    position: absolute;
+    left: 186px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+.setting_basic_system_pan_installDesktop_radio {
+    top: 32px;
+}
+.setting_basic_system_pan_installDesktop_label {
+    top: 38px;
+}
+.setting_basic_system_pan_installHanging_radio {
+    top: 32px;
+}
+.setting_basic_system_pan_installHanging_label {
+    top: 38px;
+}
+.setting_basic_system_pan_installHanging_label > *,
+.setting_basic_system_pan_installDesktop_label > *{
+    vertical-align: middle;
+    display: table-cell;
+}
+.setting_basic_system_pan_pt_speedNormal\(60deg_s\)_radio{
+    left: 19px;
+    z-index: 2;
+}
+.setting_basic_system_pan_pt_speedNormal\(60deg_s\)_label{
+    position: absolute;
+    left: 59px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+.setting_basic_system_pan_pt_speedFast1\(90deg_s\)_radio{
+    position: absolute;
+    top: 53px;
+    left: 209px;
+    z-index: 2;
+}
+.setting_basic_system_pan_pt_speedFast2\(180deg_s\)_radio{
+    position: absolute;
+    top: 53px;
+    left: 389px;
+    z-index: 2;
+}
+.setting_basic_system_pan_pt_speedFast1\(90deg_s\)_label{
+    position: absolute;
+    left: 250px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+.setting_basic_system_pan_pt_speedFast2\(180deg_s\)_label{
+    position: absolute;
+    left: 430px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+.setting_basic_system_pan_pt_speedNormal\(60deg_s\)_radio {
+    top: 348px;
+}
+
+.setting_basic_system_pan_pt_speedNormal\(60deg_s\)_label {
+    top: 355px;
+}
+
+.setting_basic_system_pan_pt_speedFast1\(90deg_s\)_radio {
+    top: 348px;
+}
+.setting_basic_system_pan_pt_speedFast2\(180deg_s\)_radio {
+    top: 348px;
+}
+
+.setting_basic_system_pan_pt_speedFast1\(90deg_s\)_label {
+    top: 355px;
+}
+.setting_basic_system_pan_pt_speedFast2\(180deg_s\)_label {
+    top: 355px;
+}
+.setting_basic_system_pan_pt_speedNormal\(60deg_s\)_label > *,
+.setting_basic_system_pan_pt_speedFast1\(90deg_s\)_label > *,
+.setting_basic_system_pan_pt_speedFast2\(180deg_s\)_label > *{
+    vertical-align: middle;
+    display: table-cell;
+}
+.setting_basic_system_pan_speed_with_zoomOff_radio{
+    left: 19px;
+    z-index: 2;
+}
+.setting_basic_system_pan_speed_with_zoomOff_label{
+    position: absolute;
+    left: 59px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+.setting_basic_system_pan_speed_with_zoomOn_radio{
+    position: absolute;
+    top: 53px;
+    left: 149px;
+    z-index: 2;
+}
+.setting_basic_system_pan_speed_with_zoomOn_label{
+    position: absolute;
+    left: 186px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+.setting_basic_system_pan_speed_with_zoomOff_radio {
+    top: 921px;
+}
+
+.setting_basic_system_pan_speed_with_zoomOff_label {
+    top: 928px;
+}
+
+.setting_basic_system_pan_speed_with_zoomOn_radio {
+    top: 921px;
+}
+
+.setting_basic_system_pan_speed_with_zoomOn_label {
+    top: 928px;
+}
+.setting_basic_system_pan_speed_with_zoomOff_label > *,
+.setting_basic_system_pan_speed_with_zoomOn_label > *{
+    vertical-align: middle;
+    display: table-cell;
+}
+.setting_basic_system_pan_focus_adjustOff_radio{
+    left: 19px;
+    z-index: 2;
+}
+.setting_basic_system_pan_focus_adjustOff_label{
+    position: absolute;
+    left: 59px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+.setting_basic_system_pan_focus_adjustOn_radio{
+    position: absolute;
+    top: 53px;
+    left: 149px;
+    z-index: 2;
+}
+.setting_basic_system_pan_focus_adjustOn_label{
+    position: absolute;
+    left: 186px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+} 
+.setting_basic_system_pan_focus_adjustOff_radio {
+    top: 1002px;
+}
+
+.setting_basic_system_pan_focus_adjustOff_label {
+    top: 1009px;
+}
+
+.setting_basic_system_pan_focus_adjustOn_radio {
+    top: 1002px;
+}
+
+.setting_basic_system_pan_focus_adjustOn_label {
+    top: 1009px;
+}
+.setting_basic_system_pan_focus_adjustOff_label > *,
+.setting_basic_system_pan_focus_adjustOn_label >*{
+    vertical-align: middle;
+    display: table-cell;
+}
+
+.setting_basic_system_power_on_position_Line{
+    position: absolute;
+    top: 400px;
+    left: 30px;
+    width: 1280px;
+}
+.setting_basic_system_power_on_position_None_label {
+    position: absolute;
+    top: 1155px;
+    left: 59px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+    z-index: 2;
+}
+.setting_basic_system_power_on_position_Standby_label {
+    position: absolute;
+    top: 1155px;
+    left: 185px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+    z-index: 2;
+}
+
+.setting_basic_system_power_on_position_Home_label {
+    position: absolute;
+    top: 1155px;
+    left: 315px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+    z-index: 2;
+}
+
+.setting_basic_system_power_on_position_Preset_label {
+    position: absolute;
+    top: 1155px;
+    left: 445px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+    z-index: 2;
+}
+.setting_basic_system_power_on_position_None_radio,
+.setting_basic_system_power_on_position_Standby_radio,
+.setting_basic_system_power_on_position_Home_radio, .setting_basic_system_power_on_position_Preset_radio {
+    position: absolute;
+    top: 1167px;
+    z-index: 2;
+}
+
+.setting_basic_system_power_on_position_None_radio {
+    left: 19px;
+}
+
+.setting_basic_system_power_on_position_Standby_radio {
+    left: 149px;
+}
+
+.setting_basic_system_power_on_position_Home_radio {
+    left: 279px;
+}
+
+.setting_basic_system_power_on_position_Preset_radio {
+    left: 409px;
+}
+
+.setting_basic_system_privacy_mode_Off_radio{
+    left: 19px;
+    z-index: 2;
+}
+.setting_basic_system_privacy_mode_Off_label{
+    position: absolute;
+    left: 59px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+.setting_basic_system_privacy_mode_On_radio{
+    position: absolute;
+    top: 53px;
+    left: 149px;
+    z-index: 2;
+}
+.setting_basic_system_privacy_mode_Off_label,
+.setting_basic_system_privacy_mode_On_label{
+    top:1067px;
+}
+
+.setting_basic_system_privacy_mode_On_radio,
+.setting_basic_system_privacy_mode_Off_radio{
+    position: absolute;
+    top: 1080px;
+    z-index: 2;
+}
+.setting_basic_system_privacy_mode_On_label{
+    position: absolute;
+    left: 186px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+.setting_basic_system_pt_acceleration_Manual_radio{
+    left: 19px;
+    z-index: 2;
+}
+.setting_basic_system_pt_acceleration_Manual_label{
+    position: absolute;
+    left: 59px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+.setting_basic_system_pt_acceleration_Auto_radio{
+    position: absolute;
+    top: 53px;
+    left: 149px;
+    z-index: 2;
+}
+.setting_basic_system_pt_acceleration_Auto_label{
+    position: absolute;
+    left: 186px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+.setting_basic_system_pt_acceleration_Manual_label > *,
+.setting_basic_system_pt_acceleration_Auto_label >  *{
+    vertical-align: middle;
+    display: table-cell;
+}
+.setting_basic_system_pt_acceleration_Manual_radio {
+    top: 514px;
+}
+.setting_basic_system_pt_acceleration_Manual_label {
+    top: 519px;
+}
+.setting_basic_system_pt_acceleration_Auto_radio {
+    top: 514px;
+}
+.setting_basic_system_pt_acceleration_Auto_label {
+    top: 519px;
+}
+
+.setting_basic_system_smart_picture_mode_Off_radio{
+    left: 19px;
+    z-index: 2;
+}
+.setting_basic_system_smart_picture_mode_Off_label{
+    position: absolute;
+    left: 59px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+.setting_basic_system_smart_picture_mode_Auto_radio{
+    position: absolute;
+    top: 182px;
+    left: 149px;
+    z-index: 2;
+}
+.setting_basic_system_smart_picture_mode_Auto_label{
+    position: absolute;
+    left: 186px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+.setting_basic_system_smart_picture_mode_Off_label > *,
+.setting_basic_system_smart_picture_mode_Auto_label >  *{
+    vertical-align: middle;
+    display: table-cell;
+}
+.setting_basic_system_smart_picture_mode_Off_radio {
+    top: 182px;
+}
+.setting_basic_system_smart_picture_mode_Off_label {
+    top: 186px;
+}
+.setting_basic_system_smart_picture_mode_Auto_radio {
+    top: 182px;
+}
+.setting_basic_system_smart_picture_mode_Auto_label {
+    top: 186px;;
+}
+
+.setting_basic_system_pan_preset_number{
+    position: absolute;
+    top: 1251px;
+    left: 19px;
+    z-index: 2;
+    font-size: large;
+}
+.setup_basic_system_flip_detect_angle_slider{
+    top: 263px;
+    left: 24px;
+    z-index: 3;
+}
+.setup_basic_system_riseCurve_slider{
+    top: 603px;
+    left: 24px;
+    z-index: 3;
+}
+.setup_basic_system_fallCurve_slider{
+    top: 684px;
+    left: 24px;
+    z-index: 3;
+}
+
+.setup_basic_system_rise_acceleration_slider{
+    top: 765px;
+    left: 24px;
+    z-index: 3;
+}
+
+.setup_basic_system_fallacceleration_slider{
+    top: 846px;
+    left: 24px;
+    z-index: 3;
+}
+
+/*------------------------------------------*/
+.setting_basic_system_tally_label{
+    position: absolute;
+    left: 33px;
+    top: 206px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+
+.setting_basic_system_tally_brightness{
+    position: absolute;
+    left: 33px;
+    top: 120px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+
+.setting_basic_system_tally_brightness_Low_radio {
+    position: absolute;
+    top: 134px;
+    left: 319px;
+    z-index: 2;
+}
+
+.setting_basic_system_tally_brightness_Low_label {
+    position: absolute;
+    left: 356px;
+    top: 122px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+
+.setting_basic_system_tally_brightness_Mid_radio {
+    position: absolute;
+    top: 134px;
+    left: 490px;
+    z-index: 2;
+}
+
+.setting_basic_system_tally_brightness_Mid_label {
+    position: absolute;
+    left: 527px;
+    top: 122px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+
+.setting_basic_system_tally_brightness_High_radio {
+    position: absolute;
+    top: 134px;
+    left: 660px;
+    z-index: 2;
+}
+
+.setting_basic_system_tally_brightness_High_label {
+    position: absolute;
+    left: 700px;
+    top: 122px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}

@@ -1,0 +1,1927 @@
+@CHARSET "UTF-8";
+
+.btn_info {
+    position: absolute;
+    top: 550px;
+    left: 30px;
+    width: 200px;
+    height: 26px;
+    font-size: large;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: left;
+    z-index: 9999;
+
+}
+
+.btn_activate {
+    position: absolute;
+    top: 650px;
+    left: 30px;
+    width: 200px;
+    height: 26px;
+    font-size: large;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: left;
+    z-index: 9999;
+
+}
+
+/*
+ * setting_maintenance_log
+ */
+.setup_maintenance_log_labels {
+    position: absolute;
+    top: 30px;
+    left: 0px;
+    height: 905px;
+    width: 260px;
+    background-color: rgb(29, 29, 31);
+}
+
+.setup_maintenance_log_title {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 30px;
+    line-height: 30px;
+    width: 100%;
+    background-color: rgb(70, 70, 71);
+    font-size: large;
+}
+
+.setup_maintenance_log_form {
+    position: absolute;
+    top: 30px;
+    left: 260px;
+    height: 850px;
+    width: 1288px;
+}
+
+.setup_maintenance_log_btn_set_area {
+    position: absolute;
+    border-top: solid 1px rgb(70, 70, 71);
+    background: rgb(29,29,31);
+    top: 104px;
+    height: 1025px;
+    width: 100%;
+}
+
+.setup_maintenance_log_system_label {
+    position: absolute;
+    left: 15px;
+    top: 15px;
+    width: 280px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+
+.setup_maintenance_log_form_table {
+    position: absolute;
+    top: 28px;
+    left: 30px;
+    width: 98%;
+    height: 800px;
+}
+
+.setup_maintenance_log_form_table_inner {
+    position: absolute;
+    top: 29px;
+    left: 0px;
+    width: 1500px;
+    height: 857px;
+    border-bottom: 1px solid rgb(70, 70, 71);
+    overflow: hidden;
+}
+
+#maintenanceLogtable {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 1503px;
+    border: solid rgb(70, 70, 71);
+    border-width: 1px 0px 0px 1px;
+    border-spacing: 0px;
+    font-size: large;
+}
+
+#maintenanceLogtableTitle {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 30px;
+    text-align: center;
+    border: solid rgb(70, 70, 71);
+    border-width: 1px 0px 0px 1px;
+    border-spacing: 0px;
+    font-size: large;
+}
+
+#maintenanceLogtable td {
+    border: solid rgb(70, 70, 71);
+    border-width: 0px 1px 1px 0px;
+    height: 28px;
+}
+
+.setup_maintenance_log_system_select {
+    position: absolute;
+    top: 23px;
+    width: 242px;
+    left: 19px;
+}
+
+.setup_maintenance_log_execute_button {
+    position: absolute;
+    top: 23px;
+    left: 321px;
+    width: 142px;
+    height: 32px;
+    font-size: large;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: center;
+}
+
+.setup_maintenance_log_execute_button.off {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_normal.png);
+    background-size: 100% 100%;
+}
+
+.setup_maintenance_log_execute_button.off_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_onmouse.png);
+    background-size: 100% 100%;
+}
+
+.setup_maintenance_log_execute_button.on {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_pressed.png);
+    background-size: 100% 100%;
+}
+
+.setup_maintenance_log_execute_button.on_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_pressed.png);
+    background-size: 100% 100%;
+}
+
+.setup_maintenance_log_execute_button.disable {
+    color: rgb(102, 102, 102);
+    background-color: rgb(38, 38, 38);
+    background-image: url(parts/setup_menu_btn_set_disable.png);
+    background-size: 100% 100%;
+}
+
+.setup_maintenance_log_execute_button > * {
+    display: table-cell;
+    vertical-align: middle;
+    cursor: default;
+}
+
+/*
+ * setting_maintenance_info
+ */
+.setup_maintenance_info_labels {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 905px;
+    width: 320px;
+    background-color: rgb(29, 29, 31);
+}
+
+.setup_maintenance_info_title {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 29px;
+    line-height: 29px;
+    width: 100%;
+    background-color: rgb(70, 70, 71);
+    font-size: large;
+}
+
+.setup_maintenance_info_form {
+    position: absolute;
+    top: 0px;
+    left: 320px;
+    height: 850px;
+    width: 1288px;
+}
+
+.setup_maintenance_info_btn_set_area {
+    position: absolute;
+    background: rgb(0, 0, 0);
+    top: 876px;
+    height: 137px;
+    width: 100%;
+}
+
+.setup_maintenance_info_bottom_area {
+    position: absolute;
+    top: 1030px;
+    height: 141px;
+    width: 1610px;
+}
+
+
+#upd_info {
+    position: absolute;
+    top: 10px;
+    left: 360px;
+    height: 68px;
+    width: 1164px;
+    padding-left: 20px;
+}
+
+/*OSS License*/
+.setting_maintenance_info_oss_license_title {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 28px;
+    line-height: 28px;
+    width: 1610px;
+    background-color: rgb(70, 70, 71);
+}
+.setting_maintenance_info_oss_license_form {
+    position: absolute;
+    top: 28px;
+    left: 0px;
+    height: 888px;
+    width: 1610px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background-color: rgb(29, 29, 31);
+    color: rgb(191,191,191);
+}
+
+.setting_maintenance_info_oss_license_set_area {
+    position: absolute;
+    border-top: solid 1px rgb(70, 70, 71);
+    background: rgb(0, 0, 0);
+    top: 917px;
+    height: 85px;
+    width: 1610px;
+}
+
+.setup_maintenance_info_model_label,
+.setup_maintenance_info_mac_label,
+.setup_maintenance_info_mac_sfp_label,
+.setup_maintenance_info_serial_label,
+.setup_maintenance_info_firmware_label,
+/* .setup_maintenance_info_cpu_label, */
+/* .setup_maintenance_info_eeprom_label, */
+/* .setup_maintenance_info_fpga_label, */
+.setup_maintenance_info_activation_label,
+.setup_maintenance_info_operation_label,
+.setup_maintenance_info_viewer_label,
+.setup_maintenance_info_oss_label,
+.setup_maintenance_info_value_model_label,
+.setup_maintenance_info_value_mac_label,
+.setup_maintenance_info_value_mac_sfp_label,
+.setup_maintenance_info_value_serial_label,
+.setup_maintenance_info_value_firmware_label,
+.setup_maintenance_info_value_activation_label,
+.setup_maintenance_info_value_operation_label,
+.setup_maintenance_info_value_viewer_label,
+.setup_maintenance_info_firmware_file_label {
+    position: absolute;
+    left: 33px;
+    width: 251px;
+    height: 52px;
+    line-height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_maintenance_info_value_activation_moip_label{
+    position: absolute;
+    top: 388px;
+    left: 21px;
+    width: 251px;
+    height: 52px;
+    line-height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_maintenance_info_value_activation_moip_label.isUE163{
+    top: 316px;
+}
+.setup_maintenance_info_value_model_label,
+.setup_maintenance_info_value_mac_label,
+.setup_maintenance_info_value_mac_sfp_label,
+.setup_maintenance_info_value_serial_label,
+.setup_maintenance_info_value_firmware_label,
+.setup_maintenance_info_value_activation_label,
+.setup_maintenance_info_value_operation_label,
+.setup_maintenance_info_value_viewer_label {
+    left: 19px;
+}
+
+.setup_maintenance_info_model_label,
+.setup_maintenance_info_value_model_label {
+    top: 8px;
+}
+
+.setup_maintenance_info_mac_label,
+.setup_maintenance_info_value_mac_label {
+    top: 82px;
+}
+
+.setup_maintenance_info_mac_sfp_label,
+.setup_maintenance_info_value_mac_sfp_label {
+    top: 158px;
+}
+
+.setup_maintenance_info_serial_label,
+.setup_maintenance_info_value_serial_label {
+    top: 234px;
+}
+.setup_maintenance_info_serial_label.isUE163,
+.setup_maintenance_info_value_serial_label.isUE163 {
+    top: 158px;
+}
+
+.setup_maintenance_info_firmware_label,
+.setup_maintenance_info_value_firmware_label {
+    top: 296px;
+}
+
+.setup_maintenance_info_firmware_label.isUE163,
+.setup_maintenance_info_value_firmware_label.isUE163 {
+    top: 220px;
+}
+
+/* .setup_maintenance_info_cpu_label {
+    left: 54px;
+    top: 272px;
+} */
+/* 
+.setup_maintenance_info_eeprom_label {
+    left: 54px;
+    top: 365px;
+} */
+/* 
+.setup_maintenance_info_fpga_label {
+    left: 54px;
+    top: 458px;
+} */
+
+.setup_maintenance_info_firmware_file_label {
+    left: 200px;
+    top: 5px;
+}
+
+.setup_maintenance_info_activation_label {
+    top: 348px;
+}
+
+.setup_maintenance_info_activation_label.isUE163 {
+    top: 272px;
+}
+
+.setup_maintenance_info_value_activation_label {
+    top: 328px;
+}
+.setup_maintenance_info_value_activation_label.isUE163 {
+    top: 252px;
+}
+
+.setup_maintenance_info_value_activation_label_note {
+    position: absolute;
+    left: 19px;
+    top: 364px;
+    cursor: default;
+    z-index: 2;
+}
+
+.setup_maintenance_info_value_activation_label_note.isUE163 {
+    position: absolute;
+    left: 19px;
+    top: 294px;
+    cursor: default;
+    z-index: 2;
+}
+
+.setup_maintenance_info_operation_label,
+.setup_maintenance_info_value_operation_label {
+    top: 456px;
+}
+
+.setup_maintenance_info_operation_label.isUE163,
+.setup_maintenance_info_value_operation_label.isUE163 {
+    top: 380px;
+}
+
+.setup_maintenance_info_viewer_label,
+.setup_maintenance_info_value_viewer_label {
+    top: 537px;
+}
+
+.setup_maintenance_info_viewer_label.isUE163,
+.setup_maintenance_info_value_viewer_label.isUE163 {
+    top: 456px;
+}
+
+.setup_maintenance_info_oss_label {
+    top: 611px;
+}
+
+.setup_maintenance_info_oss_label.isUE163 {
+    top: 537px;
+}
+
+
+.setup_maintenance_info_table_cpu {
+    position: absolute;
+    top: 280px;
+    left: 19px;
+}
+
+/* #maintenanceInfoCputable td, */
+#maintenanceInfoEepromtable td,
+#maintenanceInfoFpgatable td {
+    width: 160px;
+    font-size: large;
+    padding-left: 20px;
+}
+
+/* .setup_maintenance_info_table_eeprom {
+    position: absolute;
+    top: 380px;
+    left: 19px;
+} */
+/* 
+.setup_maintenance_info_table_fpga {
+    position: absolute;
+    top: 475px;
+    left: 19px;
+} */
+
+.setup_maintenance_info_view_button,
+.setup_maintenance_info_select_button,
+.setup_maintenance_info_close_license_button,
+.setup_maintenance_info_execute_button {
+    position: absolute;
+    width: 142px;
+    height: 32px;
+    font-size: large;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: center;
+}
+
+.setup_maintenance_info_view_button {
+    top: 630px;
+    left: 19px;
+}
+
+.setup_maintenance_info_view_button.isUE163 {
+    top: 550px;
+    left: 19px;
+}
+
+.setup_maintenance_info_select_button {
+    top: 19px;
+    left: 1070px;
+}
+
+.setup_maintenance_info_execute_button {
+    top: 87px;
+    left: 360px;
+}
+
+.setup_maintenance_info_close_license_button{
+    top:10px;
+    left: 300px;
+}
+
+.setup_maintenance_info_view_button.off,
+.setup_maintenance_info_select_button.off,
+.setup_maintenance_info_close_license_button.off,
+.setup_maintenance_info_execute_button.off {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_normal.png);
+    background-size: 100% 100%;
+}
+
+.setup_maintenance_info_view_button.off_hover,
+.setup_maintenance_info_select_button.off_hover,
+.setup_maintenance_info_close_license_button.off_hover,
+.setup_maintenance_info_execute_button.off_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_onmouse.png);
+    background-size: 100% 100%;
+}
+
+.setup_maintenance_info_view_button.on,
+.setup_maintenance_info_select_button.on,
+.setup_maintenance_info_close_license_button.on,
+.setup_maintenance_info_execute_button.on {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_pressed.png);
+    background-size: 100% 100%;
+}
+
+.setup_maintenance_info_view_button.on_hover,
+.setup_maintenance_info_select_button.on_hover,
+.setup_maintenance_info_close_license_button.on_hover,
+.setup_maintenance_info_execute_button.on_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_pressed.png);
+    background-size: 100% 100%;
+}
+
+.setup_maintenance_info_view_button.disable,
+.setup_maintenance_info_select_button.disable,
+.setup_maintenance_info_close_license_button.disable,
+.setup_maintenance_info_execute_button.disable {
+    color: rgb(102, 102, 102);
+    background-color: rgb(38, 38, 38);
+    background-image: url(parts/setup_menu_btn_set_disable.png);
+    background-size: 100% 100%;
+}
+
+.setup_maintenance_info_view_button > *,
+.setup_maintenance_info_select_button > *,
+.setup_maintenance_info_close_license_button > *,
+.setup_maintenance_info_execute_button > * {
+    display: table-cell;
+    vertical-align: middle;
+    cursor: default;
+}
+
+.setup_maintenance_info_firmware_input {
+    position: absolute;
+    top: 25px;
+    left: 360px;
+    width: 690px;
+}
+
+/*maintenance_info_file_transfer*/
+.maintenance_info_file_transfer_inner_label1,
+.maintenance_info_file_transfer_inner_label2,
+.maintenance_info_file_transfer_inner_label3,
+.maintenance_info_file_transfer_inner_label4,
+.maintenance_info_file_transfer_inner_label5 {
+    position: absolute;
+    height: 36px;
+    width:600px;
+    line-height: 36px;
+    font-size: large;
+}
+.maintenance_info_file_transfer_inner_label1{
+    top:0px;
+    left: 0px;
+    text-align: center;
+}
+.maintenance_info_file_transfer_inner_label2{
+    top:36px;
+    left: 0px;
+    text-align: center;
+}
+.maintenance_info_file_transfer_inner_label3{
+    top:252px;
+    left: 100px;
+    color: red;
+    text-align: left;
+}
+.maintenance_info_file_transfer_inner_label4{
+    top:288px;
+    left: 100px;
+    color: red;
+    text-align: left;
+}
+.maintenance_info_file_transfer_inner_label5{
+    top:324px;
+    left: 100px;
+    color: red;
+    text-align: left;
+}
+.maintenance_info_file_transfer{
+    position: absolute;
+    border: 1px solid rgb(70, 70, 71);;
+    background: rgb(29, 29, 31);
+    top:200px;
+    left: 300px;
+    width: 700px;
+    height: 450px;
+    z-index: 100;
+}
+.maintenance_info_file_transfer_inner{
+    position: absolute;
+    top:50px;
+    left: 50px;
+    width: 600px;
+    height: 350px;
+}
+.maintenance_info_file_transfer_pic{
+    position: absolute;
+    width:600px;
+    height: 130px;
+    top: 72px;
+    left: 0px;
+}
+.maintenance_info_file_transfer_pic_pc{
+    position: absolute;
+    width:90px;
+    height: 90px;
+    top: 20px;
+    left: 150px;
+    background: url(parts/setup_update_ic_pc.png);
+}
+.maintenance_info_file_transfer_pic_arrow{
+    position: absolute;
+    width:90px;
+    height: 90px;
+    top: 20px;
+    left: 250px;
+    background: url(parts/setup_update_ft_arrow.gif);
+}
+.maintenance_info_file_transfer_pic_camera{
+    position: absolute;
+    width:90px;
+    height: 90px;
+    top: 20px;
+    left: 350px;
+    background: url(parts/setup_update_ic_camera.png);
+}
+.maintenance_info_file_transfer_slider{
+    position: absolute;
+    width:600px;
+    height: 50px;
+    top: 202px;
+    left: 0px;
+}
+.maintenance_info_file_transfer_slider_process{
+    position: absolute;
+    width:404px;
+    height: 10px;
+    top: 20px;
+    left: 100px;
+    border: 1px solid green;
+}
+.maintenance_info_file_transfer_slider_process_inner{
+    position: absolute;
+    height: 6px;
+    top: 2px;
+    left: 2px;
+    background: green;
+}
+
+/*maintenance_info_version_up*/
+.maintenance_info_version_up_inner_label1,
+.maintenance_info_version_up_inner_label2,
+.maintenance_info_version_up_inner_label3,
+.maintenance_info_version_up_inner_label4,
+.maintenance_info_version_up_inner_label5 {
+    position: absolute;
+    height: 36px;
+    width:600px;
+    line-height: 36px;
+    font-size: large;
+}
+.maintenance_info_version_up_inner_label1{
+    top:0px;
+    left: 0px;
+    text-align: center;
+}
+.maintenance_info_version_up_inner_label2{
+    top:36px;
+    left: 0px;
+    text-align: center;
+}
+.maintenance_info_version_up_inner_label3{
+    top:252px;
+    left: 100px;
+    color: red;
+    text-align: left;
+}
+.maintenance_info_version_up_inner_label4{
+    top:288px;
+    left: 100px;
+    color: red;
+    text-align: left;
+}
+.maintenance_info_version_up_inner_label5{
+    top:324px;
+    left: 100px;
+    color: red;
+    text-align: left;
+}
+.maintenance_info_version_up{
+    position: absolute;
+    border: 1px solid rgb(70, 70, 71);;
+    background: rgb(29, 29, 31);
+    top:200px;
+    left: 300px;
+    width: 700px;
+    height: 450px;
+    z-index: 100;
+}
+.maintenance_info_version_up_inner{
+    position: absolute;
+    top:50px;
+    left: 50px;
+    width: 600px;
+    height: 350px;
+}
+.maintenance_info_version_up_input{
+    top:30px;
+    left: 50px;
+    width: 600px;
+    font-size: large;
+}
+.maintenance_info_version_up_pic{
+    position: absolute;
+    width:600px;
+    height: 130px;
+    top: 72px;
+    left: 0px;
+}
+.maintenance_info_version_up_pic_camera{
+    position: absolute;
+    width:90px;
+    height: 90px;
+    top: 20px;
+    left: 250px;
+    background: url(parts/setup_update_ic_camera.png);
+}
+.maintenance_info_version_up_pic_circle{
+    position: absolute;
+    width:90px;
+    height: 90px;
+    top: 20px;
+    left: 20px;
+    background: url(parts/setup_update_vu_arrow_2.gif);
+}
+.maintenance_info_version_up_slider{
+    position: absolute;
+    width:600px;
+    height: 50px;
+    top: 202px;
+    left: 0px;
+}
+.maintenance_info_version_up_slider_process{
+    position: absolute;
+    width:400px;
+    height: 10px;
+    top: 20px;
+    left: 100px;
+    border: 1px solid green;
+}
+.maintenance_info_version_up_slider_process_inner{
+    position: absolute;
+    height: 6px;
+    top: 2px;
+    left: 2px;
+    background: green;
+}
+#maintenance_info_file_display_label{
+    position: absolute;
+    z-index: 999999;
+    background-color: black;
+    opacity:0.5;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 300%;
+}
+/*
+ * setting_maintenance_reset
+ */
+.setup_maintenance_maintenance_labels,
+.setup_maintenance_reset_labels {
+    position: absolute;
+    top: 29px;
+    left: 0px;
+    height: 1100px;
+    width: 300px;
+    background-color: rgb(29, 29, 31);
+}
+
+.setup_p2_cast_title,
+.setup_csp_control_title,
+.setup_maintenance_maintenance_title,
+.setup_maintenance_reset_title {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 29px;
+    line-height: 28px;
+    width: 100%;
+    background-color: rgb(70, 70, 71);
+    font-size: large;
+    z-index: 1;
+}
+
+.setup_maintenance_reset_form {
+    position: absolute;
+    top: 29px;
+    left: 300px;
+    height: 850px;
+    width: 1288px;
+}
+
+.setup_maintenance_maintenance_form {
+    position: absolute;
+    top: 29px;
+    left: 300px;
+    height: 850px;
+    width: 1288px;
+}
+.setup_maintenance_maintenance_fan1_label,
+.setup_maintenance_maintenance_fan2_label,
+.setup_maintenance_maintenance_wireless_control_label,
+.setup_maintenance_maintenance_wireless_id_label,
+.setup_maintenance_maintenance_status_lamp_label,
+.setup_maintenance_maintenance_reset_label,
+.setup_maintenance_maintenance_reboot_label,
+.setup_maintenance_reset_reset_label,
+.setup_maintenance_reset_reboot_label {
+    position: absolute;
+    left: 33px;
+    width: 280px;
+    height: 62px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+
+.setup_maintenance_reset_reset_label p {
+    white-space: pre-line;
+}
+.setup_maintenance_maintenance_reset_label p {
+    white-space: pre-line;
+}
+.setup_maintenance_reset_reset_label {
+    top: 3px;
+}
+.setup_maintenance_maintenance_reset_label {
+    top: 401px;
+}
+.setup_maintenance_maintenance_fan1_label{
+    top: 3px;
+}
+.setup_maintenance_maintenance_fan2_label{
+    top: 77px;
+}
+.setup_maintenance_maintenance_wireless_control_label{
+    top:169px;
+}
+.setup_maintenance_maintenance_wireless_id_label{
+    top:243px;
+}
+.setup_maintenance_maintenance_status_lamp_label{
+    top:322px;
+}
+.setup_maintenance_reset_reboot_label {
+    top: 225px;
+    line-height: 36px;
+}
+.setup_maintenance_maintenance_reboot_label {
+    top: 480px;
+    line-height: 36px;
+}
+.setup_maintenance_reset_execute1_button,
+.setup_maintenance_reset_execute2_button {
+    position: absolute;
+    left: 19px;
+    width: 142px;
+    height: 32px;
+    font-size: large;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: center;
+}
+
+.setup_maintenance_reset_execute1_button {
+    top: 20px;
+}
+
+.setup_maintenance_reset_execute2_button {
+    top: 101px;
+}
+
+.setup_maintenance_reset_execute1_button.off,
+.setup_maintenance_reset_execute2_button.off {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_normal.png);
+    background-size: 100% 100%;
+}
+
+.setup_maintenance_reset_execute1_button.off_hover,
+.setup_maintenance_reset_execute2_button.off_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_onmouse.png);
+    background-size: 100% 100%;
+}
+
+.setup_maintenance_reset_execute1_button.on,
+.setup_maintenance_reset_execute2_button.on {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_pressed.png);
+    background-size: 100% 100%;
+}
+
+.setup_maintenance_reset_execute1_button.on_hover,
+.setup_maintenance_reset_execute2_button.on_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_pressed.png);
+    background-size: 100% 100%;
+}
+
+.setup_maintenance_reset_execute1_button.disable,
+.setup_maintenance_reset_execute2_button.disable {
+    color: rgb(102, 102, 102);
+    background-color: rgb(38, 38, 38);
+    background-image: url(parts/setup_menu_btn_set_disable.png);
+    background-size: 100% 100%;
+}
+
+.setup_maintenance_reset_execute1_button > *,
+.setup_maintenance_reset_execute2_button > * {
+    display: table-cell;
+    vertical-align: middle;
+    cursor: default;
+}
+.setup_maintenance_maintenance_execute1_button,
+.setup_maintenance_maintenance_execute2_button {
+    position: absolute;
+    left: 19px;
+    width: 142px;
+    height: 32px;
+    font-size: large;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: center;
+}
+
+.setup_maintenance_maintenance_execute1_button {
+    top: 417px;
+}
+
+.setup_maintenance_maintenance_execute2_button {
+    top: 496px;
+}
+
+.setup_maintenance_maintenance_execute1_button.off,
+.setup_maintenance_maintenance_execute2_button.off {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_normal.png);
+    background-size: 100% 100%;
+}
+
+.setup_maintenance_maintenance_execute1_button.off_hover,
+.setup_maintenance_maintenance_execute2_button.off_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_onmouse.png);
+    background-size: 100% 100%;
+}
+
+.setup_maintenance_maintenance_execute1_button.on,
+.setup_maintenance_maintenance_execute2_button.on {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_pressed.png);
+    background-size: 100% 100%;
+}
+
+.setup_maintenance_maintenance_execute1_button.on_hover,
+.setup_maintenance_maintenance_execute2_button.on_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_pressed.png);
+    background-size: 100% 100%;
+}
+
+.setup_maintenance_maintenance_execute1_button.disable,
+.setup_maintenance_maintenance_execute2_button.disable {
+    color: rgb(102, 102, 102);
+    background-color: rgb(38, 38, 38);
+    background-image: url(parts/setup_menu_btn_set_disable.png);
+    background-size: 100% 100%;
+}
+
+.setup_maintenance_maintenance_execute1_button > *,
+.setup_maintenance_maintenance_execute2_button > * {
+    display: table-cell;
+    vertical-align: middle;
+    cursor: default;
+}
+/*
+ * setting_maintenance_backup
+ */
+.setup_maintenance_backup_labels {
+    position: absolute;
+    top: 29px;
+    left: 0px;
+    height: 1100px;
+    width: 300px;
+    background-color: rgb(29, 29, 31);
+}
+
+.setup_maintenance_backup_title {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 29px;
+    line-height: 28px;
+    width: 100%;
+    background-color: rgb(70, 70, 71);
+    font-size: large;
+}
+
+.setup_maintenance_backup_form {
+    position: absolute;
+    top: 35px;
+    left: 300px;
+    height: 850px;
+    width: 1288px;
+}
+
+#maintenance_backup_file_display_label{
+    position: absolute;
+    z-index: 99;
+    background-color: black;
+    opacity:0.5;
+    top: -40px;
+    left: -300px;
+    width: 1920px;
+    height: 1171px;
+}
+
+.setup_maintenance_backup_download_label,
+.setup_maintenance_backup_configdatatype_download_label,
+.setup_maintenance_backup_upload_label,
+.setup_maintenance_backup_configdatatype_upload_label,
+.setup_maintenance_backup_configdata_label {
+    position: absolute;
+    left: 33px;
+    width: 251px;
+    height: 52px;
+    line-height: 26px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+
+.setup_maintenance_backup_download_label {
+    top: 13px;
+}
+
+.setup_maintenance_backup_configdatatype_download_label {
+    left: 54px;
+    top: 85px;
+}
+
+.setup_maintenance_backup_upload_label {
+    top: 230px;
+}
+
+.setup_maintenance_backup_configdatatype_upload_label {
+    left: 54px;
+    top: 300px;
+}
+
+.setup_maintenance_backup_configdata_label {
+    left: 54px;
+    top: 368px;
+}
+
+.setup_maintenance_backup_configdata_input {
+    position: absolute;
+    top: 382px;
+    left: 19px;
+    width: 180px;
+}
+
+.setup_maintenance_backup_configdata_download_select {
+    position: absolute;
+    top: 95px;
+    left: 19px;
+    width: 220px;
+}
+.setup_maintenance_backup_configdata_upload_select {
+    position: absolute;
+    top: 307px;
+    left: 19px;
+    width: 220px;
+}
+
+.setup_maintenance_backup_download_button,
+.setup_maintenance_backup_file_select_button,
+.setup_maintenance_backup_upload_button {
+    position: absolute;
+    left: 19px;
+    width: 142px;
+    height: 32px;
+    font-size: large;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: center;
+}
+
+.setup_maintenance_backup_file_select_input{
+    position: absolute;
+    width: 142px;
+    height: 32px;
+    top: 284px;
+    left: 551px;
+}
+
+.setup_maintenance_backup_download_button {
+    top: 162px;
+}
+
+.setup_maintenance_backup_file_select_button {
+    top: 378px;
+    left: 251px;
+}
+
+.setup_maintenance_backup_upload_button {
+    top: 448px;
+}
+
+.setup_maintenance_backup_download_button.off,
+.setup_maintenance_backup_file_select_button.off,
+.setup_maintenance_backup_upload_button.off {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_normal.png);
+    background-size: 100% 100%;
+}
+
+.setup_maintenance_backup_download_button.off_hover,
+.setup_maintenance_backup_file_select_button.off_hover,
+.setup_maintenance_backup_upload_button.off_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_onmouse.png);
+    background-size: 100% 100%;
+}
+
+.setup_maintenance_backup_download_button.on,
+.setup_maintenance_backup_file_select_button.on,
+.setup_maintenance_backup_upload_button.on {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_pressed.png);
+    background-size: 100% 100%;
+}
+
+.setup_maintenance_backup_download_button.on_hover,
+.setup_maintenance_backup_file_select_button.on_hover,
+.setup_maintenance_backup_upload_button.on_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_pressed.png);
+    background-size: 100% 100%;
+}
+
+.setup_maintenance_backup_download_button.disable,
+.setup_maintenance_backup_file_select_button.disable,
+.setup_maintenance_backup_upload_button.disable {
+    color: rgb(102, 102, 102);
+    background-color: rgb(38, 38, 38);
+    background-image: url(parts/setup_menu_btn_set_disable.png);
+    background-size: 100% 100%;
+}
+
+.setup_maintenance_backup_download_button > *,
+.setup_maintenance_backup_file_select_button > *,
+.setup_maintenance_backup_upload_button > * {
+    display: table-cell;
+    vertical-align: middle;
+    cursor: default;
+}
+
+#id_status_info {
+    top: 850px;
+    left: 300px;
+    position: absolute;
+}
+
+/* .setup_maintenance_info_firmware_label_Line{
+    position: absolute;
+    top:  266px;
+    left: 33px;
+    height: 258px;
+} */
+.setup_maintenance_info_model_label_Line{
+    position: absolute;
+    top: 78px;
+    left: 20px;
+    width: 1547px;
+}
+.setup_maintenance_info_mac_label_Line{
+    position: absolute;
+    top: 150px;
+    left: 20px;
+    width: 1547px;
+}
+.setup_maintenance_info_mac_sfp_label_Line{
+    position: absolute;
+    top: 225px;
+    left: 20px;
+    width: 1547px;
+}
+.setup_maintenance_info_serial_label_Line{
+    position: absolute;
+    top: 300px;
+    left: 20px;
+    width: 1547px;
+}
+
+.setup_maintenance_info_serial_label_Line.isUE16{
+    position: absolute;
+    top: 224px;
+    left: 20px;
+    width: 1547px;
+}
+/* .setup_maintenance_info_cpu_label_Line{
+    position: absolute;
+    top: 345px;
+    left: 50px;
+    width: 1547px;
+} */
+/* .setup_maintenance_info_eeprom_label_Line{
+    position: absolute;
+    top: 447px;
+    left: 50px;
+    width: 1547px;
+} */
+/* .setup_maintenance_info_fpga_label_Line{
+    position: absolute;
+    top: 538px;
+    left: 20px;
+    width: 1547px;
+} */
+.setup_maintenance_info_activation_label_Line{
+    position: absolute;
+    top: 446px;
+    left: 20px;
+    width: 1547px;
+}
+.setup_maintenance_info_activation_label_isUE163_Line{
+    position: absolute;
+    top: 370px;
+    left: 20px;
+    width: 1547px;
+}
+.setup_maintenance_info_operation_label_Line{
+    position: absolute;
+    top: 523px;
+    left: 20px;
+    width: 1547px;
+}
+.setup_maintenance_info_operation_label_isUE163_Line{
+    position: absolute;
+    top: 447px;
+    left: 20px;
+    width: 1547px;
+}
+.setup_maintenance_info_viewer_label_Line{
+    position: absolute;
+    top: 607px;
+    left: 20px;
+    width: 1547px;
+}
+.setup_maintenance_info_viewer_label_isUE163_Line{
+    position: absolute;
+    top: 531px;
+    left: 20px;
+    width: 1547px;
+}
+.setup_maintenance_reset_reset_label_Line{
+    position: absolute;
+    top: 103px;
+    left: 20px;
+    width: 1547px;
+}
+.setup_maintenance_maintenance_reset_label_Line{
+    position: absolute;
+    top: 498px;
+    left: 20px;
+    width: 1547px;
+}
+.setup_maintenance_maintenance_fan1_label_Line{
+    position: absolute;
+    top: 103px;
+    left: 20px;
+    width: 1547px;
+}
+.setup_maintenance_reset_reboot_label_Line{
+    position: absolute;
+    top: 182px;
+    left: 20px;
+    width: 1547px;
+}
+.setup_maintenance_maintenance_fan2_label_Line{
+    position: absolute;
+    top: 182px;
+    left: 20px;
+    width: 1547px;
+}
+.setup_maintenance_maintenance_wireless_control_label_Line{
+    position: absolute;
+    top: 261px;
+    left: 20px;
+    width: 1547px;
+}
+.setup_maintenance_maintenance_wireless_id_label_Line{
+    position: absolute;
+    top: 340px;
+    left: 20px;
+    width: 1547px;
+}
+.setup_maintenance_maintenance_status_lamp_label_Line{
+    position: absolute;
+    top: 419px;
+    left: 20px;
+    width: 1547px;
+}
+.setup_maintenance_maintenance_reboot_label_Line{
+    position: absolute;
+    top: 577px;
+    left: 20px;
+    width: 1547px;
+}
+.setup_maintenance_backup_configdatatype_download_label_Line{
+    position: absolute;
+    top: 108px;
+    left: 20px;
+    width: 1547px;
+}
+.setup_maintenance_backup_configdatatype_upload_label_Line{
+    position: absolute;
+    top: 247px;
+    left: 20px;
+    width: 1547px;
+}
+
+/* #setup_maintenance_info_cpu_title_main {
+    position: absolute;
+    left: 0px;
+    width: 100%;
+    height: 30px;
+    line-height: 26px;
+    display: table;
+    font-size: large;
+    text-align: left;
+    top: -10px;
+    background-color: rgb(70, 70, 71);
+} */
+.setup_maintenance_info_cpu_mainNetwork_title {
+    position: absolute;
+    display: table;
+    font-size: large;
+    text-align: left;
+    cursor: default;
+    z-index: 2;
+    height: 30px;
+    line-height: 2px;
+    left: 0px;
+    width: 0%;
+    padding-left: 33px;
+}
+.setup_maintenance_info_cpu_camera_title {
+    position: absolute;
+    display: table;
+    font-size: large;
+    text-align: left;
+    cursor: default;
+    z-index: 2;
+    height: 30px;
+    line-height: 2px;
+    left: 190px;
+    width: 0%;
+    padding-left: 33px;
+}
+.setup_maintenance_info_cpu_lens_title {
+    position: absolute;
+    display: table;
+    font-size: large;
+    text-align: left;
+    cursor: default;
+    z-index: 2;
+    height: 30px;
+    line-height: 2px;
+    left: 380px;
+    width: 0%;
+    padding-left: 33px;
+}
+.setup_maintenance_info_cpu_servo_title {
+    position: absolute;
+    display: table;
+    font-size: large;
+    text-align: left;
+    cursor: default;
+    z-index: 2;
+    height: 30px;
+    line-height: 2px;
+    left: 580px;
+    width: 0%;
+    padding-left: 33px;
+}
+.setup_maintenance_info_cpu_mainNetwork_title > P,
+.setup_maintenance_info_cpu_camera_title > P,
+.setup_maintenance_info_cpu_lens_title > P,
+.setup_maintenance_info_cpu_servo_title > P{
+    position: absolute;
+    top: -5px;
+    left: 33px;
+}
+/* #maintenanceInfoCputable{
+    top:30px;
+    left:20px;
+}
+#maintenanceInfoCputable td{
+    padding-left: 30px;
+    height: 25px;
+    font-size:large;
+} */
+
+
+#setup_maintenance_info_eeprom_title_main {
+    position: absolute;
+    left: 0px;
+    width: 100%;
+    height: 30px;
+    line-height: 26px;
+    display: table;
+    font-size: large;
+    text-align: left;
+    top: -16px;
+    background-color: rgb(70, 70, 71);
+}
+.setup_maintenance_info_eeprom_mainNetwork_title {
+    position: absolute;
+    display: table;
+    font-size: large;
+    text-align: left;
+    cursor: default;
+    z-index: 2;
+    height: 30px;
+    line-height: 2px;
+    left: 0px;
+    width: 0%;
+    padding-left: 33px;
+}
+.setup_maintenance_info_eeprom_interface_title {
+    position: absolute;
+    display: table;
+    font-size: large;
+    text-align: left;
+    cursor: default;
+    z-index: 2;
+    height: 30px;
+    line-height: 2px;
+    left: 190px;
+    width: 0%;
+    padding-left: 33px;
+}
+
+.setup_maintenance_info_eeprom_mainNetwork_title > P,
+.setup_maintenance_info_eeprom_interface_title > P{
+    position: absolute;
+    top: -5px;
+    left: 33px;
+}
+#maintenanceInfoEepromtable{
+    top:30px;
+    left:20px;
+}
+#maintenanceInfoEepromtable td{
+    padding-left: 30px;
+    height: 25px;
+    font-size:large;
+}
+
+
+/* #setup_maintenance_info_fpga_title_main {
+    position: absolute;
+    left: 0px;
+    width: 100%;
+    height: 30px;
+    line-height: 26px;
+    display: table;
+    font-size: large;
+    text-align: left;
+    top: -15px;
+    background-color: rgb(70, 70, 71);
+} */
+.setup_maintenance_info_fpga_com_title {
+    position: absolute;
+    display: table;
+    font-size: large;
+    text-align: left;
+    cursor: default;
+    z-index: 2;
+    height: 30px;
+    line-height: 2px;
+    left: 0px;
+    width: 0%;
+    padding-left: 33px;
+}
+
+.setup_maintenance_info_fpga_logic_title,
+.setup_maintenance_info_fpga_r5r_title,
+.setup_maintenance_info_fpga_r5t_title,
+.setup_maintenance_info_fpga_avio_title {
+    position: absolute;
+    display: table;
+    font-size: large;
+    text-align: left;
+    cursor: default;
+    z-index: 2;
+    height: 30px;
+    line-height: 2px;
+    left: 190px;
+    width: 0%;
+    padding-left: 33px;
+}
+
+.setup_maintenance_info_fpga_avio_title{
+    left: 190px;
+}
+.setup_maintenance_info_fpga_logic_title{
+    left: 765px;
+}
+.setup_maintenance_info_fpga_r5r_title{
+    left: 575px;
+}
+.setup_maintenance_info_fpga_r5t_title{
+    left: 380px;
+}
+
+.setup_maintenance_info_fpga_ndi_title {
+    position: absolute;
+    display: table;
+    font-size: large;
+    text-align: left;
+    cursor: default;
+    z-index: 2;
+    height: 30px;
+    line-height: 2px;
+    left: 380px;
+    width: 0%;
+    padding-left: 33px;
+}
+.setup_maintenance_info_cpu_servo_title {
+    position: absolute;
+    display: table;
+    font-size: large;
+    text-align: left;
+    cursor: default;
+    z-index: 2;
+    height: 30px;
+    line-height: 2px;
+    left: 580px;
+    width: 0%;
+    padding-left: 33px;
+}
+
+.setup_maintenance_info_fpga_logic_title > P,
+.setup_maintenance_info_fpga_r5r_title > P,
+.setup_maintenance_info_fpga_r5t_title > P,
+.setup_maintenance_info_fpga_com_title > P,
+.setup_maintenance_info_fpga_ndi_title > P,
+.setup_maintenance_info_fpga_avio_title > P{
+    position: absolute;
+    top: -5px;
+    left: 33px;
+}
+#maintenanceInfoFpgatable{
+    top:30px;
+    left:20px;
+}
+#maintenanceInfoFpgatable td{
+    padding-left: 30px;
+    height: 25px;
+    font-size:large;
+}
+
+.setup_maintenance_backup_configdata_download_select_Line{
+    position: absolute;
+    top: 325px;
+    left: 20px;
+    width: 1547px;
+}
+
+.setup_maintenance_backup_configdata_download_Line{
+    position: absolute;
+    top: 179px;
+    left: 54px;
+    width: 1547px;
+}
+.setup_maintenance_backup_configdatatype_upload_select_Line{
+    position: absolute;
+    top: 393px;
+    left: 54px;
+    width: 1547px;
+}
+.setup_maintenance_backup_configdatatype_upload_Line{
+    position: absolute;
+    top: 461px;
+    left:54px;
+    width: 1547px;
+}
+
+.setup_maintain_main_inner {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 700px;
+    width: 320px;
+}
+
+#setup_maintenance_info_inner_scroll{
+    position: absolute;
+    top: 29px;
+    left: 0px;
+    width: 2014px;
+    height: 776px;
+    border-bottom: 1px solid rgb(70, 70, 71);
+    overflow: hidden;
+}
+/**
+*
+**/
+.setting_basic_system_fan_twoAuto_radio,
+.setting_basic_system_fan_twoLow_radio,
+.setting_basic_system_fan_twoMid_radio,
+.setting_basic_system_fan_twoHigh_radio{
+    position: absolute;
+    top: 100px;
+    left: 19px;
+    z-index: 2;
+}
+.setting_basic_system_fan_twoAuto_radio{
+    left: 19px;
+}
+.setting_basic_system_fan_twoLow_radio{
+    left: 129px;
+}
+.setting_basic_system_fan_twoMid_radio {
+    left: 239px;
+}
+.setting_basic_system_fan_twoHigh_radio{
+    left: 349px;
+}
+.setting_basic_system_fan_twoAuto_label,
+.setting_basic_system_fan_twoLow_label,
+.setting_basic_system_fan_twoMid_label,
+.setting_basic_system_fan_twoHigh_label{
+    position: absolute;
+    top: 108px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+.setting_basic_system_fan_twoAuto_label{
+    left: 56px;
+}
+.setting_basic_system_fan_twoLow_label{
+    left: 166px;
+}
+
+.setting_basic_system_fan_twoMid_label {
+    left: 276px;
+}
+
+.setting_basic_system_fan_twoHigh_label {
+    left: 386px;
+}
+.setting_basic_system_fan_twoAuto_label > *,
+.setting_basic_system_fan_twoLow_label > *,
+.setting_basic_system_fan_twoMid_label > *,
+.setting_basic_system_fan_twoHigh_label > *{
+    vertical-align: middle;
+    display: table-cell;
+}
+.setting_basic_system_fan_twoAuto_label > *,
+.setting_basic_system_fan_twoLow_label > *,
+.setting_basic_system_fan_twoMid_label > *,
+.setting_basic_system_fan_twoHigh_label > *{
+    vertical-align: middle;
+    display: table-cell;
+}
+/**
+*
+**/
+.setting_basic_system_fanAuto_radio,
+.setting_basic_system_fanLow_radio,
+.setting_basic_system_fanMid_radio,
+.setting_basic_system_fanHigh_radio{
+    position: absolute;
+    top: 28px;
+    left: 19px;
+    z-index: 2;
+}
+.setting_basic_system_fanAuto_radio{
+    left: 19px;
+}
+.setting_basic_system_fanLow_radio{
+    left: 129px;
+}
+.setting_basic_system_fanMid_radio {
+    left: 239px;
+}
+.setting_basic_system_fanHigh_radio{
+    left: 349px;
+}
+.setting_basic_system_fanAuto_label,
+.setting_basic_system_fanLow_label,
+.setting_basic_system_fanMid_label,
+.setting_basic_system_fanHigh_label{
+    position: absolute;
+    top: 35px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+.setting_basic_system_fanAuto_label{
+    left: 56px;
+}
+.setting_basic_system_fanLow_label{
+    left: 166px;
+}
+
+.setting_basic_system_fanMid_label {
+    left: 276px;
+}
+
+.setting_basic_system_fanHigh_label {
+    left: 386px;
+}
+.setting_basic_system_fanAuto_label > *,
+.setting_basic_system_fanLow_label > *,
+.setting_basic_system_fanMid_label > *,
+.setting_basic_system_fanHigh_label > *{
+    vertical-align: middle;
+    display: table-cell;
+}
+.setting_basic_system_fanAuto_label > *,
+.setting_basic_system_fanLow_label > *,
+.setting_basic_system_fanMid_label > *,
+.setting_basic_system_fanHigh_label > *{
+    vertical-align: middle;
+    display: table-cell;
+}
+/**
+* wireless control
+**/
+.setting_basic_system_wirelessEnable_radio,
+.setting_basic_system_wirelessDisable_radio {
+    position: absolute;
+    top: 178px;
+    z-index: 2;
+}
+
+.setting_basic_system_wirelessEnable_radio {
+    left: 19px;
+}
+
+.setting_basic_system_wirelessDisable_radio {
+    left: 129px;
+}
+
+.setting_basic_system_wirelessEnable_label,
+.setting_basic_system_wirelessDisable_label {
+    position: absolute;
+    top: 185px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+
+.setting_basic_system_wirelessEnable_label {
+    left: 56px;
+}
+
+.setting_basic_system_wirelessDisable_label {
+    left: 166px;
+}
+
+.setting_basic_system_wirelessEnable_label>*,
+.setting_basic_system_wirelessDisable_label>* {
+    vertical-align: middle;
+    display: table-cell;
+}
+/**
+* wireless id
+**/
+.setting_basic_system_wireless_idCAM1_radio,
+.setting_basic_system_wireless_idCAM2_radio,
+.setting_basic_system_wireless_idCAM3_radio,
+.setting_basic_system_wireless_idCAM4_radio {
+    position: absolute;
+    top: 257px;
+    z-index: 2;
+}
+
+.setting_basic_system_wireless_idCAM1_radio {
+    left: 19px;
+}
+
+.setting_basic_system_wireless_idCAM2_radio {
+    left: 129px;
+}
+.setting_basic_system_wireless_idCAM3_radio {
+    left: 239px;
+}
+.setting_basic_system_wireless_idCAM4_radio {
+    left: 349px;
+}
+.setting_basic_system_wireless_idCAM1_label,
+.setting_basic_system_wireless_idCAM2_label,
+.setting_basic_system_wireless_idCAM3_label,
+.setting_basic_system_wireless_idCAM4_label {
+    position: absolute;
+    top: 264px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+
+.setting_basic_system_wireless_idCAM1_label {
+    left: 56px;
+}
+
+.setting_basic_system_wireless_idCAM2_label {
+    left: 166px;
+}
+.setting_basic_system_wireless_idCAM3_label {
+    left: 276px;
+}
+.setting_basic_system_wireless_idCAM4_label {
+    left: 386px;
+}
+.setting_basic_system_wireless_idCAM1_label>*,
+.setting_basic_system_wireless_idCAM2_label>*,
+.setting_basic_system_wireless_idCAM3_label>*,
+.setting_basic_system_wireless_idCAM4_label>* {
+    vertical-align: middle;
+    display: table-cell;
+}
+
+/**
+* status lamp
+**/
+.setting_basic_system_status_lampEnable_radio,
+.setting_basic_system_status_lampDisable_radio {
+    position: absolute;
+    top: 336px;
+    z-index: 2;
+}
+
+.setting_basic_system_status_lampEnable_radio {
+    left: 19px;
+}
+
+.setting_basic_system_status_lampDisable_radio {
+    left: 129px;
+}
+
+.setting_basic_system_status_lampEnable_label,
+.setting_basic_system_status_lampDisable_label {
+    position: absolute;
+    top: 343px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+
+.setting_basic_system_status_lampEnable_label {
+    left: 56px;
+}
+
+.setting_basic_system_status_lampDisable_label {
+    left: 166px;
+}
+
+.setting_basic_system_status_lampEnable_label>*,
+.setting_basic_system_status_lampDisable_label>* {
+    vertical-align: middle;
+    display: table-cell;
+}

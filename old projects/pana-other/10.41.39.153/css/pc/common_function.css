@@ -1,0 +1,422 @@
+.radioButton {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    vertical-align: middle;
+    cursor: default;
+}
+
+.radioButton.on {
+    background-image: url(parts/setup_menu_btn_radio_selected.png);
+}
+
+.radioButton.off {
+    background-image: url(parts/setup_menu_btn_radio_normal.png);
+}
+
+.radioButton.disable {
+    background-image: url(parts/setup_menu_btn_radio_disable.png);
+}
+
+.radioButton.onDisable {
+    background-image: url(parts/setup_menu_btn_radio_selected_disable.png);
+}
+
+.radioButton.on_hover {
+    background-image: url(parts/setup_menu_btn_radio_selected_onmouse.png);
+}
+
+.radioButton.off_hover {
+    background-image: url(parts/setup_menu_btn_radio_onmouse.png);
+}
+
+.setup_menu_single_btn_class.on {
+    color: rgb(0, 0, 0);
+    background-image: url(parts/setup_menu_tab_V_single_selected.png);
+    background-size: 100% 100%;
+}
+
+.setup_menu_single_btn_class.off {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_tab_V_single_normal.png);
+    background-size: 100% 100%;
+}
+
+.setup_menu_single_btn_class.on_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_tab_V_single_onmouse.png);
+    background-size: 100% 100%;
+}
+
+.setup_menu_single_btn_class.off_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_tab_V_single_onmouse.png);
+    background-size: 100% 100%;
+}
+
+.setup_menu_single_btn_class.disable {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_tab_V_single_disable.png);
+    background-size: 100% 100%;
+}
+
+.setup_menu_top_btn_class.on {
+    color: rgb(0, 0, 0);
+    background-image: url(parts/setup_menu_tab_V_top_selected.png);
+    background-size: 100% 100%;
+}
+
+.setup_menu_top_btn_class.off {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_tab_V_top_normal.png);
+    background-size: 100% 100%;
+}
+
+.setup_menu_top_btn_class.on_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_tab_V_top_onmouse.png);
+    background-size: 100% 100%;
+}
+
+.setup_menu_top_btn_class.off_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_tab_V_top_onmouse.png);
+    background-size: 100% 100%;
+}
+
+.setup_menu_top_btn_class.disable {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_tab_V_top_disable.png);
+    background-size: 100% 100%;
+}
+
+.setup_menu_middle_btn_class.on {
+    color: rgb(0, 0, 0);
+    background-image: url(parts/setup_menu_tab_V_middle_selected.png);
+    background-size: 100% 100%;
+}
+
+.setup_menu_middle_btn_class.off {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_tab_V_middle_normal.png);
+    background-size: 100% 100%;
+}
+
+.setup_menu_middle_btn_class.on_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_tab_V_middle_onmouse.png);
+    background-size: 100% 100%;
+}
+
+.setup_menu_middle_btn_class.off_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_tab_V_middle_onmouse.png);
+    background-size: 100% 100%;
+}
+
+.setup_menu_middle_btn_class.disable {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_tab_V_middle_disable.png);
+    background-size: 100% 100%;
+}
+
+.setup_menu_bottom_btn_class.on {
+    color: rgb(0, 0, 0);
+    background-image: url(parts/setup_menu_tab_V_bottom_selected.png);
+    background-size: 100% 100%;
+}
+
+.setup_menu_bottom_btn_class.off {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_tab_V_bottom_normal.png);
+    background-size: 100% 100%;
+}
+
+.setup_menu_bottom_btn_class.on_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_tab_V_bottom_onmouse.png);
+    background-size: 100% 100%;
+}
+
+.setup_menu_bottom_btn_class.off_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_tab_V_bottom_onmouse.png);
+    background-size: 100% 100%;
+}
+
+.setup_menu_bottom_btn_class.disable {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_tab_V_bottom_disable.png);
+    background-size: 100% 100%;
+}
+
+.setup_menu_tab_left_btn_class.on {
+    color: rgb(0, 0, 0);
+    background-image: url(parts/setup_image_adjust_menu_tab_L_selected.png);
+    background-size: 100% 100%;
+}
+
+.setup_menu_tab_left_btn_class.off {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_image_adjust_menu_tab_L_normal.png);
+    background-size: 100% 100%;
+}
+
+.setup_menu_tab_left_btn_class.on_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_image_adjust_menu_tab_L_onmouse.png);
+    background-size: 100% 100%;
+}
+
+.setup_menu_tab_left_btn_class.off_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_image_adjust_menu_tab_L_onmouse.png);
+    background-size: 100% 100%;
+}
+
+.setup_menu_tab_middle_btn_class.on {
+    color: rgb(0, 0, 0);
+    background-image: url(parts/setup_image_adjust_menu_tab_M_selected.png);
+    background-size: 100% 100%;
+}
+
+.setup_menu_tab_middle_btn_class.off {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_image_adjust_menu_tab_M_normal.png);
+    background-size: 100% 100%;
+}
+
+.setup_menu_tab_middle_btn_class.on_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_image_adjust_menu_tab_M_onmouse.png);
+    background-size: 100% 100%;
+}
+
+.setup_menu_tab_middle_btn_class.off_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_image_adjust_menu_tab_M_onmouse.png);
+    background-size: 100% 100%;
+}
+
+.setup_menu_tab_middle_btn_class.disable {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_image_adjust_menu_tab_M_disable.png);
+    background-size: 100% 100%;
+}
+
+.setup_menu_tab_right_btn_class.on {
+    color: rgb(0, 0, 0);
+    background-image: url(parts/setup_image_adjust_menu_tab_selected.png);
+    background-size: 100% 100%;
+}
+
+.setup_menu_tab_right_btn_class.off {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_image_adjust_menu_tab_R_normal.png);
+    background-size: 100% 100%;
+}
+
+.setup_menu_tab_right_btn_class.on_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_image_adjust_menu_tab_R_onmouse.png);
+    background-size: 100% 100%;
+}
+
+.setup_menu_tab_right_btn_class.off_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_image_adjust_menu_tab_R_onmouse.png);
+    background-size: 100% 100%;
+}
+
+.setup_menu_tab_right_btn_class.disable {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_image_adjust_menu_tab_disable.png);
+    background-size: 100% 100%;
+}
+
+.setup_menu_btn_P_common {
+    position: absolute;
+    display: table-cell;
+    vertical-align: middle;
+    left: 13px;
+    top: -14px;
+    cursor: default;
+    font-size: large;
+}
+.setup_tab_btn_P_common {
+    display: table-cell;
+    vertical-align: middle;
+    left: 13px;
+    top: -14px;
+    cursor: default;
+    font-size: large;
+}
+/**
+ * ボタン共通CSS
+ */
+.button_class.off {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_normal.png);
+    background-size: 100% 100%;
+}
+
+.button_class.off_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_onmouse.png);
+    background-size: 100% 100%;
+}
+
+.button_class.on {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_pressed.png);
+    background-size: 100% 100%;
+}
+
+.button_class.on_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_onmouse.png);
+    background-size: 100% 100%;
+}
+
+.button_class.disable {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_disable.png);
+    background-size: 100% 100%;
+}
+
+.button_class > * {
+    display: table-cell;
+    vertical-align: middle;
+    cursor: default;
+}
+
+.MenuButtonDivideLine {
+    position: absolute;
+    height: 1.2px;
+    width: 240px;
+    background-image: url(parts/setup_menu_tab_V_divider_normal.png);
+    z-index: 2;
+}
+.MenuButtonDivideLine.disable {
+    background-image: url(parts/setup_menu_tab_V_divider_disable.png);
+}
+
+iframe.DispNone {
+    display: none;
+    width: 0px;
+    height: 0px;
+}
+
+select {
+    height: 32px;
+    width: 182px;
+    line-height: 32px;
+    font-size: large;
+    background-color: rgb(70, 70, 71);
+    color: rgb(191, 191, 191);
+    border: 1px rgb(0, 0, 0) double;
+    background-repeat: no-repeat;
+    background-position: right 3px center;
+    appearance:none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+    padding: 0 0 0 10px;
+}
+
+select.off {
+    background-image: url(parts/cc_ic_pulldown_normal.png);
+}
+
+select.on {
+    background-image: url(parts/cc_ic_pulldown_pressed.png);
+}
+
+select.on_hover {
+    background-image: url(parts/cc_ic_pulldown_pressed.png);
+}
+
+select.off_hover {
+    background-image: url(parts/cc_ic_pulldown_onmouse.png);
+}
+
+select.disable {
+    background-image: url(parts/cc_ic_pulldown_disable.png);
+}
+
+input {
+    font-size: large;
+    background-color: rgb(0, 0, 0);
+    color: rgb(191, 191, 191);
+    border: 1px rgb(70, 70, 71) double;
+    padding: 0px 0px 0px 5px;
+}
+
+.setting_basic_select_disabled {
+    background-color: rgb(70, 70, 71) !important;
+    color: rgb(191, 191, 191);
+    border: 1px rgb(70, 70, 71) double;
+}
+#stream_status.off {
+    position: absolute;
+    top: 12px;
+    left: 456px;
+    width: 40px;
+    height: 25px;
+    line-height: 25px;
+    color: rgb(74, 241, 8);
+    background-image: url(parts/live_off.png);
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+#stream_status.on {
+    position: absolute;
+    top: 12px;
+    left: 456px;
+    width: 40px;
+    height: 25px;
+    line-height: 25px;
+    color: rgb(74, 241, 8);
+    background-image: url(parts/live_on.png);
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+#sync_status.off {
+    position: absolute;
+    top: 12px;
+    left: 405px;
+    width: 46px;
+    height: 25px;
+    line-height: 25px;
+    color: rgb(74, 241, 8);
+    background-image: url(parts/sync_d.png);
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+#sync_status.on {
+    position: absolute;
+    top: 12px;
+    left: 405px;
+    width: 46px;
+    height: 25px;
+    line-height: 25px;
+    color: rgb(74, 241, 8);
+    background-image: url(parts/sync_a.png);
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}

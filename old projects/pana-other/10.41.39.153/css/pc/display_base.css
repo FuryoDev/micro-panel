@@ -1,0 +1,222 @@
+@CHARSET "UTF-8";
+.txt_show_title {
+    position: absolute;
+    left: 20px;
+    top: 13px;
+    display: table;
+    text-align: left;
+    width: 258px;
+    color: rgb(255, 255, 255);
+    font-size: large;
+}
+.txt_level_gauge {
+    position: absolute;
+    right: 420px;
+    top: -10px;
+    display: table;
+    text-align: left;
+    width: 258px;
+    color: rgb(255, 255, 255);
+    font-size: large;
+}
+
+.parameter_tracking{
+    position: absolute;
+    right: 200px;
+    top: 13px;
+    text-align: left;
+    width: 108px;
+    color: rgb(255, 255, 255);
+    font-size: large;
+}
+.parameter_tracking_mobile{
+    right:240px !important;
+}
+.btn_tracking_mobile{
+    right:210px !important;
+}
+
+.parameter_tracking >*,
+.txt_show_title > *
+.txt_level_gauge > * {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+/**
+ * Main Header Tab
+ * モード切替用タブの共通定義
+ */
+.base_mode_view.on, .btn_changetotouch.on, .btn_changetomobile.on{
+    color: rgb(0, 0, 0);
+}
+
+.base_mode_view.off, .btn_changetotouch.off, .btn_changetomobile.off {
+    color: rgb(191, 191, 191);
+}
+
+
+.base_mode_view.on_hover, .btn_changetotouch.on_hover, .btn_changetomobile.on_hover {
+    color: rgb(0, 0, 0);
+}
+
+.base_mode_view.off_hover, .btn_changetotouch.off_hover, .btn_changetomobile.off_hover {
+    color: rgb(255, 255, 255);
+}
+
+.base_mode_view,
+.base_mode_main {
+    position: absolute;
+    top: 9px;
+    width: 200px;
+    height: 30px;
+    display: table;
+    text-align: center;
+    font-size: large;
+}
+
+.btn_changetomobile >*,
+.base_mode_view > *,
+.btn_changetotouch > *,
+.base_mode_main > * {
+    display: table-cell;
+    vertical-align: middle;
+    cursor: default;
+}
+/**
+ * Mbtn_changetotouchTab
+ * タブ(VIEWモード)
+ */
+.btn_changetomobile {
+    right:6px
+}
+.btn_changetotouch.on {
+    background-image: url(parts/cc_btn_expand_pressed.png);
+    background-size: 100% 100%;
+}
+
+.btn_changetotouch.off {
+    background-image: url(parts/cc_btn_expand_normal.png);
+    background-size: 100% 100%;
+}
+
+.btn_changetotouch.on_hover {
+    background-image: url(parts/cc_btn_expand_pressed.png);
+    background-size: 100% 100%;
+}
+
+.btn_changetotouch.off_hover {
+    background-image: url(parts/cc_btn_expand_onmouse.png);
+    background-size: 100% 100%;
+}
+
+.btn_changetotouch.disable {
+    background-image: url(parts/cc_btn_expand_disable.png);
+    background-size: 100% 100%;
+}
+.btn_changetomobile.on {
+    background-image: url(parts/L_header_btn_mode_phone_pressed.png);
+    background-size: 100% 100%;
+}
+
+.btn_changetomobile.off {
+    background-image: url(parts/L_header_btn_mode_phone_normal.png);
+    background-size: 100% 100%;
+}
+
+.btn_changetomobile.on_hover {
+    background-image: url(parts/L_header_btn_mode_phone_pressed.png);
+    background-size: 100% 100%;
+}
+
+.btn_changetomobile.off_hover {
+    background-image: url(parts/L_header_btn_mode_phone_onmouse.png);
+    background-size: 100% 100%;
+}
+
+.btn_changetomobile.disable {
+    background-image: url(parts/L_header_btn_mode_phone_disable.png);
+    background-size: 100% 100%;
+}
+/**
+ * Main Header Tab
+ * タブ(VIEWモード)
+ */
+.base_mode_view {
+    left: -200px;
+}
+
+.base_mode_view.on {
+    background-image: url(parts/tab_top_L_selected.png);
+    background-size: 100% 100%;
+}
+
+.base_mode_view.off {
+    background-image: url(parts/tab_top_L_normal.png);
+    background-size: 100% 100%;
+}
+
+.base_mode_view:hover {
+    background-image: url(parts/tab_top_L_onMouse.png);
+    background-size: 100% 100%;
+}
+
+.base_mode_view.on_hover {
+    background-image: url(parts/tab_top_L_selected.png);
+    background-size: 100% 100%;
+}
+
+.base_mode_view.off_hover {
+    background-image: url(parts/tab_top_L_onMouse.png);
+    background-size: 100% 100%;
+}
+
+/**
+ * Main Header Tab
+ * タブ(MAINモード)
+ */
+.base_mode_main {
+    left: 0px;
+}
+
+.base_mode_main.on {
+    color: rgb(0, 0, 0);
+    background-image: url(parts/toptab_R_selected.png);
+}
+
+.base_mode_main.off {
+    background-image: url(parts/tab_top_R_normal.png);
+    background-size: 100% 100%;
+}
+
+.base_mode_main.disable {
+    background-image: url(parts/tab_top_R_disable.png);
+    background-size: 100% 100%;
+}
+
+.base_mode_main.on_hover {
+    background-image: url(parts/tab_top_R_selected.png);
+    background-size: 100% 100%;
+}
+
+.base_mode_main.off_hover {
+    background-image: url(parts/tab_top_R_onMouse.png);
+    background-size: 100% 100%;
+}
+
+
+/*lines common*/
+/*Horizontal line: '-'*/
+.horizontal_line_common {
+    position: absolute;
+    height: 1.5px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+
+/*Vertical line: '|'*/
+.vertical_line_common {
+    position: absolute;
+    width: 1.5px;
+    background: rgb(70, 70, 71)
+}

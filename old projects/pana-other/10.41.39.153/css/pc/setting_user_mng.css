@@ -1,0 +1,1972 @@
+@CHARSET "UTF-8";
+
+#div_user_mng {
+    position: absolute;
+    height: 880px;
+    width: 1050px;
+    top: 40px;
+    left: 500px;
+    background: rgb(0, 0, 0);
+    z-index: 1;
+}
+.user_mode_title {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    background-color: rgb(70, 70, 71);
+}
+
+.user_mode_title >P{
+    position: absolute;
+    top: -13px;
+    left: 33px;
+}
+
+.user_mode_title > * {
+    vertical-align: middle;
+    display: table-cell;
+}
+
+.user_mode_add_user {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    background-color: rgb(70, 70, 71);
+}
+
+.user_mode_add_user >P{
+    position: absolute;
+    top: -15px;
+    left: 33px;
+}
+
+.user_mode_add_user > * {
+    vertical-align: middle;
+    display: table-cell;
+}
+
+.user_priority_stream {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    background-color: rgb(70, 70, 71);
+}
+
+.user_priority_stream >P{
+    position: absolute;
+    top: -15px;
+    left: 24px;
+}
+
+.user_priority_stream > * {
+    vertical-align: middle;
+    display: table-cell;
+}
+
+#setting_user_mng_priority {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 1130px;
+    background-color: rgb(45, 45, 48);
+}
+
+#div_priority_stream {
+    position: absolute;
+    top: 28px;
+    left: 250px;
+    width: 100%;
+    height: 934px;
+    background-color: rgb(0, 0, 0);
+    z-index: 1;
+}
+
+#user_name {
+    position: absolute;
+    top: 30px;
+    left: 19px;
+    width: 260px;
+    height: 26px;
+    z-index: 2;
+}
+#host_add_ip {
+    position: absolute;
+    top: 30px;
+    left: 19px;
+    width: 260px;
+    height: 26px;
+    z-index: 2;
+}
+#priority_stream_ip1 {
+    position: absolute;
+    top: 90px;
+    left: 350px;
+    width: 360px;
+    height: 26px;
+    z-index: 2;
+}
+#priority_stream_ip2 {
+    position: absolute;
+    top: 145px;
+    left: 350px;
+    width: 360px;
+    height: 26px;
+    z-index: 2;
+}
+#user_password {
+    position: absolute;
+    top: 105px;
+    left: 19px;
+    width: 260px;
+    height: 26px;
+    z-index: 2;
+}
+
+#user_repassword {
+    position: absolute;
+    top: 185px;
+    left: 19px;
+    width: 260px;
+    height: 26px;
+    z-index: 2;
+}
+
+.text_setting_user_menu_title {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 280px;
+    height: 28px;
+    cursor: default;
+    text-align: center;
+    font-size: large;
+    background-color: rgb(70, 70, 71);
+}
+
+.text_setting_user_menu_title >P{
+    position: absolute;
+    top: -13px;
+    left: 24px;
+}
+
+.txt_add_user_name > *,
+.txt_add_user_password > *,
+.txt_add_user_repassword > *,
+.txt_add_user_access_level > *,
+.user_mode_user_auth_title > *,
+.user_mode_user_authentication_title > *,
+.setup_userAuth_addUser_accessLevel_Administrator_label > *,
+.setup_userAuth_addUser_accessLevel_Camera_control_label > * {
+    display: table-cell;
+    vertical-align: middle;
+    cursor: default;
+}
+
+.txt_add_user_name {
+    position: absolute;
+    top: 28px;
+    left: 33px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+
+.txt_add_user_password {
+    position: absolute;
+    top: 105px;
+    left: 33px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+
+.txt_add_user_repassword {
+    position: absolute;
+    top: 180px;
+    left: 33px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+
+.txt_add_user_access_level {
+    position: absolute;
+    top: 258px;
+    left: 33px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.txt_add_user_node {
+    position: absolute;
+    top: 390px;
+    left: -340px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.user_mode_user_auth_title {
+    position: absolute;
+    left: 33px;
+    top: 28px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+
+.user_mode_user_authentication_title {
+    position: absolute;
+    left: 33px;
+    top: 105px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+
+.user_mode_user_wait_time_title{
+    position: absolute;
+    left: 33px;
+    top: 162px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+
+}
+
+.text_setting_user_menu_title > * {
+    vertical-align: middle;
+    display: table-cell;
+}
+
+.btn_setting_user_status {
+    position: absolute;
+    top: 54px;
+    left: 20px;
+    width: 240px;
+    height: 30px;
+    font-size: large;
+    text-align: center;
+    display: table;
+}
+
+.btn_setting_user_mode {
+    position: absolute;
+    top: 145px;
+    left: 20px;
+    width: 240px;
+    height: 30px;
+    font-size: large;
+    text-align: left;
+    display: table;
+}
+
+.btn_setting_user_add {
+    position: absolute;
+    top: 175px;
+    left: 20px;
+    width: 240px;
+    height: 28px;
+    font-size: large;
+    text-align: left;
+    display: table;
+}
+
+.btn_setting_user_delete {
+    position: absolute;
+    top: 206px;
+    left: 20px;
+    width: 240px;
+    height: 29px;
+    font-size: large;
+    text-align: left;
+    display: table;
+}
+
+.btn_setting_user_mode> *,
+.btn_setting_user_add> *,
+.btn_setting_user_delete > * {
+    display: table-cell;
+    vertical-align: middle;
+    cursor: default;
+}
+
+/**
+ * Setup
+ */
+.btn_system_set.off,
+.btn_host_del.off,
+.btn_host_reg.off,
+.btn_host_set.off,
+.btn_user_del.off,
+.btn_reg_set.off,
+.btn_user_set.off,
+.btn_host_delete.off,
+.btn_host_set.off,
+.btn_user_delete.off,
+.btn_user_auth_set.off {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_normal.png);
+    background-size: 100% 100%;
+}
+
+.btn_system_set.off_hover,
+.btn_host_del.off_hover,
+.btn_host_reg.off_hover,
+.btn_host_set.off_hover,
+.btn_user_del.off_hover,
+.btn_reg_set.off_hover,
+.btn_user_set.off_hover,
+.btn_host_delete.off_hover,
+.btn_host_set.off_hover,
+.btn_user_delete.off_hover,
+.btn_user_auth_set.off_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_onmouse.png);
+    background-size: 100% 100%;
+}
+
+.btn_system_set.on,
+.btn_host_del.on,
+.btn_host_reg.on,
+.btn_host_set.on,
+.btn_user_del.on,
+.btn_reg_set.on,
+.btn_user_set.on,
+.btn_host_delete.on,
+.btn_host_set.on,
+.btn_user_delete.on,
+.btn_user_auth_set.on {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_pressed.png);
+    background-size: 100% 100%;
+}
+.btn_system_set.on_hover,
+.btn_host_del.on_hover,
+.btn_host_reg.on_hover,
+.btn_host_set.on_hover,
+.btn_user_del.on_hover,
+.btn_reg_set.on_hover,
+.btn_user_set.on_hover,
+.btn_host_delete.on_hover,
+.btn_host_set.on_hover,
+.btn_user_delete.on_hover,
+.btn_user_auth_set.on_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_pressed.png);
+    background-size: 100% 100%;
+}
+.btn_system_set > *,
+.btn_host_del > *,
+.btn_host_reg > *,
+.btn_host_set > *,
+.btn_user_del > *,
+.btn_reg_set > *,
+.btn_user_set > *,
+.btn_host_delete > *,
+.btn_host_set > *,
+.btn_user_auth_set > *,
+.btn_user_delete > *,
+.btn_user_auth > *,
+.btn_host_auth > *,
+.btn_priority_stream > * {
+    display: table-cell;
+    vertical-align: middle;
+    cursor: default;
+}
+
+.btn_system_set {
+    position: absolute;
+    top: 270px;
+    left: 350px;
+    width: 50px;
+    height: 25px;
+    font-size: large;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: center;
+    z-index: 9999;
+}
+
+.btn_host_set {
+    position: absolute;
+    top: 96px;
+    left: 30px;
+    width: 142px;
+    height: 32px;
+    font-size: large;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: center;
+    z-index: 9999;
+
+}
+
+.btn_host_reg {
+    position: absolute;
+    top: 174px;
+    left: 30px;
+    width: 142px;
+    height: 32px;
+    font-size: large;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: center;
+    z-index: 9999;
+}
+
+.btn_host_del {
+    position: absolute;
+    top: 207px;
+    left: 580px;
+    width: 50px;
+    height: 25px;
+    font-size: large;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: center;
+    z-index: 9999;
+
+}
+
+.btn_user_del {
+    position: absolute;
+    top: 300px;
+    left: 620px;
+    width: 50px;
+    height: 25px;
+    font-size: large;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: center;
+    z-index: 9999;
+
+}
+
+.btn_user_set {
+    position: absolute;
+    top: 274px;
+    left: 30px;
+    width: 142px;
+    height: 32px;
+    font-size: large;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: center;
+    z-index: 9999;
+
+}
+
+.btn_reg_set {
+    position: absolute;
+    top: 327px;
+    left: 30px;
+    width: 142px;
+    height: 32px;
+    font-size: large;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: center;
+    z-index: 9999;
+
+}
+
+.btn_user_delete {
+    position: absolute;
+    top: 510px;
+    left: 600px;
+    width: 50px;
+    height: 25px;
+    font-size: large;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: center;
+    z-index: 9999;
+
+}
+/************Input***************/
+
+#input_user_mng_ip_one {
+    position: absolute;
+    top: 70px;
+    left: 300px;
+    width: 340px;
+    height: 26px;
+}
+
+#input_user_mng_ip_two {
+    position: absolute;
+    top: 130px;
+    left: 300px;
+    width: 340px;
+    height: 26px;
+}
+
+#input_user_mng_ip {
+    position: absolute;
+    top: 160px;
+    left: 240px;
+    width: 340px;
+    height: 26px;
+}
+
+#input_user_mng_name {
+    position: absolute;
+    top: 260px;
+    left: 240px;
+    width: 340px;
+    height: 26px;
+}
+
+#input_user_mng_password {
+    position: absolute;
+    top: 310px;
+    left: 240px;
+    width: 340px;
+    height: 26px;
+}
+
+#input_user_mng_retype {
+    position: absolute;
+    top: 360px;
+    left: 240px;
+    width: 340px;
+    height: 26px;
+}
+
+/*************select*******************/
+#id_admin {
+    position: absolute;
+    top: 510px;
+    left: 240px;
+    width: 340px;
+    height: 26px;
+}
+
+#id_check {
+    position: absolute;
+    top: 510px;
+    left: 240px;
+    width: 340px;
+    height: 26px;
+}
+
+#id_type {
+    position: absolute;
+    top: 190px;
+    left: 300px;
+    width: 70px;
+    height: 26px;
+}
+
+.setup_userAuth_addUser_accessLevel_Administrator_label {
+    position: absolute;
+    top: 200px;
+    left: 280px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+
+.setup_userAuth_addUser_accessLevel_Camera_control_label {
+    position: absolute;
+    top: 200px;
+    left: 450px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+
+.setup_userAuth_addUser_accessLevel_Administrator_radio, .setup_userAuth_addUser_accessLevel_Camera_control_radio {
+    position: absolute;
+    top: 200px;
+}
+
+.setup_userAuth_addUser_accessLevel_Administrator_radio {
+    left: 240px;
+}
+
+.setup_userAuth_addUser_accessLevel_Camera_control_radio {
+    left: 410px;
+}
+
+/*
+ * setting_user_mng_user
+ */
+.setting_user_mng_user_title_hider {
+    position: absolute;
+    top: -29px;
+    left: -20px;
+    width: 20px;
+    height: 28px;
+    background: black;
+}
+
+.setting_user_mng_user_middle_bg {
+    width: 1310px;
+    height: 934px;
+    top: 29px;
+    left: 300px;
+    position: absolute;
+}
+
+.setting_user_mng_user_title {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 28px;
+    line-height: 28px;
+    width: 1610px;
+    background-color: rgb(70, 70, 71);
+}
+
+.setting_user_mng_user_left_bg {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 934px;
+    width: 280px;
+    background-color: rgb(45, 45, 48);
+}
+
+.btn_user_auth_situation.off,
+.btn_user_auth_mode.off,
+.btn_user_auth_add.off,
+.btn_user_auth_edit.off {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/tab_top_R_normal.png);
+    background-size: 100% 100%;
+}
+
+.btn_user_auth_situation.off_hover,
+.btn_user_auth_mode.off_hover,
+.btn_user_auth_add.off_hover,
+.btn_user_auth_edit.off_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/tab_top_R_onMouse.png);
+    background-size: 100% 100%;
+}
+
+.btn_user_auth_situation.on,
+.btn_user_auth_mode.on,
+.btn_user_auth_add.on,
+.btn_user_auth_edit.on {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/tab_top_R_normal.png);
+    background-size: 100% 100%;
+}
+
+.btn_user_auth_situation.on_hover,
+.btn_user_auth_mode.on_hover,
+.btn_user_auth_add.on_hover,
+.btn_user_auth_edit.on_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/tab_top_R_normal.png);
+    background-size: 100% 100%;
+}
+
+.btn_user_auth_situation > *,
+.btn_user_auth_mode > *,
+.btn_user_auth_add > *,
+.btn_user_auth_edit > * {
+    display: table-cell;
+    vertical-align: middle;
+    cursor: default;
+}
+
+.btn_user_auth_situation {
+    position: absolute;
+    top: 35px;
+    left: 30px;
+    width: 200px;
+    height: 26px;
+    font-size: large;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: left;
+}
+
+.btn_user_auth_mode {
+    position: absolute;
+    top: 90px;
+    left: 30px;
+    width: 200px;
+    height: 26px;
+    font-size: large;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: left;
+}
+
+.btn_user_auth_add {
+    position: absolute;
+    top: 115px;
+    left: 30px;
+    width: 200px;
+    height: 26px;
+    font-size: large;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: left;
+}
+
+.btn_user_auth_edit {
+    position: absolute;
+    top: 140px;
+    left: 30px;
+    width: 200px;
+    height: 26px;
+    font-size: large;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: left;
+}
+
+#setting_user_mng_user_situation {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 1310px;
+    height: 905px;
+    background-color: rgb(45, 45, 48);
+}
+
+#setting_user_mng_user_mode {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 280px;
+    height: 905px;
+    background-color: rgb(45, 45, 48);
+}
+
+#setting_user_mng_user_add {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 280px;
+    height: 905px;
+    background-color: rgb(45, 45, 48);
+}
+
+#setting_user_mng_user_delete {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 1310px;
+    height: 905px;
+    background-color: rgb(45, 45, 48);
+}
+
+.setting_user_mng_user_situation_table1 {
+    margin-top: 50px;
+    margin-left: 10px;
+    width: 1300px;
+    height: 50px;
+}
+
+.setting_user_mng_user_situation_table2 {
+    margin-top: 50px;
+    margin-left: 10px;
+    width: 1300px;
+}
+
+.setting_user_mng_user_situation_td_bg {
+    background: rgb(70, 70, 71);
+    height: 25px;
+    line-height: 25px;
+}
+
+.setting_user_mng_user_situation_td_common {
+    height: 25px;
+    line-height: 25px;
+    border-bottom: 1px solid rgb(70, 70, 71);
+}
+
+.setting_user_mng_user_mode_table {
+    margin-left: 10px;
+    width: 1300px;
+    height: 50px;
+}
+
+.setting_user_mng_user_mode_td_common {
+    height: 50px;
+    line-height: 50px;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid rgb(70, 70, 71);
+}
+
+.setting_user_mng_user_mode_span1 {
+    margin-left: 113.5px;
+}
+
+.setting_user_mng_user_mode_span2 {
+    margin-left: 100px;
+}
+
+.setting_user_mng_user_add_table {
+    margin-left: 10px;
+    width: 1300px;
+    height: 50px;
+}
+
+.setting_user_mng_user_add_td_common {
+    height: 50px;
+    line-height: 50px;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid rgb(70, 70, 71);
+}
+
+.setting_user_mng_user_add_input {
+    margin-left: 10px;
+    width: 60%;
+}
+
+/*
+ * setting_user_mng_host
+ */
+.setting_user_mng_host_title_hider {
+    position: absolute;
+    top: -29px;
+    left: -20px;
+    width: 20px;
+    height: 28px;
+    background: black;
+}
+
+.setting_user_mng_host_middle_bg {
+    width: 1310px;
+    height: 934px;
+    top: 29px;
+    left: 300px;
+    position: absolute;
+}
+
+.setting_user_mng_host_title {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 28px;
+    line-height: 28px;
+    width: 1610px;
+    background-color: rgb(70, 70, 71);
+}
+
+.setting_user_mng_host_left_bg {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 934px;
+    width: 280px;
+    background-color: rgb(45, 45, 48);
+}
+
+#setting_user_mng_host_situation {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 1310px;
+    height: 905px;
+    background-color: rgb(45, 45, 48);
+}
+
+#setting_user_mng_host_mode {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 280px;
+    height: 905px;
+    background-color: rgb(45, 45, 48);
+}
+
+#setting_user_mng_host_add {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 280px;
+    height: 905px;
+    background-color: rgb(45, 45, 48);
+}
+
+#setting_user_mng_host_delete {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 1310px;
+    height: 905px;
+    background-color: rgb(45, 45, 48);
+}
+
+.btn_host_auth_situation.off,
+.btn_host_auth_mode.off,
+.btn_host_auth_add.off,
+.btn_host_auth_edit.off {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/tab_top_R_normal.png);
+    background-size: 100% 100%;
+}
+
+.btn_host_auth_situation.off_hover,
+.btn_host_auth_mode.off_hover,
+.btn_host_auth_add.off_hover,
+.btn_host_auth_edit.off_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/tab_top_R_onMouse.png);
+    background-size: 100% 100%;
+}
+
+.btn_host_auth_situation.on,
+.btn_host_auth_mode.on,
+.btn_host_auth_add.on,
+.btn_host_auth_edit.on {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/tab_top_R_normal.png);
+    background-size: 100% 100%;
+}
+
+.btn_host_auth_situation.on_hover,
+.btn_host_auth_mode.on_hover,
+.btn_host_auth_add.on_hover,
+.btn_host_auth_edit.on_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/tab_top_R_normal.png);
+    background-size: 100% 100%;
+}
+
+.btn_host_auth_situation > *,
+.btn_host_auth_mode > *,
+.btn_host_auth_add > *,
+.btn_host_auth_edit > * {
+    display: table-cell;
+    vertical-align: middle;
+    cursor: default;
+}
+
+.btn_host_auth_situation {
+    position: absolute;
+    top: 35px;
+    left: 30px;
+    width: 200px;
+    height: 26px;
+    font-size: large;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: left;
+}
+
+.btn_host_auth_mode {
+    position: absolute;
+    top: 90px;
+    left: 30px;
+    width: 200px;
+    height: 26px;
+    font-size: large;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: left;
+}
+
+.btn_host_auth_add {
+    position: absolute;
+    top: 115px;
+    left: 30px;
+    width: 200px;
+    height: 26px;
+    font-size: large;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: left;
+}
+
+.btn_host_auth_edit {
+    position: absolute;
+    top: 140px;
+    left: 30px;
+    width: 200px;
+    height: 26px;
+    font-size: large;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: left;
+}
+
+.setting_user_mng_host_situation_table1 {
+    margin-top: 50px;
+    margin-left: 10px;
+    width: 1300px;
+    height: 50px;
+}
+
+.setting_user_mng_host_situation_table2 {
+    margin-top: 50px;
+    margin-left: 10px;
+    width: 1300px;
+}
+
+.setting_user_mng_host_situation_td_bg {
+    background: rgb(70, 70, 71);
+    height: 25px;
+    line-height: 25px;
+}
+
+.setting_user_mng_host_situation_td_common {
+    height: 25px;
+    line-height: 25px;
+    border-bottom: 1px solid rgb(70, 70, 71);
+}
+
+.setting_user_mng_host_mode_table {
+    margin-left: 10px;
+    width: 1300px;
+    height: 50px;
+}
+
+.setting_user_mng_host_mode_td_common {
+    height: 50px;
+    line-height: 50px;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid rgb(70, 70, 71);
+}
+
+.setting_user_mng_host_mode_span1 {
+    margin-left: 113.5px;
+}
+
+.setting_user_mng_host_mode_span2 {
+    margin-left: 100px;
+}
+
+.setting_user_mng_host_add_table {
+    margin-left: 10px;
+    width: 1300px;
+    height: 50px;
+}
+
+.setting_user_mng_host_add_td_common {
+    height: 50px;
+    line-height: 50px;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid rgb(70, 70, 71);
+}
+
+.setting_user_mng_host_add_input {
+    margin-left: 10px;
+    width: 60%;
+}
+
+
+/*****************line*******************/
+.modeDivInnerLine1 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top: 78px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+
+.modeDivInnerLine2 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top: 156px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+
+.modeDivInnerLine3 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top: 78px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+
+.modeDivInnerLine4 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top: 155px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+
+.modeDivInnerLine5 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top: 232px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+
+.modeDivInnerLine6 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top: 309px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+
+.modeDivInnerLine7 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top: 78px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+
+.modeDivInnerLine8 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top: 78px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+
+.modeDivInnerLine9 {
+    position: absolute;
+    height: 1px;
+    width: 97.5%;
+    top: 156px;
+    left: 20px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+
+.setup_user_mode_host_authOn_radio {
+    position: absolute;
+    top: 25px;
+    left: 19px;
+    z-index: 2;
+}
+
+.setup_user_mode_host_authOff_radio {
+    position: absolute;
+    top: 25px;
+    left: 219px;
+    z-index: 2;
+}
+
+.setup_user_mode_user_authOn_radio {
+    position: absolute;
+    top: 25px;
+    left: 19px;
+    z-index: 2;
+}
+
+.setup_user_mode_user_authOff_radio {
+    position: absolute;
+    top: 25px;
+    left: 219px;
+    z-index: 2;
+}
+
+.setup_user_mode_wait_timeMode1_radio {
+    position: absolute;
+    top: 171px;
+    left: 19px;
+    z-index: 2;
+}
+
+.setup_user_mode_wait_timeMode2_radio {
+    position: absolute;
+    top: 171px;
+    left: 219px;
+    z-index: 2;
+}
+
+.setup_user_mode_host_authOn_label {
+    position: absolute;
+    left: 69px;
+    top: 32px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+
+.setup_user_mode_host_authOff_label {
+    position: absolute;
+    left: 275px;
+    top: 32px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+.setup_user_mode_warning_message{
+    position: absolute;
+    left: 10px;
+    width: 251px;
+    height: 52px;
+    line-height: 26px;
+    display: table;
+    font-size: large;
+    text-align: left;
+    top: 220px;
+    color: red;
+}
+.setup_user_mode_user_authOn_label {
+    position: absolute;
+    left: 69px;
+    top: 32px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+
+.setup_user_mode_user_authOff_label {
+    position: absolute;
+    left: 275px;
+    top: 32px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+
+.setup_user_mode_wait_timeMode1_label  {
+    position: absolute;
+    left: 69px;
+    top: 175px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+
+.setup_user_mode_wait_timeMode2_label  {
+    position: absolute;
+    left: 275px;
+    top: 175px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+
+.setup_user_mode_authenticationBasic_radio {
+    position: absolute;
+    top: 98px;
+    left: 19px;
+    z-index: 2;
+}
+
+.setup_user_mode_authenticationDigest_radio {
+    position: absolute;
+    top: 98px;
+    left: 219px;
+    z-index: 2;
+}
+
+.setup_user_mode_authenticationBasic_label {
+    position: absolute;
+    left: 69px;
+    top: 107px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+
+.setup_user_mode_authenticationDigest_label {
+    position: absolute;
+    left: 275px;
+    top: 105px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+
+.setup_user_mode_access_level1_Administrator_radio {
+    position: absolute;
+    top: 255px;
+    left: 19px;
+    z-index: 2;
+}
+
+.setup_user_mode_access_level2_Camera_control_radio {
+    position: absolute;
+    top: 255px;
+    left: 219px;
+    z-index: 2;
+}
+
+.setup_user_mode_access_level1_Administrator_label {
+    position: absolute;
+    left: 69px;
+    top: 262px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+
+.setup_user_mode_access_level2_Camera_control_label {
+    position: absolute;
+    left: 269px;
+    top: 262px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+
+.setup_user_mode_host_auth_access_level1_Administrator_radio {
+    position: absolute;
+    top: 100px;
+    left: 19px;
+    z-index: 2;
+}
+
+.setup_user_mode_host_auth_access_level2_Camera_control_radio{
+    position: absolute;
+    top: 100px;
+    left: 219px;
+    z-index: 2;
+}
+
+.setup_user_mode_host_auth_access_level1_Administrator_label   {
+    position: absolute;
+    left: 69px;
+    top: 108px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+
+.setup_user_mode_host_auth_access_level2_Camera_control_label {
+    position: absolute;
+    left: 269px;
+    top: 108px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+
+
+.setting_basic_system_genlock_note >*,
+.setup_priority_streamOn_label > *,
+.setup_priority_streamOff_label > *,
+.user_priority_stream > *,
+.user_priority_stream_activation > *,
+.user_priority_stream_dis_ip_one > *,
+.user_priority_stream_dis_ip_two > *,
+.user_priority_stream_type > *,
+.host_user_add_user_ip > *,
+.setup_user_mode_authenticationDigest_label > *,
+.setup_user_mode_authenticationBasic_label > *,
+.setup_user_mode_user_authOn_label > *,
+.setup_user_mode_user_authOff_label > *,
+.setup_user_mode_wait_timeMode1_label > *,
+.setup_user_mode_wait_timeMode2_label > *,
+.setup_user_mode_host_authOn_label > *,
+.setup_user_mode_host_authOff_label > *,
+.setup_user_mode_access_level1_Administrator_label > *,
+.setup_user_mode_access_level2_Camera_control_label > *,
+.setup_user_mode_host_auth_access_level1_Administrator_label > *,
+.setup_user_mode_host_auth_access_level2_Camera_control_label > * {
+    vertical-align: middle;
+    display: table-cell;
+}
+#setting_priority_stream_type {
+    position: absolute;
+    top: 200px;
+    left: 350px;
+    z-index: 2;
+}
+
+.setting_basic_system_genlock_note{
+    position: absolute;
+    left: 800px;
+    top: 80px;
+    cursor: default;
+    font-size: large;
+    z-index: 2;
+}
+.btn_setting_user_mode_Line{
+    position: absolute;
+    top: 174px;
+    left: 20px;
+}
+.btn_setting_user_add_Line{
+    position: absolute;
+    top: 204px;
+    left: 20px;
+}
+
+.setting_user_mng_main_title_label {
+    position: absolute;
+    left: 33px;
+    top: 0px;
+    cursor: default;
+    text-align: center;
+    font-size: large;
+    background-color: rgb(70, 70, 71);
+}
+
+.setting_user_mng_main_title_label > * {
+    vertical-align: middle;
+    display: table-cell;
+}
+.setting_user_mng_main_title_label >P{
+    position: absolute;
+    top: -13px;
+    left: 0px;
+}
+
+.setting_host_mng_main_title_label {
+    position: absolute;
+    left: 33px;
+    top: 0px;
+    cursor: default;
+    text-align: center;
+    font-size: large;
+    background-color: rgb(70, 70, 71);
+}
+.setting_host_mng_main_title_label > * {
+    vertical-align: middle;
+    display: table-cell;
+}
+
+.host_auth_setting >p{
+    position: absolute;
+    top: -10px;
+    left: 33px;
+}
+#setup_userMng_userAuth_status_userAuth_title_main{
+    position: absolute;
+    left: 20px;
+    width: 97.5%;
+    height: 30px;
+    line-height: 26px;
+    display: table;
+    font-size: large;
+    text-align: left;
+    top: 25px;
+    background-color: rgb(70, 70, 71);
+}
+.setup_userMng_userAuth_status_userAuth_title{
+    position: absolute;
+    display: table;
+    font-size: large;
+    text-align: left;
+    cursor: default;
+    z-index: 2;
+    height: 30px;
+    line-height: 2px;
+    left: 0px;
+    width: 0%;
+    padding-left: 33px;
+}
+.setup_userMng_userAuth_status_authentication_title{
+    position: absolute;
+    display: table;
+    font-size: large;
+    text-align: left;
+    cursor: default;
+    z-index: 2;
+    height: 30px;
+    line-height: 2px;
+    left: 200px;
+    width: 0%;
+    padding-left: 33px;
+}
+.setup_userMng_userAuth_status_userAuth_title > P,
+.setup_userMng_userAuth_status_authentication_title > P{
+    position: absolute;
+    top: -5px;
+    left: 33px;
+}
+#setup_userMng_userAuth_status_userAuth_value_main{
+    position: absolute;
+    left: 20px;
+    width: 85%;
+    height: 30px;
+    line-height: 26px;
+    display: table;
+    font-size: large;
+    text-align: left;
+    top: 55px;
+    background-color: rgb(0, 0, 0);
+}
+.setup_userMng_userAuth_status_userAuth_value{
+    position: absolute;
+    left: 20px;
+    width: 251px;
+    height: 52px;
+    line-height: 26px;
+    display: table;
+    font-size: large;
+    text-align: left;
+    top: 10px;
+}
+.setup_userMng_userAuth_status_authentication_value{
+    position: absolute;
+    left: 220px;
+    width: 251px;
+    height: 52px;
+    line-height: 26px;
+    display: table;
+    font-size: large;
+    text-align: left;
+    top: 10px;
+}
+.setup_userMng_userAuth_status_warningMessage{
+    position: absolute;
+    left: 380px;
+    width: 251px;
+    height: 52px;
+    line-height: 26px;
+    display: table;
+    font-size: large;
+    text-align: left;
+    top: 10px;
+    color: red;
+}
+.setup_userMng_userAuth_status_userAuth_value > P,
+.setup_userMng_userAuth_status_authentication_value > P,
+.setup_userMng_userAuth_status_warningMessage > P{
+    position: absolute;
+    top: -5px;
+    left: 33px;
+}
+#setup_userMng_userAuth_status_userList_title_main{
+    position: absolute;
+    left: 20px;
+    width: 97.5%;
+    height: 30px;
+    line-height: 26px;
+    display: table;
+    font-size: large;
+    text-align: left;
+    top: 120px;
+    background-color: rgb(70, 70, 71);
+}
+.setup_userMng_userAuth_status_userList_no_title {
+    position: absolute;
+    display: table;
+    font-size: large;
+    text-align: left;
+    cursor: default;
+    z-index: 2;
+    height: 30px;
+    line-height: 2px;
+    left: 0px;
+    width: 0%;
+    padding-left: 33px;
+}
+.setup_userMng_userAuth_status_userList_name_title {
+    position: absolute;
+    display: table;
+    font-size: large;
+    text-align: left;
+    cursor: default;
+    z-index: 2;
+    height: 30px;
+    line-height: 2px;
+    left: 200px;
+    width: 0%;
+    padding-left: 33px;
+}
+.setup_userMng_userAuth_status_userList_accessLevel_title {
+    position: absolute;
+    display: table;
+    font-size: large;
+    text-align: left;
+    cursor: default;
+    z-index: 2;
+    height: 30px;
+    line-height: 2px;
+    left: 400px;
+    width: 0%;
+    padding-left: 33px;
+}
+.setup_userMng_userAuth_status_userList_no_title > P,
+.setup_userMng_userAuth_status_userList_name_title > P,
+.setup_userMng_userAuth_status_userList_accessLevel_title > P{
+    position: absolute;
+    top: -5px;
+    left: 33px;
+}
+#usertable {
+    top: 170px;
+    left: 35px;
+    width: 97.5%;
+}
+#usertable td{
+    padding-left: 30px;
+    height: 25px;
+    border-bottom: 1px solid rgb(70, 70, 71);
+    font-size:large;
+}
+#setup_userMng_userAuth_status_userDelete_title_main {
+    position: absolute;
+    left: 20px;
+    width: 97.5%;
+    height: 30px;
+    line-height: 26px;
+    display: table;
+    font-size: large;
+    text-align: left;
+    top: 24px;
+    background-color: rgb(70, 70, 71);
+}
+.setup_userMng_userAuth_status_userDelete_no_title {
+    position: absolute;
+    display: table;
+    font-size: large;
+    text-align: left;
+    cursor: default;
+    z-index: 2;
+    height: 30px;
+    line-height: 2px;
+    left: 0px;
+    width: 0%;
+    padding-left: 33px;
+}
+.setup_userMng_userAuth_status_userDelete_name_title {
+    position: absolute;
+    display: table;
+    font-size: large;
+    text-align: left;
+    cursor: default;
+    z-index: 2;
+    height: 30px;
+    line-height: 2px;
+    left: 180px;
+    width: 0%;
+    padding-left: 33px;
+}
+.setup_userMng_userAuth_status_userDelete_accessLevel_title {
+    position: absolute;
+    display: table;
+    font-size: large;
+    text-align: left;
+    cursor: default;
+    z-index: 2;
+    height: 30px;
+    line-height: 2px;
+    left: 400px;
+    width: 0%;
+    padding-left: 33px;
+}
+.setup_userMng_userAuth_status_userDelete_delete_title {
+    position: absolute;
+    display: table;
+    font-size: large;
+    text-align: left;
+    cursor: default;
+    z-index: 2;
+    height: 30px;
+    line-height: 2px;
+    left: 800px;
+    width: 0%;
+    padding-left: 33px;
+}
+.setup_userMng_userAuth_status_userDelete_no_title > P,
+.setup_userMng_userAuth_status_userDelete_name_title > P,
+.setup_userMng_userAuth_status_userDelete_accessLevel_title > P,
+.setup_userMng_userAuth_status_userDelete_delete_title > P{
+    position: absolute;
+    top: -5px;
+    left: 33px;
+}
+#deleteUsertable{
+    top:30px;
+    left:20px;
+}
+#deleteUsertable td{
+    padding-left: 30px;
+    height: 25px;
+    font-size:large;
+    border-bottom: 1px solid rgb(70, 70, 71);;
+}
+#setup_userMng_userAuth_status_hostDelete_title_main {
+    position: absolute;
+    left: 20px;
+    width: 97.5%;
+    height: 30px;
+    line-height: 26px;
+    display: table;
+    font-size: large;
+    text-align: left;
+    top: 24px;
+    background-color: rgb(70, 70, 71);
+}
+.setup_userMng_userAuth_status_hostDelete_no_title {
+    position: absolute;
+    display: table;
+    font-size: large;
+    text-align: left;
+    cursor: default;
+    z-index: 2;
+    height: 30px;
+    line-height: 2px;
+    left: 0px;
+    width: 0%;
+    padding-left: 33px;
+}
+.setup_userMng_userAuth_status_hostDelete_name_title {
+    position: absolute;
+    display: table;
+    font-size: large;
+    text-align: left;
+    cursor: default;
+    z-index: 2;
+    height: 30px;
+    line-height: 2px;
+    left: 200px;
+    width: 0%;
+    padding-left: 33px;
+}
+.setup_userMng_userAuth_status_hostDelete_accessLevel_title {
+    position: absolute;
+    display: table;
+    font-size: large;
+    text-align: left;
+    cursor: default;
+    z-index: 2;
+    height: 30px;
+    line-height: 2px;
+    left: 480px;
+    width: 0%;
+    padding-left: 33px;
+}
+.setup_userMng_userAuth_status_hostDelete_delete_title {
+    position: absolute;
+    display: table;
+    font-size: large;
+    text-align: left;
+    cursor: default;
+    z-index: 2;
+    height: 30px;
+    line-height: 2px;
+    left: 800px;
+    width: 0%;
+    padding-left: 33px;
+}
+.setup_userMng_userAuth_status_hostDelete_no_title > P,
+.setup_userMng_userAuth_status_hostDelete_name_title > P,
+.setup_userMng_userAuth_status_hostDelete_accessLevel_title > P,
+.setup_userMng_userAuth_status_hostDelete_delete_title > P{
+    position: absolute;
+    top: -5px;
+    left: 33px;
+}
+#deleteHosttable{
+    top:30px;
+    left:20px;
+}
+#deleteHosttable td{
+    padding-left: 30px;
+    height: 25px;
+    font-size:large;
+    border-bottom: 1px solid rgb(70, 70, 71);;
+}
+
+#setup_userMng_hostAuth_status_hostAuth_title_main{
+    position: absolute;
+    left: 20px;
+    width: 97.5%;
+    height: 30px;
+    line-height: 26px;
+    display: table;
+    font-size: large;
+    text-align: left;
+    top: 25px;
+    background-color: rgb(70, 70, 71);
+}
+.setup_userMng_hostAuth_status_hostAuth_title{
+    position: absolute;
+    display: table;
+    font-size: large;
+    text-align: left;
+    cursor: default;
+    z-index: 2;
+    height: 30px;
+    line-height: 2px;
+    left: 0px;
+    width: 0%;
+    padding-left: 33px;
+}
+.setup_userMng_hostAuth_status_hostAuth_title > P {
+    position: absolute;
+    top: -5px;
+    left: 33px;
+}
+#setup_userMng_hostAuth_status_hostAuth_value_main{
+    position: absolute;
+    left: 20px;
+    width: 85%;
+    height: 30px;
+    line-height: 26px;
+    display: table;
+    font-size: large;
+    text-align: left;
+    top: 55px;
+    background-color: rgb(0, 0, 0);
+}
+.setup_userMng_hostAuth_status_hostAuth_value{
+    position: absolute;
+    left: 10px;
+    width: 251px;
+    height: 52px;
+    line-height: 26px;
+    display: table;
+    font-size: large;
+    text-align: left;
+    top: 10px;
+}
+
+.setup_userMng_hostAuth_status_hostAuth_value > P{
+    position: absolute;
+    top: -5px;
+    left: 33px;
+}
+#setup_userMng_hostAuth_status_hostList_title_main{
+    position: absolute;
+    left: 20px;
+    width: 97.5%;
+    height: 30px;
+    line-height: 26px;
+    display: table;
+    font-size: large;
+    text-align: left;
+    top: 120px;
+    background-color: rgb(70, 70, 71);
+}
+.setup_userMng_hostAuth_status_hostList_no_title {
+    position: absolute;
+    display: table;
+    font-size: large;
+    text-align: left;
+    cursor: default;
+    z-index: 2;
+    height: 30px;
+    line-height: 2px;
+    left: 0px;
+    width: 0%;
+    padding-left: 33px;
+}
+.setup_userMng_hostAuth_status_hostList_name_title {
+    position: absolute;
+    display: table;
+    font-size: large;
+    text-align: left;
+    cursor: default;
+    z-index: 2;
+    height: 30px;
+    line-height: 2px;
+    left: 200px;
+    width: 0%;
+    padding-left: 33px;
+}
+.setup_userMng_hostAuth_status_hostList_accessLevel_title {
+    position: absolute;
+    display: table;
+    font-size: large;
+    text-align: left;
+    cursor: default;
+    z-index: 2;
+    height: 30px;
+    line-height: 2px;
+    left: 480px;
+    width: 0%;
+    padding-left: 33px;
+}
+.setup_userMng_hostAuth_status_hostList_no_title > P,
+.setup_userMng_hostAuth_status_hostList_name_title > P,
+.setup_userMng_hostAuth_status_hostList_accessLevel_title > P{
+    position: absolute;
+    top: -5px;
+    left: 33px;
+}
+#hosttable {
+    top: 160px;
+    left: 20px;
+}
+#hosttable td{
+    padding-left: 30px;
+    height: 25px;
+    border-bottom: 1px solid rgb(70, 70, 71);
+    font-size:large;
+}

@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>ATEM Micro Panel – Interactive</title>
+    <style>
+        :root{
+            --panel-w: 1220px;
+            --btn: 54px;
+            --gap: 10px;
+            --radius: 10px;
+            --font: 12px;
+            --panel-radius: 22px;
+        }
+        body{
+            background: radial-gradient(1200px 500px at 50% 10%, #1c1c1c, #0f0f10);
+            min-height:100dvh; display:grid; place-items:center; margin:0;
+            font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+            color:#ddd;
+        }
+        .panel{
+            width: min(95vw, var(--panel-w));
+            padding: 28px 28px 32px;
+            border-radius: var(--panel-radius);
+            background:
+                    radial-gradient(120% 120% at 30% -10%, #1a1a1c 0 60%, #0c0c0d 100%),
+                    linear-gradient(#0b0b0c, #0b0b0c);
+            box-shadow:
+                    inset 0 8px 18px rgba(255,255,255,0.04),
+                    inset 0 -8px 18px rgba(0,0,0,0.5),
+                    0 18px 40px rgba(0,0,0,0.6);
+            position: relative;
+        }
+        .brand{ position:absolute; top:14px; right:26px; opacity:.85; font-size:13px; }
+        .title{ position:absolute; top:14px; left:26px; opacity:.85; font-size:16px; }
+
+        .surface{
+            display:grid;
+            grid-template-columns: repeat(24, minmax(24px, 1fr));
+            grid-auto-rows: var(--btn);
+            gap: var(--gap);
+            margin-top: 30px;
+            align-items:center;
+        }
+
+        .key{
+            height: var(--btn);
+            border-radius: var(--radius);
+            display:grid; place-items:center;
+            font-weight:600; font-size: var(--font);
+            line-height:1; text-align:center;
+            user-select:none; cursor:pointer;
+            box-shadow:
+                    inset 0 1px 0 rgba(255,255,255,.25),
+                    inset 0 -3px 8px rgba(0,0,0,.55),
+                    0 4px 8px rgba(0,0,0,.35);
+            background: linear-gradient(#efefef,#dbdbdb 55%,#cfcfcf);
+            color:#111;
+            transition: transform .02s ease, box-shadow .15s ease, filter .15s ease;
+        }
+        .key:active{ transform: translateY(1px); filter: brightness(.98); }
+        .sm{ font-size:10px; }
+        .pill{ border-radius: 9px; height: calc(var(--btn) - 6px); margin:auto 0; }
+
+        /* states/colors */
+        .lit-red{
+            background: radial-gradient(circle at 50% 35%, #ff6f6f, #ff3b3b 60%, #b11818);
+            color:#220; text-shadow: 0 1px 0 rgba(0,0,0,.25);
+            box-shadow:
+                    0 0 10px rgba(255,60,60,.45),
+                    inset 0 -6px 12px rgba(0,0,0,.45),
+                    inset 0 2px 0 rgba(255,255,255,.25);
+        }
+        .lit-amber{
+            background: radial-gradient(circle at 50% 35%, #ffd77a, #ffbf3b 60%, #b36f06);
+            color:#261b00;
+            box-shadow:
+                    0 0 10px rgba(255,191,59,.4),
+                    inset 0 -6px 12px rgba(0,0,0,.45),
+                    inset 0 2px 0 rgba(255,255,255,.25);
+        }
+        .lit-green{
+            background: radial-gradient(circle at 50% 35%, #83ff9a, #3be26a 60%, #14803a);
+            color:#06240f;
+            box-shadow:
+                    0 0 10px rgba(59,226,106,.45),
+                    inset 0 -6px 12px rgba(0,0,0,.45),
+                    inset 0 2px 0 rgba(255,255,255,.25);
+        }
+        .grey{ background: linear-gradient(#f1f1f1,#e7e7e7 60%,#d6d6d6); }
+
+        /* Fader */
+        .fader-wrap{ grid-column: 16 / span 3; grid-row: 2 / span 5; display:grid; place-items:center; }
+        .fader-slot{
+            width: 70px; height: 300px; border-radius: 12px;
+            background: linear-gradient(#131313,#0b0b0b);
+            box-shadow: inset 0 8px 18px rgba(0,0,0,.8), inset 0 -8px 18px rgba(0,0,0,.6);
+            position:relative; touch-action: none;
+        }
+        .fader-line{ position:absolute; left: 50%; top: 18px; bottom: 18px; width: 3px; transform:translateX(-50%); background: linear-gradient(#1f1f1f, #0e0e0e); border-radius:2px; }
+        .fader-knob{
+            width: 38px; height: 74px; border-radius:10px; position:absolute;
+            left:50%; transform: translate(-50%,-50%); top: 48%;
+            background: linear-gradient(#2b2b2b,#0f0f0f);
+            box-shadow: inset 0 8px 10px rgba(255,255,255,.06), inset 0 -10px 14px rgba(0,0,0,.7), 0 8px 18px rgba(0,0,0,.6);
+            cursor:grab; touch-action: none;
+        }
+        .fader-knob:active{ cursor:grabbing; }
+
+        [style*="--c"]{ grid-column: var(--c); }
+        [style*="--r"]{ grid-row: var(--r); }
+
+        @media (max-width: 1100px){ :root{ --btn: 48px; } }
+        @media (max-width: 900px){ :root{ --btn: 42px; --gap: 8px; } }
+    </style>
+</head>
+<body>
+<div class="panel" id="panel">
+    <div class="title">ATEM Micro Panel</div>
+    <div class="brand">Blackmagicdesign</div>
+
+    <div class="surface">
+
+        <!-- ===== TOP-LEFT MACRO/BKGD & KEY 1..4 ===== -->
+        <div class="key grey sm"  data-toggle data-color="grey" style="--c: 6 / span 1; --r: 1">MACRO</div>
+        <div class="key grey sm"  data-toggle data-color="grey" style="--c: 6 / span 1; --r: 2">BKGD</div>
+
+        <div class="key lit-red"       data-toggle data-color="lit-red"  style="--c: 8 / span 1; --r: 1">ON</div>
+        <div class="key lit-amber sm"  data-toggle data-color="lit-amber" style="--c: 8 / span 1; --r: 2">KEY 1</div>
+
+        <div class="key lit-red"       data-toggle data-color="lit-red"  style="--c: 9 / span 1; --r: 1">ON</div>
+        <div class="key lit-amber sm"  data-toggle data-color="lit-amber" style="--c: 9 / span 1; --r: 2">KEY 2</div>
+
+        <div class="key lit-red"       data-toggle data-color="lit-red"  style="--c: 10 / span 1; --r: 1">ON</div>
+        <div class="key grey sm"       data-toggle data-color="grey" style="--c: 10 / span 1; --r: 2">KEY 3</div>
+
+        <div class="key lit-red"       data-toggle data-color="lit-red"  style="--c: 11 / span 1; --r: 1">ON</div>
+        <div class="key grey sm"       data-toggle data-color="grey" style="--c: 11 / span 1; --r: 2">KEY 4</div>
+
+        <!-- ===== TOP CENTER: M/E 1..4 ===== -->
+        <div class="key grey sm"   data-toggle data-color="grey"   style="--c: 14 / span 1; --r: 1">M/E 1</div>
+        <div class="key lit-amber sm" data-toggle data-color="lit-amber" style="--c: 15 / span 1; --r: 1">M/E 2</div>
+        <div class="key grey sm"   data-toggle data-color="grey"   style="--c: 16 / span 1; --r: 1">M/E 3</div>
+        <div class="key grey sm"   data-toggle data-color="grey"   style="--c: 17 / span 1; --r: 1">M/E 4</div>
+
+        <!-- DIP / DVE / STING -->
+        <div class="key grey sm"   data-toggle data-color="grey"   style="--c: 14 / span 1; --r: 2">DIP</div>
+        <div class="key grey sm"   data-toggle data-color="grey"   style="--c: 15 / span 1; --r: 2">DVE</div>
+        <div class="key grey sm"   data-toggle data-color="grey"   style="--c: 16 / span 1; --r: 2">STING</div>
+
+        <!-- MIX / WIPE / ARM -->
+        <div class="key lit-amber sm" data-toggle data-color="lit-amber" style="--c: 14 / span 1; --r: 3">MIX</div>
+        <div class="key grey sm"   data-toggle data-color="grey"   style="--c: 15 / span 1; --r: 3">WIPE</div>
+        <div class="key grey sm"   data-toggle data-color="grey"   style="--c: 16 / span 1; --r: 3">ARM</div>
+
+        <!-- SHIFT / PREV TRANS / CUT / AUTO -->
+        <div class="key grey sm"  data-toggle data-color="grey"   style="--c: 12 / span 1; --r: 4">SHIFT</div>
+        <div class="key grey sm"  data-toggle data-color="grey"   style="--c: 12 / span 1; --r: 6">PREV<br>TRANS</div>
+        <div class="key grey sm"  data-toggle data-color="grey"   style="--c: 14 / span 1; --r: 6">CUT</div>
+        <div class="key lit-red pill" data-toggle data-color="lit-red" style="--c: 15 / span 1; --r: 6">AUTO</div>
+
+        <!-- ===== VERTICAL FADER ===== -->
+        <div class="fader-wrap">
+            <div class="fader-slot" id="fader" aria-label="T-bar" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="52">
+                <div class="fader-line"></div>
+                <div class="fader-knob" id="faderKnob"></div>
+            </div>
+        </div>
+
+        <!-- ===== RIGHT CLUSTER ===== -->
+        <div class="key lit-amber sm" data-toggle data-color="lit-amber" style="--c: 20 / span 1; --r: 2">DSK 1<br>TIE</div>
+        <div class="key lit-amber sm" data-toggle data-color="lit-amber" style="--c: 22 / span 1; --r: 2">DSK 2<br>TIE</div>
+
+        <div class="key lit-red sm" data-toggle data-color="lit-red" style="--c: 20 / span 1; --r: 4">DSK 1<br>CUT</div>
+        <div class="key grey sm"   data-toggle data-color="grey"    style="--c: 20 / span 1; --r: 5">DSK 1<br>AUTO</div>
+
+        <div class="key lit-red sm" data-toggle data-color="lit-red" style="--c: 22 / span 1; --r: 4">DSK 2<br>CUT</div>
+        <div class="key grey sm"   data-toggle data-color="grey"    style="--c: 22 / span 1; --r: 5">DSK 2<br>AUTO</div>
+
+        <!-- ===== PROGRAM (exclusive, red) ===== -->
+        <div class="key grey" data-group="program" style="--c: 4 / span 1; --r: 3">1</div>
+        <div class="key grey" data-group="program" style="--c: 5 / span 1; --r: 3">2</div>
+        <div class="key grey" data-group="program" style="--c: 6 / span 1; --r: 3">3</div>
+        <div class="key lit-red" data-group="program" style="--c: 7 / span 1; --r: 3">4</div>
+        <div class="key grey" data-group="program" style="--c: 8 / span 1; --r: 3">5</div>
+        <div class="key grey" data-group="program" style="--c: 9 / span 1; --r: 3">6</div>
+        <div class="key grey" data-group="program" style="--c: 10 / span 1; --r: 3">7</div>
+        <div class="key grey" data-group="program" style="--c: 11 / span 1; --r: 3">8</div>
+        <div class="key grey" data-group="program" style="--c: 12 / span 1; --r: 3">9</div>
+        <div class="key grey" data-group="program" style="--c: 13 / span 1; --r: 3">10</div>
+
+        <!-- ===== PREVIEW (exclusive, green) ===== -->
+        <div class="key grey"  data-group="preview" style="--c: 4 / span 1; --r: 5">1</div>
+        <div class="key grey"  data-group="preview" style="--c: 5 / span 1; --r: 5">2</div>
+        <div class="key lit-green" data-group="preview" style="--c: 6 / span 1; --r: 5">3</div>
+        <div class="key grey"  data-group="preview" style="--c: 7 / span 1; --r: 5">4</div>
+        <div class="key grey"  data-group="preview" style="--c: 8 / span 1; --r: 5">5</div>
+        <div class="key grey"  data-group="preview" style="--c: 9 / span 1; --r: 5">6</div>
+        <div class="key grey"  data-group="preview" style="--c: 10 / span 1; --r: 5">7</div>
+        <div class="key grey"  data-group="preview" style="--c: 11 / span 1; --r: 5">8</div>
+        <div class="key grey"  data-group="preview" style="--c: 12 / span 1; --r: 5">9</div>
+        <div class="key grey"  data-group="preview" style="--c: 13 / span 1; --r: 5">10</div>
+
+    </div>
+</div>
+
+<script>
+    // --- Toggle keys (momentary/latching visual) ---
+    document.querySelectorAll('.key[data-toggle]').forEach(key=>{
+        key.addEventListener('click', ()=>{
+            const colorClass = key.dataset.color || 'grey';
+            const isLit = key.classList.contains('lit-red') || key.classList.contains('lit-amber') || key.classList.contains('lit-green');
+            // if already lit, turn off -> grey; else apply its target color
+            if(isLit){
+                key.classList.remove('lit-red','lit-amber','lit-green');
+                key.classList.add('grey');
+            }else{
+                key.classList.remove('grey','lit-red','lit-amber','lit-green');
+                key.classList.add(colorClass);
+            }
+        });
+    });
+
+    // --- Exclusive groups (program/preview buses) ---
+    function setExclusive(group, clicked){
+        const keys = [...document.querySelectorAll(`.key[data-group="${group}"]`)];
+        keys.forEach(k => k.classList.remove('lit-red','lit-green','lit-amber'));
+        keys.forEach(k => k.classList.add('grey'));
+        clicked.classList.remove('grey');
+        clicked.classList.add(group === 'program' ? 'lit-red' : 'lit-green');
+    }
+    document.querySelectorAll('.key[data-group]').forEach(key=>{
+        key.addEventListener('click', ()=> setExclusive(key.dataset.group, key));
+    });
+
+    // --- Fader drag (mouse + touch) ---
+    (function(){
+        const slot = document.getElementById('fader');
+        const knob = document.getElementById('faderKnob');
+        const padding = 18; // from .fader-line top/bottom
+        let dragging = false;
+
+        function posToPercent(clientY){
+            const rect = slot.getBoundingClientRect();
+            const minY = rect.top + padding;
+            const maxY = rect.bottom - padding;
+            const y = Math.min(Math.max(clientY, minY), maxY);
+            const t = (y - minY) / (maxY - minY);       // 0 @ top -> 1 @ bottom
+            const percent = Math.round((1 - t) * 100);  // 100 top, 0 bottom
+            return { y, percent };
+        }
+
+        function moveTo(clientY){
+            const { y, percent } = posToPercent(clientY);
+            const rect = slot.getBoundingClientRect();
+            knob.style.top = (y - rect.top) + 'px';
+            slot.setAttribute('aria-valuenow', String(percent));
+            // console.log('Fader:', percent); // hook here
+        }
+
+        // Mouse
+        knob.addEventListener('mousedown', e=>{ dragging=true; e.preventDefault(); });
+        window.addEventListener('mousemove', e=>{ if(dragging) moveTo(e.clientY); });
+        window.addEventListener('mouseup',   ()=> dragging=false);
+
+        // Touch
+        knob.addEventListener('touchstart', e=>{ dragging=true; e.preventDefault(); }, {passive:false});
+        window.addEventListener('touchmove', e=>{
+            if(!dragging) return;
+            const t = e.touches[0];
+            moveTo(t.clientY);
+        }, {passive:false});
+        window.addEventListener('touchend', ()=> dragging=false);
+
+        // Click on the slot to jump
+        slot.addEventListener('mousedown', e=>{
+            if(e.target === knob) return;
+            moveTo(e.clientY);
+        });
+        slot.addEventListener('touchstart', e=>{
+            if(e.target === knob) return;
+            moveTo(e.touches[0].clientY);
+        }, {passive:false});
+    })();
+</script>
+</body>
+</html>

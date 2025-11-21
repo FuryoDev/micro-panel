@@ -1,0 +1,280 @@
+@CHARSET "UTF-8";
+
+.setting_status_title {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 30px;
+    cursor: default;
+    font-size: large;
+    background-color: rgb(70, 70, 71);
+}
+
+.setting_status_title > P {
+    position: absolute;
+    top: -12px;
+    left: 33px;
+}
+
+.setting_status_title > * {
+    display: table-cell;
+    vertical-align: middle;
+    cursor: default;
+}
+
+.setting_status_model_no {
+    position: absolute;
+    left: 40px;
+    top: 190px;
+    height: 28px;
+    cursor: default;
+    font-size: 20px;
+    line-height: 2px;
+    z-index: 2;
+}
+
+.setting_status_firmware_version {
+    position: absolute;
+    left: 40px;
+    top: 260px;
+    height: 28px;
+    cursor: default;
+    font-size: 20px;
+    line-height: 2px;
+    z-index: 2;
+}
+
+.setting_status_system_format {
+    position: absolute;
+    left: 40px;
+    top: 330px;
+    height: 28px;
+    cursor: default;
+    font-size: 20px;
+    line-height: 2px;
+    z-index: 2;
+}
+
+.setting_status_system_frequency {
+    position: absolute;
+    left: 40px;
+    top: 400px;
+    height: 28px;
+    cursor: default;
+    font-size: 20px;
+    line-height: 2px;
+    z-index: 2;
+}
+
+.setting_status_streaming_mode {
+    position: absolute;
+    left: 40px;
+    top: 470px;
+    height: 28px;
+    cursor: default;
+    font-size: 20px;
+    line-height: 2px;
+    z-index: 2;
+}
+
+.setting_status_frequency_Line {
+    position: absolute;
+    top: 170px;
+    left: 30px;
+    width: 1280px;
+}
+
+.setting_status_horizontal_Line {
+    position: absolute;
+    top: 242px;
+    left: 30px;
+    width: 1280px;
+}
+
+.setting_status_wireless_Line {
+    position: absolute;
+    top: 315px;
+    left: 30px;
+    width: 1280px;
+}
+
+.setting_status_fan1_Line {
+    position: absolute;
+    top: 388px;
+    left: 30px;
+    width: 1280px;
+}
+
+.setting_status_12g_Line {
+    position: absolute;
+    top: 460px;
+    left: 30px;
+    width: 1280px;
+}
+
+.setting_status_instal_pas_Line {
+    position: absolute;
+    top: 530px;
+    left: 30px;
+    width: 1280px;
+}
+.setting_status_model_no_title {
+    position: absolute;
+    top: 55px;
+    height: 30px;
+    cursor: default;
+    font-size: large;
+    line-height: 2px;
+    z-index: 2;
+    left: 20px;
+    width: 96.5%;
+    display: table;
+    text-align: left;
+    padding-left: 33px;
+    background-color: rgb(70, 70, 71);
+}
+.setting_status_model_no_title >p{
+    position: absolute;
+    top: -5px;
+    left: 33px;
+}
+
+
+.setting_status_model_no_value {
+    position: absolute;
+    left: 74px;
+    top: 100px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    line-height: 2px;
+    z-index: 2;
+}
+
+.setting_status_firmware_version_title {
+    position: absolute;
+    top: 150px;
+    height: 30px;
+    cursor: default;
+    font-size: large;
+    line-height: 2px;
+    z-index: 2;
+    left: 20px;
+    width: 96.5%;
+    display: table;
+    text-align: left;
+    padding-left: 33px;
+    background-color: rgb(70, 70, 71);
+}
+.setting_status_firmware_version_title >p{
+    position: absolute;
+    top: -5px;
+    left: 33px;
+}
+
+
+.setting_status_firmware_version_value {
+    position: absolute;
+    left: 74px;
+    top: 195px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    line-height: 2px;
+    z-index: 2;
+}
+.setting_status_system_format_title {
+    position: absolute;
+    top: 340px;
+    height: 30px;
+    cursor: default;
+    font-size: large;
+    line-height: 2px;
+    z-index: 2;
+    left: 20px;
+    width: 96.5%;
+    display: table;
+    text-align: left;
+    padding-left: 33px;
+    background-color: rgb(70, 70, 71);
+}
+
+.setting_status_system_format_title >p{
+    position: absolute;
+    top: -5px;
+    left: 33px;
+}
+
+.setting_status_system_format_value {
+    position: absolute;
+    left: 74px;
+    top: 385px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    line-height: 2px;
+    z-index: 2;
+}
+.setting_status_system_frequency_title {
+    position: absolute;
+    top: 245px;
+    height: 30px;
+    cursor: default;
+    font-size: large;
+    line-height: 2px;
+    z-index: 2;
+    left: 20px;
+    width: 96.5%;
+    display: table;
+    text-align: left;
+    padding-left: 33px;
+    background-color: rgb(70, 70, 71);
+}
+.setting_status_system_frequency_title >p{
+    position: absolute;
+    top: -5px;
+    left: 33px;
+}
+
+.setting_status_system_frequency_value {
+    position: absolute;
+    left: 74px;
+    top: 290px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    line-height: 2px;
+    z-index: 2;
+}
+.setting_status_streaming_mode_title {
+    position: absolute;
+    top: 435px;
+    height: 30px;
+    cursor: default;
+    font-size: large;
+    line-height: 2px;
+    z-index: 2;
+    left: 20px;
+    width: 96.5%;
+    display: table;
+    text-align: left;
+    padding-left: 33px;
+    background-color: rgb(70, 70, 71);
+}
+.setting_status_streaming_mode_title >p{
+    position: absolute;
+    top: -5px;
+    left: 33px;
+}
+
+.setting_status_streaming_mode_value {
+    position: absolute;
+    left: 74px;
+    top: 480px;
+    height: 28px;
+    cursor: default;
+    font-size: large;
+    line-height: 2px;
+    z-index: 2;
+}

@@ -1,0 +1,34 @@
+@CHARSET "UTF-8";
+
+/**
+ * tracking_setting
+ */
+#tracking_setting {
+    position: absolute;
+    left: 760px;
+    top: 560px;
+    width: 490px;
+    height: 340px;
+    visibility: hidden;
+    z-index: 2;
+    background-color: rgb(29, 29, 31);
+    border: 1px rgb(51, 51, 52) solid;
+}
+
+#trackingDataText{
+    position: absolute;
+    left:410px;
+    z-index: 1;
+    color: rgb(238, 0, 0);
+    top: 1050px;
+    height: 60px;
+    margin-left:-100px;
+}
+/*　todo 180905表示しないで依頼　*/
+/*#ip_Transmission{*/
+    /*position: absolute;*/
+    /*left: 0px;*/
+    /*top: 100px;*/
+    /*width: 0px;*/
+    /*height: 0px;*/
+/*}*/

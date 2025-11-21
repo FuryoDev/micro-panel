@@ -1,0 +1,200 @@
+/**
+ * Slider
+ */
+.slider_main {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    position: absolute;
+    background: url(parts/setup_slider_base_normal.png) no-repeat center;
+    width: 294px;
+    height: 32px;
+}
+
+.slider_main.disable {
+    color: rgb(102, 102, 102);
+    background-image: url(parts/setup_slider_base_disable.png);
+}
+
+.slider_value {
+    position: absolute;
+    top: -17px;
+    left: 0px;
+    padding-left: 0px;
+    width: 50px;
+    height: 19px;
+    text-align: center;
+    font-size: large;
+    cursor: default;
+    z-index: 20;
+    font-family: "Arial";
+}
+
+.slider_poscheck {
+    position: absolute;
+    top: 1px;
+    left: 32px;
+    width: 232px;
+    height: 30px;
+    cursor: default;
+    z-index: 30;
+}
+
+.slider_down > *, .slider_up > *, .slider_option > *, .slider_indicator > * {
+    display: table-cell;
+    vertical-align: middle;
+    padding-left: 12px;
+    cursor: default;
+}
+
+.slider_option.off {
+    color: rgb(217, 217, 217);
+    background-image: url(parts/setup_slider_btn_option_normal.png);
+}
+
+.slider_option.on {
+    color: rgb(255, 255, 255);
+    background-image: url(parts/setup_slider_btn_option_selected.png);
+}
+
+.slider_option {
+    position: absolute;
+    top: 0px;
+    left: 307px;
+    width: 76px;
+    height: 32px;
+    background-image: url(parts/setup_slider_btn_option_normal.png);
+    line-height: 32px;
+    text-align: center;
+    z-index: 20;
+}
+.slider_option >P{
+    position: absolute;
+    top: -15px;
+    left: 8px;
+}
+
+.slider_option.disable {
+    color: rgb(102, 102, 102);
+    background-image: url(parts/setup_slider_btn_option_disable.png);
+}
+
+.slider_option.on_hover {
+    color: rgb(255, 255, 255);
+    background-image: url(parts/setup_slider_btn_option_selected_Onmouse.html);
+}
+
+.slider_option.off_hover {
+    color: rgb(255, 255, 255);
+    background-image: url(parts/setup_slider_btn_option_onmouse.png);
+}
+
+.slider_down {
+    position: absolute;
+    top: 0px;
+    left: -5px;
+    width: 32px;
+    height: 32px;
+    background-image: url(parts/setup_slider_btn_normal.png);
+    line-height: 32px;
+    text-align: center;
+    -webkit-user-select: none;
+    z-index: 20;
+}
+
+.slider_down.off {
+    color: rgb(217, 217, 217);
+    background-image: url(parts/setup_slider_btn_normal.png);
+}
+
+.slider_down.on {
+    color: rgb(255, 255, 255);
+    background-image: url(parts/setup_slider_btn_pressed.png);
+}
+
+.slider_down.disable {
+    color: rgb(102, 102, 102);
+    background-image: url(parts/setup_slider_btn_disable.png);
+}
+
+.slider_down.on_hover {
+    color: rgb(255, 255, 255);
+    background-image: url(parts/setup_slider_btn_Onmouse.html);
+}
+
+.slider_down.off_hover {
+    color: rgb(255, 255, 255);
+    background-image: url(parts/setup_slider_btn_onmouse.png);
+}
+
+.slider_up {
+    position: absolute;
+    top: 0px;
+    left: 264px;
+    width: 32px;
+    height: 32px;
+    background-image: url(parts/setup_slider_btn_normal.png);
+    line-height: 32px;
+    text-align: center;
+    margin: 0 auto;
+    z-index: 20;
+}
+
+.slider_up.off {
+    color: rgb(217, 217, 217);
+    background-image: url(parts/setup_slider_btn_normal.png);
+}
+
+.slider_up.on {
+    color: rgb(255, 255, 255);
+    background-image: url(parts/setup_slider_btn_pressed.png);
+}
+
+.slider_up.disable {
+    color: rgb(102, 102, 102);
+    background-image: url(parts/setup_slider_btn_disable.png);
+}
+
+.slider_up.on_hover {
+    color: rgb(255, 255, 255);
+    background-image: url(parts/setup_slider_btn_Onmouse.html);
+}
+
+.slider_up.off_hover {
+    color: rgb(255, 255, 255);
+    background-image: url(parts/setup_slider_btn_onmouse.png);
+}
+
+.slider_indicator {
+    position: absolute;
+    top: 5px;
+    background-image: url(parts/setup_slider_knob_normal.png);
+    width: 16px;
+    height: 27px;
+    z-index: 20;
+}
+
+.slider_indicator.off {
+    color: rgb(217, 217, 217);
+    background-image: url(parts/setup_slider_knob_normal.png);
+}
+
+.slider_indicator.on {
+    color: rgb(255, 255, 255);
+    background-image: url(parts/setup_slider_knob_pressed.png);
+}
+
+.slider_indicator.disable {
+    color: rgb(102, 102, 102);
+    background-image: url(parts/setup_slider_knob_disable.png);
+}
+
+.slider_indicator.on_hover {
+    color: rgb(255, 255, 255);
+    background-image: url(parts/setup_slider_knob_Onmouse.html);
+}
+
+.slider_indicator.off_hover {
+    color: rgb(255, 255, 255);
+    background-image: url(parts/setup_slider_knob_onmouse.png);
+}

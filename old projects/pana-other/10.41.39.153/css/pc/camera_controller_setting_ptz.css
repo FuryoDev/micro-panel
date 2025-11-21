@@ -1,0 +1,62 @@
+@CHARSET "UTF-8";
+/**
+ *  camera_control区切られました。
+ */
+
+
+#camera_control_setup_left_line {
+    position: absolute;
+    width: 1px;
+    height: 1113px;
+    top: 0px;
+    left: 0px;
+    background-color: rgb(70, 70, 71);
+}
+
+#camera_control_line, #camera_control_line_2, #camera_control_line_3 {
+    position: absolute;
+    width: 558px;
+    height: 36px;
+    left: 1px;
+    background-color: rgb(0, 0, 0);
+}
+
+#camera_control_line {
+    top: 0px;
+}
+
+#camera_control_line_2 {
+    top: 284px;
+}
+
+#camera_control_line_3 {
+    top: 726px;
+}
+
+#camera_control_line_4 {
+    top: 854px;
+    left: 19px;
+    position: absolute;
+    width: 442px;
+    height: 1px;
+    background-color: rgb(70, 70, 71);
+}
+
+.camera_controller_gui_ptz_main_bottom_line,
+.camera_controller_gui_preset_main_bottom_line {
+    position: absolute;
+    bottom: 1px;
+    left: 0px;
+    width: 558px;
+    height: 1px;
+    background-color: rgb(70, 70, 71);
+}
+
+.camera_controller_gui_ptz_main_down {
+    height: 480px;
+    border-bottom: 1px solid rgb(0,0,0);
+}
+
+.camera_controller_gui_preset_main_down {
+    height: 790px;
+}

@@ -1,0 +1,4945 @@
+@CHARSET "UTF-8";
+
+/**
+ * Setup
+ * 表示領域定義(Setup_Network)
+ */
+#setup_network_main {
+    position: absolute;
+    left: 0px;
+    width: 2020px;
+    height: 800px;
+}
+
+#setup_advanced_main {
+    position: absolute;
+    left: 0px;
+    width: 2013px;
+    height: 1122px;
+}
+
+.btn_https_cc_execute.off,
+.btn_https_key_execute.off,
+.btn_https_gen_execute.off,
+.btn_https_ss_confirm.off,
+.btn_https_ss_delete.off,
+.btn_https_ca_execute.off,
+.btn_https_ca_confirm.off,
+.btn_https_ca_delete.off,
+.btn_https_set.off
+{
+    color: rgb(191, 191, 191);
+    background-image: url(parts/btn_cameraController_slider_toggle_normal.png);
+    background-size: 100% 100%;
+}
+
+.btn_https_cc_execute.off_hover,
+.btn_https_key_execute.off_hover,
+.btn_https_gen_execute.off_hover,
+.btn_https_ss_confirm.off_hover,
+.btn_https_ss_delete.off_hover,
+.btn_https_ca_execute.off_hover,
+.btn_https_ca_confirm.off_hover,
+.btn_https_ca_delete.off_hover,
+.btn_https_set.off_hover
+{
+    color: rgb(191, 191, 191);
+    background-image: url(parts/btn_cameraController_slider_toggle_onMouse.png);
+    background-size: 100% 100%;
+}
+.btn_https_cc_execute.on,
+.btn_https_key_execute.on,
+.btn_https_gen_execute.on,
+.btn_https_ss_confirm.on,
+.btn_https_ss_delete.on,
+.btn_https_ca_execute.on,
+.btn_https_ca_confirm.on,
+.btn_https_ca_delete.on,
+.btn_https_set.on
+{
+    color: rgb(191, 191, 191);
+    background-image: url(parts/btn_cameraController_slider_toggle_selected.png);
+    background-size: 100% 100%;
+}
+
+.btn_https_cc_execute.on_hover,
+.btn_https_key_execute.on_hover,
+.btn_https_gen_execute.on_hover,
+.btn_https_ss_confirm.on_hover,
+.btn_https_ss_delete.on_hover,
+.btn_https_ca_execute.on_hover,
+.btn_https_ca_confirm.on_hover,
+.btn_https_ca_delete.on_hover,
+.btn_https_set.on_hover
+{
+    color: rgb(191, 191, 191);
+    background-image: url(parts/btn_cameraController_slider_toggle_selected.png);
+    background-size: 100% 100%;
+}
+
+.btn_https_ca_delete.disable,
+.btn_https_ca_confirm.disable,
+.btn_https_ss_delete.disable,
+.btn_https_ss_confirm.disable {
+    color: rgb(102, 102, 102);
+    background-color: rgb(38, 38, 38);
+    background-image: url(parts/btn_cameraController_slider_toggle_disable.png);
+    background-size: 100% 100%;
+}
+
+.btn_https_cc_execute > *,
+.btn_https_key_execute > *,
+.btn_https_gen_execute > *,
+.btn_https_ss_confirm > *,
+.btn_https_ss_delete > *,
+.btn_https_ca_execute > *,
+.btn_https_ca_confirm > *,
+.btn_https_ca_delete > *,
+.btn_https_set > *
+{
+    display: table-cell;
+    vertical-align: middle;
+    cursor: default;
+}
+
+.btn_https_cc_execute {
+    position: absolute;
+    top: 360px;
+    left: 650px;
+    width: 50px;
+    height: 25px;
+    font-size: 8pt;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: center;
+    z-index: 9999;
+}
+
+.btn_https_key_execute {
+    position: absolute;
+    top: 70px;
+    left: 445px;
+    width: 50px;
+    height: 25px;
+    font-size: 8pt;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: center;
+    z-index: 9999;
+
+}
+
+.btn_https_gen_execute {
+    position: absolute;
+    top: 140px;
+    left: 445px;
+    width: 50px;
+    height: 25px;
+    font-size: 8pt;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: center;
+    z-index: 9999;
+
+}
+
+.btn_https_ss_confirm {
+    position: absolute;
+    top: 200px;
+    left: 442px;
+    width: 50px;
+    height: 25px;
+    font-size: 8pt;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: center;
+    z-index: 9999;
+
+}
+
+.btn_https_ss_delete {
+    position: absolute;
+    top: 200px;
+    left: 600px;
+    width: 50px;
+    height: 25px;
+    font-size: 8pt;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: center;
+    z-index: 9999;
+
+}
+
+.btn_https_ca_execute {
+    position: absolute;
+    top: 300px;
+    left: 445px;
+    width: 50px;
+    height: 25px;
+    font-size: 8pt;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: center;
+    z-index: 9999;
+
+}
+
+.btn_https_ca_confirm {
+    position: absolute;
+    top: 405px;
+    left: 442px;
+    width: 50px;
+    height: 25px;
+    font-size: 8pt;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: center;
+    z-index: 9999;
+
+}
+
+.btn_https_ca_delete {
+    position: absolute;
+    top: 405px;
+    left: 600px;
+    width: 50px;
+    height: 25px;
+    font-size: 8pt;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: center;
+    z-index: 9999;
+
+}
+
+.btn_https_set {
+    position: absolute;
+    top: 600px;
+    left: 442px;
+    width: 50px;
+    height: 25px;
+    font-size: 8pt;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: center;
+    z-index: 9999;
+
+}
+
+
+.CssLabel {
+    width: 283px;
+}
+
+.CssSetupTable {
+
+}
+
+.CssSetupMarginFtp .CssTdLB {
+    padding-left: 180px;
+}
+
+.CssSetupMarginNtp .CssTdLB {
+    padding-left: 120px;
+}
+
+/*
+ *network : netWork
+ */
+.setup_network_lan_inner{
+    position: absolute;
+    /*top: 29px;*/
+    left: 300px;
+    width: 100%;
+    height: 1100px;
+    border-bottom: 1px solid rgb(70, 70, 71);
+    overflow: hidden;
+/*    overflow-y: scroll;
+    overflow-x: hidden;*/
+}
+.setup_network_domain_inner{
+    position: absolute;
+    /*top: 29px;*/
+    left: 300px;
+    width: 100%;
+    height: 1100px;
+    border-bottom: 1px solid rgb(70, 70, 71);
+    overflow: hidden;
+/*    overflow-y: scroll;
+    overflow-x: hidden;*/
+}
+.setup_network_common_inner{
+    position: absolute;
+    /*top: 29px;*/
+    left: 300px;
+    width: 100%;
+    height: 1100px;
+    border-bottom: 1px solid rgb(70, 70, 71);
+    overflow: hidden;
+/*    overflow-y: scroll;
+    overflow-x: hidden;*/
+}
+.setup_network_dns_inner{
+    position: absolute;
+    /*top: 29px;*/
+    left: 300px;
+    width: 100%;
+    height: 1100px;
+    border-bottom: 1px solid rgb(70, 70, 71);
+    overflow: hidden;
+/*    overflow-y: scroll;
+    overflow-x: hidden;*/
+}
+.setup_network_domain_inner{
+    position: absolute;
+    /*top: 29px;*/
+    left: 300px;
+    width: 100%;
+    height: 1100px;
+    border-bottom: 1px solid rgb(70, 70, 71);
+    overflow: hidden;
+/*    overflow-y: scroll;
+    overflow-x: hidden;*/
+}
+
+.setup_network_sfp_plus_inner{
+    position: absolute;
+    /*top: 29px;*/
+    left: 300px;
+    width: 100%;
+    height: 1100px;
+    border-bottom: 1px solid rgb(70, 70, 71);
+    overflow: hidden;
+/*    overflow-y: scroll;
+    overflow-x: hidden;*/
+}
+
+.setup_network_usb_inner{
+    position: absolute;
+    /*top: 29px;*/
+    left: 300px;
+    width: 100%;
+    height: 1100px;
+    border-bottom: 1px solid rgb(70, 70, 71);
+    overflow: hidden;
+/*    overflow-y: scroll;
+    overflow-x: hidden;*/
+}
+/* #setup_network_lan_innerpart {
+    position: absolute;
+    top:-140px;
+    height: 1300px;
+} */
+.setup_network_lan_labels {
+    position: absolute;
+    top: 30px;
+    left: 0px;
+    height: 1200px;
+    width: 300px;
+    background-color: rgb(29, 29, 31);
+}
+.setup_network_common_labels {
+    position: absolute;
+    top: 30px;
+    left: 0px;
+    height: 1200px;
+    width: 300px;
+    background-color: rgb(29, 29, 31);
+}
+.setup_network_dns_labels {
+    position: absolute;
+    top: 30px;
+    left: 0px;
+    height: 1200px;
+    width: 300px;
+    background-color: rgb(29, 29, 31);
+}
+.setup_network_domain_labels {
+    position: absolute;
+    top: 30px;
+    left: 0px;
+    height: 1200px;
+    width: 300px;
+    background-color: rgb(29, 29, 31);
+}
+.setup_network_sfp_plus_labels {
+    position: absolute;
+    top: 30px;
+    left: 0px;
+    height: 1200px;
+    width: 300px;
+    background-color: rgb(29, 29, 31);
+}
+.setup_network_usb_labels {
+    position: absolute;
+    top: 30px;
+    left: 0px;
+    height: 1200px;
+    width: 300px;
+    background-color: rgb(29, 29, 31);
+}
+.setup_network_lan_labels_part{
+    position: absolute;
+    top: -140px;
+}
+.setup_network_common_labels_part{
+    position: absolute;
+    top: -803px;
+}
+.setup_network_dns_labels_part{
+    position: absolute;
+    top: -140px;
+}
+.setup_network_domain_labels_part{
+    position: absolute;
+    top: -140px;
+}
+.setup_network_sfp_plus_labels_part{
+    position: absolute;
+    top: -140px;
+}
+.setup_network_usb_labels_part{
+    position: absolute;
+    top: -140px;
+}
+.setup_network_title {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 29px;
+    line-height: 29px;
+    font-size: large;
+    width: 100%;
+    background-color: rgb(70, 70, 71);
+}
+.setup_network_title>p{
+    position: absolute;
+    top: -18px;
+    left: 33px;
+}
+.setup_network_lan_form {
+    position: absolute;
+    top: 30px;
+    left: 300px;
+    height: 850px;
+    width: 1713px;
+}
+.setup_network_common_form {
+    position: absolute;
+    top: 30px;
+    left: 300px;
+    height: 850px;
+    width: 1713px;
+}
+.setup_network_dns_form {
+    position: absolute;
+    top: 30px;
+    left: 300px;
+    height: 850px;
+    width: 1713px;
+}
+.setup_network_domain_form {
+    position: absolute;
+    top: 30px;
+    left: 300px;
+    height: 850px;
+    width: 1713px;
+}
+.setup_network_sfp_plus_form {
+    position: absolute;
+    top: 30px;
+    left: 300px;
+    height: 850px;
+    width: 1713px;
+}
+.setup_network_usb_form {
+    position: absolute;
+    top: 30px;
+    left: 300px;
+    height: 850px;
+    width: 1713px;
+}
+.setup_network_lan_form_part{
+    position: absolute;
+    top: -140px;
+}
+.setup_network_common_form_part{
+    position: absolute;
+    top: -803px;
+}
+.setup_network_dns_form_part{
+    position: absolute;
+    top: -140px;
+}
+.setup_network_domain_form_part{
+    position: absolute;
+    top: -140px;
+}
+.setup_network_sfp_plus_form_part{
+    position: absolute;
+    top: -140px;
+}
+.setup_network_usb_form_part{
+    position: absolute;
+    top: -140px;
+}
+.setup_network_btn_set_area {
+    position: absolute;
+    top:580px;
+    height: 40px;
+    width: 1000px;
+}
+.setup_network_usb_btn_set_area {
+    position: absolute;
+    top:580px;
+    height: 40px;
+    width: 1000px;
+}
+
+.setup_network_dns_btn_set_area {
+    position: absolute;
+    top:196px;
+    height: 40px;
+    width: 1000px;
+}
+.setup_network_domain_btn_set_area {
+    position: absolute;
+    top:144px;
+    height: 40px;
+    width: 1000px;
+}
+.setup_network_common_btn_set_area {
+    position: absolute;
+    top:311px;
+    height: 40px;
+    width: 1000px;
+}
+.setup_network_sfp_plus_btn_set_area {
+    position: absolute;
+    top:350px;
+    height: 40px;
+    width: 1000px;
+}
+
+.setup_network_ipv4_network_label,
+.setup_network_dhcp_label,
+.setup_network_ipv4_address_label,
+.setup_network_subnet_mask_label,
+.setup_network_default_gateway_label,
+.setup_network_dns_label,
+.setup_network_primary_server_label,
+.setup_network_secondary_server_label,
+.setup_network_ipv6_network_label,
+.setup_network_manual_label,
+.setup_network_ipv6_address_label,
+.setup_network_default_gateway2_label,
+.setup_network_dhcpv6_label,
+.setup_network_metric_label,
+.setup_network_sfp_metric_label,
+.setup_network_usb_metric_label,
+.setup_network_dns2_label,
+.setup_network_primary_server2_label,
+.setup_network_secondary_server2_label,
+.setup_network_domain_label,
+.setup_network_common_label,
+.setup_network_http_port_label,
+.setup_network_max_rtp_label,
+.setup_network_http_max_label,
+.setup_network_easy_ip_label,
+.setup_network_http_check_active_network_setting_label,
+.setup_network_recommended_network_label {
+    position: absolute;
+    left: 54px;
+    width: 247px;
+    height: 52px;
+    line-height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+    color: rgb(191,191,191);
+}
+
+.setup_network_ipv4_network_label {
+    left: 33px;
+    top: 13px;
+}
+
+.setup_network_dhcp_label {
+    top: 41px;
+}
+
+.setup_network_ipv4_address_label {
+    top: 91px;
+}
+
+.setup_network_subnet_mask_label {
+    top: 145px;
+}
+
+.setup_network_default_gateway_label {
+    top: 195px;
+}
+
+.setup_network_dns_label {
+    top: 1px;
+}
+
+.setup_network_primary_server_label {
+    left: 75px;
+    top: 40px;
+}
+
+.setup_network_secondary_server_label {
+    left: 75px;
+    top: 90px;
+}
+
+.setup_network_ipv6_network_label {
+    left: 33px;
+    top: 401px;
+}
+
+.setup_network_manual_label {
+    top: 437px;
+}
+
+.setup_network_ipv6_address_label {
+    top: 491px;
+}
+
+.setup_network_default_gateway2_label {
+    top: 543px;
+}
+
+.setup_network_dhcpv6_label {
+    top: 595px;
+}
+.setup_network_metric_label {
+    left: 33px;
+    top: 648px;
+}
+.setup_network_sfp_metric_label{
+    left: 33px;
+    top: 400px; 
+}
+.setup_network_usb_metric_label {
+    left: 33px;
+    top: 510px;
+}
+
+.setup_network_dns2_label {
+    top: 655px;
+    left: 33px;
+}
+
+.setup_network_primary_server2_label {
+    top: 687px;
+}
+
+.setup_network_secondary_server2_label {
+    top: 740px;
+}
+.setup_network_domain_label {
+    top: 154px;
+}
+.setup_network_common_label {
+    left: 33px;
+    top: 800px;
+}
+
+.setup_network_http_port_label {
+    top: 835px;
+}
+
+.setup_network_max_rtp_label {
+    top: 882px;
+}
+
+.setup_network_http_max_label {
+    top: 928px;
+}
+
+.setup_network_easy_ip_label {
+    top: 980px;
+}
+
+.setup_network_recommended_network_label {
+    top: 1053px;
+}
+
+.setup_network_http_check_active_network_setting_label{
+    top: 1135px;
+}
+
+.setup_network_http_max_label p,
+.setup_network_easy_ip_label p,
+.setup_network_http_check_active_network_setting_label p,
+.setup_network_recommended_network_label p {
+    white-space: pre-line;
+}
+
+.setup_network_http_port_area_label {
+    position: absolute;
+    left: 249px;
+    top: 835px;
+    width: 280px;
+    height: 52px;
+    line-height: 26px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_usb_metric_during_label{
+    position: absolute;
+    left: 249px;
+    top: 510px;
+    width: 280px;
+    height: 52px;
+    line-height: 26px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_sfp_plus_metric_during_label{
+    position: absolute;
+    left: 249px;
+    top: 400px;
+    width: 280px;
+    height: 52px;
+    line-height: 26px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_lan_metric_during_label{
+    position: absolute;
+    left: 249px;
+    top: 648px;
+    width: 280px;
+    height: 52px;
+    line-height: 26px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+/*dhcp radio*/
+.setup_network_dhcpOn_radio {
+    position: absolute;
+    top: 57px;
+    left: 19px;
+}
+
+.setup_network_dhcpOn_label {
+    position: absolute;
+    top: 46px;
+    font-size: large;
+    left: 61px;
+}
+
+.setup_network_dhcpOff_radio {
+    position: absolute;
+    top: 57px;
+    left: 228px;
+}
+
+.setup_network_dhcpOff_label {
+    position: absolute;
+    top: 46px;
+    font-size: large;
+    left: 270px;
+}
+
+.setup_network_ipv4_input {
+    position: absolute;
+    top: 114px;
+    left: 19px;
+    width: 500px;
+}
+
+.setup_network_netmask_input {
+    position: absolute;
+    top: 167px;
+    left: 19px;
+    width: 500px;
+}
+
+.setup_network_gateway_input {
+    position: absolute;
+    top: 220px;
+    left: 19px;
+    width: 500px;
+}
+
+.setup_network_pri_server_input {
+    position: absolute;
+    top: 64px;
+    left: 19px;
+    width: 500px;
+}
+
+.setup_network_sec_server_input {
+    position: absolute;
+    top: 113px;
+    left: 19px;
+    width: 500px;
+}
+.setup_network_domain_input {
+    position: absolute;
+    top: 30px;
+    left: 19px;
+    width: 500px;
+}
+.setup_network_domain_label_Line{
+    position: absolute;
+    top: 114px;
+    left: 54px;
+    width: 1547px;
+}
+.setup_network_ipv6_input {
+    position: absolute;
+    top: 512px;
+    left: 19px;
+    width: 500px;
+}
+
+.setup_network_gateway2_input {
+    position: absolute;
+    top: 565px;
+    left: 19px;
+    width: 500px;
+}
+
+.setup_network_pri_server2_input {
+    position: absolute;
+    top: 705px;
+    left: 19px;
+    width: 500px;
+}
+
+.setup_network_sec_server2_input {
+    position: absolute;
+    top: 760px;
+    left: 19px;
+    width: 500px;
+}
+
+.setup_network_http_port_input {
+    position: absolute;
+    top: 855px;
+    left: 19px;
+    width: 180px;
+}
+.setup_network_usb_metric_input{
+    position: absolute;
+    top: 527px;
+    left: 19px;
+    width: 180px; 
+}
+.setup_network_spf_plus_metric_input{
+    position: absolute;
+    top: 420px;
+    left: 19px;
+    width: 180px; 
+}
+.setup_network_lan_metric_input{
+    position: absolute;
+    top: 667px;
+    left: 19px;
+    width: 180px; 
+}
+/*DNS manual radio*/
+.setup_network_dns_manualAuto_radio {
+    position: absolute;
+    top: 22px;
+    left: 19px;
+}
+
+.setup_network_dns_manualAuto_label {
+    position: absolute;
+    top: 12px;
+    left: 61px;
+    font-size: large;
+}
+
+.setup_network_dns_manualManual_radio {
+    position: absolute;
+    top: 22px;
+    left: 228px;
+}
+
+.setup_network_dns_manualManual_label {
+    position: absolute;
+    top: 12px;
+    left: 270px;
+    font-size: large;
+}
+
+/*ipv6 manual radio*/
+.setup_network_ipv6_manualOn_radio {
+    position: absolute;
+    top: 453px;
+    left: 19px;
+}
+
+.setup_network_ipv6_manualOn_label {
+    position: absolute;
+    top: 441px;
+    left: 61px;
+    font-size: large;
+}
+
+.setup_network_ipv6_manualOff_radio {
+    position: absolute;
+    top: 453px;
+    left: 228px;
+}
+
+.setup_network_ipv6_manualOff_label {
+    position: absolute;
+    top: 441px;
+    left: 270px;
+    font-size: large;
+}
+
+/*ipv6 dhcpv6 radio*/
+.setup_network_ipv6_dhcpv6On_radio {
+    position: absolute;
+    top: 611px;
+    left: 19px;
+}
+
+.setup_network_ipv6_dhcpv6On_label {
+    position: absolute;
+    top: 601px;
+    left: 61px;
+    font-size: large;
+}
+
+.setup_network_ipv6_dhcpv6Off_radio {
+    position: absolute;
+    top: 611px;
+    left: 228px;
+}
+
+.setup_network_ipv6_dhcpv6Off_label {
+    position: absolute;
+    top: 601px;
+    left: 270px;
+    font-size: large;
+}
+
+/*Easy IP Setup accommodate period radio*/
+.setup_network_easy_ip20min_radio {
+    position: absolute;
+    top: 1009px;
+    left: 19px;
+}
+
+.setup_network_easy_ip20min_label {
+    position: absolute;
+    top: 1000px;
+    left: 61px;
+    font-size: large;
+}
+
+.setup_network_easy_ipUnlimited_radio {
+    position: absolute;
+    top: 1009px;
+    left: 228px;
+}
+
+.setup_network_easy_ipUnlimited_label {
+    position: absolute;
+    top: 1000px;
+    left: 270px;
+    font-size: large;
+}
+
+/*Max RTP packet size*/
+.setup_network_max_rtpUnlimited-1500byte_radio {
+    position: absolute;
+    top: 904px;
+    left: 19px;
+}
+
+.setup_network_max_rtpUnlimited-1500byte_label {
+    position: absolute;
+    top: 894px;
+    left: 61px;
+    font-size: large;
+}
+
+.setup_network_max_rtpLimited-1280byte_radio {
+    position: absolute;
+    top: 904px;
+    left: 229px;
+}
+
+.setup_network_max_rtpLimited-1280byte_label {
+    position: absolute;
+    top: 894px;
+    left: 271px;
+    font-size: large;
+}
+
+#setup_network_lan_form select {
+}
+
+.setup_network_http_max_select {
+    position: absolute;
+    top: 958px;
+    left: 19px;
+    width: 200px;
+}
+
+.setup_network_set_button {
+    position: absolute;
+    top: 52px;
+    left: 319px;
+    width: 142px;
+    height: 32px;
+    font-size: large;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: center;
+}
+
+.setup_network_set_button.off {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_normal.png);
+    background-size: 100% 100%;
+}
+
+.setup_network_set_button.off_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_onmouse.png);
+    background-size: 100% 100%;
+}
+
+.setup_network_set_button.on {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_pressed.png);
+    background-size: 100% 100%;
+}
+
+.setup_network_set_button.on_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_pressed.png);
+    background-size: 100% 100%;
+}
+
+.setup_network_set_button.disable {
+    color: rgb(102, 102, 102);
+    background-color: rgb(38, 38, 38);
+    background-image: url(parts/setup_menu_btn_set_disable.png);
+    background-size: 100% 100%;
+}
+
+.setup_network_set_button > * {
+    display: table-cell;
+    vertical-align: middle;
+    cursor: default;
+}
+
+/*
+ *network : Advanced
+ */
+/*advanced : common*/
+.setup_network_menu_setting_status_button {
+    position: absolute;
+    top: 54px;
+    left: 20px;
+    width: 240px;
+    height: 30px;
+    font-size: 11pt;
+    text-align: left;
+    display: table;
+}
+.setup_advanced_menu_setting_status_button {
+    position: absolute;
+    top: 54px;
+    left: 20px;
+    width: 240px;
+    height: 30px;
+    font-size: 11pt;
+    text-align: left;
+    display: none !important;
+}
+.setup_advanced_menu_ntp_button {
+    position: absolute;
+    top: 54px;
+    left: 20px;
+    width: 240px;
+    height: 29px;
+    font-size: 11pt;
+    text-align: left;
+    display: table;
+}
+.setup_network_menu_lan_button {
+    position: absolute;
+    top: 145px;
+    left: 20px;
+    width: 240px;
+    height: 29px;
+    font-size: 11pt;
+    text-align: left;
+    display: table;
+}
+
+.setup_advanced_menu_upnp_button {
+    position: absolute;
+    top: 84px;
+    left: 20px;
+    width: 240px;
+    height: 28px;
+    font-size: 11pt;
+    text-align: left;
+    display: none;
+}
+
+.setup_network_menu_sfp_plus_button {
+    position: absolute;
+    top: 175px;
+    left: 20px;
+    width: 240px;
+    height: 28px;
+    font-size: 11pt;
+    text-align: left;
+    display: table;
+}
+.setup_advanced_menu_https_button {
+    position: absolute;
+    top: 83px;
+    left: 20px;
+    width: 240px;
+    height: 28px;
+    font-size: 11pt;
+    text-align: left;
+    display: table;
+}
+.setup_network_menu_usb_button {
+    position: absolute;
+    top: 204px;
+    left: 20px;
+    width: 240px;
+    height: 28px;
+    font-size: 11pt;
+    text-align: left;
+    display: table;
+}
+
+.setup_advanced_menu_rtsp_button {
+    position: absolute;
+    top: 204px;
+    left: 20px;
+    width: 240px;
+    height: 29px;
+    font-size: 11pt;
+    text-align: left;
+    display: table;
+}
+.setup_network_menu_usb_button.isUE163 {
+    position: absolute;
+    top: 175px;
+    left: 20px;
+    width: 240px;
+    height: 29px;
+    font-size: 11pt;
+    text-align: left;
+    display: table;
+}
+.setup_advanced_menu_rtsp_button_show {
+    position: absolute;
+    top: 112px;
+    left: 20px;
+    width: 240px;
+    height: 29px;
+    font-size: 11pt;
+    text-align: left;
+    display: table;
+}
+.setup_network_menu_dns_button {
+    position: absolute;
+    top: 233px;
+    left: 20px;
+    width: 240px;
+    height: 29px;
+    font-size: 11pt;
+    text-align: left;
+    display: table;
+}
+
+.setup_network_menu_dns_button.isUE163 {
+    position: absolute;
+    top: 204px;
+    left: 20px;
+    width: 240px;
+    height: 29px;
+    font-size: 11pt;
+    text-align: left;
+    display: table;
+}
+.setup_network_menu_setting_status_button > *,
+.setup_advanced_menu_setting_status_button > *,
+.setup_network_menu_dns_button > *,
+.setup_advanced_menu_rtsp_button > *,
+.setup_network_menu_domain_button > *,
+.setup_advanced_menu_rtsp_button_show > *,
+.setup_network_menu_lan_button > *,
+.setup_advanced_menu_ntp_button > *,
+.setup_advanced_menu_upnp_button > *,
+.setup_network_menu_sfp_plus_button > *,
+.setup_network_menu_usb_button > *,
+.setup_advanced_menu_https_button > * {
+    display: table-cell;
+    vertical-align: middle;
+    cursor: default;
+    white-space: pre;
+}
+/*SNMP*/
+.setup_advanced_menu_easyip,
+.setup_advanced_menu_802_1_x,
+.setup_advanced_menu_m_dns,
+.setup_advanced_menu_referer_button_show,
+.setup_advanced_menu_tsl_button_show,
+.setup_network_menu_common_button,
+.setup_advanced_menu_snmp_button_show{
+    display: table-cell;
+    vertical-align: middle;
+    cursor: default;
+    white-space: pre;
+}
+.setup_advanced_menu_snmp_button_show {
+     position: absolute;
+     top: 142px;
+     left: 20px;
+     width: 240px;
+     height: 29px;
+     font-size: 11pt;
+     text-align: left;
+     display: table;
+ }
+ .setup_network_menu_domain_button {
+    position: absolute;
+    top: 263px;
+    left: 20px;
+    width: 240px;
+    height: 29px;
+    font-size: 11pt;
+    text-align: left;
+    display: table;
+}
+.setup_network_menu_domain_button.isUE163 {
+    position: absolute;
+    top: 233px;
+    left: 20px;
+    width: 240px;
+    height: 29px;
+    font-size: 11pt;
+    text-align: left;
+    display: table;
+}
+.setup_advanced_menu_tsl_button_show {
+    position: absolute;
+    top: 172px;
+    left: 20px;
+    width: 240px;
+    height: 29px;
+    font-size: 11pt;
+    text-align: left;
+    display: table;
+}
+.setup_network_menu_common_button {
+    position: absolute;
+    top: 293px;
+    left: 20px;
+    width: 240px;
+    height: 29px;
+    font-size: 11pt;
+    text-align: left;
+    display: table;
+}
+.setup_network_menu_common_button.isUE163 {
+    position: absolute;
+    top: 263px;
+    left: 20px;
+    width: 240px;
+    height: 29px;
+    font-size: 11pt;
+    text-align: left;
+    display: table;
+}
+.setup_advanced_menu_referer_button_show {
+    position: absolute;
+    top: 202px;
+    left: 20px;
+    width: 240px;
+    height: 29px;
+    font-size: 11pt;
+    text-align: left;
+    display: table;
+}
+.setup_advanced_menu_m_dns{
+    position: absolute;
+    top: 232px;
+    left: 20px;
+    width: 240px;
+    height: 29px;
+    font-size: 11pt;
+    text-align: left;
+    display: table;
+}
+.setup_advanced_menu_802_1_x{
+    position: absolute;
+    top: 262px;
+    left: 20px;
+    width: 240px;
+    height: 29px;
+    font-size: 11pt;
+    text-align: left;
+    display: table;
+}
+.setup_advanced_menu_easyip{
+    position: absolute;
+    top: 292px;
+    left: 20px;
+    width: 240px;
+    height: 29px;
+    font-size: 11pt;
+    text-align: left;
+    display: table;
+}
+.setup_advanced_menu_rtsp_button_show_Line {
+    position: absolute;
+    top: 171px;
+    left: 20px;
+}
+.setup_network_menu_domain_button_Line {
+    position: absolute;
+    top: 291px;
+    left: 20px;
+}
+.setup_network_menu_dns_button_Line {
+    position: absolute;
+    top: 262px;
+    left: 20px;
+}
+.setup_advanced_menu_snmp_button_show_Line {
+    position: absolute;
+    top: 200px;
+    left: 20px;
+}
+.setup_network_menu_common_button_Line {
+    position: absolute;
+    top: 200px;
+    left: 20px;
+}
+.setup_advanced_menu_tsl_button_show_Line {
+    position: absolute;
+    top: 231px;
+    left: 20px;
+}
+.setup_advanced_menu_referer_button_show_Line {
+    position: absolute;
+    top: 261px;
+    left: 20px;
+}
+.setup_advanced_menu_m_dns_Line{
+    position: absolute;
+    top: 291px;
+    left: 20px;
+}
+.setup_advanced_menu_802_1_x_Line{
+    position: absolute;
+    top: 321px;
+    left: 20px;
+}
+.setup_network_menu {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 280px;
+    height: 1122px;
+    background-color: rgb(29, 29, 31);
+}
+.setup_advanced_menu {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 280px;
+    height: 1122px;
+    background-color: rgb(29, 29, 31);
+}
+.setup_network_menu_title {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 280px;
+    height: 29px;
+    background-color: rgb(70, 70, 71);
+    font-size: large;
+}
+.setup_network_menu_title > P{
+    position: absolute;
+    top: -15px;
+    left: 20px;
+}
+
+.setup_advanced_menu_title {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 280px;
+    height: 29px;
+    background-color: rgb(70, 70, 71);
+    font-size: large;
+}
+.setup_advanced_menu_title > P{
+    position: absolute;
+    top: -15px;
+    left: 20px;
+}
+/*network : setting status*/
+.setup_network_setting_status_inner {
+    position: absolute;
+    top: 0px;
+    left: 294px;
+    width: 100%;
+}
+.setup_network_setting_status_inner_title {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 29px;
+    background-color: rgb(70, 70, 71);
+    font-size: large;
+    z-index: 2;
+}
+.setup_network_setting_status_inner_title > P{
+    position: absolute;
+    top: -15px;
+    left: 20px;
+}
+
+.setup_network_lan_inner_title {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 29px;
+    background-color: rgb(70, 70, 71);
+    font-size: large;
+    z-index: 2;
+}
+.setup_network_common_inner_title {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 29px;
+    background-color: rgb(70, 70, 71);
+    font-size: large;
+    z-index: 2;
+}
+.setup_network_dns_inner_title {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 29px;
+    background-color: rgb(70, 70, 71);
+    font-size: large;
+    z-index: 2;
+}
+.setup_network_domain_inner_title {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 29px;
+    background-color: rgb(70, 70, 71);
+    font-size: large;
+    z-index: 2;
+}
+.setup_network_lan_inner_title > P{
+    position: absolute;
+    top: -15px;
+    left: 20px;
+}
+.setup_network_common_inner_title > P{
+    position: absolute;
+    top: -15px;
+    left: 20px;
+}
+.setup_network_dns_inner_title > P{
+    position: absolute;
+    top: -15px;
+    left: 20px;
+}
+.setup_network_domain_inner_title > P{
+    position: absolute;
+    top: -15px;
+    left: 20px;
+}
+.setup_network_sfp_plus_inner_title {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 29px;
+    background-color: rgb(70, 70, 71);
+    font-size: large;
+    z-index: 2;
+}
+.setup_network_usb_inner_title {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 29px;
+    background-color: rgb(70, 70, 71);
+    font-size: large;
+    z-index: 2;
+}
+.setup_network_sfp_plus_inner_title > P{
+    position: absolute;
+    top: -15px;
+    left: 20px;
+}
+.setup_network_usb_inner_title > P{
+    position: absolute;
+    top: -15px;
+    left: 20px;
+}
+.setup_network_usb_inner_title {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 29px;
+    background-color: rgb(70, 70, 71);
+    font-size: large;
+    z-index: 2;
+}
+.setup_network_usb_inner_title > P{
+    position: absolute;
+    top: -15px;
+    left: 20px;
+}
+#setup_network_setting_status_inner_main {
+    position: absolute;
+    top: 30px;
+    left: 0px;
+    width: 1726px;
+    height: 1093px;
+}
+#setup_network_setting_status_inner_main_labels {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 300px;
+    height: 1093px;
+    background-color: rgb(29, 29, 31);
+}
+
+#setup_network_setting_status_inner_main_values {
+    position: absolute;
+    top: 0px;
+    left: 300px;
+    /* width: 1726px; */
+    height: 1093px;
+}
+/*advanced : setting status*/
+.setup_advanced_setting_status_inner {
+    position: absolute;
+    top: 0px;
+    left: 294px;
+    width: 100%;
+}
+
+.setup_advanced_setting_status_inner_title {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 29px;
+    background-color: rgb(70, 70, 71);
+    font-size: large;
+}
+.setup_advanced_setting_status_inner_title > P{
+    position: absolute;
+    top: -15px;
+    left: 20px;
+}
+
+.setup_advanced_setting_status_inner_main {
+    position: absolute;
+    top: 28px;
+    left: 0px;
+    width: 1726px;
+    height: 1093px;
+}
+
+/*advanced : ntp*/
+.setup_advanced_ntp_inner {
+    position: absolute;
+    top: 0px;
+    left: 300px;
+    width: 1762px;
+    height: 1122px;
+}
+.setup_advanced_ntp_inner_title {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 29px;
+    background-color: rgb(70, 70, 71);
+    font-size: large;
+}
+
+.setup_advanced_ntp_inner_main {
+    position: absolute;
+    top: 28px;
+    left: 0px;
+    width: 100%;
+    height: 850px;
+}
+
+.setup_advanced_ntp_labels {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 1100px;
+    width: 300px;
+    background-color: rgb(29, 29, 31);
+}
+
+.setup_advanced_ntp_form {
+    position: absolute;
+    top: 0px;
+    left: 300px;
+    height: 350px;
+    width: 1426px;
+}
+
+.setup_advanced_ntp_btn_set_area {
+    position: absolute;
+    top: 400px;
+    height: 40px;
+    width: 1000px;
+}
+
+.setup_advanced_ntp_symchronization_label,
+.setup_advanced_ntp_address_setting_label,
+.setup_advanced_ntp_address_txt_label,
+.setup_advanced_ntp_port_label,
+.setup_advanced_ntp_interval_label,
+.setup_advanced_ntp_port_area_label{
+    position: absolute;
+    left: 33px;
+    width: 251px;
+    height: 52px;
+    line-height: 26px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+
+.setup_advanced_ntp_symchronization_label {
+    top: 13px;
+}
+
+.setup_advanced_ntp_address_setting_label {
+    top: 82px;
+}
+
+.setup_advanced_ntp_address_txt_label {
+    top: 151px;
+}
+
+.setup_advanced_ntp_port_label {
+    top: 220px;
+}
+
+.setup_advanced_ntp_interval_label {
+    top: 289px;
+}
+
+.setup_advanced_ntp_port_area_label {
+    left: 220px;
+    top: 220px;
+}
+
+/* radio(NTP) : Symchronization with NTP*/
+.setup_advanced_ntp_symchronizationOn_radio {
+    position: absolute;
+    top: 28px;
+    left: 19px;
+}
+
+.setup_advanced_ntp_symchronizationOn_label {
+    position: absolute;
+    top: 17px;
+    font-size: large;
+    left: 61px;
+}
+
+.setup_advanced_ntp_symchronizationOff_radio {
+    position: absolute;
+    top: 28px;
+    left: 139px;
+}
+
+.setup_advanced_ntp_symchronizationOff_label {
+    position: absolute;
+    top: 17px;
+    font-size: large;
+    left: 179px;
+}
+
+.setup_advanced_ntp_address_txt_input {
+    position: absolute;
+    top: 170px;
+    left: 19px;
+    width: 180px;
+}
+
+.setup_advanced_ntp_port_input {
+    position: absolute;
+    top: 240px;
+    left: 19px;
+    width: 180px;
+}
+
+.setup_advanced_ntp_address_setting_select {
+    position: absolute;
+    top: 92px;
+    left: 19px;
+}
+
+.setup_advanced_ntp_interval_select {
+    position: absolute;
+    top: 304px;
+    left: 19px;
+}
+
+.setup_advanced_ntp_set_button {
+    position: absolute;
+    top: 0px;
+    left: 319px;
+    width: 142px;
+    height: 32px;
+    font-size: large;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: center;
+}
+
+.setup_advanced_ntp_set_button.off {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_normal.png);
+    background-size: 100% 100%;
+}
+
+.setup_advanced_ntp_set_button.off_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_onmouse.png);
+    background-size: 100% 100%;
+}
+
+.setup_advanced_ntp_set_button.on {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_pressed.png);
+    background-size: 100% 100%;
+}
+
+.setup_advanced_ntp_set_button.on_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_pressed.png);
+    background-size: 100% 100%;
+}
+
+.setup_advanced_ntp_set_button.disable {
+    color: rgb(102, 102, 102);
+    background-color: rgb(38, 38, 38);
+    background-image: url(parts/setup_menu_btn_set_disable.png);
+    background-size: 100% 100%;
+}
+
+.setup_advanced_ntp_set_button > * {
+    display: table-cell;
+    vertical-align: middle;
+    cursor: default;
+}
+
+/*advanced : upnp*/
+.setup_advanced_upnp_inner {
+    position: absolute;
+    top: 0px;
+    left: 300px;
+    width: 100%;
+    height: 1093px;
+}
+
+.setup_advanced_upnp_inner_title {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 28px;
+    background-color: rgb(70, 70, 71);
+    font-size: large;
+}
+
+.setup_advanced_upnp_inner_main {
+    position: absolute;
+    top: 28px;
+    left: 0px;
+    width: 100%;
+    height: 850px;
+}
+
+.setup_advanced_upnp_labels {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 1100px;
+    width: 300px;
+    background-color: rgb(29, 29, 31);
+}
+
+.setup_advanced_upnp_form {
+    position: absolute;
+    top: 0px;
+    left: 300px;
+    height: 73px;
+    width: 1288px;
+}
+
+.setup_advanced_mDNS_btn_set_area,
+.setup_advanced_upnp_btn_set_area {
+    position: absolute;
+    top: 120px;
+    height: 40px;
+    width: 1300px;
+}
+
+.setup_advanced_upnp_auto_port_label {
+    position: absolute;
+    left: 33px;
+    top: 13px;
+    width: 250px;
+    height: 52px;
+    line-height: 26px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+
+/* radio(UPnP) : Auto port forwarding*/
+.setup_advanced_upnp_auto_portOn_radio {
+    position: absolute;
+    top: 28px;
+    left: 19px;
+}
+
+.setup_advanced_upnp_auto_portOn_label {
+    position: absolute;
+    top: 17px;
+    left: 61px;
+    font-size: large;
+}
+
+.setup_advanced_upnp_auto_portOff_radio {
+    position: absolute;
+    top: 28px;
+    left: 139px;
+}
+
+.setup_advanced_upnp_auto_portOff_label {
+    position: absolute;
+    top: 17px;
+    left: 179px;
+    font-size: large;
+}
+
+.setup_advanced_upnp_set_button {
+    position: absolute;
+    top: 0px;
+    left: 319px;
+    width: 142px;
+    height: 32px;
+    font-size: large;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: center;
+}
+.setup_advanced_802_1x_set_button{
+    position: absolute;
+    top: 970px;
+    left: 319px;
+    width: 142px;
+    height: 32px;
+    font-size: large;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: center;
+}
+
+.setup_advanced_easyip_set_button.off,
+.setup_advanced_802_1x_set_button.off,
+.setup_advanced_upnp_set_button.off {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_normal.png);
+    background-size: 100% 100%;
+}
+
+.setup_advanced_easyip_set_button.off_hover,
+.setup_advanced_802_1x_set_button.off_hover,
+.setup_advanced_upnp_set_button.off_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_onmouse.png);
+    background-size: 100% 100%;
+}
+
+.setup_advanced_easyip_set_button.on,
+.setup_advanced_802_1x_set_button.on,
+.setup_advanced_upnp_set_button.on {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_pressed.png);
+    background-size: 100% 100%;
+}
+
+.setup_advanced_easyip_set_button.on_hover,
+.setup_advanced_802_1x_set_button.on_hover,
+.setup_advanced_upnp_set_button.on_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_pressed.png);
+    background-size: 100% 100%;
+}
+
+.setup_advanced_802_1x_set_button.disable,
+.setup_advanced_upnp_set_button.disable {
+    color: rgb(102, 102, 102);
+    background-color: rgb(38, 38, 38);
+    background-image: url(parts/setup_menu_btn_set_disable.png);
+    background-size: 100% 100%;
+}
+
+.setup_advanced_easyip_set_button > *,
+.setup_advanced_802_1x_set_button > *,
+.setup_advanced_upnp_set_button > * {
+    display: table-cell;
+    vertical-align: middle;
+    cursor: default;
+}
+
+/*advanced : https*/
+.setup_advanced_https_inner {
+    position: absolute;
+    top: 0px;
+    left: 300px;
+    width: 1726px;
+    height: 1122px;
+}
+
+.setup_advanced_https_inner_title {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 28px;
+    background-color: rgb(70, 70, 71);
+}
+
+.setup_advanced_https_inner_main {
+    position: absolute;
+    top: 28px;
+    left: 0px;
+    width: 100%;
+    height: 630px;
+}
+
+.setup_advanced_https_labels {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 1100px;
+    width: 300px;
+    background-color: rgb(29, 29, 31);
+}
+
+.setup_advanced_https_form {
+    position: absolute;
+    top: 0px;
+    left: 300px;
+    height: 630px;
+    width: 1288px;
+}
+
+.setup_advanced_https_btn_set_area {
+    position: absolute;
+    top: 665px;
+    height: 40px;
+    width: 1300px;
+}
+
+.setup_advanced_https_crt_key_label,
+.setup_advanced_https_self_signed_label,
+.setup_advanced_https_generate_label,
+.setup_advanced_https_information_label,
+.setup_advanced_https_certificate_label,
+
+.setup_advanced_https_install_label,
+.setup_advanced_https_information2_label,
+.setup_advanced_https_connection_label,
+.setup_advanced_https_port_label,
+.setup_advanced_https_tls_label,
+.setup_advanced_https_invalid_label,
+.setup_advanced_https_port_tips_label {
+    position: absolute;
+    left: 54px;
+    width: 251px;
+    height: 52px;
+    line-height: 24px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_advanced_https_not_generated_label{
+    position: absolute;
+    left: 54px;
+    width: 1000px;
+    height: 52px;
+    line-height: 24px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_advanced_https_signing_request_label{
+    position: absolute;
+    left: 54px;
+    width: 251px;
+    height: 52px;
+    line-height: 24px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_advanced_https_signing_request_label p {
+    white-space: pre-line;
+}
+.setup_advanced_https_crt_key_label {
+    top: 13px;
+    left: 33px;
+}
+
+.setup_advanced_https_self_signed_label {
+    top: 82px;
+    left: 33px;
+}
+
+.setup_advanced_https_generate_label {
+    top: 114px;
+}
+
+.setup_advanced_https_information_label {
+    top: 167px;
+}
+
+.setup_advanced_https_certificate_label {
+    top: 245px;
+    left: 33px;
+}
+
+.setup_advanced_https_signing_request_label {
+    top: 270px;
+}
+
+.setup_advanced_https_install_label {
+    top: 338px;
+}
+
+.setup_advanced_https_information2_label {
+    top: 394px;
+}
+
+.setup_advanced_https_connection_label {
+    top: 483px;
+    left: 33px;
+}
+
+.setup_advanced_https_port_label {
+    top: 552px;
+    left: 33px;
+}
+.setup_advanced_https_tls_label{
+    top: 621px;
+    left: 33px;
+}
+
+.setup_advanced_https_not_generated_label {
+    top: 201px;
+    left: 41px;
+}
+
+.setup_advanced_https_invalid_label {
+    top: 427px;
+    left: 68px;
+}
+
+.setup_advanced_https_port_tips_label {
+    left: 220px;
+    top: 552px;
+}
+
+.setup_advanced_https_install_input {
+    position: absolute;
+    top: 355px;
+    left: 19px;
+    width: 200px;
+}
+
+.setup_advanced_https_port_input {
+    position: absolute;
+    top: 570px;
+    left: 19px;
+    width: 180px;
+}
+
+.setup_advanced_https_connection_select {
+    position: absolute;
+    top: 493px;
+    left: 19px;
+}
+
+.setup_advanced_https_crt_key_execute_button,
+.setup_advanced_https_generate_button,
+.setup_advanced_https_information_confirm_button,
+.setup_advanced_https_information_delete_button,
+.setup_advanced_https_signing_request_execute_button,
+.setup_advanced_https_install_select_button,
+.setup_advanced_https_install_execute_button,
+.setup_advanced_https_information2_confirm_button,
+.setup_advanced_https_information2_delete_button,
+.setup_advanced_https_set_button {
+    position: absolute;
+    width: 142px;
+    height: 32px;
+    font-size: large;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: center;
+    z-index: 1;
+}
+
+.setup_advanced_https_crt_key_execute_button.off,
+.setup_advanced_https_generate_button.off,
+.setup_advanced_https_information_confirm_button.off,
+.setup_advanced_https_information_delete_button.off,
+.setup_advanced_https_signing_request_execute_button.off,
+.setup_advanced_https_install_select_button.off,
+.setup_advanced_https_install_execute_button.off,
+.setup_advanced_https_information2_confirm_button.off,
+.setup_advanced_https_information2_delete_button.off,
+.setup_advanced_https_set_button.off {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_normal.png);
+    background-size: 100% 100%;
+}
+
+.setup_advanced_https_crt_key_execute_button.off_hover,
+.setup_advanced_https_generate_button.off_hover,
+.setup_advanced_https_information_confirm_button.off_hover,
+.setup_advanced_https_information_delete_button.off_hover,
+.setup_advanced_https_signing_request_execute_button.off_hover,
+.setup_advanced_https_install_select_button.off_hover,
+.setup_advanced_https_install_execute_button.off_hover,
+.setup_advanced_https_information2_confirm_button.off_hover,
+.setup_advanced_https_information2_delete_button.off_hover,
+.setup_advanced_https_set_button.off_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_onmouse.png);
+    background-size: 100% 100%;
+}
+
+.setup_advanced_https_crt_key_execute_button.on,
+.setup_advanced_https_generate_button.on,
+.setup_advanced_https_information_confirm_button.on,
+.setup_advanced_https_information_delete_button.on,
+.setup_advanced_https_signing_request_execute_button.on,
+.setup_advanced_https_install_select_button.on,
+.setup_advanced_https_install_execute_button.on,
+.setup_advanced_https_information2_confirm_button.on,
+.setup_advanced_https_information2_delete_button.on,
+.setup_advanced_https_set_button.on {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_pressed.png);
+    background-size: 100% 100%;
+}
+
+.setup_advanced_https_crt_key_execute_button.on_hover,
+.setup_advanced_https_generate_button.on_hover,
+.setup_advanced_https_information_confirm_button.on_hover,
+.setup_advanced_https_information_delete_button.on_hover,
+.setup_advanced_https_signing_request_execute_button.on_hover,
+.setup_advanced_https_install_select_button.on_hover,
+.setup_advanced_https_install_execute_button.on_hover,
+.setup_advanced_https_information2_confirm_button.on_hover,
+.setup_advanced_https_information2_delete_button.on_hover,
+.setup_advanced_https_set_button.on_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_pressed.png);
+    background-size: 100% 100%;
+}
+
+.setup_advanced_https_crt_key_execute_button.disable,
+.setup_advanced_https_generate_button.disable,
+.setup_advanced_https_information_confirm_button.disable,
+.setup_advanced_https_information_delete_button.disable,
+.setup_advanced_https_signing_request_execute_button.disable,
+.setup_advanced_https_install_select_button.disable,
+.setup_advanced_https_install_execute_button.disable,
+.setup_advanced_https_information2_confirm_button.disable,
+.setup_advanced_https_information2_delete_button.disable,
+.setup_advanced_https_set_button.disable {
+    color: rgb(102, 102, 102);
+    background-color: rgb(38, 38, 38);
+    background-image: url(parts/setup_menu_btn_set_disable.png);
+    background-size: 100% 100%;
+}
+
+.setup_advanced_https_crt_key_execute_button > *,
+.setup_advanced_https_generate_button > *,
+.setup_advanced_https_information_confirm_button > *,
+.setup_advanced_https_information_delete_button > *,
+.setup_advanced_https_signing_request_execute_button > *,
+.setup_advanced_https_install_select_button > *,
+.setup_advanced_https_install_execute_button > *,
+.setup_advanced_https_information2_confirm_button > *,
+.setup_advanced_https_information2_delete_button > *,
+.setup_advanced_https_set_button > * {
+    display: table-cell;
+    vertical-align: middle;
+    cursor: default;
+}
+
+.setup_advanced_https_crt_key_execute_button {
+    top: 23px;
+    left: 19px;
+}
+
+.setup_advanced_https_generate_button {
+    top: 124px;
+    left: 19px;
+}
+
+.setup_advanced_https_information_confirm_button {
+    top: 177px;
+    left: 19px;
+}
+
+.setup_advanced_https_information_delete_button {
+    top: 177px;
+    left: 200px;
+}
+
+.setup_advanced_https_signing_request_execute_button {
+    top: 298px;
+    left: 19px;
+}
+
+.setup_advanced_https_install_select_button {
+    top: 351px;
+    left: 270px;
+}
+
+.setup_advanced_https_install_execute_button {
+    top: 351px;
+    left: 450px;
+}
+
+.setup_advanced_https_information2_confirm_button {
+    top: 404px;
+    left: 19px;
+}
+
+.setup_advanced_https_information2_delete_button {
+    top: 404px;
+    left: 200px;
+}
+
+.setup_advanced_https_set_button {
+    top: 69px;
+    left: 320px;
+}
+
+/*
+ *advanced : rtsp
+ */
+.setup_advanced_rtsp_inner {
+    position: absolute;
+    top: 0px;
+    left: 300px;
+    width: 100%;
+    height: 934px;
+}
+/*
+ *advanced : rtsp
+ */
+.setup_advanced_snmp_inner {
+     position: absolute;
+     top: 0px;
+     left: 300px;
+     width: 100%;
+     height: 934px;
+ }
+.setup_advanced_tsl_inner {
+    position: absolute;
+    top: 0px;
+    left: 300px;
+    width: 100%;
+    height: 934px;
+}
+
+.setup_advanced_easyip_inner,
+.setup_advanced_802_1x_inner,
+.setup_advanced_mDNS_inner,
+.setup_advanced_referer_inner {
+    position: absolute;
+    top: 0px;
+    left: 300px;
+    width: 100%;
+    height: 934px;
+}
+.setup_advanced_rtsp_inner_title {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 28px;
+    background-color: rgb(70, 70, 71);
+}
+.setup_advanced_snmp_inner_title {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 28px;
+    background-color: rgb(70, 70, 71);
+}
+
+.setup_advanced_802_1x_title,
+.setup_advanced_mDNS_title,
+.setup_advanced_referer_title,
+.setup_advanced_tsl_inner_title{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 28px;
+    background-color: rgb(70, 70, 71);
+}
+
+.setup_advanced_802_1x_inner_title,
+.setup_advanced_mDNS_inner_title,
+.setup_advanced_referer_inner_title{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 28px;
+    background-color: rgb(70, 70, 71);
+}
+.setup_advanced_rtsp_inner_main {
+    position: absolute;
+    top: 28px;
+    left: 0px;
+    width: 1710px;
+    height: 1093px;
+}
+
+.setup_advanced_easyip_inner_main {
+    position: absolute;
+    left: 0px;
+    top: 29px;
+    width: 100%;
+    height: 1093px;
+}
+.setup_advanced_802_1x_inner_main{
+    position: absolute;
+    left: 0px;
+    width: 100%;
+    height: 1093px;
+}
+.setup_advanced_mDNS_inner_main,
+.setup_advanced_tsl_inner_main,
+.setup_advanced_referer_inner_main,
+.setup_advanced_snmp_inner_main {
+    position: absolute;
+    top: 28px;
+    left: 0px;
+    width: 100%;
+    height: 1093px;
+}
+
+.setup_advanced_rtsp_labels {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 1100px;
+    width: 300px;
+    background-color: rgb(29, 29, 31);
+}
+
+.setup_advanced_802_1x_inner_labels,
+.setup_advanced_mDNS_inner_labels,
+.setup_advanced_easyip_inner_labels,
+.setup_advanced_referer_labels,
+.setup_advanced_tsl_labels,
+.setup_advanced_snmp_labels {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 1100px;
+    width: 300px;
+    background-color: rgb(29, 29, 31);
+}
+.setup_advanced_rtsp_form {
+    position: absolute;
+    top: 0px;
+    left: 300px;
+    height: 418px;
+    width: 1288px;
+}
+
+.setup_advanced_802_1x_inner_form,
+.setup_advanced_mDNS_inner_form,
+.setup_advanced_easyip_inner_form,
+.setup_advanced_tsl_form,
+.setup_advanced_referer_form,
+.setup_advanced_snmp_form {
+    position: absolute;
+    top: 0px;
+    left: 300px;
+    height: 418px;
+    width: 1288px;
+}
+.setup_advanced_rtsp_btn_set_area {
+    position: absolute;
+    top: 472px;
+    height: 40px;
+    width: 1300px;
+}
+.setup_advanced_tsl_btn_set_area {
+    position: absolute;
+    top: 241px;
+    height: 40px;
+    width: 1300px;
+}
+.setup_advanced_snmp_btn_set_area {
+    position: absolute;
+    top: 741px;
+    height: 40px;
+    width: 1300px;
+}
+.setup_advanced_rtsp_port_label,
+.setup_advanced_rtsp_request_url1_label,
+.setup_advanced_rtsp_request_url2_label,
+.setup_advanced_rtsp_request_url3_label,
+.setup_advanced_rtsp_request_url4_label,
+.setup_advanced_rtsp_request_url5_label,
+.setup_advanced_rtsp_request_url6_label,
+.setup_advanced_rtsp_port_tips_label {
+    position: absolute;
+    left: 33px;
+    width: 251px;
+    height: 52px;
+    line-height: 26px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+
+.setup_advanced_rtsp_port_label {
+    top: 13px;
+}
+
+.setup_advanced_rtsp_request_url1_label {
+    top: 78px;
+}
+
+.setup_advanced_rtsp_request_url2_label {
+    top: 147px;
+}
+
+.setup_advanced_rtsp_request_url3_label {
+    top: 216px;
+}
+
+.setup_advanced_rtsp_request_url5_label {
+    top: 285px;
+}
+.setup_advanced_rtsp_request_url6_label{
+    top: 354px;
+}
+
+.setup_advanced_rtsp_port_tips_label {
+    left: 556px;
+    top: 13px;
+}
+
+.setup_advanced_rtsp_port_input {
+    position: absolute;
+    top: 34px;
+    left: 19px;
+    width: 500px;
+}
+
+.setup_advanced_rtsp_request_url1_input {
+    position: absolute;
+    top: 100px;
+    left: 19px;
+    width: 500px;
+}
+
+.setup_advanced_rtsp_request_url2_input {
+    position: absolute;
+    top: 167px;
+    left: 19px;
+    width: 500px;
+}
+
+.setup_advanced_rtsp_request_url3_input {
+    position: absolute;
+    top: 237px;
+    left: 19px;
+    width: 500px;
+}
+
+.setup_advanced_rtsp_request_url5_input{
+    position: absolute;
+    top: 307px;
+    left: 19px;
+    width: 500px;
+}
+.setup_advanced_rtsp_request_url6_input{
+    position: absolute;
+    top: 374px;
+    left: 19px;
+    width: 500px;
+}
+.setup_advanced_rtsp_set_button {
+    position: absolute;
+    top: 0px;
+    left: 319px;
+    width: 142px;
+    height: 32px;
+    font-size: large;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: center;
+}
+
+.setup_advanced_rtsp_set_button.off {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_normal.png);
+    background-size: 100% 100%;
+}
+
+.setup_advanced_rtsp_set_button.off_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_onmouse.png);
+    background-size: 100% 100%;
+}
+
+.setup_advanced_rtsp_set_button.on {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_pressed.png);
+    background-size: 100% 100%;
+}
+
+.setup_advanced_rtsp_set_button.on_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_pressed.png);
+    background-size: 100% 100%;
+}
+
+.setup_advanced_rtsp_set_button.disable {
+    color: rgb(102, 102, 102);
+    background-color: rgb(38, 38, 38);
+    background-image: url(parts/setup_menu_btn_set_disable.png);
+    background-size: 100% 100%;
+}
+
+.setup_advanced_rtsp_set_button > * {
+    display: table-cell;
+    vertical-align: middle;
+    cursor: default;
+}
+
+/*
+ *setup_network_crtkey_change.html
+ */
+.setting_network_crtkey_change_title {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 28px;
+    line-height: 28px;
+    width: 1610px;
+    background-color: rgb(70, 70, 71);
+}
+
+.setting_network_crtkey_change_left_bg {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 500px;
+    width: 200px;
+    background-color: rgb(45, 45, 48);
+    z-index: -1;
+}
+
+.setting_network_crtkey_change_line1 {
+    top: 145px;
+    left: 10px;
+    position: absolute;
+    width: 1100px;
+    height: 1px;
+    background-color: rgb(70, 70, 71);
+    z-index: 10;
+}
+
+.setting_network_crtkey_change_line2 {
+    top: 240px;
+    left: 10px;
+    position: absolute;
+    width: 1100px;
+    height: 1px;
+    background-color: rgb(70, 70, 71);
+    z-index: 10;
+}
+
+/*
+ *setup_network_self_signed_create.html
+ */
+.setting_network_self_signed_create_bg {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 570px;
+    width: 200px;
+    background-color: rgb(29, 29, 31) !important;
+    z-index: -2;
+}
+
+.setting_network_self_signed_create_title {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 26px;
+    line-height: 30px;
+    width: 700px;
+    background-color: rgb(70, 70, 71);
+    z-index: -1;
+}
+
+/*
+ *setup_network_self_signed_info.html
+ */
+.setting_network_self_signed_info_bg {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 500px;
+    width: 200px;
+    background-color: rgb(45, 45, 48);
+    z-index: -2;
+}
+
+.setting_network_self_signed_info_title {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 26px;
+    line-height: 30px;
+    width: 1610px;
+    background-color: rgb(70, 70, 71);
+    z-index: -1;
+}
+
+.setting_network_ca_signed_info_bg {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 480px;
+    width: 237px;
+    background-color: rgb(29, 29, 31) !important;
+    z-index: -2;
+}
+/*
+ * setup_network_ca_signed_create
+ */
+.setting_network_ca_signed_create_bg {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 570px;
+    width: 200px;
+    background-color: rgb(29, 29, 31) !important;
+    z-index: -2;
+}
+
+.setting_network_ca_signed_create_title {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 26px;
+    line-height: 30px;
+    width: 820px;
+    background-color: rgb(70, 70, 71);
+    z-index: -1;
+}
+
+/*
+ * setting_network_ca_signed_info
+ */
+.setting_network_ca_signed_info_bg {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 570px;
+    width: 200px;
+    background-color: rgb(29, 29, 31) !important;
+    z-index: -2;
+}
+
+.setting_network_ca_signed_info_title {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 26px;
+    line-height: 30px;
+    width: 740px;
+    background-color: rgb(70, 70, 71);
+    z-index: -1;
+}
+
+.setup_advanced_menu_ntp_button_Line{
+    position: absolute;
+    top: 83px;
+    left: 20px;
+}
+
+.setup_network_menu_lan_button_Line{
+    position: absolute;
+    top: 174px;
+    left: 20px;
+}
+.setup_advanced_menu_upnp_button_Line{
+    position: absolute;
+    top: 112px;
+    left: 20px;
+}
+.setup_network_menu_sfp_plus_button_Line{
+    position: absolute;
+    top: 203px;
+    left: 20px;
+}
+.setup_advanced_menu_https_button_Line{
+    position: absolute;
+    top: 141px;
+    left: 20px;
+}
+.setup_network_menu_usb_button_Line{
+    position: absolute;
+    top: 232px;
+    left: 20px;
+}
+.setup_advanced_menu_rtsp_button_Line {
+    position: absolute;
+    top: 232px;
+    left: 20px;
+}
+.setup_advanced_ntp_symchronization_label_Line{
+    position: absolute;
+    top: 73px;
+    left: 20px;
+    width:1260px;
+}
+
+.setup_advanced_ntp_address_txt_label_Line{
+    position: absolute;
+    top: 211px;
+    left: 20px;
+    width:1260px;
+}
+.setting_basic_system_fan_Line{
+    top: 111px;
+    left: 50px;
+    width:1280px;
+}
+.setting_basic_system_fan_two_Line{
+    top: 190px;
+    left: 20px;
+    width:1280px;
+}
+
+
+.setup_advanced_ntp_symchronization_label_Line{
+    position: absolute;
+    top: 73px;
+    left: 20px;
+    width: 1260px;
+}
+.setup_advanced_ntp_address_setting_label_Line{
+    position: absolute;
+    top: 142px;
+    left: 20px;
+    width: 1260px;
+}
+.setup_advanced_ntp_address_txt_label_Line{
+    position: absolute;
+    top: 211px;
+    left: 20px;
+    width: 1260px;
+}
+.setup_advanced_ntp_port_label_Line{
+    position: absolute;
+    top: 280px;
+    left: 20px;
+    width: 1260px;
+}
+.setup_advanced_ntp_interval_label_Line{
+    position: absolute;
+    top: 349px;
+    left: 20px;
+    width: 1260px;
+}
+
+.setup_advanced_upnp_auto_port_label_Line{
+    position: absolute;
+    top: 70px;
+    left: 20px;
+    width: 1300px;
+}
+
+
+.setup_advanced_rtsp_port_label_Line{
+    position: absolute;
+    top: 73px;
+    left: 20px;
+    width: 1260px;
+}
+.setup_advanced_rtsp_request_url1_label_Line{
+    position: absolute;
+    top: 142px;
+    left: 20px;
+    width: 1260px;
+}
+.setup_advanced_rtsp_request_url2_label_Line{
+    position: absolute;
+    top: 211px;
+    left: 20px;
+    width: 1260px;
+}
+.setup_advanced_rtsp_request_url3_label_Line{
+    position: absolute;
+    top: 280px;
+    left: 20px;
+    width: 1260px;
+}
+.setup_advanced_rtsp_request_url4_label_Line{
+    position: absolute;
+    top: 349px;
+    left: 20px;
+    width: 1260px;
+}
+.setup_advanced_rtsp_request_url5_label_Line{
+    position: absolute;
+    top: 349px;
+    left: 20px;
+    width: 1300px;
+}
+.setup_advanced_rtsp_request_url6_label_Line{
+    position: absolute;
+    top: 418px;
+    left: 20px;
+    width: 1300px;
+}
+
+.setup_advanced_https_self_signed_label_Line{
+    position: absolute;
+    top: 126px;
+    left: 37px;
+    height: 85px;
+}
+
+.setup_advanced_https_certificate_label_Line{
+    position: absolute;
+    top: 300px;
+    left: 37px;
+    height: 138px;
+}
+.setup_advanced_https_crt_key_label_Line{
+    position: absolute;
+    top: 73px;
+    left: 20px;
+    width: 1260px;
+}
+.setup_advanced_https_generate_label_Line{
+    position: absolute;
+    top: 166px;
+    left: 50px;
+    width: 1230px;
+}
+.setup_advanced_https_information_label_Line{
+    position: absolute;
+    top: 247px;
+    left: 20px;
+    width: 1260px;
+}
+.setup_advanced_https_signing_request_label_Line{
+    position: absolute;
+    top: 340px;
+    left: 50px;
+    width: 1230px;
+}
+.setup_advanced_https_install_label_Line{
+    position: absolute;
+    top: 393px;
+    left: 50px;
+    width: 1230px;
+}
+.setup_advanced_https_information2_label_Line{
+    position: absolute;
+    top: 474px;
+    left: 20px;
+    width: 1260px;
+}
+.setup_advanced_https_connection_label_Line{
+    position: absolute;
+    top: 543px;
+    left: 20px;
+    width: 1260px;
+}
+
+.setup_advanced_https_tls_label_Line{
+    position: absolute;
+    top: 686px;
+    left: 20px;
+    width: 1260px;
+}
+
+.setup_advanced_https_port_label_Line{
+    position: absolute;
+    top: 612px;
+    left: 20px;
+    width: 1300px;
+}
+
+.setup_network_ipv4_network_label_Line{
+    position: absolute;
+    top: 104px;
+    left: 37px;
+    height: 191px;
+}
+.setup_network_ipv4_network_usb_label_Line{
+    position: absolute;
+    top: 86px;
+    left: 37px;
+    height: 191px;
+}
+
+.setup_network_dns_label_Line{
+    position: absolute;
+    top: 81px;
+    left: 58px;
+    height: 85px;
+}
+
+.setup_network_ipv6_network_label_Line{
+    position: absolute;
+    top: 343px;
+    left: 37px;
+    height: 191px;
+}
+.setup_network_dns2_label_Line{
+    position: absolute;
+    top: 699px;
+    left: 37px;
+    height: 85px;
+}
+.setup_network_common_label_Line{
+    position: absolute;
+    top: 68px;
+    left: 37px;
+    height: 225px;
+}
+/* */
+.setup_network_dhcp_label_Line{
+    position: absolute;
+    top: 127px;
+    left: 50px;
+    width: 1518px;
+}
+.setup_network_ipv4_address_label_Line{
+    position: absolute;
+    top: 180px;
+    left: 50px;
+    width: 1518px;
+}
+.setup_network_subnet_mask_label_Line{
+    position: absolute;
+    top: 231px;
+    left: 50px;
+    width: 1518px;
+}
+.setup_network_default_gateway_label_Line{
+    position: absolute;
+    top: 282px;
+    left: 50px;
+    width: 1518px;
+}
+.setup_network_primary_server_label_Line{
+    position: absolute;
+    top: 127px;
+    left: 71px;
+    width: 1497px;
+}
+.setup_network_secondary_server_label_Line{
+    position: absolute;
+    top: 177px;
+    left: 54px;
+    width: 1547px;
+}
+.setup_network_manual_label_Line{
+    position: absolute;
+    top: 384px;
+    left: 50px;
+    width: 1518px;
+}
+.setup_network_ipv6_address_label_Line{
+    position: absolute;
+    top: 442px;
+    left: 50px;
+    width: 1518px;
+}
+.setup_network_default_gateway2_label_Line{
+    position: absolute;
+    top: 493px;
+    left: 50px;
+    width: 1518px;
+}
+.setup_network_dhcpv6_label_Line{
+    position: absolute;
+    top: 543px;
+    left: 50px;
+    width: 1518px;
+}
+.setup_network_metric_label_Line{
+    position: absolute;
+    top: 593px;
+    left: 33px;
+    width: 1518px;
+}
+.setup_network_sfp_metric_label_Line{
+    position: absolute;
+    top: 350px;
+    left: 33px;
+    width: 1518px;
+}
+.setup_network_usb_metric_label_Line{
+    position: absolute;
+    top: 593px;
+    left: 33px;
+    width: 1518px;
+}
+.setup_network_primary_server2_label_Line{
+    position: absolute;
+    top: 739px;
+    left: 71px;
+    width: 1497px;
+}
+.setup_network_secondary_server2_label_Line{
+    position: absolute;
+    top: 800px;
+    left: 54px;
+    width: 1547px;
+}
+.setup_network_domain_Line{
+    position: absolute;
+    top: 800px;
+    left: 54px;
+    width: 1547px;
+}
+.setup_network_http_port_label_Line{
+    position: absolute;
+    top: 118px;
+    left: 50px;
+    width: 15180px;
+}
+.setup_network_max_rtp_label_Line{
+    position: absolute;
+    top: 167px;
+    left: 50px;
+    width: 15180px;
+}
+.setup_network_http_max_label_Line{
+    position: absolute;
+    top: 226px;
+    left: 50px;
+    width: 15180px;
+}
+.setup_network_easy_ip_label_Line{
+    position: absolute;
+    top: 293px;
+    left: 50px;
+    width: 15180px;
+}
+/* .setup_network_recommended_network_label_Line{
+    position: absolute;
+    top: 409px;
+    left: 50px;
+    width: 15180px;
+} */
+.setup_status_http_status_label{
+    position: absolute;
+    left: 20px;
+    width: 95%;
+    height: 30px;
+    line-height: 2px;
+    display: table;
+
+    text-align: left;
+    top:110px;
+    background-color: rgb(70, 70, 71);
+    padding-left: 33px;
+}
+.setup_status_http_status_label>p{
+    font-size: large;
+    position: absolute;
+    left: 33px;
+    top:-5px;
+}
+.setup_status_http_port_label{
+    position: absolute;
+    left: 20px;
+    width: 95%;
+    height: 30px;
+    line-height: 2px;
+    display: table;
+    font-size: large;
+    text-align: left;
+    top:205px;
+    background-color: rgb(70, 70, 71);
+    position: absolute;
+    padding-left: 33px;
+}
+.setup_https_status_label{
+    position: absolute;
+    left: 20px;
+    width: 95%;
+    height: 30px;
+    line-height: 2px;
+    display: table;
+    font-size: large;
+    text-align: left;
+    top:300px;
+    background-color: rgb(70, 70, 71);
+    position: absolute;
+    padding-left: 33px;
+
+}
+.setup_status_router_global_address_label{
+    position: absolute;
+    left: 20px;
+    width: 96%;
+    height: 30px;
+    line-height: 2px;
+    display: table;
+    font-size: large;
+    text-align: left;
+    top:395px;
+    background-color: rgb(70, 70, 71);
+    position: absolute;
+    padding-left: 33px;
+}
+
+.setup_status_router_global_address_label_show{
+    position: absolute;
+    left: 20px;
+    width: 95%;
+    height: 30px;
+    line-height: 2px;
+    display: table;
+    font-size: large;
+    text-align: left;
+    top:395px;
+    background-color: rgb(70, 70, 71);
+    position: absolute;
+    padding-left: 33px;
+}
+.setup_status_router_global_address_label_show_rtsp{
+    position: absolute;
+    left: 20px;
+    width: 96%;
+    height: 30px;
+    line-height: 2px;
+    display: table;
+    font-size: large;
+    text-align: left;
+    top:205px;
+    background-color: rgb(70, 70, 71);
+    position: absolute;
+    padding-left: 33px;
+}
+
+.setup_advanced_status_http_port_label_Line,
+.setup_advanced_http_status_label_Line,
+.setup_advanced_status_https_port_label_Line,
+.setup_advanced_https_status_label_Line,
+.setup_advanced_router_global_label_Line{
+    position: absolute;
+    left: 33px;
+    width: 251px;
+    height: 2px;
+    line-height: 26px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+
+.setup_advanced_ntp_inner_title>p{
+    position: absolute;
+    left: 33px;
+    top: -13px;
+}
+
+.setup_advanced_upnp_inner_title>p{
+    position: absolute;
+    left: 33px;
+    top: -13px;
+}
+
+.setup_advanced_rtsp_inner_title>p{
+    position: absolute;
+    left: 33px;
+    top: -10px;
+}
+
+.setup_advanced_802_1x_title>p,
+.setup_advanced_mDNS_title>p,
+.setup_advanced_referer_title>p,
+.setup_advanced_tsl_inner_title>p,
+.setup_advanced_referer_inner_title>p,
+.setup_advanced_snmp_inner_title>p{
+    position: absolute;
+    left: 33px;
+    top: -10px;
+}
+.setup_advanced_https_inner_title>p{
+    position: absolute;
+    left: 33px;
+    top: -10px;
+}
+.setup_status_port_number_label{
+    position: absolute;
+    left: 20px;
+    width: 95%;
+    height: 30px;
+    line-height: 2px;
+    display: table;
+    padding-left: 33px;
+    font-size: large;
+    text-align: left;
+    top: 25px;
+    background-color: rgb(70, 70, 71);
+}
+.setup_status_port_number_label>p{
+    position: absolute;
+    top: -5px;
+    left: 33px;
+}
+.setup_status_port_number_label_value{
+    position: absolute;
+    top: 65px;
+    left: 20px;
+    width: 98%;
+    height: 30px;
+    line-height: 2px;
+    display: table;
+    padding-left: 54px;
+    font-size: large;
+    text-align: left;
+}
+.setup_status_http_status_label_value{
+    position: absolute;
+    left: 20px;
+    width: 98%;
+    height: 30px;
+    line-height: 2px;
+    display: table;
+    padding-left: 54px;
+    font-size: large;
+    text-align: left;
+    top: 155px;
+}
+.setup_status_http_port_label_value{
+    position: absolute;
+    left: 20px;
+    width: 98%;
+    height: 30px;
+    line-height: 2px;
+    display: table;
+    padding-left: 54px;
+    font-size: large;
+    text-align: left;
+    top: 245px;
+}
+.setup_https_status_label_value{
+    position: absolute;
+    left: 20px;
+    width: 98%;
+    height: 30px;
+    line-height: 2px;
+    display: table;
+    padding-left: 54px;
+    font-size: large;
+    text-align: left;
+    top: 345px;
+ }
+.setup_status_router_global_address_label_value{
+    position: absolute;
+    left: 20px;
+    width: 98%;
+    height: 30px;
+    line-height: 2px;
+    display: table;
+    padding-left: 54px;
+    font-size: large;
+    text-align: left;
+    top: 435px;;
+  }
+
+.setup_status_router_global_address_label_value_rtsp{
+    position: absolute;
+    left: 20px;
+    width: 98%;
+    height: 30px;
+    line-height: 2px;
+    display: table;
+    padding-left: 54px;
+    font-size: large;
+    text-align: left;
+    top: 265px;;
+}
+.setup_status_router_global_address_label_show_value{
+       position: absolute;
+       left: 20px;
+       width: 98%;
+       height: 30px;
+       line-height: 2px;
+       display: table;
+       padding-left: 54px;
+       font-size: large;
+       text-align: left;
+       top: 515px;
+   }
+
+.select_setting_https_tls {
+    position: absolute;
+    top: 633px;
+    left: 19px;
+    z-index: 2;
+    font-size: large;
+    width: 200px;
+}
+
+.setup_advanced_tls_label,
+.setup_advanced_eap_label,
+.setup_advanced_m_dns_label,
+.setup_advanced_referer_label,
+.setup_advanced_tsl_index_number_label,
+.setup_advanced_tsl_port_label,
+.setup_advanced_snmp_label,
+.setup_advanced_snmp_version_label,
+.setup_advanced_user_name_label,
+.setup_advanced_authentication_label,
+.setup_advanced_encryption_method_label,
+.setup_advanced_password_label,
+.setup_advanced_system_name_label,
+.setup_advanced_location_label,
+.setup_advanced_contact_label {
+    position: absolute;
+    left: 33px;
+    width: 251px;
+    height: 52px;
+    line-height: 26px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+
+.setup_advanced_m_dns_label,
+.setup_advanced_referer_label,
+.setup_advanced_tsl_index_number_label,
+.setup_advanced_snmp_label {
+    top: 13px;
+}
+.setup_advanced_eap_label{
+    top: 74px;
+}
+.setup_advanced_tls_label{
+    top: 140px;
+}
+.setup_advanced_client_label{
+    position: absolute;
+    left: 63px;
+    top: 180px;
+    width: 251px;
+    height: 52px;
+    line-height: 26px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_advanced_private_label{
+    position: absolute;
+    left: 63px;
+    top: 236px;
+    width: 251px;
+    height: 52px;
+    line-height: 26px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+
+.setup_advanced_private_password_label{
+    position: absolute;
+    left: 73px;
+    top: 315px;
+    width: 251px;
+    height: 52px;
+    line-height: 26px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_advanced_client_install_label{
+    position: absolute;
+    left: 63px;
+    top: 451px;
+    width: 251px;
+    height: 52px;
+    line-height: 26px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_advanced_8021_tls_user_name_label{
+    position: absolute;
+    left: 63px;
+    top: 381px;
+    width: 251px;
+    height: 52px;
+    line-height: 26px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_advanced_information_label{
+    position: absolute;
+    left: 63px;
+    top: 517px;
+    width: 251px;
+    height: 52px;
+    line-height: 26px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_advanced_peap_label{
+    position: absolute;
+    left: 33px;
+    top: 607px;
+    width: 251px;
+    height: 52px;
+    line-height: 26px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_advanced_peap_user_label{
+    position: absolute;
+    left: 63px;
+    top: 670px;
+    width: 251px;
+    height: 52px;
+    line-height: 26px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_advanced_peap_password_label{
+    position: absolute;
+    left: 63px;
+    top: 736px;
+    width: 251px;
+    height: 52px;
+    line-height: 26px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_advanced_cac_install_label{
+    position: absolute;
+    left: 33px;
+    top: 802px;
+    width: 251px;
+    height: 52px;
+    line-height: 26px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_advanced_ca_information_label{
+    position: absolute;
+    left: 33px;
+    top: 864px;
+    width: 251px;
+    height: 52px;
+    line-height: 26px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_advanced_tsl_port_label,
+.setup_advanced_snmp_version_label {
+    top: 78px;
+}
+
+.setup_advanced_user_name_label {
+    top: 147px;
+}
+
+.setup_advanced_authentication_label {
+    top: 216px;
+}
+
+.setup_advanced_encryption_method_label {
+    top: 285px;
+}
+.setup_advanced_password_label {
+    top: 354px;
+}
+.setup_advanced_system_name_label{
+    top: 423px;
+}
+.setup_advanced_location_label{
+    top: 492px;
+}
+.setup_advanced_contact_label{
+    top: 561px;
+}
+
+.setup_advanced_snmp_label_Line{
+    position: absolute;
+    top: 73px;
+    left: 20px;
+    width: 1260px;
+}
+.setup_advanced_snmp_version_label_Line{
+    position: absolute;
+    top: 142px;
+    left: 20px;
+    width: 1260px;
+}
+.setup_advanced_user_name_label_Line{
+    position: absolute;
+    top: 211px;
+    left: 20px;
+    width: 1260px;
+}
+.setup_advanced_authentication_label_Line{
+    position: absolute;
+    top: 280px;
+    left: 20px;
+    width: 1260px;
+}
+.setup_advanced_encryption_method_label_Line{
+    position: absolute;
+    top: 349px;
+    left: 20px;
+    width: 1260px;
+}
+.setup_advanced_password_label_Line{
+    position: absolute;
+    top: 418px;
+    left: 20px;
+    width: 1300px;
+}
+.setup_advanced_system_name_label_Line{
+    position: absolute;
+    top: 487px;
+    left: 20px;
+    width: 1300px;
+}
+.setup_advanced_location_label_Line{
+    position: absolute;
+    top: 556px;
+    left: 20px;
+    width: 1300px;
+}
+.setup_advanced_contact_label_Line{
+    position: absolute;
+    top: 625px;
+    left: 20px;
+    width: 1300px;
+}
+/*snmp radio*/
+/* radio(UPnP) : Auto port forwarding*/
+.setup_advanced_snmpOn_radio {
+    position: absolute;
+    top: 28px;
+    left: 19px;
+}
+
+.setup_advanced_snmpOn_label {
+    position: absolute;
+    top: 17px;
+    left: 61px;
+    font-size: large;
+}
+
+.setup_advanced_snmpOff_radio {
+    position: absolute;
+    top: 28px;
+    left: 139px;
+}
+
+.setup_advanced_snmpOff_label {
+    position: absolute;
+    top: 17px;
+    left: 179px;
+    font-size: large;
+}
+/*auth*/
+.setup_advanced_authentictionMD5_radio {
+    position: absolute;
+    top: 230px;
+    left: 19px;
+}
+
+.setup_advanced_authentictionMD5_label {
+    position: absolute;
+    top: 219px;
+    left: 61px;
+    font-size: large;
+}
+
+.setup_advanced_authentictionSHA1_radio {
+    position: absolute;
+    top: 230px;
+    left: 139px;
+}
+
+.setup_advanced_authentictionSHA1_label {
+    position: absolute;
+    top: 219px;
+    left: 179px;
+    font-size: large;
+}
+/*enc*/
+.setup_advanced_encryption_methodDES_radio {
+    position: absolute;
+    top: 293px;
+    left: 19px;
+}
+
+.setup_advanced_encryption_methodDES_label {
+    position: absolute;
+    top: 282px;
+    left: 61px;
+    font-size: large;
+}
+
+.setup_advanced_encryption_methodAES_radio {
+    position: absolute;
+    top: 293px;
+    left: 139px;
+}
+
+.setup_advanced_encryption_methodAES_label {
+    position: absolute;
+    top: 282px;
+    left: 179px;
+    font-size: large;
+}
+/*SNMP INPUT*/
+.setup_advanced_snmp_user_name_input {
+    position: absolute;
+    top: 165px;
+    left: 19px;
+    width: 300px;
+    height: 28px;
+}
+.setup_advanced_m_dns_input,
+.setup_advanced_tsl_index_input{
+    position: absolute;
+    top: 25px;
+    left: 19px;
+    width: 300px;
+    height: 28px;
+}
+.setup_advanced_tsl_port_input{
+    position: absolute;
+    top: 95px;
+    left: 19px;
+    width: 300px;
+    height: 28px;
+}
+.setup_advanced_snmp_password_input {
+    position: absolute;
+    top: 372px;
+    left: 19px;
+    width: 300px;
+    height: 28px;
+}
+.setup_advanced_snmp_system_name_input {
+    position: absolute;
+    top: 440px;
+    left: 19px;
+    width: 300px;
+    height: 28px;
+}
+.setup_advanced_snmp_location_input {
+    position: absolute;
+    top: 508px;
+    left: 19px;
+    width: 300px;
+    height: 28px;
+}
+.setup_advanced_snmp_contact_input {
+    position: absolute;
+    top: 576px;
+    left: 19px;
+    width: 300px;
+    height: 28px;
+}
+.setup_advanced_tsl_set_button,
+.setup_advanced_snmp_set_button {
+    position: absolute;
+    top: 0px;
+    left: 319px;
+    width: 142px;
+    height: 32px;
+    font-size: large;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: center;
+}
+.setup_advanced_tsl_set_button.off,
+.setup_advanced_snmp_set_button.off {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_normal.png);
+    background-size: 100% 100%;
+}
+.setup_advanced_tsl_set_button.off_hover,
+.setup_advanced_snmp_set_button.off_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_onmouse.png);
+    background-size: 100% 100%;
+}
+.setup_advanced_tsl_set_button.on,
+.setup_advanced_snmp_set_button.on {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_pressed.png);
+    background-size: 100% 100%;
+}
+.setup_advanced_tsl_set_button.on_hover,
+.setup_advanced_snmp_set_button.on_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_set_pressed.png);
+    background-size: 100% 100%;
+}
+.setup_advanced_tsl_set_button.disable,
+.setup_advanced_snmp_set_button.disable {
+    color: rgb(102, 102, 102);
+    background-color: rgb(38, 38, 38);
+    background-image: url(parts/setup_menu_btn_set_disable.png);
+    background-size: 100% 100%;
+}
+.setup_advanced_tsl_set_button > *,
+.setup_advanced_snmp_set_button > * {
+    display: table-cell;
+    vertical-align: middle;
+    cursor: default;
+}
+
+.setup_advanced_tsl_index_label_Line{
+    position: absolute;
+    top: 73px;
+    left: 20px;
+}
+.setup_advanced_802_1x_label_Line{
+    position: absolute;
+    top: 83px;
+    left: 20px;
+}
+.setup_advanced_eap_label_Line{
+    position: absolute;
+    top: 145px;
+    left: 20px;
+}
+.setup_advanced_private_k_p_usage_label_Line{
+    position: absolute;
+    top: 245px;
+    left: 50px;
+}
+.setup_advanced_private_k_password_label_Line{
+    position: absolute;
+    top: 312px;
+    left: 50px;
+}
+.setup_advanced_private_password_label_Line{
+    position: absolute;
+    top: 378px;
+    left: 65px;
+}
+.setup_advanced_tls_user_name_label_Line{
+    position: absolute;
+    top: 445px;
+    left: 50px;
+}
+.setup_advanced_client_install_label_Line{
+    position: absolute;
+    top: 515px;
+    left: 50px;
+}
+.setup_advanced_information_label_Line{
+    position: absolute;
+    top: 585px;
+    left: 50px;
+}
+.setup_advanced_peap_label_Line{
+    position: absolute;
+    top: 729px;
+    left: 50px;
+}
+.setup_advanced_peap_user_label_Line{
+    position: absolute;
+    top: 795px;
+    left: 50px;
+}
+.setup_advanced_peap_password_label_Line{
+    position: absolute;
+    top: 861px;
+    left: 20px;
+}
+.setup_advanced_information1_label_Line{
+    position: absolute;
+    top: 927px;
+    left: 20px;
+}
+.setup_advanced_tsl_port_label_Line{
+    position: absolute;
+    top: 142px;
+    left: 20px;
+}
+
+.setup_advanced_refererEnable_radio {
+    position: absolute;
+    top: 28px;
+    left: 19px;
+}
+
+.setup_advanced_refererEnable_label {
+    position: absolute;
+    top: 17px;
+    left: 61px;
+    font-size: large;
+}
+
+.setup_advanced_refererDisable_radio {
+    position: absolute;
+    top: 28px;
+    left: 139px;
+}
+
+.setup_advanced_refererDisable_label {
+    position: absolute;
+    top: 17px;
+    left: 179px;
+    font-size: large;
+}
+.setup_advanced_snmp_version{
+    position: absolute;
+    left: 323px;
+    width: 251px;
+    height: 52px;
+    line-height: 26px;
+    display: table;
+    font-size: large;
+    text-align: left;
+    top: 78px;
+}
+.txt_advanced_tsl_index {
+    position: absolute;
+    top: 11px;
+    left: 650px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.txt_advanced_tsl_port {
+    position: absolute;
+    top: 80px;
+    left: 650px;
+    width: 250px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+
+.setup_advanced_eapTLS_radio  {
+    position: absolute;
+    top: 99px;
+    left: 19px;
+}
+
+.setup_advanced_eapTLS_label {
+    position: absolute;
+    top: 89px;
+    font-size: large;
+    left: 61px;
+}
+
+.setup_advanced_eapPEAP_radio {
+    position: absolute;
+    top: 99px;
+    left: 139px;
+}
+
+.setup_advanced_eapPEAP_label {
+    position: absolute;
+    top: 89px;
+    font-size: large;
+    left: 179px;
+}
+.setup_advanced_private_key_label_Line{
+    top: 319px;
+    left: 65px;
+    height: 50px;
+}
+.setup_advanced_tls_label_Line{
+    top: 190px;
+    left: 45px;
+    height: 410px;
+}
+.setup_advanced_peap_vertical_label_Line{
+    top: 655px;
+    left: 45px;
+    height: 140px;
+}
+#setup_advanced_802_1x_scroll_div{
+    position: absolute;
+    top: 29px;
+    width: 100%;
+}
+
+.setup_advanced_client_typePEM_radio {
+    position: absolute;
+    top: 194px;
+    left: 19px;
+}
+
+.setup_advanced_client_typePEM_label {
+    position: absolute;
+    top: 183px;
+    font-size: large;
+    left: 61px;
+}
+
+.setup_advanced_client_typePKCS\#12_radio {
+    position: absolute;
+    top: 194px;
+    left: 139px;
+}
+
+.setup_advanced_client_typePKCS\#12_label {
+    position: absolute;
+    top: 183px;
+    font-size: large;
+    left: 179px;
+}
+
+.setup_advanced_private_key_usageEnable_radio {
+    position: absolute;
+    top: 264px;
+    left: 19px;
+}
+
+.setup_advanced_private_key_usageEnable_label {
+    position: absolute;
+    top: 253px;
+    font-size: large;
+    left: 61px;
+}
+
+.setup_advanced_private_key_usageDisable_radio {
+    position: absolute;
+    top: 264px;
+    left: 139px;
+}
+
+.setup_advanced_private_key_usageDisable_label {
+    position: absolute;
+    top: 253px;
+    font-size: large;
+    left: 179px;
+}
+.setup_advanced_private_key_password {
+    position: absolute;
+    top: 335px;
+    left: 19px;
+    width: 300px;
+}
+.setup_advanced_tls_user_name{
+    position: absolute;
+    top: 405px;
+    left: 19px;
+    width: 300px;
+}
+.setup_advanced_client_certificate_install {
+    position: absolute;
+    top: 470px;
+    left: 19px;
+    width: 200px;
+}
+.setup_advanced_peap_user{
+    position: absolute;
+    top: 689px;
+    left: 19px;
+    width: 200px;
+}
+.setup_advanced_peap_password{
+    position: absolute;
+    top: 751px;
+    left: 19px;
+    width: 200px;
+}
+.setup_advanced_ca_certiticate_install{
+    position: absolute;
+    top: 817px;
+    left: 19px;
+    width: 200px;
+}
+#setup_advanced_menu_802_1_x_client_select{
+    top: 471px;
+    left: 270px;
+}
+#setup_advanced_menu_802_1_x_client_execute{
+    top: 471px;
+    left: 450px;
+}
+#setup_advanced_menu_802_1_x_ca_select{
+    top: 813px;
+    left: 270px;
+}
+#setup_advanced_menu_802_1_x_ca_execute{
+    top: 813px;
+    left: 450px;
+}
+#setup_advanced_menu_802_1_x_tls_information_confirm{
+    top: 535px;
+    left: 19px;
+}
+#setup_advanced_menu_802_1_x_tls_information_delete{
+    top: 535px;
+    left: 200px;
+}
+#setup_advanced_menu_802_1_x_peap_information_confirm{
+    top: 880px;
+    left: 19px;
+}
+#setup_advanced_menu_802_1_x_peap_information_delete{
+    top: 880px;
+    left: 200px;
+}
+.setup_advanced_easyip_set_button {
+    position: absolute;
+    top: 100px;
+    left: 319px;
+    width: 142px;
+    height: 32px;
+    font-size: large;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: center;
+}
+
+.setup_advanced_private_key_usageNORMAL_radio  {
+    position: absolute;
+    top: 265px;
+    left: 19px;
+}
+
+.setup_advanced_private_key_usageNORMAL_label {
+    position: absolute;
+    top: 256px;
+    font-size: large;
+    left: 58px;
+}
+
+.setup_advanced_private_key_usageWIDE_G2_radio  {
+    position: absolute;
+    top: 265px;
+    left: 139px;
+}
+
+.setup_advanced_private_key_usageWIDE_G2_label {
+    position: absolute;
+    top: 256px;
+    font-size: large;
+    left: 179px;
+}
+
+.setup_advanced_refererNORMAL_radio  {
+    position: absolute;
+    top: 28px;
+    left: 19px;
+}
+
+.setup_advanced_refererNORMAL_label {
+    position: absolute;
+    top: 17px;
+    font-size: large;
+    left: 58px;
+}
+
+.setup_advanced_refererWIDE_G2_radio  {
+    position: absolute;
+    top: 28px;
+    left: 139px;
+}
+
+.setup_advanced_refererWIDE_G2_label {
+    position: absolute;
+    top: 17px;
+    font-size: large;
+    left: 179px;
+}
+
+.setup_network_status_lan_title {
+    position: absolute;
+    top: 0px;
+    left: 10px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+    font-weight: bold;
+}
+.setup_network_status_lan_ipv4_title {
+    position: absolute;
+    top: 30px;
+    left: 20px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_status_lan_ipv4_address_title {
+    position: absolute;
+    top: 60px;
+    left: 40px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_status_lan_ipv4_subset_mask_title {
+    position: absolute;
+    top: 90px;
+    left: 40px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_status_lan_ipv4_default_gateway_title {
+    position: absolute;
+    top: 120px;
+    left: 40px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_status_lan_ipv6_title {
+    position: absolute;
+    top: 150px;
+    left: 20px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_status_lan_ipv6_address1_title {
+    position: absolute;
+    top: 180px;
+    left: 40px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_status_lan_ipv6_address2_title {
+    position: absolute;
+    top: 210px;
+    left: 40px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_status_lan_ipv6_default_gateway_title {
+    position: absolute;
+    top: 240px;
+    left: 40px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_status_sfp_plus_title {
+    position: absolute;
+    top: 270px;
+    left: 10px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+    font-weight: bold;
+}
+.setup_network_status_sfp_plus_ipv4_title {
+    position: absolute;
+    top: 300px;
+    left: 20px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_status_sfp_plus_ipv4_address_title {
+    position: absolute;
+    top: 330px;
+    left: 40px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_status_sfp_plus_ipv4_subset_mask_title {
+    position: absolute;
+    top: 360px;
+    left: 40px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_status_sfp_plus_ipv4_default_gateway_title {
+    position: absolute;
+    top: 390px;
+    left: 40px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_status_sfp_plus_ipv6_title {
+    position: absolute;
+    top: 420px;
+    left: 20px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_status_sfp_plus_ipv6_address1_title {
+    position: absolute;
+    top: 450px;
+    left: 40px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_status_sfp_plus_ipv6_address2_title {
+    position: absolute;
+    top: 480px;
+    left: 40px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+
+.setup_network_status_sfp_plus_ipv6_default_gateway_title {
+    position: absolute;
+    top: 510px;
+    left:40px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_status_usb_title {
+    position: absolute;
+    top: 420px;
+    left: 10px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+    font-weight: bold;
+}
+
+.setup_network_status_usb_title.isUE163 {
+    position: absolute;
+    top: 270px;
+    left: 10px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+    font-weight: bold;
+}
+.setup_network_status_usb_ipv4_title {
+    position: absolute;
+    top: 450px;
+    left: 20px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_status_usb_ipv4_title.isUE163 {
+    position: absolute;
+    top: 300px;
+    left: 20px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_status_usb_ipv4_address_title {
+    position: absolute;
+    top: 480px;
+    left: 40px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_status_usb_ipv4_address_title.isUE163 {
+    position: absolute;
+    top: 330px;
+    left: 40px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_status_usb_ipv4_subset_mask_title {
+    position: absolute;
+    top: 510px;
+    left: 40px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_status_usb_ipv4_subset_mask_title.isUE163 {
+    position: absolute;
+    top: 360px;
+    left: 40px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_status_usb_ipv4_default_gateway_title {
+    position: absolute;
+    top: 540px;
+    left: 40px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_status_usb_ipv4_default_gateway_title.isUE163 {
+    position: absolute;
+    top: 390px;
+    left: 40px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+
+
+.setup_network_status_usb_ipv6_title {
+    position: absolute;
+    top: 570px;
+    left: 20px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_status_usb_ipv6_address1_title {
+    position: absolute;
+    top: 600px;
+    left: 40px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_status_usb_ipv6_address2_title {
+    position: absolute;
+    top: 630px;
+    left: 40px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_status_usb_ipv6_default_gateway_title {
+    position: absolute;
+    top: 660px;
+    left: 40px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+
+.setup_network_status_dns1_title {
+    position: absolute;
+    top: 690px;
+    left: 10px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+    font-weight: bold;
+}
+.setup_network_status_dns_title {
+    position: absolute;
+    top: 720px;
+    left: 20px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_status_dns_title.isUE163 {
+    position: absolute;
+    top: 420px;
+    left: 20px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_status_dns_pri_server_address_title {
+    position: absolute;
+    top: 750px;
+    left: 40px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_status_dns_pri_server_address_title.isUE163 {
+    position: absolute;
+    top: 450px;
+    left: 40px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_status_dns_sec_server_address_title {
+    position: absolute;
+    top: 780px;
+    left: 40px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_status_dns_sec_server_address_title.isUE163 {
+    position: absolute;
+    top: 480px;
+    left: 40px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+
+.setup_network_status_lan_ipv4_address_value {
+    position: absolute;
+    top: 60px;
+    left: 40px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_status_lan_ipv4_subset_mask_value {
+    position: absolute;
+    top: 90px;
+    left: 40px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_status_lan_ipv4_default_gateway_value {
+    position: absolute;
+    top: 120px;
+    left: 40px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+
+.setup_network_status_usb_ipv6_address1_value {
+    position: absolute;
+    top: 600px;
+    left: 40px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_status_usb_ipv6_address2_value {
+    position: absolute;
+    top: 630px;
+    left: 40px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_status_usb_ipv6_default_gateway_value {
+    position: absolute;
+    top: 660px;
+    left: 40px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+
+.setup_network_status_lan_ipv6_address1_value {
+    position: absolute;
+    top: 180px;
+    left: 40px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_status_lan_ipv6_address2_value {
+    position: absolute;
+    top: 210px;
+    left: 40px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_status_lan_ipv6_default_gateway_value {
+    position: absolute;
+    top: 240px;
+    left: 40px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_status_sfp_plus_ipv4_address_value {
+    position: absolute;
+    top: 330px;
+    left: 40px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_status_sfp_plus_ipv4_subset_mask_value {
+    position: absolute;
+    top: 360px;
+    left: 40px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_status_sfp_plus_ipv4_default_gateway_value {
+    position: absolute;
+    top: 390px;
+    left: 40px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+
+.setup_network_status_sfp_plus_ipv6_address1_value {
+    position: absolute;
+    top: 450px;
+    left: 40px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_status_sfp_plus_ipv6_address2_value {
+    position: absolute;
+    top: 480px;
+    left: 40px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+
+.setup_network_status_sfp_plus_ipv6_default_gateway_value {
+    position: absolute;
+    top: 510px;
+    left:40px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+
+.setup_network_status_usb_ipv4_address_value {
+    position: absolute;
+    top: 480px;
+    left: 40px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_status_usb_ipv4_address_value.isUE163 {
+    position: absolute;
+    top: 330px;
+    left: 40px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_status_usb_ipv4_subset_mask_value {
+    position: absolute;
+    top: 510px;
+    left: 40px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_status_usb_ipv4_subset_mask_value.isUE163 {
+    position: absolute;
+    top: 360px;
+    left: 40px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_status_usb_ipv4_default_gateway_value {
+    position: absolute;
+    top: 540px;
+    left: 40px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_status_usb_ipv4_default_gateway_value.isUE163 {
+    position: absolute;
+    top: 390px;
+    left: 40px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_status_dns_pri_server_address_value {
+    position: absolute;
+    top: 750px;
+    left: 20px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_status_dns_pri_server_address_value.isUE163 {
+    position: absolute;
+    top: 420px;
+    left: 20px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_status_dns_sec_server_address_value {
+    position: absolute;
+    top: 780px;
+    left: 20px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_status_dns_sec_server_address_value.isUE163 {
+    position: absolute;
+    top: 450px;
+    left: 20px;
+    width: 50px;
+    height: 28px;
+    display: table;
+    font-size: large;
+    text-align: left;
+}
+.setup_network_status_lan_ipv4_title_Line{
+    top:70px;
+    left: 20px;
+}
+.setup_network_status_lan_ipv4_address_title_Line{
+    top:100px;
+    left: 40px;
+}
+.setup_network_status_lan_ipv4_subset_mask_title_Line{
+    top:130px;
+    left: 40px;
+}
+.setup_network_status_lan_ipv4_default_gateway_title_Line{
+    top:160px;
+    left: 40px;
+}
+.setup_network_status_lan_ipv6_title_Line{
+    top:190px;
+    left: 20px;
+}
+.setup_network_status_lan_ipv6_address_title_Line{
+    top:220px;
+    left: 40px;
+}
+.setup_network_status_lan_ipv6_subset_mask_title_Line{
+    top:250px;
+    left: 40px;
+}
+.setup_network_status_lan_ipv6_default_gateway_title_Line{
+    top:280px;
+    left: 40px;
+}
+
+.setup_network_status_sfp_plus_ipv4_title_Line{
+    top:340px;
+    left: 20px;
+}
+.setup_network_status_sfp_plus_ipv4_address_title_Line{
+    top:370px;
+    left: 40px;
+}
+.setup_network_status_sfp_plus_ipv4_subset_mask_title_Line{
+    top:400px;
+    left: 40px;
+}
+.setup_network_status_sfp_plus_ipv4_default_gateway_title_Line{
+    top:430px;
+    left: 40px;
+}
+.setup_network_status_sfp_plus_ipv6_title_Line{
+    top:460px;
+    left: 20px;
+}
+.setup_network_status_sfp_plus_ipv6_address_title_Line{
+    top:490px;
+    left: 40px;
+}
+.setup_network_status_sfp_plus_ipv6_subset_mask_title_Line{
+    top:520px;
+    left: 40px;
+}
+.setup_network_status_sfp_plus_ipv6_default_gateway_title_Line{
+    top:550px;
+    left: 40px;
+}
+.setup_network_status_usb_ipv4_title_Line{
+    top:490px;
+    left: 20px;
+}
+.setup_network_status_usb_ipv4_title_isUE163_Line{
+    top:490px;
+    left: 40px;
+}
+.setup_network_status_usb_ipv4_address_title_Line{
+    top:520px;
+    left: 40px;
+}
+.setup_network_status_usb_ipv4_subset_mask_title_Line{
+    top:550px;
+    left: 40px;
+}
+.setup_network_status_usb_ipv4_default_gateway_title_Line{
+    top:580px;
+    left: 40px;
+}
+.setup_network_status_usb_ipv6_title_Line{
+    top:610px;
+    left: 20px;
+}
+.setup_network_status_usb_ipv6_address_title_Line{
+    top:640px;
+    left: 40px;
+}
+.setup_network_status_usb_ipv6_subset_mask_title_Line{
+    top:670px;
+    left: 40px;
+}
+.setup_network_status_usb_ipv6_default_gateway_title_Line{
+    top:700px;
+    left: 40px;
+}
+
+.setup_network_status_dns_title_Line{
+    top:760px;
+    left: 20px;
+}
+.setup_network_status_dns_pri_server_address_title_Line{
+    top:790px;
+    left: 40px;
+}
+.setup_network_status_dns_sec_server_address_title_Line{
+    top:820px;
+    left: 40px;
+}

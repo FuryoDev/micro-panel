@@ -1,0 +1,20 @@
+@CHARSET "UTF-8";
+
+#base_main_controller {
+    position: absolute;
+    width: 558px;
+    height: 29px;
+    top: -31px;
+    display: table;
+    text-align: center;
+    border: 1px rgb(70, 70, 71) solid;
+    background-color: rgb(70, 70, 71);
+    z-index: 3;
+ 	line-height:27px;
+    font-size: large;
+}
+
+#base_main_controller > * {
+    vertical-align: top;
+    cursor: default;
+}

@@ -1,0 +1,868 @@
+/**
+* Setup Main Menu
+*/
+.setup_menu_setting_status_btn {
+    position: absolute;
+    top: 54px;
+    left: 20px;
+    width: 240px;
+    height: 30px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+
+/**
+ * Basic
+ */
+.setup_main_basic_menu_label {
+    position: absolute;
+    top: 106px;
+    left: 30px;
+    cursor: default;
+    text-align: center;
+    font-size: large;
+    color: rgb(217, 217, 217);
+}
+
+.setup_menu_basic_system_btn {
+    position: absolute;
+    top: 145px;
+    left: 20px;
+    width: 240px;
+    height: 29px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+
+.setup_menu_basic_system_btn_Line {
+    position: absolute;
+    top: 174px;
+    left: 20px;
+}
+.setup_menu_basic_pan_tilt_btn {
+    position: absolute;
+    top: 175px;
+    left: 20px;
+    width: 240px;
+    height: 28px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+
+.setup_menu_basic_pan_tilt_btn_Line {
+    position: absolute;
+    top: 203px;
+    left: 20px;
+}
+
+.setup_menu_basic_dateTime_btn {
+    position: absolute;
+    top: 204px;
+    left: 20px;
+    width: 240px;
+    height: 29px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+
+.setup_menu_basic_dateTime_btn_Line {
+    position: absolute;
+    top: 233px;
+    left: 20px;
+}
+
+.setup_menu_basic_livePage_btn {
+    position: absolute;
+    top: 234px;
+    left: 20px;
+    width: 240px;
+    height: 29px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+
+/**
+ * Signals
+ */
+ .setup_main_signals_menu_label {
+    position: absolute;
+    top: 286px;
+    left: 30px;
+    cursor: default;
+    text-align: center;
+    font-size: large;
+    color: rgb(217, 217, 217);
+}
+
+.setup_menu_output_btn {
+    position: absolute;
+    top: 323px;
+    left: 20px;
+    width: 240px;
+    height: 29px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+
+.setup_menu_output_btn_Line {
+    top: 353px;
+    left: 20px;
+}
+
+.setup_menu_return_btn {
+    position: absolute;
+    top: 354px;
+    left: 20px;
+    width: 240px;
+    height: 28px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+
+.setup_menu_return_btn_Line {
+    top: 381px;
+    left: 20px;
+}
+
+.setup_menu_ip_signal_btn {
+    position: absolute;
+    top: 382px;
+    left: 20px;
+    width: 240px;
+    height: 28px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+.setup_menu_ip_signal_btn.isUE163 {
+    position: absolute;
+    top: 354px;
+    left: 20px;
+    width: 240px;
+    height: 28px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+
+.setup_menu_ip_signal_btn_Line {
+    top: 410px;
+    left: 20px;
+}
+
+/**
+ * Image/Audio
+ */
+.setup_main_imageOrAudio_menu_label {
+    position: absolute;
+    top: 436px;
+    left: 30px;
+    cursor: default;
+    text-align: center;
+    font-size: large;
+    color: rgb(217, 217, 217);
+}
+.setup_main_imageOrAudio_menu_label.isUE163 {
+    position: absolute;
+    top: 406px;
+    left: 30px;
+    cursor: default;
+    text-align: center;
+    font-size: large;
+    color: rgb(217, 217, 217);
+}
+
+.setup_menu_videoOverIP_btn {
+    position: absolute;
+    top: 473px;
+    left: 20px;
+    width: 240px;
+    height: 29px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+.setup_menu_videoOverIP_btn.isUE163 {
+    position: absolute;
+    top: 443px;
+    left: 20px;
+    width: 240px;
+    height: 29px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+
+.setup_menu_videoOverIP_btn_Line {
+    position: absolute;
+    top: 503px;
+    left: 20px;
+}
+.setup_menu_videoOverIP_btn_Line.isUE163 {
+    position: absolute;
+    top: 473px;
+    left: 20px;
+}
+.setup_menu_mediaOverIP_btn {
+    position: absolute;
+    top: 503px;
+    left: 20px;
+    width: 240px;
+    height: 29px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+
+.setup_menu_mediaOverIP_btn_Line {
+    position: absolute;
+    top: 533px;
+    left: 20px;
+}
+
+.setup_menu_audio_btn {
+    position: absolute;
+    top: 534px;
+    left: 20px;
+    width: 240px;
+    height: 28px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+.setup_menu_audio_btn.isUE163 {
+    position: absolute;
+    top: 474px;
+    left: 20px;
+    width: 240px;
+    height: 28px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+
+.setup_menu_audio_btn_Line {
+    position: absolute;
+    top: 561px;
+    left: 20px;
+}
+.setup_menu_audio_btn_Line.isUE163 {
+    position: absolute;
+    top: 501px;
+    left: 20px;
+}
+.setup_menu_imageAdjust_btn {
+    position: absolute;
+    top: 562px;
+    left: 20px;
+    width: 240px;
+    height: 28px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+.setup_menu_imageAdjust_btn.isUE163 {
+    position: absolute;
+    top: 502px;
+    left: 20px;
+    width: 240px;
+    height: 28px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+
+.setup_menu_imageAdjust_btn_Line {
+    position: absolute;
+    top: 590px;
+    left: 20px;
+}
+.setup_menu_imageAdjust_btn_Line.isUE163 {
+    position: absolute;
+    top: 530px;
+    left: 20px;
+}
+
+.setup_menu_monitor_display_btn{
+    position: absolute;
+    top: 591px;
+    left: 20px;
+    width: 240px;
+    height: 28px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+.setup_menu_monitor_display_btn.isUE163{
+    position: absolute;
+    top: 531px;
+    left: 20px;
+    width: 240px;
+    height: 28px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+.setup_menu_monitor_display_btn_Line {
+    position: absolute;
+    top: 618px;
+    left: 20px;
+}
+.setup_menu_monitor_display_btn_Line.isUE163 {
+    position: absolute;
+    top: 558px;
+    left: 20px;
+}
+.setup_menu_lens_btn {
+    position: absolute;
+    top: 621px;
+    left: 20px;
+    width: 240px;
+    height: 28px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+.setup_menu_lens_btn.isUE163 {
+    position: absolute;
+    top: 561px;
+    left: 20px;
+    width: 240px;
+    height: 28px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+
+.setup_menu_lens_btn_Line {
+    position: absolute;
+    top: 648px;
+    left: 20px;
+}
+.setup_menu_lens_btn_Line.isUE163 {
+    position: absolute;
+    top: 588px;
+    left: 20px;
+}
+
+.setup_menu_UHDCrop_btn {
+    position: absolute;
+    top: 650px;
+    left: 20px;
+    width: 240px;
+    height: 28px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+.setup_menu_UHDCrop_btn.isUE163 {
+    position: absolute;
+    top: 590px;
+    left: 20px;
+    width: 240px;
+    height: 28px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+
+
+.setup_menu_UHDCrop_btn_Line {
+    position: absolute;
+    top: 680px;
+    left: 20px;
+}
+
+.setup_menu_UHDCrop_btn_Line.isUE163 {
+    position: absolute;
+    top: 620px;
+    left: 20px;
+}
+.setup_menu_presetPosition_btn {
+    position: absolute;
+    top: 679px;
+    left: 20px;
+    width: 240px;
+    height: 29px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+.setup_menu_presetPosition_btn.isUE163 {
+    position: absolute;
+    top: 619px;
+    left: 20px;
+    width: 240px;
+    height: 29px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+
+
+/**
+ * User mng.
+ */
+.setup_main_userMng_menu_label {
+    position: absolute;
+    top: 786px;
+    left: 30px;
+    cursor: default;
+    text-align: center;
+    font-size: large;
+    color: rgb(217, 217, 217);
+}
+.setup_main_userMng_menu_label.isUE163 {
+    position: absolute;
+    top: 739px;
+    left: 30px;
+    cursor: default;
+    text-align: center;
+    font-size: large;
+    color: rgb(217, 217, 217);
+}
+
+.setup_menu_userMng_userAuth_btn {
+    position: absolute;
+    top: 817px;
+    left: 20px;
+    width: 240px;
+    height: 29px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+.setup_menu_userMng_userAuth_btn.isUE163 {
+    position: absolute;
+    top: 777px;
+    left: 20px;
+    width: 240px;
+    height: 29px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+
+.setup_menu_userMng_userAuth_btn_Line {
+    position: absolute;
+    top: 846px;
+    left: 20px;
+}
+.setup_menu_userMng_userAuth_btn_Line.isUE163 {
+    position: absolute;
+    top: 806px;
+    left: 20px;
+}
+
+
+.setup_menu_userMng_hostAuth_btn {
+    position: absolute;
+    top: 847px;
+    left: 20px;
+    width: 240px;
+    height: 28px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+.setup_menu_userMng_hostAuth_btn.isUE163 {
+    position: absolute;
+    top: 807px;
+    left: 20px;
+    width: 240px;
+    height: 28px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+
+.setup_menu_userMng_hostAuth_btn_Line {
+    position: absolute;
+    top: 865px;
+    left: 20px;
+}
+
+.setup_menu_userMng_priorityStream_btn {
+    position: absolute;
+    top: 798px;
+    left: 20px;
+    width: 240px;
+    height: 29px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+
+/**
+ * network
+ */
+.setup_main_network_label {
+    position: absolute;
+    top: 885px;
+    left: 30px;
+    cursor: default;
+    text-align: center;
+    font-size: large;
+    color: rgb(217, 217, 217);
+}
+.setup_main_network_label.isUE163 {
+    position: absolute;
+    top: 855px;
+    left: 30px;
+    cursor: default;
+    text-align: center;
+    font-size: large;
+    color: rgb(217, 217, 217);
+}
+.setup_menu_network_network_btn {
+    position: absolute;
+    top: 919px;
+    left: 20px;
+    width: 240px;
+    height: 29px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+.setup_menu_network_network_btn.isUE163 {
+    position: absolute;
+    top: 889px;
+    left: 20px;
+    width: 240px;
+    height: 29px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+.setup_menu_network_network_btn_Line {
+    position: absolute;
+    top: 948px;
+    left: 20px;
+}
+.setup_menu_network_network_btn_Line.isUE163 {
+    position: absolute;
+    top: 918px;
+    left: 20px;
+}
+.setup_menu_network_advance_btn {
+    position: absolute;
+    top: 948px;
+    left: 20px;
+    width: 240px;
+    height: 29px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+.setup_menu_network_advance_btn.isUE163 {
+    position: absolute;
+    top: 918px;
+    left: 20px;
+    width: 240px;
+    height: 29px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+
+/**
+ * Maintenance
+ */
+.setup_main_maintenance_menu_label {
+    position: absolute;
+    top: 1000px;
+    left: 30px;
+    cursor: default;
+    text-align: center;
+    font-size: large;
+    color: rgb(217, 217, 217);
+}
+.setup_main_maintenance_menu_label.isUE163 {
+    position: absolute;
+    top: 970px;
+    left: 30px;
+    cursor: default;
+    text-align: center;
+    font-size: large;
+    color: rgb(217, 217, 217);
+}
+
+.setup_menu_maintenance_system_log_btn {
+    position: absolute;
+    top: 1036px;
+    left: 20px;
+    width: 240px;
+    height: 29px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+.setup_menu_maintenance_system_log_btn.isUE163 {
+    position: absolute;
+    top: 1006px;
+    left: 20px;
+    width: 240px;
+    height: 29px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+.setup_menu_maintenance_system_log_btn_Line {
+    position: absolute;
+    top: 1066px;
+    left: 20px;
+}
+.setup_menu_maintenance_system_log_btn_Line.isUE163 {
+    position: absolute;
+    top: 1036px;
+    left: 20px;
+}
+
+.setup_menu_maintenance_maintenance_btn {
+    position: absolute;
+    top: 1066px;
+    left: 20px;
+    width: 240px;
+    height: 28px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+.setup_menu_maintenance_maintenance_btn.isUE163 {
+    position: absolute;
+    top: 1036px;
+    left: 20px;
+    width: 240px;
+    height: 28px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+
+.setup_menu_maintenance_maintenance_btn_Line {
+    position: absolute;
+    top: 1095px;
+    left: 20px;
+}
+
+.setup_menu_maintenance_maintenance_btn_Line.isUE163 {
+    position: absolute;
+    top: 1095px;
+    left: 20px;
+}
+.setup_menu_maintenance_product_info_btn {
+    position: absolute;
+    top: 1095px;
+    left: 20px;
+    width: 240px;
+    height: 28px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+.setup_menu_maintenance_product_info_btn.isUE163 {
+    position: absolute;
+    top: 1065px;
+    left: 20px;
+    width: 240px;
+    height: 28px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+
+.setup_menu_maintenance_product_info_btn_Line {
+    position: absolute;
+    top: 1124px;
+    left: 20px;
+}
+.setup_menu_maintenance_product_info_btn_Line.isUE163 {
+    position: absolute;
+    top: 1064px;
+    left: 20px;
+}
+/* .setup_menu_maintenance_default_reset_btn {
+    position: absolute;
+    top: 1095px;
+    left: 20px;
+    width: 240px;
+    height: 28px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+
+.setup_menu_maintenance_default_reset_btn_Line {
+    position: absolute;
+    top: 1124px;
+    left: 20px;
+} */
+
+.setup_menu_maintenance_backup_btn {
+    position: absolute;
+    top: 1125px;
+    left: 20px;
+    width: 240px;
+    height: 29px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+.setup_menu_maintenance_backup_btn.isUE163 {
+    position: absolute;
+    top: 1095px;
+    left: 20px;
+    width: 240px;
+    height: 29px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+.setup_main_basic_menu_label > *,
+.setup_main_imageOrAudio_menu_label > *,
+.setup_main_signals_menu_label > *,
+.setup_main_connected_menu_label >*,
+.setup_main_userMng_menu_label > *,
+.setup_main_network_label > *,
+.setup_main_maintenance_menu_label > * {
+    vertical-align: middle;
+    display: table-cell;
+    text-align: center;
+}
+
+/*201904*/
+.setup_menu_virtual_btn_Line {
+    position: absolute;
+    top: 798px;
+    left: 20px;
+}
+.setup_menu_virtual_btn_Line.isUE163 {
+    position: absolute;
+    top: 738px;
+    left: 20px;
+}
+.setup_menu_virtual_btn {
+    position: absolute;
+    top: 771px;
+    left: 20px;
+    width: 240px;
+    height: 28px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+.setup_menu_virtual_btn.isUE163 {
+    position: absolute;
+    top: 711px;
+    left: 20px;
+    width: 240px;
+    height: 28px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+
+.setup_menu_csp_btn_Line {
+    position: absolute;
+    top: 798px;
+    left: 20px;
+}
+.setup_menu_csp_btn {
+    position: absolute;
+    top: 824px;
+    left: 20px;
+    width: 240px;
+    height: 28px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+.setup_menu_csp_btn.isUE163 {
+    position: absolute;
+    top: 764px;
+    left: 20px;
+    width: 240px;
+    height: 28px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+
+.setup_menu_cast_btn{
+    position: absolute;
+    top: 799px;
+    left: 20px;
+    width: 240px;
+    height: 28px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+.setup_menu_cast_btn.isUE163{
+    position: absolute;
+    top: 739px;
+    left: 20px;
+    width: 240px;
+    height: 28px;
+    font-size: 11pt;
+    text-align: center;
+    display: table;
+}
+.setup_menu_cast_btn_Line {
+    position: absolute;
+    top: 825px;
+    left: 20px;
+}
+
+.setup_menu_cast_btn_Line.isUE163 {
+    position: absolute;
+    top: 764px;
+    left: 20px;
+}
+/*20190424 add*/
+#setup_main_menu_other{
+    position: absolute;
+    top:80px;
+}
+/**
+ * Image/Audio
+ */
+.setup_main_connected_menu_label {
+    position: absolute;
+    top: 732px;
+    left: 30px;
+    cursor: default;
+    text-align: center;
+    font-size: large;
+    color: rgb(217, 217, 217);
+}
+.setup_main_connected_menu_label.isUE163 {
+    position: absolute;
+    top: 672px;
+    left: 30px;
+    cursor: default;
+    text-align: center;
+    font-size: large;
+    color: rgb(217, 217, 217);
+}
+
+#setup_menu_scroll{
+    height: 1055px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    position: relative;
+    top: 30px;
+}
+
+#setup_main_menu{
+    position: absolute;
+    width: 287px;
+    height: 1240px;
+}

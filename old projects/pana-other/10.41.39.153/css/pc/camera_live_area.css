@@ -1,0 +1,1813 @@
+@CHARSET "UTF-8";
+/**
+ * Camera List Area
+ */
+
+#camera_live_area {
+    position: absolute;
+    left: 0px;
+    top: 49px;
+    display: table;
+    background-color: rgb(29, 29, 31);
+    z-index:2;
+}
+
+/**
+ * Camera List Area
+ */
+.view_main {
+    width: 278px;
+    height: 1100px;
+    display: table-column !important;
+}
+
+.base_main_live_view {
+    position: absolute;
+    width: 278px;
+    left: 0px;
+    height: 29px;
+    top: 0px;
+    display: table;
+    text-align: center;
+    background-color: rgb(70, 70, 71);
+    z-index: 3;
+    font-size: large;
+}
+.base_main_live_view >p{
+    position: absolute;
+    top: -14px;
+    left: 115px;
+}
+
+.base_main_setup_view {
+    position: absolute;
+    width: 278px;
+    left: 0px;
+    height: 29px;
+    top: 0px;
+    display: table;
+    text-align: center;
+    background-color: rgb(70, 70, 71);
+    z-index: 3;
+    font-size: large;
+}
+.base_main_setup_view >p{
+    position: absolute;
+    top: -14px;
+    left: 24px;
+}
+
+/**
+ * Header Select
+ * camera_count
+ */
+select#camera_count {
+    position: absolute;
+    top: 4px;
+    left: 175px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 140px;
+    height: 29px;
+    background-color: rgb(0, 0, 0);
+    color: rgb(191, 191, 191);
+    font-size: 14pt;
+    border: 1px rgb(70, 70, 71) double;
+    padding: 1px 0px 0px 5px;
+    background-image: url(parts/btn_pulldown_normal.png);
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: 24px 27px;
+}
+
+select#bars_type {
+    position: absolute;
+    top: 500px;
+    left: 110px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 140px;
+    height: 29px;
+    background-color: rgb(70, 70, 71);
+    color: rgb(191, 191, 191);
+    font-size: 14pt;
+    padding: 1px 0px 0px 5px;
+    background-image: url(parts/btn_pulldown_normal.png);
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: 24px 27px;
+}
+
+select#camera_count:active {
+    background-image: url(parts/btn_pulldown_click.png);
+    background-repeat: no-repeat;
+    background-position: right center;
+}
+
+select#camera_count:hover {
+    background-image: url(parts/btn_pulldown_onMouse.png);
+    background-repeat: no-repeat;
+    background-position: right center;
+}
+
+select#camera_count:disabled {
+    background-image: url(parts/btn_pulldown_disable.png);
+    background-repeat: no-repeat;
+    background-position: right center;
+}
+
+/**
+ * Camera list
+ * base_view_controller
+ */
+#base_view_controller {
+    position: absolute;
+    right: 22px;
+    top: 3px;
+    width: 212px;
+    height: 30px;
+    display: table;
+    text-align: center;
+    background-color: rgb(70, 70, 71);
+    color: rgb(255, 255, 255);
+}
+
+.base_view_controller_on {
+    width: 478px !important;
+    left: 1438px;
+}
+
+#base_view_controller > * {
+    display: table-cell;
+    vertical-align: middle;
+    cursor: default;
+}
+
+/**
+ * Header Select
+ * camera_category
+ */
+select#camera_category {
+    position: absolute;
+    top: 4px;
+    left: 10px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 132px;
+    height: 29px;
+    background-color: rgb(0, 0, 0);
+    color: rgb(191, 191, 191);
+    font-size: 14pt;
+    border: 1px rgb(70, 70, 71) double;
+    padding: 1px 0px 0px 5px;
+    background-image: url(parts/btn_pulldown_normal.png);
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: 24px 27px;
+}
+
+select#camera_category:active {
+    background-image: url(parts/btn_pulldown_click.png);
+    background-repeat: no-repeat;
+    background-position: right center;
+}
+
+select#camera_category:hover {
+    background-image: url(parts/btn_pulldown_onMouse.png);
+    background-repeat: no-repeat;
+    background-position: right center;
+}
+
+select#camera_category:disabled {
+    background-image: url(parts/btn_pulldown_disable.png);
+    background-repeat: no-repeat;
+    background-position: right center;
+}
+
+/**
+ * scroll control
+ */
+::-webkit-scrollbar-thumb {
+    background-color: rgb(171, 171, 171);
+    height: 300px;
+    outline-offset: -2px;
+    outline: 2px solid rgb(70, 70, 71);
+    -webkit-border-radius: 14px;
+    border-left: 2px solid rgb(70, 70, 71);
+    border-right: 2px solid rgb(70, 70, 71);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(255, 255, 255);
+    height: 300px;
+    -webkit-border-radius: 12px;
+}
+
+::-webkit-scrollbar {
+    width: 14px;
+}
+
+::-webkit-scrollbar-track-piece {
+    background-color: rgb(70, 70, 71);
+    -webkit-border-radius: 0;
+}
+
+.btn_basic.off,
+.btn_image.off,
+.btn_multi_screen.off,
+.btn_user_mng.off,
+.btn_network.off,
+.btn_maintenance.off {
+    color: rgb(191, 191, 191);
+    color: rgb(191, 191, 191);
+    background-image: url(parts/btn_cameraController_slider_toggle_normal.png);
+    background-size: 100% 100%;
+}
+
+.btn_basic.off_hover,
+.btn_image.off_hover,
+.btn_multi_screen.off_hover,
+.btn_user_mng.off_hover,
+.btn_network.off_hover,
+.btn_maintenance.off_hover {
+    color: rgb(191, 191, 191);
+    color: rgb(191, 191, 191);
+    background-image: url(parts/btn_cameraController_slider_toggle_onMouse.png);
+    background-size: 100% 100%;
+}
+
+.btn_basic.on,
+.btn_image.on,
+.btn_multi_screen.on,
+.btn_user_mng.on,
+.btn_network.on,
+.btn_maintenance.on {
+    color: rgb(255, 255, 255);
+    background-image: url(parts/btn_cameraController_slider_toggle_selected.png);
+    background-size: 100% 100%;
+}
+
+.btn_basic.on_hover,
+.btn_image.on_hover,
+.btn_multi_screen.on_hover,
+.btn_user_mng.on_hover,
+.btn_network.on_hover,
+.btn_maintenance.on_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/btn_cameraController_slider_toggle_selected.png);
+    background-size: 100% 100%;
+}
+
+.btn_basic.disable,
+.btn_image.disable,
+.btn_multi_screen.disable,
+.btn_user_mng.disable,
+.btn_network.disable,
+.btn_maintenance.disable {
+    color: rgb(102, 102, 102);
+    background-image: url(parts/btn_cameraController_slider_toggle_disable.png);
+    background-size: 100% 100%;
+}
+
+.btn_basic > *,
+.btn_image > *,
+.btn_multi_screen > *,
+.btn_user_mng > *,
+.btn_network > *,
+.btn_maintenance > * {
+    display: table-cell;
+    vertical-align: middle;
+    cursor: default;
+}
+
+.div_Situation {
+    position: absolute;
+    left: 300px;
+    top: 0px;
+    width: 2020px;
+    height: 2020px;
+}
+
+.div_basic,.div_maintenance{
+    position: absolute;
+    left: 293px;
+    top: 0px;
+    width: 2020px;
+    height: 1130px;
+    overflow:hidden;
+}
+.div_multi_screen,
+.div_user_mng{
+    position: absolute;
+    left: 300px;
+    top: 0px;
+    width: 1400px;
+    height: 1100px;
+}
+
+.div_image {
+    position: absolute;
+    left: 300px;
+    top: 0px;
+    width: 1620px;
+    height: 850px;
+}
+
+.btn_basic {
+    position: absolute;
+    top: 100px;
+    left: 55px;
+    width: 85px;
+    height: 25px;
+    font-size: 8pt;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: center;
+    z-index: 9999;
+
+}
+
+.btn_image {
+    position: absolute;
+    top: 150px;
+    left: 55px;
+    width: 85px;
+    height: 25px;
+    font-size: 8pt;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: center;
+    z-index: 9999;
+
+}
+
+.btn_multi_screen {
+    position: absolute;
+    top: 200px;
+    left: 55px;
+    width: 85px;
+    height: 25px;
+    font-size: 8pt;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: center;
+    z-index: 9999;
+
+}
+
+.btn_user_mng {
+    position: absolute;
+    top: 250px;
+    left: 55px;
+    width: 85px;
+    height: 25px;
+    font-size: 8pt;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: center;
+    z-index: 9999;
+
+}
+
+.btn_network {
+    position: absolute;
+    top: 300px;
+    left: 55px;
+    width: 85px;
+    height: 25px;
+    font-size: 8pt;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: center;
+    z-index: 9999;
+
+}
+
+.btn_maintenance {
+    position: absolute;
+    top: 350px;
+    left: 55px;
+    width: 85px;
+    height: 25px;
+    font-size: 8pt;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: center;
+    z-index: 9999;
+
+}
+
+.osd_btn_up.off {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/cc_menu_osd_arrow_up_normal.png);
+    background-size: 100% 100%;
+}
+
+.osd_btn_down.off {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/cc_menu_osd_arrow_down_normal.png);
+    background-size: 100% 100%;
+}
+
+.osd_btn_left.off {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/cc_menu_osd_arrow_left_normal.png);
+    background-size: 100% 100%;
+}
+
+.osd_btn_right.off {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/cc_menu_osd_arrow_right_normal.png);
+    background-size: 100% 100%;
+}
+
+.osd_btn_enter.off {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/L_menu_osd_arrow_none_normal.png);
+    background-size: 100% 100%;
+}
+
+.osd_btn_cancel.off {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_exec_normal.png);
+    background-size: 100% 100%;
+}
+
+.btn_Enlarge.off,
+.btn_cupture.off {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/btn_cameraController_slider_toggle_normal.png);
+    background-size: 100% 100%;
+}
+
+.btn_lock.off {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/cc_menu_btn_oplock_normal.png);
+    background-size: 100% 100%;
+}
+
+.osd_btn_up.off_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/cc_menu_osd_arrow_up_onmouse.png);
+    background-size: 100% 100%;
+}
+
+.osd_btn_down.off_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/cc_menu_osd_arrow_down_onmouse.png);
+    background-size: 100% 100%;
+}
+
+.osd_btn_left.off_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/cc_menu_osd_arrow_left_onmouse.png);
+    background-size: 100% 100%;
+}
+
+.osd_btn_right.off_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/cc_menu_osd_arrow_right_onmouse.png);
+    background-size: 100% 100%;
+}
+
+.osd_btn_enter.off_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/L_menu_osd_arrow_none_onmouse.png);
+    background-size: 100% 100%;
+}
+
+.osd_btn_cancel.off_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_exec_onmouse.png);
+    background-size: 100% 100%;
+}
+
+.btn_Enlarge.off_hover,
+.btn_lock.off_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/cc_menu_btn_oplock_onmouse.png);
+    background-size: 100% 100%;
+}
+
+.osd_btn_up.on {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/cc_menu_osd_arrow_up_pressed.png);
+    background-size: 100% 100%;
+}
+
+.osd_btn_down.on {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/cc_menu_osd_arrow_down_pressed.png);
+    background-size: 100% 100%;
+}
+
+.osd_btn_left.on {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/cc_menu_osd_arrow_left_pressed.png);
+    background-size: 100% 100%;
+}
+
+.osd_btn_right.on {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/cc_menu_osd_arrow_right_pressed.png);
+    background-size: 100% 100%;
+}
+
+.osd_btn_enter.on {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/L_menu_osd_arrow_none_pressed.png);
+    background-size: 100% 100%;
+}
+
+.osd_btn_cancel.on {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_exec_pressed.png);
+    background-size: 100% 100%;
+}
+
+.btn_Enlarge.on,
+.btn_lock.on {
+    color: rgb(255, 255, 255);
+    background-image: url(parts/cc_menu_btn_oplock_selected.png);
+    background-size: 100% 100%;
+}
+.osd_btn_enter.on_hover,
+.btn_Enlarge.on_hover,
+.osd_btn_cancel.on_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/setup_menu_btn_exec_pressed.png);
+    background-size: 100% 100%;
+}
+
+.osd_btn_up.on_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/cc_menu_osd_arrow_up_pressed.png);
+    background-size: 100% 100%;
+}
+
+.osd_btn_down.on_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/cc_menu_osd_arrow_down_pressed.png);
+    background-size: 100% 100%;
+}
+
+.osd_btn_left.on_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/cc_menu_osd_arrow_left_pressed.png);
+    background-size: 100% 100%;
+}
+
+.osd_btn_right.on_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/cc_menu_osd_arrow_right_pressed.png);
+    background-size: 100% 100%;
+}
+
+.btn_lock.on_hover {
+    color: rgb(191, 191, 191);
+    background-image: url(parts/cc_menu_btn_oplock_selectedOnmouse.png);
+    background-size: 100% 100%;
+}
+
+.osd_btn_enter.disable,
+.btn_Enlarge.disable,
+.osd_btn_cancel.disable {
+    color: rgb(102, 102, 102);
+    background-image: url(parts/setup_menu_btn_exec_disable.png);
+    background-size: 100% 100%;
+}
+
+.osd_btn_up.disable {
+    color: rgb(102, 102, 102);
+    background-image: url(parts/cc_menu_osd_arrow_up_disable.png);
+    background-size: 100% 100%;
+}
+
+.osd_btn_down.disable {
+    color: rgb(102, 102, 102);
+    background-image: url(parts/cc_menu_osd_arrow_down_disable.png);
+    background-size: 100% 100%;
+}
+
+.osd_btn_left.disable {
+    color: rgb(102, 102, 102);
+    background-image: url(parts/cc_menu_osd_arrow_left_disable.png);
+    background-size: 100% 100%;
+}
+
+.osd_btn_right.disable {
+    color: rgb(102, 102, 102);
+    background-image: url(parts/cc_menu_osd_arrow_right_disable.png);
+    background-size: 100% 100%;
+}
+
+.btn_lock.disable {
+    color: rgb(102, 102, 102);
+    background-image: url(parts/cc_menu_btn_oplock_disable.png);
+    background-size: 100% 100%;
+}
+
+.btn_lock {
+    position: absolute;
+    top: 1042px;
+    left: 78px;
+    width: 122px;
+    height: 34px;
+    font-size: large;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: center;
+    z-index: 9999;
+}
+
+.btn_Enlarge {
+    position: absolute;
+    top: 8px;
+    width: 38px;
+    height: 32px;
+    font-size: 8pt;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: center;
+    z-index: 9999;
+    right:17px;
+}
+.btn_changetotouch {
+    position: absolute;
+    top: 8px;
+    width: 38px;
+    height: 32px;
+    font-size: 8pt;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: center;
+    z-index: 9999;
+    right:65px;
+}
+.btn_changetomobile {
+    position: absolute;
+    top: 8px;
+    width: 38px;
+    height: 32px;
+    font-size: 8pt;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: center;
+    z-index: 9999;
+    right:113px;
+}
+.btn_Enlarge.off {
+    color: rgb(217, 217, 217);
+    background-image: url(parts/cc_header_btn_fullscreen_normal.png);
+    background-size: 100% 100%;
+}
+
+.btn_Enlarge.on {
+    color: rgb(217, 217, 217);
+    background-image: url(parts/cc_header_btn_fullscreen_pressed.png);
+    background-size: 100% 100%;
+}
+
+.btn_Enlarge.disable {
+    color: rgb(102, 102, 102);
+    background-image: url(parts/cc_header_btn_fullscreen_disable.png);
+    background-size: 100% 100%;
+}
+
+.btn_Enlarge.on_hover {
+    color: rgb(255, 255, 255);
+    background-image: url(parts/cc_header_btn_fullscreen_pressed.png);
+    background-size: 100% 100%;
+}
+
+.btn_Enlarge.off_hover {
+    color: rgb(255, 255, 255);
+    background-image: url(parts/cc_header_btn_fullscreen_onmouse.png);
+    background-size: 100% 100%;
+}
+
+.osd_btn_up {
+    position: absolute;
+    top: 242px;
+    left: 115px;
+    width: 48px;
+    height: 48px;
+    font-size: 12px;
+    border: none;
+    outline: none;
+    background: none;
+    display: table;
+    text-align: center;
+    z-index: 9999;
+}
+
+.osd_btn_down {
+    position: absolute;
+    top: 378px;
+    left: 115px;
+    width: 48px;
+    height: 48px;
+    display: table;
+    text-align: center;
+    z-index: 9999;
+    font-size: 12px;
+}
+
+.osd_btn_left {
+    position: absolute;
+    top: 310px;
+    left: 47px;
+    width: 48px;
+    height: 48px;
+    display: table;
+    text-align: center;
+    z-index: 9999;
+    font-size: 12px;
+}
+
+.osd_btn_right {
+    position: absolute;
+    top: 310px;
+    left: 183px;
+    width: 48px;
+    height: 48px;
+    display: table;
+    text-align: center;
+    z-index: 9999;
+    font-size: 12px;
+}
+
+.osd_btn_enter {
+    position: absolute;
+    top: 310px;
+    left: 115px;
+    width: 48px;
+    height: 48px;
+    display: table;
+    text-align: center;
+    z-index: 9999;
+    font-size: large;
+}
+
+.osd_corlorbar_on {
+    position: absolute;
+    top: 611px;
+    left: 19px;
+    width: 120px;
+    height: 30px;
+    display: table;
+    text-align: center;
+    z-index: 9999;
+    font-size: large;
+}
+.osd_corlorbar_on>p{
+    position: absolute;
+    top: -12px;
+    left: 40px;
+}
+.osd_corlorbar_off {
+    position: absolute;
+    top: 611px;
+    left: 139px;
+    width: 120px;
+    height: 30px;
+    display: table;
+    text-align: center;
+    z-index: 9999;
+    font-size: large;
+}
+.osd_corlorbar_off>p{
+    position: absolute;
+    top: -12px;
+    left: 40px;
+}
+.osd_btn_cancel {
+    position: absolute;
+    top: 458px;
+    left: 78px;
+    width: 122px;
+    height: 32px;
+    display: table;
+    text-align: center;
+    z-index: 9999;
+    font-size: large;
+}
+.osd_onSetting > *,
+.osd_onSetting_off > *,
+.osd_corlorbar_on > *,
+.osd_corlorbar_off > *,
+.osd_btn_up > *,
+.osd_btn_down > *,
+.osd_btn_left > *,
+.osd_btn_right > *,
+.osd_btn_enter > *,
+.osd_btn_cancel > *,
+.btn_Enlarge > *,
+.btn_lock > * {
+    display: table-cell;
+    vertical-align: middle;
+    cursor: default;
+}
+#select_action {
+    -webkit-appearance: none;
+    color: rgb(191, 191, 191);
+    font-size: 14px;
+    outline: none;
+    background-color: rgb(70, 70, 71);
+    background-image: url(parts/ic_pulldown_arrow_normal.png);
+    background-position: 76px, 0px;
+    border: none;
+    position: absolute;
+    top: 4px;
+    width: 100px;
+    height: 27px;
+    border-radius: 5px;
+}
+
+#select_action:active {
+    background-image: url(parts/ic_pulldown_arrow_click.png);
+}
+
+#select_action:hover {
+    background-image: url(parts/ic_pulldown_arrow_onMouse.png);
+}
+
+#select_action:disabled {
+    background-image: url(parts/ic_pulldown_arrow_disable.png);
+}
+
+#select_action {
+    position: absolute;
+    top: 4px;
+    left: 330px;
+    width: 100px;
+    height: 28px;
+}
+
+.action_select_main {
+    left: 150px;
+}
+
+.action_select_view {
+    left: 330px;
+}
+
+.wrapper_label_color_bar {
+    position: absolute;
+    top: 570px;
+    left: 0px;
+    width: 280px;
+    height: 25px;
+    /*background-color: #233F60;*/
+    font-size: large;
+    text-align: center;
+    display: table;
+    line-height: 0px;
+}
+
+#power {
+    position: absolute;
+    top: 12px;
+    left: 281px;
+    width: 120px;
+    height: 25px;
+    line-height: 25px;
+    color: rgb(74, 241, 8);
+    background-image: url(parts/cc_ic_pulldown_normal.png);
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+
+.txt_osd_Menu {
+    position: absolute;
+    top: 135px;
+    left: 0px;
+    width: 280px;
+    height: 25px;
+    font-size: large;
+    text-align: center;
+    display: table;
+    line-height: 0px;
+}
+
+.cls_h264,
+.osd_onSetting {
+    position: absolute;
+    top: 169px;
+    left: 19px;
+    width: 120px;
+    height: 30px;
+    font-size: large;
+    text-align: center;
+    display: table;
+}
+
+.cls_jpeg,
+.osd_onSetting_off {
+    position: absolute;
+    top: 169px;
+    left: 139px;
+    width: 120px;
+    height: 30px;
+    font-size: large;
+    text-align: center;
+    display: table;
+}
+
+#camera_live_line {
+    position: absolute;
+    width: 240px;
+    height: 1px;
+    background-color: rgb(70, 70, 71);
+    top: 108px;
+    left: 19px;
+}
+
+.stream_menu {
+    position: absolute;
+    top: 53px;
+    left: 19px;
+    width: 120px;
+    height: 30px;
+    font-size: large;
+    text-align: center;
+    display: table;
+}
+
+.other_menu {
+    position: absolute;
+    top: 53px;
+    left: 139px;
+    width: 120px;
+    height: 30px;
+    font-size: large;
+    text-align: center;
+    display: table;
+}
+
+.live_menu {
+    position: absolute;
+    top: 0px;
+    left: -10px;
+    width: 50px;
+    height: 25px;
+    font-size: small;
+    text-align: center;
+    display: table;
+    z-index: 1;
+}
+
+.live_menu_right {
+    position: absolute;
+    top: 0px;
+    right: 8px;
+    width: 50px;
+    height: 25px;
+    font-size: small;
+    text-align: right;
+    display: table;
+}
+
+.show_live_menu {
+    position: absolute;
+    top: 0px;
+    left: -10px;
+    width: 50px;
+    height: 25px;
+    font-size: small;
+    text-align: center;
+    display: table;
+}
+
+.show_live_menu_right {
+    position: absolute;
+    top: 0px;
+    right: 6px;
+    width: 50px;
+    height: 25px;
+    font-size: small;
+    text-align: right;
+    display: table;
+}
+
+.wrapper_label_Stream {
+    position: absolute;
+    top: 225px;
+    left: 0px;
+    width: 280px;
+    height: 25px;
+    font-size: large;
+    text-align: center;
+    display: table;
+    line-height: 0px;
+}
+
+.btn_stream1 {
+    position: absolute;
+    top: 257px;
+    left: 19px;
+    width: 60px;
+    height: 30px;
+    font-size: large;
+    text-align: center;
+    display: table;
+    line-height: 30px;
+}
+
+.btn_preset_list_page_1 {
+
+    top: 0px;
+    left: 0px;
+    width: 160px;
+    height: 34px;
+    font-size: large;
+    text-align: center;
+    display: table;
+    line-height: 30px;
+}
+.btn_preset_list_page_2 {
+    position: absolute;
+    top: 0px;
+    left: 160px;
+    width: 160px;
+    height: 34px;
+    font-size: large;
+    text-align: center;
+    display: table;
+    line-height: 30px;
+}
+
+.btn_preset_list_page_2.on{
+    color: rgb(217, 217, 217);
+    background-image: url(parts/pl_tab_page_R_selected.png);
+    background-size: 100% 100%;
+}
+
+
+.btn_preset_list_page_2.on_hover{
+    color: rgb(217, 217, 217);
+    background-image: url(parts/pl_tab_page_R_selected.png);
+    background-size: 100% 100%;
+}
+
+.btn_preset_list_page_2.off{
+    color: rgb(217, 217, 217);
+    background-image: url(parts/pl_tab_page_R_normal.png);
+    background-size: 100% 100%;
+}
+
+.btn_preset_list_page_2.off_hover{
+    color: rgb(217, 217, 217);
+    background-image: url(parts/pl_tab_page_R_onmouse.png);
+    background-size: 100% 100%;
+}
+
+.btn_stream2 {
+    position: absolute;
+    top: 257px;
+    left: 79px;
+    width: 60px;
+    height: 30px;
+    font-size: large;
+    text-align: center;
+    display: table;
+    line-height: 30px;
+}
+
+.btn_stream3 {
+    position: absolute;
+    top: 257px;
+    left: 139px;
+    width: 60px;
+    height: 30px;
+    font-size: large;
+    text-align: center;
+    display: table;
+    line-height: 30px;
+}
+
+
+.btn_iris_setting {
+    position: absolute;
+    top: 357px;
+    left: 139px;
+    width: 60px;
+    height: 30px;
+    font-size: large;
+    text-align: center;
+    display: table;
+    line-height: 30px;
+}
+
+.btn_stream4 {
+    position: absolute;
+    top: 257px;
+    left: 199px;
+    width: 60px;
+    height: 30px;
+    font-size: large;
+    text-align: center;
+    display: table;
+    line-height: 30px;
+}
+
+.cls_jpeg > *,
+.cls_h264 > *,
+.stream_menu > *,
+.other_menu > *,
+.live_menu > *,
+.live_menu_right > *,
+.show_live_menu > *,
+.show_live_menu_right > *,
+.btn_stream1 > *,
+.btn_stream2 > *,
+.btn_stream3 > *,
+.btn_stream4 > *,
+.btn_preset_list_page_1 >*,
+.btn_preset_list_page_2 >*,
+.btn_qt1 > *,
+.btn_qt2 > * {
+    display: table-cell;
+    vertical-align: middle;
+    cursor: default;
+}
+
+.cls_h264.off,
+.stream_menu.off,
+.osd_onSetting.off,
+.osd_corlorbar_on.off,
+.btn_qt1.off {
+    color: rgb(217, 217, 217);
+    background-image: url(parts/cc_menu_tab_L_normal.png);
+    background-size: 100% 100%;
+}
+
+.btn_qt2.off {
+    color: rgb(217, 217, 217);
+    background-image: url(parts/tab_preview_ptzCtrl_normal.png);
+    background-size: 100% 100%;
+}
+
+.btn_stream1.off {
+    color: rgb(217, 217, 217);
+    background-image: url(parts/cc_menu_tab_streaming_L_normal.png);
+    background-size: 100% 100%;
+}
+
+.btn_preset_list_page_1.on{
+    color: rgb(217, 217, 217);
+    background-image: url(parts/pl_tab_page_L_selected.png);
+    background-size: 100% 100%;
+}
+
+
+.btn_preset_list_page_1.on_hover{
+    color: rgb(217, 217, 217);
+    background-image: url(parts/pl_tab_page_L_selected.png);
+    background-size: 100% 100%;
+}
+
+.btn_preset_list_page_1.off{
+    color: rgb(217, 217, 217);
+    background-image: url(parts/pl_tab_page_L_normal.png);
+    background-size: 100% 100%;
+}
+
+.btn_preset_list_page_1.off_hover{
+    color: rgb(217, 217, 217);
+    background-image: url(parts/pl_tab_page_L_onmouse.png);
+    background-size: 100% 100%;
+}
+
+.btn_stream1.on {
+    color: rgb(0, 0, 0);
+    background-image: url(parts/cc_menu_tab_streaming_L_selected.png);
+    background-size: 100% 100%;
+}
+
+.btn_stream1.disable {
+    color: rgb(102, 102, 102);
+    background-image: url(parts/cc_menu_tab_streaming_L_disable.png);
+    background-size: 100% 100%;
+}
+
+.btn_stream1.on_hover {
+    color: rgb(255, 255, 255);
+    background-image: url(parts/cc_menu_tab_streaming_L_selected.png);
+    background-size: 100% 100%;
+}
+
+
+.btn_stream1.off_hover {
+    color: rgb(255, 255, 255);
+    background-image: url(parts/cc_menu_tab_streaming_L_onmouse.png);
+    background-size: 100% 100%;
+}
+
+.btn_stream2.off,
+.btn_stream3.off {
+    color: rgb(217, 217, 217);
+    background-image: url(parts/cc_menu_tab_streaming_M_normal.png);
+    background-size: 100% 100%;
+}
+
+.btn_stream2.on,
+.btn_stream3.on {
+    color: rgb(0, 0, 0);
+    background-image: url(parts/cc_menu_tab_streaming_M_selected.png);
+    background-size: 100% 100%;
+}
+
+.btn_stream2.disable,
+.btn_stream3.disable {
+    color: rgb(102, 102, 102);
+    background-image: url(parts/cc_menu_tab_streaming_M_disable.png);
+    background-size: 100% 100%;
+}
+
+.btn_stream2.on_hover,
+.btn_stream3.on_hover {
+    color: rgb(217, 217, 217);
+    background-image: url(parts/cc_menu_tab_streaming_M_selected.png);
+    background-size: 100% 100%;
+}
+
+.btn_stream2.off_hover,
+.btn_stream3.off_hover {
+    color: rgb(217, 217, 217);
+    background-image: url(parts/cc_menu_tab_streaming_M_onmouse.png);
+    background-size: 100% 100%;
+}
+
+.btn_stream4.off {
+    color: rgb(217, 217, 217);
+    background-image: url(parts/cc_menu_tab_streaming_R_normal.png);
+    background-size: 100% 100%;
+}
+
+.btn_stream4.on {
+    color: rgb(0, 0, 0);
+    background-image: url(parts/cc_menu_tab_streaming_R_selected.png);
+    background-size: 100% 100%;
+}
+
+.btn_stream4.disable {
+    color: rgb(102, 102, 102);
+    background-image: url(parts/cc_menu_tab_streaming_R_disable.png);
+    background-size: 100% 100%;
+}
+
+.btn_stream4.on_hover {
+    color: rgb(217, 217, 217);
+    background-image: url(parts/cc_menu_tab_streaming_R_selected.png);
+    background-size: 100% 100%;
+}
+
+.btn_stream4.off_hover {
+    color: rgb(217, 217, 217);
+    background-image: url(parts/cc_menu_tab_streaming_R_onmouse.png);
+    background-size: 100% 100%;
+}
+
+.live_menu.off {
+}
+
+.live_menu_right.off {
+    background-color: rgb(70, 70, 71);
+}
+
+.cls_jpeg.off,
+.other_menu.off,
+.osd_onSetting_off.off,
+.osd_corlorbar_off.off {
+    color: rgb(217, 217, 217);
+    background-image: url(parts/cc_menu_tab_R_normal.png);
+    background-size: 100% 100%;
+
+}
+
+.cls_h264.on,
+.stream_menu.on,
+.btn_qt1.on,
+.osd_onSetting.on,
+.osd_corlorbar_on.on,
+.btn_qt2.on {
+    color: rgb(0, 0, 0);
+    background-image: url(parts/cc_menu_tab_L_selected.png);
+    background-size: 100% 100%;
+}
+
+.cls_jpeg.on,
+.other_menu.on,
+.osd_onSetting_off.on,
+.osd_corlorbar_off.on {
+    color: rgb(0, 0, 0);
+    background-image: url(parts/cc_menu_tab_R_selected.png);
+    background-size: 100% 100%;
+}
+
+.cls_h264.disable,
+.stream_menu.disable,
+.btn_qt1.disable,
+.osd_onSetting.disable,
+.osd_corlorbar_on.disable,
+.btn_qt2.disable {
+    color: rgb(102, 102, 102);
+    background-image: url(parts/cc_menu_tab_L_disable.png);
+    background-size: 100% 100%;
+}
+
+.cls_jpeg.disable,
+.other_menu.disable,
+.osd_onSetting_off.disable,
+.osd_corlorbar_off.disable {
+    color: rgb(102, 102, 102);
+    background-image: url(parts/cc_menu_tab_R_disable.png);
+    background-size: 100% 100%;
+}
+
+.live_menu.disable {
+    color: rgb(217, 217, 217);
+    background-image: url(parts/tab_preview_camera_disable.png);
+    background-size: 100% 100%;
+
+}
+
+.cls_h264.on_hover,
+.stream_menu.on_hover,
+.btn_qt1.on_hover,
+.osd_onSetting.on_hover,
+.osd_corlorbar_on.on_hover,
+.btn_qt2.on_hover {
+    color: rgb(255, 255, 255);
+    background-image: url(parts/cc_menu_tab_L_selected.png);
+    background-size: 100% 100%;
+}
+
+.cls_jpeg.on_hover,
+.other_menu.on_hover,
+.osd_onSetting_off.on_hover,
+.osd_corlorbar_off.on_hover {
+    color: rgb(217, 217, 217);
+    background-image: url(parts/cc_menu_tab_R_selected.png);
+    background-size: 100% 100%;
+}
+
+.cls_h264.off_hover,
+.stream_menu.off_hover,
+.btn_qt1.off_hover,
+.osd_onSetting.off_hover,
+.osd_corlorbar_on.off_hover,
+.btn_qt2.off_hover {
+    color: rgb(255, 255, 255);
+    background-image: url(parts/cc_menu_tab_L_onmouse.png);
+    background-size: 100% 100%;
+}
+
+.cls_jpeg.off_hover,
+.other_menu.off_hover,
+.osd_onSetting_off.off_hover,
+.osd_corlorbar_off.off_hover {
+    color: rgb(217, 217, 217);
+    background-image: url(parts/cc_menu_tab_R_onmouse.png);
+    background-size: 100% 100%;
+}
+
+.btn_power_on {
+    position: absolute;
+    top: 550px;
+    left: 50px;
+    width: 80px;
+    height: 25px;
+    font-size: small;
+    text-align: center;
+    display: table;
+    line-height: 25px;
+}
+
+.btn_standby {
+    position: absolute;
+    top: 550px;
+    left: 145px;
+    width: 80px;
+    height: 25px;
+    font-size: small;
+    text-align: center;
+    display: table;
+    line-height: 25px;
+}
+
+.btn_power_on > *,
+.btn_standby > * {
+    display: table-cell;
+    vertical-align: middle;
+    cursor: default;
+}
+
+.btn_power_on.off,
+.btn_standby.off {
+    color: rgb(217, 217, 217);
+    background-image: url(parts/btn_cameraController_slider_toggle_normal.png);
+    background-size: 100% 100%;
+}
+
+.btn_power_on.on,
+.btn_standby.on {
+    color: rgb(255, 255, 255);
+    background-image: url(parts/btn_cameraController_slider_toggle_selected.png);
+    background-size: 100% 100%;
+}
+
+.btn_power_on.disable,
+.btn_standby.disable {
+    color: rgb(102, 102, 102);
+    background-image: url(parts/btn_cameraController_slider_toggle_disable.png);
+    background-size: 100% 100%;
+}
+
+.btn_power_on.on_hover,
+.btn_standby.on_hover {
+    color: rgb(255, 255, 255);
+    background-image: url(parts/btn_cameraController_slider_toggle_selectedOnMouse.png);
+    background-size: 100% 100%;
+}
+
+.btn_power_on.off_hover,
+.btn_standby.off_hover {
+    color: rgb(255, 255, 255);
+    background-image: url(parts/btn_cameraController_slider_toggle_onMouse.png);
+    background-size: 100% 100%;
+}
+
+
+#camera_stream_menu {
+    position: absolute;
+    top: 0px;
+}
+
+#btnJpeg {
+    display: none;
+}
+
+#camera_osd_menu {
+}
+
+.txt_bars_type {
+    position: absolute;
+    left: 19px;
+    top: 660px;
+    width: 100px;
+    height: 32px;
+    line-height: 32px;
+    cursor: default;
+    text-align: left;
+    font-size: large;
+}
+
+.txt_osd_Menu > *,
+.txt_bars_type > *,
+.text_maintenace > *,
+.text_network > *,
+.text_user_mng > *,
+.text_setupmenu > * {
+    vertical-align: middle;
+    display: table-cell;
+    text-align: center;
+}
+
+.CssMenuSpace {
+    height: 4px;
+}
+
+.div_network {
+    position: absolute;
+    left: 300px;
+    top: 0px;
+    width: 1800px;
+    height: 930px;
+}
+
+#setting_network_inner {
+    position: absolute;
+    top: 29px;
+}
+
+.setting_network_middle_bg {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 905px;
+    width: 300px;
+    background-color: rgb(45, 45, 48);
+}
+
+#camera_osd_menu_middle_line {
+    position: absolute;
+    width: 240px;
+    height: 1px;
+    background-color: rgb(70, 70, 71);
+    top: 550px;
+    left: 19px;
+}
+
+#camera_live_area_bottom_line {
+    position: absolute;
+    width: 200px;
+    height: 1px;
+    background-color: rgb(70, 70, 71);
+    top: 1032px;
+    left: 39px;
+}
+
+.select_live_osd_color_type {
+    position: absolute;
+    top: 660px;
+    left: 121px;
+    z-index: 2;
+    width: 138px;
+    height: 32px;
+    line-height: 32px;
+    font-size: large;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+
+/*#ip_Transmission{*/
+/*position: absolute;*/
+/*width: 540px;*/
+/*left: 300px;*/
+/*top:800px;*/
+/*z-index: 2;*/
+/*}*/
+.live_transmission{
+    position: absolute;
+    left: 333px;
+    top: 930px;
+    height: 28px;
+    cursor: default;
+    font-size: 16px;
+    z-index: 2;
+}
+.live_transmission_status{
+    position: absolute;
+    left: 360px;
+    top: 960px;
+    height: 28px;
+    cursor: default;
+    font-size: 16px;
+    z-index: 2;
+}
+.live_transmission_server{
+    position: absolute;
+    left: 360px;
+    top: 990px;
+    height: 28px;
+    cursor: default;
+    font-size: 16px;
+    z-index: 2;
+}
+
+.live_transmission_server > *,
+.live_transmission_status > *,
+.live_transmission > * {
+    vertical-align: middle;
+    display: table-cell;
+}
+.liveDivInnerLine1 {
+    position: absolute;
+    height: 1px;
+    width: 300px;
+    top: 955px;
+    left: 490px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.liveDivInnerLine2{
+    position: absolute;
+    height: 1px;
+    width: 300px;
+    top: 985px;
+    left: 490px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.liveDivInnerLine3 {
+    position: absolute;
+    height: 1px;
+    width: 300px;
+    top: 1015px;
+    left: 490px;
+    background: rgb(70, 70, 71);
+    z-index: 2;
+}
+.setup_status{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 90px;
+    height: 90px;
+    font-size: small;
+    text-align: center;
+    display: table;
+    line-height: 30px;
+    color: rgb(255, 255, 255);
+    background-image: url(parts/setup_update_vu_arrow_2.gif);
+    background-size: 100% 100%;
+}
+
+.div_ndihx{
+    position: absolute;
+    top:870px !important;
+    left:0px !important;
+    width: 278px;
+    height: 148px;
+    display: table;
+    background-color: rgb(255, 255, 255);
+}
+
+.label_ndihx_frist,.label_ndihx_second, .label_ndihx_third{
+    position: absolute;
+    width: 280px;
+    height: 25px;
+    color: #000000;
+    font-size: 20px;
+    text-align: center;
+    display: table;
+    line-height: 0px;
+}
+.label_ndihx_frist {
+    top: 30px;
+    left: 0px;
+}
+.label_ndihx_second {
+    top: 55px;
+    left: 0px;
+}
+.label_ndihx_third {
+    top: 80px;
+    left: 0px;
+}
+.btn_audio_level{
+    position: absolute;
+    width: 38px;
+    height: 32px;
+    top: 8px;
+    right: 265px;
+    border: none;
+    outline: none;
+    display: table;
+}
+.btn_audio_level.off {
+    background-image: url(parts/btn_level_normal.png);
+    background-size: 100% 100%;
+}
+
+.btn_audio_level.off_hover {
+    background-image: url(parts/btn_level_onmouse.png);
+    background-size: 100% 100%;
+}
+
+.btn_audio_level.on {
+    background-image: url(parts/btn_level_selecting.png);
+    background-size: 100% 100%;
+}
+
+.btn_audio_level.on_hover {
+    background-image: url(parts/btn_level_selecting.png);
+    background-size: 100% 100%;
+}
+
+.btn_audio_level.disable {
+    background-image: url(parts/btn_level_disable.png);
+    background-size: 100% 100%;
+}
+
+.btn_audio_level.on_disable {
+    background-image: url(parts/btn_level_disable.png);
+    background-size: 100% 100%;
+}
+
+.btn_gauge > * {
+    display: table-cell;
+    vertical-align: middle;
+    cursor: default;
+}
+.btn_gauge{
+    position: absolute;
+    width: 38px;
+    height: 32px;
+    top: 8px;
+    right: 320px;
+    border: none;
+    outline: none;
+    display: table;
+}
+.btn_gauge.off {
+    background-image: url(parts/normal.png);
+    background-size: 100% 100%;
+}
+
+.btn_gauge.off_hover {
+    background-image: url(parts/onmouse.png);
+    background-size: 100% 100%;
+}
+
+.btn_gauge.on {
+    background-image: url(parts/select.png);
+    background-size: 100% 100%;
+}
+
+.btn_gauge.on_hover {
+    background-image: url(parts/onmouse.png);
+    background-size: 100% 100%;
+}
+
+.btn_gauge.disable {
+    background-image: url(parts/disable.png);
+    background-size: 100% 100%;
+}
+
+.btn_gauge > * {
+    display: table-cell;
+    vertical-align: middle;
+    cursor: default;
+}
+.btn_tracking {
+    position: absolute;
+    width: 38px;
+    height: 32px;
+    top: 8px;
+    right: 210px;
+    border: none;
+    outline: none;
+    display: table;
+}
+
+.btn_tracking.off {
+    background-image: url(parts/header_btn_noUpdate_selected.png);
+    background-size: 100% 100%;
+}
+
+.btn_tracking.off_hover {
+    background-image: url(parts/header_btn_noUpdate_selectedOnmouse.png);
+    background-size: 100% 100%;
+}
+
+.btn_tracking.on {
+    background-image: url(parts/header_btn_noUpdate_normal.png);
+    background-size: 100% 100%;
+}
+
+.btn_tracking.on_hover {
+    background-image: url(parts/header_btn_noUpdate_onmouse.png);
+    background-size: 100% 100%;
+}
+
+.btn_tracking.disable {
+    background-image: url(parts/header_btn_noUpdate_disable.png);
+    background-size: 100% 100%;
+}
+
+.btn_tracking.on_disable {
+    background-image: url(parts/header_btn_noUpdate_disable.png);
+    background-size: 100% 100%;
+}
+
+.btn_tracking > * {
+    display: table-cell;
+    vertical-align: middle;
+    cursor: default;
+}
+#camera_control_left_line {
+    position: absolute;
+    width: 1px;
+    height: 1117px;
+    top: -20px;
+    left: 0px;
+    background-color: rgb(70, 70, 71);
+}

@@ -1,0 +1,101 @@
+@CHARSET "UTF-8";
+
+/**
+ * Camera Setting
+ * 各種テキストボックスの文字色指定
+ */
+.camera_set_input_long,
+.camera_set_input_middle_1,
+.camera_set_input_middle_2,
+.camera_set_input_short_1,
+.camera_set_input_short_2,
+#id_setting_lost {
+    background-color: rgb(0, 0, 0);
+    color: rgb(191, 191, 191);
+    border: 1px rgb(70, 70, 71) double;
+    padding: 0px 0px 0px 5px;
+    height: 26px;
+}
+
+/**
+ * Camera Setting
+ * 項目名称の色指定
+ */
+div[class^="txt_setting"] {
+    color: rgb(162, 162, 162);
+}
+
+/**
+ * Camera Setting
+ * 設定入力用テーブルの規定(Tracking)
+ */
+.camera_setting_table_tracking {
+    font-size: 9pt;
+    border-spacing: 4px 2px;
+}
+
+/**
+ * Camera Setting
+ * 設定入力用テーブルの規定(Setting)
+ */
+.camera_setting_table_camera_01 {
+    font-size: 9pt;
+    border-spacing: 4px;
+}
+
+.camera_setting_table_camera_02 {
+    font-size: 9pt;
+    border-spacing: 4px 0px;
+}
+
+.camera_setting_table_td {
+    color: rgb(191, 191, 191);
+    height: 16px;
+}
+
+.camera_setting_table_td_double {
+    color: rgb(191, 191, 191);
+    height: 16px;
+}
+
+.camera_setting_table_tracking th,
+.camera_setting_table_tracking td,
+.camera_setting_table_camera_01 th,
+.camera_setting_table_camera_01 td,
+.camera_setting_table_camera_02 th,
+.camera_setting_table_camera_02 td {
+    padding: 0px 0px 0px 0px; /*領域内側の余白*/
+    cursor: default;
+}
+
+/**
+ * Camera Setting
+ * 設定入力用テーブル内、入力オブジェクト
+ */
+.camera_set_input_long {
+    width: 173px;
+}
+
+.camera_set_input_middle_1 {
+    width: 115px;
+}
+
+.camera_set_input_middle_2 {
+    width: 80px;
+}
+
+.camera_set_input_short_1 {
+    width: 77px;
+}
+
+.camera_set_input_short_2 {
+    width: 44px;
+}
+
+/**
+ * Camera Detail(Camera)
+ * チェックボックス領域用空白(Angle Zoom : Auto)
+ */
+.camera_set_checkbox_short {
+    width: 34px;
+}

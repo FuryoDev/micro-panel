@@ -1,0 +1,148 @@
+@CHARSET "UTF-8";
+
+#tracking_controller {
+    position: absolute;
+    left: 281px;
+    top: 49px;
+    width: 1958px;
+    height: 1126px;
+    display: table;
+    font-size: 10pt;
+    color: rgb(162, 162, 162);
+    background-color: rgb(0, 0, 0);
+}
+
+/**
+ * tracking controller
+ * tracking_controller_header
+ */
+#tracking_controller_header {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    background-color: rgb(0, 0, 0);
+    border-top: rgb(37,37,39) solid 1px;
+}
+#WebVideoDiv {
+    display: block;
+    background-color: #000000;
+    border: ridge 5px white;
+    width: 1120px;
+    height: 630px;
+    overflow: hidden;
+}
+
+#iris_setting_mask {
+    position: absolute;
+    top: 200px;
+    left: 0px;
+    width: 1280px;
+    height: 720px;
+    border: 1px solid rgb(255 255 255);
+    display: flex;
+    flex-wrap: wrap;
+    z-index: 1;
+    top: 0px;
+    bottom:0px;
+    left:0px;
+    right:0px;
+    margin: auto;
+}
+#iris_setting_mask_cover{
+    position: absolute;
+    top: 201px;
+    left: 0px;
+    width: 1491px;
+    height: 1144px;
+    display: flex;
+    flex-wrap: wrap;
+    z-index: 1;
+    top:0px;
+    bottom:0px;
+    left:0px;
+    right:0px;
+    margin: auto;
+}
+#iris_setting_mask.stream2 {
+    position: absolute;
+    /* top: 379px;
+    left: 0px; */
+    width: 640px;
+    height: 360px;
+}
+#iris_setting_mask.stream3 {
+    position: absolute;
+    /* top: 469px;
+    left: 0px; */
+    width: 320px;
+    height: 180px;
+}
+#iris_setting_mask.stream4 {
+    position: absolute;
+    /* top: 152px;
+    left: 0px; */
+    width: 1450px;
+    height: 816px;
+}
+.iris_setting_mask_item{
+    width: 124px;
+    height: 68px;
+    border:2px solid green ;
+}
+
+#selectable .ui-selecting,
+#setup_live_selectable .ui-selecting{
+    background: #5d7c6c;
+    opacity: 0.5;
+}
+
+#selectable .ui-selected,
+#setup_live_selectable .ui-selected {
+    background: #2a3f34;
+    color: white;
+    opacity: 0.5;
+}
+
+#selectable,
+#setup_live_selectable {
+    position: relative;
+    box-sizing: content-box;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 92.6%;
+    height: 85.6%;
+    margin: 3.7%;
+    border: 5px solid rgb(95, 87, 87);
+}
+
+#selectable li,
+#setup_live_selectable li {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+    float: left;
+    width: 11.11%;
+    height: 20%;
+    font-size: 4em;
+    text-align: center;
+    border: rgb(95, 87, 87) 1px solid;
+}
+
+#iris_setting_mask.stream2 > #selectable li{
+    width: 11.11%;
+    height: 20%;
+}
+#iris_setting_mask.stream3 > #selectable li{
+    width: 11.11%;
+    height: 20%;
+}
+
+#iris_setting_mask.stream4 > #selectable li{
+    width: 11.11%;
+    height: 20%;
+}
+
