@@ -741,100 +741,119 @@ if (typeof window !== 'undefined') {
 
 <template>
   <main class="panel-shell">
-    <header class="panel-header">
-      <div>
-        <h1 class="panel-title">Kairos Scenes</h1>
-        <p class="panel-subtitle">Délégation et pilotage des scènes</p>
-      </div>
+    <div class="panel-layout">
+      <section class="panel-controls">
+        <header class="panel-header">
+          <div>
+            <h1 class="panel-title">Kairos Scenes</h1>
+            <p class="panel-subtitle">Délégation et pilotage des scènes</p>
+          </div>
 
-      <div class="sync-indicator" :class="syncStatusClass">
-        <span class="indicator-dot" aria-hidden="true" />
-        <span class="indicator-text">{{ syncStatusText }}</span>
-        <span v-if="formattedSyncTime" class="indicator-meta">{{ formattedSyncTime }}</span>
-        <button
-            class="ghost-button"
-            type="button"
-            @click="refreshNow"
-            :disabled="isFetching || !hasRefreshHandler"
+          <div class="sync-indicator" :class="syncStatusClass">
+            <span class="indicator-dot" aria-hidden="true" />
+            <span class="indicator-text">{{ syncStatusText }}</span>
+            <span v-if="formattedSyncTime" class="indicator-meta">{{ formattedSyncTime }}</span>
+            <button
+                class="ghost-button"
+                type="button"
+                @click="refreshNow"
+                :disabled="isFetching || !hasRefreshHandler"
+            >
+              Rafraîchir
+            </button>
+          </div>
+
+          <div class="patch-indicator" :class="{ 'is-busy': isPatching, 'is-error': Boolean(patchError) }">
+            <span v-if="isPatching">Envoi des modifications…</span>
+            <span v-else-if="patchError">{{ patchError }}</span>
+            <span v-else-if="lastPushedAt">État envoyé à {{ formattedPushTime }}</span>
+            <span v-else>État prêt</span>
+          </div>
+        </header>
+
+        <section v-if="!hasVisibleLayers && isInitialLoading" class="panel-placeholder">
+          <p>Chargement des scènes…</p>
+        </section>
+
+        <section v-else-if="!hasVisibleLayers" class="panel-placeholder">
+          <p>Aucune scène disponible.</p>
+        </section>
+
+        <section
+            v-else
+            class="panel-grid"
+            :style="{ '--button-count': Math.max(columnCount, 1) }"
         >
-          Rafraîchir
-        </button>
-      </div>
-
-      <div class="patch-indicator" :class="{ 'is-busy': isPatching, 'is-error': Boolean(patchError) }">
-        <span v-if="isPatching">Envoi des modifications…</span>
-        <span v-else-if="patchError">{{ patchError }}</span>
-        <span v-else-if="lastPushedAt">État envoyé à {{ formattedPushTime }}</span>
-        <span v-else>État prêt</span>
-      </div>
-    </header>
-
-    <section v-if="!hasVisibleLayers && isInitialLoading" class="panel-placeholder">
-      <p>Chargement des scènes…</p>
-    </section>
-
-    <section v-else-if="!hasVisibleLayers" class="panel-placeholder">
-      <p>Aucune scène disponible.</p>
-    </section>
-
-    <section
-        v-else
-        class="panel-grid"
-        :style="{ '--button-count': Math.max(columnCount, 1) }"
-    >
-      <article
-          v-for="layer in visibleLayers"
-          :key="layer.id"
-          class="panel-row"
-          :class="{
-          'is-delegation': layer.id === delegationLayer?.id,
-          'is-sticky': layer.sticky,
-        }"
-      >
-        <div class="layer-title">
-          {{ layer.id === 'delegation' ? 'Delegation' : layer.name }}
-        </div>
-
-        <div class="layer-buttons">
-          <button
-              v-for="button in layer.buttons"
-              :key="button.id"
-              class="panel-button"
-              :class="[
-              `variant-${buttonVariant(button)}`,
-              {
-                'is-selected':
-                  layer.kind === 'delegation'
-                    ? button.state === 'program'
-                    : layer.kind === 'source' && isButtonToggledOn(button),
-              },
-            ]"
-              type="button"
-              :disabled="button.disabled"
-              :aria-pressed="
-              layer.kind === 'delegation' || layer.kind === 'source'
-                ? isButtonToggledOn(button)
-                : undefined
-            "
-              :title="buttonTitle(layer, button)"
-              @click="handleButtonClick(layer, button)"
+          <article
+              v-for="layer in visibleLayers"
+              :key="layer.id"
+              class="panel-row"
+              :class="{
+              'is-delegation': layer.id === delegationLayer?.id,
+              'is-sticky': layer.sticky,
+            }"
           >
-            <span class="button-label">{{ button.label }}</span>
-          </button>
+            <div class="layer-title">
+              {{ layer.id === 'delegation' ? 'Delegation' : layer.name }}
+            </div>
 
-          <button
-              v-if="layer.kind === 'source' && layer.hasPager"
-              :key="`${layer.id}-pager`"
-              class="panel-button pager-button variant-warning"
-              type="button"
-              :title="`Changer de page (${pagerLabel(layer)})`"
-              @click="cycleLayerPage(layer)"
-          >
-            <span class="button-label">{{ pagerLabel(layer) }}</span>
-          </button>
+            <div class="layer-buttons">
+              <button
+                  v-for="button in layer.buttons"
+                  :key="button.id"
+                  class="panel-button"
+                  :class="[
+                  `variant-${buttonVariant(button)}`,
+                  {
+                    'is-selected':
+                      layer.kind === 'delegation'
+                        ? button.state === 'program'
+                        : layer.kind === 'source' && isButtonToggledOn(button),
+                  },
+                ]"
+                  type="button"
+                  :disabled="button.disabled"
+                  :aria-pressed="
+                  layer.kind === 'delegation' || layer.kind === 'source'
+                    ? isButtonToggledOn(button)
+                    : undefined
+                "
+                  :title="buttonTitle(layer, button)"
+                  @click="handleButtonClick(layer, button)"
+              >
+                <span class="button-label">{{ button.label }}</span>
+              </button>
+
+              <button
+                  v-if="layer.kind === 'source' && layer.hasPager"
+                  :key="`${layer.id}-pager`"
+                  class="panel-button pager-button variant-warning"
+                  type="button"
+                  :title="`Changer de page (${pagerLabel(layer)})`"
+                  @click="cycleLayerPage(layer)"
+              >
+                <span class="button-label">{{ pagerLabel(layer) }}</span>
+              </button>
+            </div>
+          </article>
+        </section>
+      </section>
+
+      <aside class="camera-preview">
+        <div class="camera-header">
+          <span class="camera-title">Live caméra</span>
+          <span class="camera-meta">Miroir : 10.41.39.153</span>
         </div>
-      </article>
-    </section>
+        <div class="camera-frame">
+          <iframe
+              title="Flux vidéo en direct"
+              src="/camera/live/index.html"
+              allowfullscreen
+              loading="lazy"
+          />
+        </div>
+      </aside>
+    </div>
   </main>
 </template>
 
@@ -848,6 +867,19 @@ if (typeof window !== 'undefined') {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   min-height: 100vh;
   box-sizing: border-box;
+}
+
+.panel-layout {
+  display: grid;
+  grid-template-columns: 1fr minmax(340px, 480px);
+  gap: 16px;
+  align-items: start;
+}
+
+.panel-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .panel-header {
@@ -1049,5 +1081,53 @@ if (typeof window !== 'undefined') {
 .variant-light {
   background: #ffffff;
   color: #111;
+}
+
+.camera-preview {
+  background: #0d0d0d;
+  border: 1px solid #262626;
+  border-radius: 6px;
+  padding: 10px;
+  box-shadow: inset 0 0 0 1px #000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 360px;
+}
+
+.camera-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 12px;
+  color: #cfcfcf;
+}
+
+.camera-title {
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.camera-meta {
+  color: #888;
+}
+
+.camera-frame {
+  position: relative;
+  padding-top: 56.25%;
+  background: #000;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid #1f1f1f;
+}
+
+.camera-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #000;
 }
 </style>
