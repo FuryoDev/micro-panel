@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
 type UnknownRecord = Record<string, unknown>
 type DateInput = Date | string | number | null | undefined
@@ -117,11 +117,17 @@ const refreshHandler = ref<(() => void) | null>(null)
 const buttonEventHandler = ref<((event: PanelButtonEvent) => void) | null>(null)
 const pageIndexCache = new Map<string, number>()
 
+const CAMERA_SNAPSHOT_URL = '/camera/cgi-bin/view.cgi?action=snapshot'
+const cameraTick = ref(0)
+let cameraTimer: number | null = null
+
 const delegationLayer = computed(() => layers.value.find((layer) => layer.kind === 'delegation') ?? null)
 const hasRefreshHandler = computed(() => Boolean(refreshHandler.value))
 const columnCount = computed(() => PAGE_SIZE + 1)
 const visibleLayers = computed(() => layers.value)
 const hasVisibleLayers = computed(() => visibleLayers.value.length > 0)
+
+const cameraSnapshotSrc = computed(() => `${CAMERA_SNAPSHOT_URL}&n=${cameraTick.value}`)
 
 const syncStatusText = computed(() => {
   if (syncStatusOverrideText.value) return syncStatusOverrideText.value
@@ -203,6 +209,21 @@ function applySyncState(state: SyncStatePayload) {
   }
   if ('statusClass' in state) {
     syncStatusOverrideClass.value = state.statusClass ?? null
+  }
+}
+
+function startCameraSnapshotLoop() {
+  stopCameraSnapshotLoop()
+  cameraTick.value = Date.now()
+  cameraTimer = window.setInterval(() => {
+    cameraTick.value = Date.now()
+  }, 1000)
+}
+
+function stopCameraSnapshotLoop() {
+  if (cameraTimer) {
+    clearInterval(cameraTimer)
+    cameraTimer = null
   }
 }
 
@@ -733,6 +754,14 @@ const bridge: PanelIntegrationBridge = {
   },
 }
 
+onMounted(() => {
+  startCameraSnapshotLoop()
+})
+
+onBeforeUnmount(() => {
+  stopCameraSnapshotLoop()
+})
+
 if (typeof window !== 'undefined') {
   window.MicroPanelUI = bridge
 }
@@ -841,17 +870,20 @@ if (typeof window !== 'undefined') {
 
       <aside class="camera-preview">
         <div class="camera-header">
-          <span class="camera-title">Live caméra</span>
-          <span class="camera-meta">Miroir : 10.41.39.153</span>
+          <div class="camera-title-block">
+            <span class="camera-title">Live caméra</span>
+            <p class="camera-caption">Aperçu automatique depuis 10.41.39.153</p>
+          </div>
+          <span class="camera-meta">Snapshot proxy</span>
         </div>
         <div class="camera-frame">
-          <iframe
-              title="Flux vidéo en direct"
-              src="/camera/live/index.html"
-              allowfullscreen
-              loading="lazy"
+          <img
+              :src="cameraSnapshotSrc"
+              alt="Flux caméra (rafraîchi chaque seconde)"
+              class="camera-player"
           />
         </div>
+        <p class="camera-hint">Flux MJPEG proxy : /camera/cgi-bin/view.cgi?action=snapshot</p>
       </aside>
     </div>
   </main>
@@ -1083,51 +1115,71 @@ if (typeof window !== 'undefined') {
   color: #111;
 }
 
-.camera-preview {
-  background: #0d0d0d;
-  border: 1px solid #262626;
-  border-radius: 6px;
-  padding: 10px;
-  box-shadow: inset 0 0 0 1px #000;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  min-height: 360px;
-}
+  .camera-preview {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01));
+    border: 1px solid #1f1f1f;
+    border-radius: 12px;
+    padding: 12px;
+    box-shadow: inset 0 0 0 1px #000;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
 
-.camera-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 8px;
-  font-size: 12px;
-  color: #cfcfcf;
-}
+  .camera-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: #cfcfcf;
+  }
 
-.camera-title {
-  font-weight: 600;
-  font-size: 13px;
-}
+  .camera-title-block {
+    display: grid;
+    gap: 4px;
+  }
 
-.camera-meta {
-  color: #888;
-}
+  .camera-title {
+    font-weight: 600;
+    font-size: 14px;
+  }
 
-.camera-frame {
-  position: relative;
-  padding-top: 56.25%;
-  background: #000;
-  border-radius: 4px;
-  overflow: hidden;
-  border: 1px solid #1f1f1f;
-}
+  .camera-caption {
+    margin: 0;
+    color: #aaa;
+    font-size: 12px;
+  }
 
-.camera-frame iframe {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
-  background: #000;
-}
+  .camera-meta {
+    color: #888;
+    background: #161616;
+    border-radius: 999px;
+    padding: 4px 10px;
+  }
+
+  .camera-frame {
+    aspect-ratio: 16 / 9;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #1f1f1f;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.3);
+    background: radial-gradient(circle at center, rgba(79, 70, 229, 0.12), rgba(0, 0, 0, 0.5));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .camera-player {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background: #0a0a0a;
+  }
+
+  .camera-hint {
+    margin: 0;
+    font-size: 12px;
+    color: #999;
+  }
 </style>
