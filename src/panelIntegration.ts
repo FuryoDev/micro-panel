@@ -48,7 +48,7 @@ type MetaCandidate = {
   uuid?: unknown
 }
 
-const API_BASE_URL = 'http://10.41.40.130:1234'
+const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL ?? '/api').replace(/\/$/, '')
 const API_SCENES_ENDPOINT = `${API_BASE_URL}/scenes`
 let isIntegrationSetup = false
 
