@@ -5,13 +5,13 @@ import com.example.micropanel.web.dto.SceneDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestClientResponseException;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Map;
@@ -29,21 +29,21 @@ public class ScenesProxyService {
         this.scenesBasePath = sanitizedBase + "/scenes";
     }
 
-    public ResponseEntity<?> fetchScenes() {
+    public List<SceneDto> fetchScenes() {
         try {
             ResponseEntity<List<SceneDto>> response = client.get()
                     .uri("/scenes")
                     .retrieve()
                     .toEntity(new ParameterizedTypeReference<>() {
                     });
-            return passthrough(response);
+            return response.getBody();
         } catch (RestClientResponseException ex) {
             logger.warn("Upstream responded with status {} for GET {}", ex.getStatusCode(), scenesBasePath);
-            return ResponseEntity.status(ex.getStatusCode()).body(ex.getResponseBodyAsString());
+            throw new ResponseStatusException(ex.getStatusCode(), ex.getResponseBodyAsString(), ex);
         } catch (RestClientException ex) {
             logger.error("Failed to reach upstream scenes endpoint {}", scenesBasePath, ex);
-            return ResponseEntity.status(HttpStatus.BAD_GATEWAY)
-                    .body(Map.of("error", "Upstream unreachable", "details", ex.getMessage()));
+            throw new ResponseStatusException(HttpStatus.BAD_GATEWAY,
+                    "Upstream unreachable: " + ex.getMessage(), ex);
         }
     }
 
@@ -55,7 +55,7 @@ public class ScenesProxyService {
                     .body(body != null ? body : Map.of())
                     .retrieve()
                     .toEntity(Object.class);
-            return passthrough(response);
+            return ResponseEntity.status(response.getStatusCode()).body(response.getBody());
         } catch (RestClientResponseException ex) {
             logger.warn("Upstream responded with status {} for PATCH {}", ex.getStatusCode(), target);
             return ResponseEntity.status(ex.getStatusCode()).body(ex.getResponseBodyAsString());
@@ -64,13 +64,5 @@ public class ScenesProxyService {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY)
                     .body(Map.of("error", "Upstream unreachable", "details", ex.getMessage()));
         }
-    }
-
-    private <T> ResponseEntity<T> passthrough(ResponseEntity<T> response) {
-        HttpHeaders headers = HttpHeaders.writableHttpHeaders(response.getHeaders());
-        headers.remove(HttpHeaders.TRANSFER_ENCODING);
-        headers.remove(HttpHeaders.CONTENT_LENGTH);
-        headers.remove(HttpHeaders.CONTENT_ENCODING);
-        return new ResponseEntity<>(response.getBody(), headers, response.getStatusCode());
     }
 }

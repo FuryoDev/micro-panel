@@ -1,6 +1,9 @@
 package com.example.micropanel.web;
 
 import com.example.micropanel.service.ScenesProxyService;
+import com.example.micropanel.web.dto.SceneDto;
+
+import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -20,8 +23,8 @@ public class ScenesController {
     }
 
     @GetMapping
-    public ResponseEntity<?> getScenes() {
-        return scenesProxyService.fetchScenes();
+    public ResponseEntity<List<SceneDto>> getScenes() {
+        return ResponseEntity.ok(scenesProxyService.fetchScenes());
     }
 
     @PatchMapping("/{sceneId}/{layerId}")
