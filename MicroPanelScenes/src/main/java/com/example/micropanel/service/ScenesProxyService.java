@@ -8,6 +8,7 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestClientResponseException;
@@ -24,7 +25,12 @@ public class ScenesProxyService {
     private final RestClient client;
 
     public ScenesProxyService(RestClient.Builder builder, UpstreamProperties properties) {
-        String sanitizedBase = properties.getBaseUrl().replaceAll("/+$", "");
+        String configuredBase = properties.getBaseUrl();
+        if (!StringUtils.hasText(configuredBase)) {
+            throw new IllegalStateException("panel.upstream.base-url must be configured");
+        }
+
+        String sanitizedBase = configuredBase.trim().replaceAll("/+$", "");
         this.client = builder.baseUrl(sanitizedBase).build();
     }
 
@@ -60,12 +66,14 @@ public class ScenesProxyService {
 
             return ResponseEntity
                     .status(response.getStatusCode())
+                    .headers(response.getHeaders())
                     .body(response.getBody());
 
         } catch (RestClientResponseException ex) {
             logger.warn("Upstream responded with status {} for PATCH {}", ex.getStatusCode(), path);
             return ResponseEntity
                     .status(ex.getStatusCode())
+                    .headers(ex.getResponseHeaders())
                     .body(ex.getResponseBodyAsString());
         } catch (RestClientException ex) {
             logger.error("Failed to reach upstream scenes endpoint {}", path, ex);
