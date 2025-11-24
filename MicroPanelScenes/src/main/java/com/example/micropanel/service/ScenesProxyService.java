@@ -66,6 +66,7 @@ public class ScenesProxyService {
         HttpHeaders headers = HttpHeaders.writableHttpHeaders(response.getHeaders());
         headers.remove(HttpHeaders.TRANSFER_ENCODING);
         headers.remove(HttpHeaders.CONTENT_LENGTH);
+        headers.remove(HttpHeaders.CONTENT_ENCODING);
         return new ResponseEntity<>(response.getBody(), headers, response.getStatusCode());
     }
 }
