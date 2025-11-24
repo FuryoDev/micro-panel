@@ -27,9 +27,8 @@ function createProxyConfig(apiTarget: string, cameraTarget: string) {
 }
 
 export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, process.cwd(), '')
-  const apiTarget = env.VITE_PROXY_TARGET || env.VITE_API_BASE_URL || 'http://10.41.40.130:1234'
-  const cameraTarget = env.VITE_CAMERA_TARGET || 'http://10.41.39.153'
+  const apiTarget =  'http://10.41.40.130:1234'
+  const cameraTarget =  'http://10.41.39.153'
 
   return {
     plugins: [vue()],
