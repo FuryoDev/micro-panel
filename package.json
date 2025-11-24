@@ -4,7 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --host",
+    "dev": "sh -c \"trap 'kill 0' EXIT; (cd backend && mvn spring-boot:run) & (vite --host)\"",
+    "dev:frontend": "vite --host",
+    "dev:backend": "cd backend && mvn spring-boot:run",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
