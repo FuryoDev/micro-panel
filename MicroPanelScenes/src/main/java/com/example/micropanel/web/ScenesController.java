@@ -20,7 +20,7 @@ public class ScenesController {
     }
 
     @GetMapping
-    public ResponseEntity<Object> getScenes() {
+    public ResponseEntity<?> getScenes() {
         return scenesProxyService.fetchScenes();
     }
 

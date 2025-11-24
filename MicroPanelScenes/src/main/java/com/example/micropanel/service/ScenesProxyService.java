@@ -1,8 +1,10 @@
 package com.example.micropanel.service;
 
 import com.example.micropanel.config.UpstreamProperties;
+import com.example.micropanel.web.dto.SceneDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +13,7 @@ import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestClientResponseException;
 
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -26,12 +29,13 @@ public class ScenesProxyService {
         this.scenesBasePath = sanitizedBase + "/scenes";
     }
 
-    public ResponseEntity<Object> fetchScenes() {
+    public ResponseEntity<?> fetchScenes() {
         try {
-            ResponseEntity<Object> response = client.get()
+            ResponseEntity<List<SceneDto>> response = client.get()
                     .uri("/scenes")
                     .retrieve()
-                    .toEntity(Object.class);
+                    .toEntity(new ParameterizedTypeReference<>() {
+                    });
             return passthrough(response);
         } catch (RestClientResponseException ex) {
             logger.warn("Upstream responded with status {} for GET {}", ex.getStatusCode(), scenesBasePath);
@@ -62,10 +66,11 @@ public class ScenesProxyService {
         }
     }
 
-    private ResponseEntity<Object> passthrough(ResponseEntity<Object> response) {
+    private <T> ResponseEntity<T> passthrough(ResponseEntity<T> response) {
         HttpHeaders headers = HttpHeaders.writableHttpHeaders(response.getHeaders());
         headers.remove(HttpHeaders.TRANSFER_ENCODING);
         headers.remove(HttpHeaders.CONTENT_LENGTH);
+        headers.remove(HttpHeaders.CONTENT_ENCODING);
         return new ResponseEntity<>(response.getBody(), headers, response.getStatusCode());
     }
 }
