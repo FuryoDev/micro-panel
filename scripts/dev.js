@@ -1,12 +1,14 @@
-import { spawn } from 'child_process';
+import { spawn, spawnSync } from 'child_process';
+import { existsSync } from 'fs';
+import path from 'path';
 
 const processes = [];
 let shuttingDown = false;
 
-function startProcess(label, command) {
-  const child = spawn(command, {
-    shell: true,
+function startProcess(label, command, args = [], options = {}) {
+  const child = spawn(command, args, {
     stdio: 'inherit',
+    ...options,
   });
 
   processes.push({ label, child });
@@ -62,5 +64,42 @@ function shutdown(exitCode = 0) {
   });
 });
 
-startProcess('backend', 'cd backend && mvn spring-boot:run');
-startProcess('frontend', 'vite --host');
+function isCommandAvailable(command) {
+  const check = process.platform === 'win32' ? `where ${command}` : `command -v ${command}`;
+  const result = spawnSync(check, { shell: true, stdio: 'ignore' });
+  return result.status === 0;
+}
+
+function resolveBackendCommand() {
+  const backendDir = path.join(process.cwd(), 'backend');
+  const isWindows = process.platform === 'win32';
+  const envCmd = process.env.BACKEND_CMD;
+
+  if (envCmd) {
+    return { command: envCmd, args: ['spring-boot:run'], options: { cwd: backendDir } };
+  }
+
+  const wrapperName = isWindows ? 'mvnw.cmd' : 'mvnw';
+  const wrapperPath = path.join(backendDir, wrapperName);
+  if (existsSync(wrapperPath)) {
+    return { command: wrapperPath, args: ['spring-boot:run'], options: { cwd: backendDir } };
+  }
+
+  if (isCommandAvailable('mvn')) {
+    return { command: 'mvn', args: ['spring-boot:run'], options: { cwd: backendDir } };
+  }
+
+  throw new Error(
+    'Maven introuvable. Installez Maven et ajoutez-le au PATH ou définissez BACKEND_CMD vers votre exécutable mvn/mvnw.'
+  );
+}
+
+try {
+  const backend = resolveBackendCommand();
+  startProcess('backend', backend.command, backend.args, backend.options);
+} catch (error) {
+  console.error(`\n[backend] ${error.message}`);
+  shutdown(1);
+}
+
+startProcess('frontend', 'vite', ['--host']);

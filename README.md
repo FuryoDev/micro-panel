@@ -30,6 +30,7 @@ Cela permet de travailler avec une API distante sans devoir modifier le code.
 Un backend Spring Boot est livré dans le dossier `backend/` pour faire l'appel aux scènes et éviter le CORS côté navigateur.
 
 - `npm run dev` démarre le backend (`mvn spring-boot:run`) en parallèle de Vite et arrêtera l'API quand vous quittez le dev server.
-  Le script Node ne dépend plus de `sh`, il fonctionne donc aussi sur Windows (nécessite Java + Maven dans le `PATH`).
+  Le script Node ne dépend plus de `sh`, il fonctionne donc aussi sur Windows. Il nécessite Java + Maven disponibles dans le `PATH`
+  ou la variable d'environnement `BACKEND_CMD` pointant vers votre exécutable Maven (par ex. `C:\\apache-maven\\bin\\mvn.cmd`).
 - Vous pouvez lancer uniquement l'API avec `npm run dev:backend` ou `cd backend && mvn spring-boot:run`.
 - Le backend proxy les appels `/api/scenes` vers une API en amont définie par la propriété `panel.upstream.base-url` (fichier `backend/src/main/resources/application.yml` ou variable d'environnement `PANEL_UPSTREAM_BASE_URL`).
