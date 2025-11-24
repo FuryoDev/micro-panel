@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "node scripts/dev.js",
     "dev:frontend": "vite --host",
-    "dev:backend": "cd backend && mvn spring-boot:run",
+    "dev:backend": "cd MicroPanelScenes && mvn spring-boot:run",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },

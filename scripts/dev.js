@@ -71,7 +71,7 @@ function isCommandAvailable(command) {
 }
 
 function resolveBackendCommand() {
-  const backendDir = path.join(process.cwd(), 'backend');
+  const backendDir = path.join(process.cwd(), 'MicroPanelScenes');
   const isWindows = process.platform === 'win32';
   const envCmd = process.env.BACKEND_CMD;
 
