@@ -8,4 +8,4 @@ server:
 panel:
   upstream:
     # Base URL de l'API qui expose les scènes (inclure le préfixe /api si nécessaire)
-    base-url: http://10.41.40.130:1234/api
+    base-url: http://10.41.40.130:1234/
