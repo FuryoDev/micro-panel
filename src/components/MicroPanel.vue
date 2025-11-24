@@ -58,7 +58,7 @@ interface ParsedScene {
 }
 
 interface ScenesResponse {
-  layers?: unknown
+  scenes?: unknown
 }
 
 interface PanelButtonEvent {
@@ -402,9 +402,10 @@ function refreshNow() {
 }
 
 function parseScenesPayload(payload: unknown): ParsedScene[] {
-  if (!Array.isArray(payload)) return []
+  const scenesCollection = extractScenesCollection(payload)
+  if (!Array.isArray(scenesCollection)) return []
 
-  return (payload as unknown[])
+  return scenesCollection
       .map((rawScene, sceneIndex) => {
         if (!rawScene || typeof rawScene !== 'object') return null
         const sceneRecord = rawScene as UnknownRecord
@@ -418,7 +419,7 @@ function parseScenesPayload(payload: unknown): ParsedScene[] {
 
         const parsedLayers = parseSceneLayers(sceneRecord)
         const snapshots = parseSceneButtons(sceneRecord.snapshots, `${id}-snapshot`)
-        const macros = parseSceneButtons(sceneRecord.macros, `${id}-macro`)
+        const macros = parseSceneButtons(sceneRecord.macros ?? sceneRecord.actions, `${id}-macro`)
 
         return {
           id,
@@ -430,6 +431,15 @@ function parseScenesPayload(payload: unknown): ParsedScene[] {
         }
       })
       .filter((scene): scene is ParsedScene => Boolean(scene))
+}
+
+function extractScenesCollection(payload: unknown): unknown[] | undefined {
+  if (Array.isArray(payload)) return payload
+  if (payload && typeof payload === 'object') {
+    const candidate = (payload as ScenesResponse).scenes
+    if (Array.isArray(candidate)) return candidate
+  }
+  return undefined
 }
 
 function parseSceneLayers(sceneRecord: UnknownRecord): ParsedLayerDefinition[] {
