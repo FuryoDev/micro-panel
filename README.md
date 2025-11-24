@@ -17,6 +17,7 @@ Cela permet de travailler avec une API distante sans devoir modifier le code.
 2. Définissez `VITE_API_BASE_URL` sur `/api` si vous avez un reverse proxy en prod, ou directement sur `http://10.41.40.130:1234` si vous servez le front depuis la même machine.
 3. Facultatif : définissez `VITE_PROXY_TARGET` si l'API est accessible sur un autre hôte en local pour bénéficier du proxy Vite.
    Pour un backend Spring Boot local, utilisez `http://localhost:8080` afin que les appels `/api/scenes` du panel soient redirigés vers `http://localhost:8080/api/scenes` sans avoir à gérer le CORS côté navigateur.
+4. Le backend Spring Boot proxy les appels `/api/scenes` vers l'URL définie par `panel.upstream.base-url` (fichier `MicroPanelScenes/src/main/resources/application.yml` ou variable d'environnement `PANEL_UPSTREAM_BASE_URL`). La valeur par défaut pointe sur `http://10.41.40.130:1234/api` ; ajustez-la si l'API tourne sur un autre hôte ou port.
 
 ## Scripts
 

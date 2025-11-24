@@ -9,7 +9,7 @@ public class UpstreamProperties {
     /**
      * Base URL of the upstream API that exposes scene resources (must include the /api prefix if needed).
      */
-    private String baseUrl = "http://localhost:1234/api";
+    private String baseUrl = "http://10.41.40.130:1234/api";
 
     public String getBaseUrl() {
         return baseUrl;
