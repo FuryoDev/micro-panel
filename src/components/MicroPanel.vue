@@ -801,14 +801,21 @@ function getPageSize(): number {
 }
 
 function measureGridWidth(entry?: ResizeObserverEntry): number {
+  const viewportWidth = typeof window !== 'undefined' ? window.innerWidth : 0
   const observedWidth = entry?.contentRect?.width ?? 0
-  if (observedWidth > 0) return observedWidth
+
+  if (observedWidth > 0) {
+    return viewportWidth ? Math.min(observedWidth, viewportWidth) : observedWidth
+  }
 
   const element = gridElement.value
-  const parentWidth = element?.parentElement?.clientWidth ?? 0
+  const parent = element?.parentElement
+  const parentWidth = parent?.clientWidth ?? 0
+  const parentRectWidth = parent?.getBoundingClientRect()?.width ?? 0
   const ownWidth = element?.clientWidth ?? 0
+  const measured = Math.max(parentWidth, parentRectWidth, ownWidth, 0)
 
-  return Math.max(parentWidth, ownWidth, 0)
+  return viewportWidth ? Math.min(measured, viewportWidth) : measured
 }
 
 function updatePageSizeFromWidth(containerWidth: number) {
@@ -1071,6 +1078,8 @@ function updatePageSizeFromWidth(containerWidth: number) {
   border-radius: 4px;
   border: 1px solid #2a2a2a;
   overflow-x: auto;
+  width: 100%;
+  box-sizing: border-box;
   box-shadow: inset 0 0 0 1px #000;
 }
 
