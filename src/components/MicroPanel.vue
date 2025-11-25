@@ -13,7 +13,6 @@ const GRID_GAP = 4
 const GRID_PADDING = 16
 const LABEL_WIDTH = 140
 const PAGER_COLUMN_COUNT = 1
-const PAGE_LABELS = ['1st', '2nd', '3rd']
 
 interface SceneButton {
   id: string
@@ -328,7 +327,7 @@ function activateSourceButton(layer: SceneLayer, button: SceneButton) {
 }
 
 function cycleLayerPage(layer: SceneLayer) {
-  if (!layer.pages || layer.pages.length === 0) return
+  if (!layer.hasPager || !layer.pages || layer.pages.length === 0) return
   const nextIndex = ((layer.pageIndex ?? 0) + 1) % layer.pages.length
   layer.pageIndex = nextIndex
   pageIndexCache.set(layer.id, nextIndex)
@@ -336,8 +335,9 @@ function cycleLayerPage(layer: SceneLayer) {
 }
 
 function pagerLabel(layer: SceneLayer): string {
-  const index = layer.pageIndex ?? 0
-  return PAGE_LABELS[index] ?? `${index + 1}th`
+  const current = (layer.pageIndex ?? 0) + 1
+  const total = layer.pageCount ?? layer.pages?.length ?? 1
+  return `${current}/${total}`
 }
 
 function layerColumnCount(layer: SceneLayer): number {
@@ -621,7 +621,12 @@ function buildSourceRow(
       : ''
   const rowId = `${scene.id}:${layer.id}:${sourceKey}`
   const selectedValue = layer.state[sourceKey] ?? null
-  const currentPageSize = getPageSize()
+  const availableSlots = getPageSize()
+  const needsPager = layer.sources.length > availableSlots
+  const pageSlotCount = needsPager
+      ? Math.max(1, availableSlots - PAGER_COLUMN_COUNT)
+      : Math.max(1, availableSlots)
+
   const pages = buildPagedButtons(
       rowId,
       scene.id,
@@ -630,7 +635,7 @@ function buildSourceRow(
       layer.sources,
       selectedValue,
       layerState,
-      currentPageSize,
+      pageSlotCount,
   )
   const cachedIndex = pageIndexCache.get(rowId) ?? 0
   const pageIndex = Math.min(cachedIndex, pages.length - 1)
@@ -644,7 +649,7 @@ function buildSourceRow(
     pages,
     pageIndex,
     pageCount: pages.length,
-    hasPager: true,
+    hasPager: needsPager && pages.length > 1,
     raw: layer.raw,
     meta: {
       kind: 'source',
@@ -796,14 +801,21 @@ function getPageSize(): number {
 }
 
 function measureGridWidth(entry?: ResizeObserverEntry): number {
+  const viewportWidth = typeof window !== 'undefined' ? window.innerWidth : 0
   const observedWidth = entry?.contentRect?.width ?? 0
-  if (observedWidth > 0) return observedWidth
+
+  if (observedWidth > 0) {
+    return viewportWidth ? Math.min(observedWidth, viewportWidth) : observedWidth
+  }
 
   const element = gridElement.value
-  const parentWidth = element?.parentElement?.clientWidth ?? 0
+  const parent = element?.parentElement
+  const parentWidth = parent?.clientWidth ?? 0
+  const parentRectWidth = parent?.getBoundingClientRect()?.width ?? 0
   const ownWidth = element?.clientWidth ?? 0
+  const measured = Math.max(parentWidth, parentRectWidth, ownWidth, 0)
 
-  return Math.max(parentWidth, ownWidth, 0)
+  return viewportWidth ? Math.min(measured, viewportWidth) : measured
 }
 
 function updatePageSizeFromWidth(containerWidth: number) {
@@ -812,7 +824,7 @@ function updatePageSizeFromWidth(containerWidth: number) {
   const innerWidth = Math.max(containerWidth - GRID_PADDING, 0)
   const availableWidth = Math.max(innerWidth - LABEL_WIDTH, BUTTON_WIDTH)
   const maxColumns = Math.floor((availableWidth + GRID_GAP) / (BUTTON_WIDTH + GRID_GAP))
-  const nextSize = Math.max(1, Math.min(DEFAULT_PAGE_SIZE, maxColumns - PAGER_COLUMN_COUNT))
+  const nextSize = Math.max(1, Math.min(DEFAULT_PAGE_SIZE, maxColumns))
 
   if (nextSize !== pageSize.value) {
     pageSize.value = nextSize
@@ -1066,6 +1078,8 @@ function updatePageSizeFromWidth(containerWidth: number) {
   border-radius: 4px;
   border: 1px solid #2a2a2a;
   overflow-x: auto;
+  width: 100%;
+  box-sizing: border-box;
   box-shadow: inset 0 0 0 1px #000;
 }
 
