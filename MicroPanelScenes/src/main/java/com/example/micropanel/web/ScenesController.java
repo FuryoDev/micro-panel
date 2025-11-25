@@ -24,7 +24,8 @@ public class ScenesController {
 
     @GetMapping
     public ResponseEntity<List<SceneDto>> getScenes() {
-        return ResponseEntity.ok(scenesProxyService.fetchScenes());
+        List<SceneDto> s = scenesProxyService.fetchScenes();
+        return ResponseEntity.ok(s);
     }
 
     @PatchMapping("/{sceneId}/{layerId}")
