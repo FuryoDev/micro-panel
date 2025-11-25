@@ -52,6 +52,18 @@ const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:808
 const API_SCENES_ENDPOINT = `${API_BASE_URL}/scenes`
 let isIntegrationSetup = false
 
+function sceneLayerUrl(sceneId: string, layerId: string): string {
+  return `${API_SCENES_ENDPOINT}/${encodeURIComponent(sceneId)}/${encodeURIComponent(layerId)}`
+}
+
+function snapshotUrl(sceneId: string, uuid: string): string {
+  return `${API_SCENES_ENDPOINT}/${encodeURIComponent(sceneId)}/snapshots/${encodeURIComponent(uuid)}`
+}
+
+function macroUrl(sceneId: string, uuid: string): string {
+  return `${API_SCENES_ENDPOINT}/${encodeURIComponent(sceneId)}/macros/${encodeURIComponent(uuid)}`
+}
+
 export function setupPanelIntegration() {
   if (typeof window === 'undefined') return
   if (isIntegrationSetup) return
@@ -140,13 +152,13 @@ class PanelController {
       if (meta.kind === 'source') {
         const { sceneId, layerId, layerState, sourceKey, value } = meta
         const payload = { ...layerState, [sourceKey]: value }
-        await patchJson(`${API_SCENES_ENDPOINT}/${sceneId}/${layerId}`, payload)
+        await patchJson(sceneLayerUrl(sceneId, layerId), payload)
       } else if (meta.kind === 'snapshot') {
-        await patchJson(`${API_SCENES_ENDPOINT}/${meta.sceneId}/snapshots/${meta.uuid}`, {
+        await patchJson(snapshotUrl(meta.sceneId, meta.uuid), {
           state: 'recall',
         })
       } else if (meta.kind === 'macro') {
-        await patchJson(`${API_SCENES_ENDPOINT}/${meta.sceneId}/macros/${meta.uuid}`, {
+        await patchJson(macroUrl(meta.sceneId, meta.uuid), {
           state: 'play',
         })
       }
@@ -198,16 +210,26 @@ function extractButtonMeta(event: PanelButtonEvent): ButtonMeta | undefined {
 }
 
 async function patchJson(url: string, body: unknown) {
-  const response = await fetch(url, {
-    method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(body ?? {}),
-  })
+  let response: Response
+
+  try {
+    response = await fetch(url, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      cache: 'no-cache',
+      body: JSON.stringify(body ?? {}),
+    })
+  } catch (error) {
+    const message = error instanceof Error ? error.message : 'Erreur réseau'
+    throw new Error(`Requête PATCH échouée: ${message}`)
+  }
 
   if (!response.ok) {
-    throw new Error(`HTTP ${response.status}`)
+    const details = await response.text().catch(() => '')
+    const message = details && details.trim().length > 0 ? details : `HTTP ${response.status}`
+    throw new Error(message)
   }
 }
 

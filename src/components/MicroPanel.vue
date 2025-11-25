@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
 type UnknownRecord = Record<string, unknown>
 type DateInput = Date | string | number | null | undefined
@@ -7,7 +7,12 @@ type DateInput = Date | string | number | null | undefined
 type LayerKind = 'delegation' | 'source' | 'snapshots' | 'macros'
 type ButtonVariant = 'muted' | 'active' | 'preview' | 'warning' | 'danger' | 'light'
 
-const PAGE_SIZE = 31
+const DEFAULT_PAGE_SIZE = 31
+const BUTTON_WIDTH = 44
+const GRID_GAP = 4
+const GRID_PADDING = 16
+const LABEL_WIDTH = 140
+const PAGER_COLUMN_COUNT = 1
 const PAGE_LABELS = ['1st', '2nd', '3rd']
 
 interface SceneButton {
@@ -104,6 +109,7 @@ const rawPayload = ref<unknown | null>(null)
 const scenes = ref<ParsedScene[]>([])
 const layers = ref<SceneLayer[]>([])
 const selectedSceneId = ref<string | null>(null)
+const pageSize = ref(DEFAULT_PAGE_SIZE)
 const lastUpdated = ref<Date | null>(null)
 const lastPushedAt = ref<Date | null>(null)
 const isInitialLoading = ref(true)
@@ -116,10 +122,11 @@ const syncStatusOverrideClass = ref<'is-ok' | 'is-busy' | 'is-error' | null>(nul
 const refreshHandler = ref<(() => void) | null>(null)
 const buttonEventHandler = ref<((event: PanelButtonEvent) => void) | null>(null)
 const pageIndexCache = new Map<string, number>()
+const gridElement = ref<HTMLElement | null>(null)
+let resizeObserver: ResizeObserver | null = null
 
 const delegationLayer = computed(() => layers.value.find((layer) => layer.kind === 'delegation') ?? null)
 const hasRefreshHandler = computed(() => Boolean(refreshHandler.value))
-const columnCount = computed(() => PAGE_SIZE + 1)
 const visibleLayers = computed(() => layers.value)
 const hasVisibleLayers = computed(() => visibleLayers.value.length > 0)
 
@@ -159,6 +166,30 @@ const formattedPushTime = computed(() => {
 
 watch(selectedSceneId, (sceneId) => {
   layers.value = buildVisibleLayers(scenes.value, sceneId)
+})
+
+watch(pageSize, () => {
+  layers.value = buildVisibleLayers(scenes.value, selectedSceneId.value)
+})
+
+onMounted(() => {
+  resizeObserver = new ResizeObserver((entries) => {
+    const width = measureGridWidth(entries[0])
+    updatePageSizeFromWidth(width)
+  })
+
+  const target = gridElement.value?.parentElement ?? gridElement.value
+
+  if (target && resizeObserver) {
+    resizeObserver.observe(target)
+  }
+
+  updatePageSizeFromWidth(measureGridWidth())
+})
+
+onBeforeUnmount(() => {
+  resizeObserver?.disconnect()
+  resizeObserver = null
 })
 
 function applyScenesPayload(payload: unknown, meta?: { updatedAt?: DateInput }) {
@@ -307,6 +338,12 @@ function cycleLayerPage(layer: SceneLayer) {
 function pagerLabel(layer: SceneLayer): string {
   const index = layer.pageIndex ?? 0
   return PAGE_LABELS[index] ?? `${index + 1}th`
+}
+
+function layerColumnCount(layer: SceneLayer): number {
+  const buttonCount = Array.isArray(layer.buttons) ? layer.buttons.length : 0
+  const pagerCount = layer.kind === 'source' && layer.hasPager ? 1 : 0
+  return Math.max(buttonCount + pagerCount, 1)
 }
 
 function normalizeKey(value: unknown): string {
@@ -584,6 +621,7 @@ function buildSourceRow(
       : ''
   const rowId = `${scene.id}:${layer.id}:${sourceKey}`
   const selectedValue = layer.state[sourceKey] ?? null
+  const currentPageSize = getPageSize()
   const pages = buildPagedButtons(
       rowId,
       scene.id,
@@ -592,6 +630,7 @@ function buildSourceRow(
       layer.sources,
       selectedValue,
       layerState,
+      currentPageSize,
   )
   const cachedIndex = pageIndexCache.get(rowId) ?? 0
   const pageIndex = Math.min(cachedIndex, pages.length - 1)
@@ -625,9 +664,11 @@ function buildPagedButtons(
     sources: string[],
     selectedValue: string | null,
     layerState: UnknownRecord,
+    pageSizeForRow: number,
 ): SceneButton[][] {
-  const totalPages = Math.max(PAGE_LABELS.length, 1)
-  const totalSlots = totalPages * PAGE_SIZE
+  const size = Math.max(1, pageSizeForRow)
+  const totalPages = Math.max(Math.ceil(sources.length / size), 1)
+  const totalSlots = totalPages * size
   const entries = [...sources]
   while (entries.length < totalSlots) {
     entries.push('')
@@ -635,8 +676,8 @@ function buildPagedButtons(
 
   const pages: SceneButton[][] = []
   for (let pageIndex = 0; pageIndex < totalPages; pageIndex += 1) {
-    const offset = pageIndex * PAGE_SIZE
-    const subset = entries.slice(offset, offset + PAGE_SIZE)
+    const offset = pageIndex * size
+    const subset = entries.slice(offset, offset + size)
     const pageButtons = subset.map((label, index) => {
       const normalizedLabel = typeof label === 'string' ? label.trim() : ''
       const value = normalizedLabel || ''
@@ -673,6 +714,7 @@ function buildSnapshotsLayer(scene: ParsedScene): SceneLayer {
         },
       })),
       `${scene.id}-snapshot-placeholder`,
+      getPageSize(),
   )
 
   return {
@@ -696,6 +738,7 @@ function buildMacrosLayer(scene: ParsedScene): SceneLayer {
         },
       })),
       `${scene.id}-macro-placeholder`,
+      getPageSize(),
   )
 
   return {
@@ -708,12 +751,13 @@ function buildMacrosLayer(scene: ParsedScene): SceneLayer {
   }
 }
 
-function padButtons(buttons: SceneButton[], prefix: string): SceneButton[] {
+function padButtons(buttons: SceneButton[], prefix: string, pageSizeForRow: number): SceneButton[] {
+  const size = Math.max(1, pageSizeForRow)
   const result = [...buttons]
-  while (result.length < PAGE_SIZE) {
+  while (result.length < size) {
     result.push(createPlaceholderButton(`${prefix}-${result.length}`))
   }
-  return result.slice(0, PAGE_SIZE)
+  return result.slice(0, size)
 }
 
 function createPlaceholderButton(id: string): SceneButton {
@@ -745,6 +789,34 @@ const bridge: PanelIntegrationBridge = {
 
 if (typeof window !== 'undefined') {
   window.MicroPanelUI = bridge
+}
+
+function getPageSize(): number {
+  return Math.max(1, pageSize.value || DEFAULT_PAGE_SIZE)
+}
+
+function measureGridWidth(entry?: ResizeObserverEntry): number {
+  const observedWidth = entry?.contentRect?.width ?? 0
+  if (observedWidth > 0) return observedWidth
+
+  const element = gridElement.value
+  const parentWidth = element?.parentElement?.clientWidth ?? 0
+  const ownWidth = element?.clientWidth ?? 0
+
+  return Math.max(parentWidth, ownWidth, 0)
+}
+
+function updatePageSizeFromWidth(containerWidth: number) {
+  if (!containerWidth) return
+
+  const innerWidth = Math.max(containerWidth - GRID_PADDING, 0)
+  const availableWidth = Math.max(innerWidth - LABEL_WIDTH, BUTTON_WIDTH)
+  const maxColumns = Math.floor((availableWidth + GRID_GAP) / (BUTTON_WIDTH + GRID_GAP))
+  const nextSize = Math.max(1, Math.min(DEFAULT_PAGE_SIZE, maxColumns - PAGER_COLUMN_COUNT))
+
+  if (nextSize !== pageSize.value) {
+    pageSize.value = nextSize
+  }
 }
 </script>
 
@@ -792,7 +864,7 @@ if (typeof window !== 'undefined') {
         <section
             v-else
             class="panel-grid"
-            :style="{ '--button-count': Math.max(columnCount, 1) }"
+            ref="gridElement"
         >
           <article
               v-for="layer in visibleLayers"
@@ -802,6 +874,7 @@ if (typeof window !== 'undefined') {
               'is-delegation': layer.id === delegationLayer?.id,
               'is-sticky': layer.sticky,
             }"
+              :style="{ '--button-count': layerColumnCount(layer) }"
           >
             <div class="layer-title">
               {{ layer.id === 'delegation' ? 'Delegation' : layer.name }}
