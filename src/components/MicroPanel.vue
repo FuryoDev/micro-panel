@@ -127,7 +127,6 @@ let resizeObserver: ResizeObserver | null = null
 
 const delegationLayer = computed(() => layers.value.find((layer) => layer.kind === 'delegation') ?? null)
 const hasRefreshHandler = computed(() => Boolean(refreshHandler.value))
-const columnCount = computed(() => getPageSize() + 1)
 const visibleLayers = computed(() => layers.value)
 const hasVisibleLayers = computed(() => visibleLayers.value.length > 0)
 
@@ -175,15 +174,17 @@ watch(pageSize, () => {
 
 onMounted(() => {
   resizeObserver = new ResizeObserver((entries) => {
-    const width = entries[0]?.contentRect.width ?? gridElement.value?.clientWidth ?? 0
+    const width = measureGridWidth(entries[0])
     updatePageSizeFromWidth(width)
   })
 
-  if (gridElement.value && resizeObserver) {
-    resizeObserver.observe(gridElement.value)
+  const target = gridElement.value?.parentElement ?? gridElement.value
+
+  if (target && resizeObserver) {
+    resizeObserver.observe(target)
   }
 
-  updatePageSizeFromWidth(gridElement.value?.clientWidth ?? 0)
+  updatePageSizeFromWidth(measureGridWidth())
 })
 
 onBeforeUnmount(() => {
@@ -337,6 +338,12 @@ function cycleLayerPage(layer: SceneLayer) {
 function pagerLabel(layer: SceneLayer): string {
   const index = layer.pageIndex ?? 0
   return PAGE_LABELS[index] ?? `${index + 1}th`
+}
+
+function layerColumnCount(layer: SceneLayer): number {
+  const buttonCount = Array.isArray(layer.buttons) ? layer.buttons.length : 0
+  const pagerCount = layer.kind === 'source' && layer.hasPager ? 1 : 0
+  return Math.max(buttonCount + pagerCount, 1)
 }
 
 function normalizeKey(value: unknown): string {
@@ -788,6 +795,17 @@ function getPageSize(): number {
   return Math.max(1, pageSize.value || DEFAULT_PAGE_SIZE)
 }
 
+function measureGridWidth(entry?: ResizeObserverEntry): number {
+  const observedWidth = entry?.contentRect?.width ?? 0
+  if (observedWidth > 0) return observedWidth
+
+  const element = gridElement.value
+  const parentWidth = element?.parentElement?.clientWidth ?? 0
+  const ownWidth = element?.clientWidth ?? 0
+
+  return Math.max(parentWidth, ownWidth, 0)
+}
+
 function updatePageSizeFromWidth(containerWidth: number) {
   if (!containerWidth) return
 
@@ -847,7 +865,6 @@ function updatePageSizeFromWidth(containerWidth: number) {
             v-else
             class="panel-grid"
             ref="gridElement"
-            :style="{ '--button-count': Math.max(columnCount, 1) }"
         >
           <article
               v-for="layer in visibleLayers"
@@ -857,6 +874,7 @@ function updatePageSizeFromWidth(containerWidth: number) {
               'is-delegation': layer.id === delegationLayer?.id,
               'is-sticky': layer.sticky,
             }"
+              :style="{ '--button-count': layerColumnCount(layer) }"
           >
             <div class="layer-title">
               {{ layer.id === 'delegation' ? 'Delegation' : layer.name }}
