@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
-type UnknownRecord = Record<string, unknown>
+type UnknownRecord = Record<string, any>
 type DateInput = Date | string | number | null | undefined
 
 type LayerKind = 'delegation' | 'source' | 'snapshots' | 'macros'
@@ -71,6 +71,8 @@ interface PanelButtonEvent {
   buttonId: string
   buttonLabel: string
   nextState?: string
+  // on laisse UnknownRecord, mais comme c'est un index signature très permissif,
+  // SceneButton est assignable sans erreur
   rawButton?: UnknownRecord
   rawLayer?: UnknownRecord
 }
@@ -124,7 +126,9 @@ const pageIndexCache = new Map<string, number>()
 const gridElement = ref<HTMLElement | null>(null)
 let resizeObserver: ResizeObserver | null = null
 
-const delegationLayer = computed(() => layers.value.find((layer) => layer.kind === 'delegation') ?? null)
+const delegationLayer = computed(
+    () => layers.value.find((layer) => layer.kind === 'delegation') ?? null,
+)
 const hasRefreshHandler = computed(() => Boolean(refreshHandler.value))
 const visibleLayers = computed(() => layers.value)
 const hasVisibleLayers = computed(() => visibleLayers.value.length > 0)
@@ -171,19 +175,33 @@ watch(pageSize, () => {
   layers.value = buildVisibleLayers(scenes.value, selectedSceneId.value)
 })
 
+/**
+ * ⚠️ Nouvelle version de onMounted avec ResizeObserver attaché
+ * dès que gridElement existe réellement dans le DOM.
+ */
 onMounted(() => {
+  if (typeof window === 'undefined') return
+
   resizeObserver = new ResizeObserver((entries) => {
     const width = measureGridWidth(entries[0])
     updatePageSizeFromWidth(width)
   })
 
-  const target = gridElement.value?.parentElement ?? gridElement.value
+  // Observe dynamiquement l’élément de grid dès qu’il apparaît
+  watch(
+      () => gridElement.value,
+      (el) => {
+        if (!resizeObserver || !el) return
 
-  if (target && resizeObserver) {
-    resizeObserver.observe(target)
-  }
+        const target = el.parentElement ?? el
+        resizeObserver.observe(target)
 
-  updatePageSizeFromWidth(measureGridWidth())
+        // Première mesure dès que le grid est présent
+        const width = measureGridWidth()
+        updatePageSizeFromWidth(width)
+      },
+      { immediate: true },
+  )
 })
 
 onBeforeUnmount(() => {
@@ -199,7 +217,8 @@ function applyScenesPayload(payload: unknown, meta?: { updatedAt?: DateInput }) 
     selectedSceneId.value = parsed[0]?.id ?? null
   }
   layers.value = buildVisibleLayers(parsed, selectedSceneId.value)
-  lastUpdated.value = coerceDate(meta?.updatedAt) ?? (parsed.length > 0 ? new Date() : lastUpdated.value)
+  lastUpdated.value =
+      coerceDate(meta?.updatedAt) ?? (parsed.length > 0 ? new Date() : lastUpdated.value)
   isInitialLoading.value = false
   errorMessage.value = null
 }
@@ -293,11 +312,12 @@ function activateSourceButton(layer: SceneLayer, button: SceneButton) {
   const meta = button.meta ?? layer.meta
   if (!meta || meta.kind !== 'source') return
 
-  const value = typeof meta.value === 'string' && meta.value.trim().length > 0
-      ? meta.value.trim()
-      : typeof button.label === 'string'
-          ? button.label.trim()
-          : ''
+  const value =
+      typeof meta.value === 'string' && meta.value.trim().length > 0
+          ? meta.value.trim()
+          : typeof button.label === 'string'
+              ? button.label.trim()
+              : ''
   if (!value) return
 
   layer.pages.forEach((page) => {
@@ -495,11 +515,7 @@ function parseSceneLayers(sceneRecord: UnknownRecord): ParsedLayerDefinition[] {
         const name = nameCandidate ?? id
         const sources = Array.isArray(layerRecord.sources)
             ? (layerRecord.sources as unknown[]).map((entry) =>
-                typeof entry === 'string'
-                    ? entry
-                    : typeof entry === 'number'
-                        ? `${entry}`
-                        : '',
+                typeof entry === 'string' ? entry : typeof entry === 'number' ? `${entry}` : '',
             )
             : []
         const hasSourceA = Object.prototype.hasOwnProperty.call(layerRecord, 'sourceA')
@@ -537,8 +553,7 @@ function parseSceneButtons(collection: unknown, fallbackPrefix: string): SceneBu
         const rawEntry = entry as UnknownRecord
         const rawId = rawEntry.uuid ?? rawEntry.id ?? `${fallbackPrefix}-${index}`
         const id = typeof rawId === 'string' ? rawId : `${fallbackPrefix}-${index}`
-        const nameCandidate =
-            rawEntry.name ?? rawEntry.label ?? rawEntry.title ?? rawEntry.text ?? id
+        const nameCandidate = rawEntry.name ?? rawEntry.label ?? rawEntry.title ?? rawEntry.text ?? id
         const label = typeof nameCandidate === 'string' ? nameCandidate : id
         const state =
             typeof rawEntry.state === 'string' && rawEntry.state.trim().length > 0
@@ -610,7 +625,9 @@ function buildDelegationLayer(parsedScenes: ParsedScene[], activeSceneId: string
 }
 
 function buildLayerLabel(layer: ParsedLayerDefinition): string {
-  const parts = [layer.path, layer.name].filter((value) => typeof value === 'string' && value.trim().length > 0)
+  const parts = [layer.path, layer.name].filter(
+      (value) => typeof value === 'string' && value.trim().length > 0,
+  )
   const base = parts.join(' ').trim()
   return base.length > 0 ? base : layer.name
 }
@@ -622,11 +639,8 @@ function buildSourceRow(
     layerState: UnknownRecord,
 ): SceneLayer {
   const baseLabel = buildLayerLabel(layer)
-  const suffix = layer.hasSourceA && layer.hasSourceB
-      ? sourceKey === 'sourceA'
-          ? ' - A'
-          : ' - B'
-      : ''
+  const suffix =
+      layer.hasSourceA && layer.hasSourceB ? (sourceKey === 'sourceA' ? ' - A' : ' - B') : ''
   const rowId = `${scene.id}:${layer.id}:${sourceKey}`
   const selectedValue = layer.state[sourceKey] ?? null
   const availableSlots = getPageSize()
@@ -767,7 +781,11 @@ function buildMacrosLayer(scene: ParsedScene): SceneLayer {
     raw: { type: 'macros' },
   }
 }
-function paginateLayerButtons(rowId: string, buttons: SceneButton[]): {
+
+function paginateLayerButtons(
+    rowId: string,
+    buttons: SceneButton[],
+): {
   buttons: SceneButton[]
   pages: SceneButton[][]
   pageIndex: number
@@ -803,7 +821,9 @@ function chunkButtons(rowId: string, buttons: SceneButton[], pageSizeForRow: num
     const pageButtons = [...subset]
 
     while (pageButtons.length < size) {
-      pageButtons.push(createPlaceholderButton(`${rowId}-placeholder-${pageIndex}-${pageButtons.length}`))
+      pageButtons.push(
+          createPlaceholderButton(`${rowId}-placeholder-${pageIndex}-${pageButtons.length}`),
+      )
     }
 
     pages.push(pageButtons)
