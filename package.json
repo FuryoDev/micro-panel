@@ -4,9 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "node scripts/dev.js",
-    "dev:frontend": "vite --host",
-    "dev:backend": "mvn -f MicroPanelScenes/pom.xml spring-boot:run",
+    "dev": "node scripts/dev.js frontend",
+    "backend": "node scripts/dev.js backend",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },

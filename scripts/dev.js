@@ -2,14 +2,14 @@ import { spawn, spawnSync } from 'child_process';
 import { existsSync } from 'fs';
 import path from 'path';
 
-const processes = [];
-let shuttingDown = false;
-
 // Ajoute node_modules/.bin au PATH pour pouvoir appeler "vite" directement
 process.env.PATH =
-    path.join(process.cwd(), 'node_modules', '.bin') +
-    path.delimiter +
-    (process.env.PATH ?? '');
+  path.join(process.cwd(), 'node_modules', '.bin') +
+  path.delimiter +
+  (process.env.PATH ?? '');
+
+const processes = [];
+let shuttingDown = false;
 
 function startProcess(label, command, args = [], options = {}) {
   console.log(`[${label}] Starting: ${command} ${args.join(' ')}`);
@@ -23,9 +23,9 @@ function startProcess(label, command, args = [], options = {}) {
 
   child.on('exit', (code, signal) => {
     console.log(
-        `\n[${label}] exited with code ${code ?? 'null'}${
-            signal ? `, signal ${signal}` : ''
-        }`
+      `\n[${label}] exited with code ${code ?? 'null'}${
+        signal ? `, signal ${signal}` : ''
+      }`
     );
     if (!shuttingDown) {
       shutdown(code ?? 0);
@@ -58,10 +58,9 @@ function shutdown(exitCode = 0) {
   if (shuttingDown) return;
   shuttingDown = true;
 
-  console.log('\nShutting down dev servers...');
+  console.log('\nShutting down dev server...');
   processes.forEach(({ child }) => killChild(child));
 
-  // Petit délai pour laisser le temps aux enfants de se fermer proprement
   setTimeout(() => {
     process.exit(exitCode);
   }, 500);
@@ -87,7 +86,6 @@ function resolveBackendCommand() {
   const isWindows = process.platform === 'win32';
   const envCmd = process.env.BACKEND_CMD;
 
-  // 1) Si l'utilisateur a défini BACKEND_CMD, on l'utilise
   if (envCmd) {
     return {
       command: envCmd,
@@ -96,7 +94,6 @@ function resolveBackendCommand() {
     };
   }
 
-  // 2) Sinon, on essaie le wrapper Maven (mvnw/mvnw.cmd) dans MicroPanelScenes
   const wrapperName = isWindows ? 'mvnw.cmd' : 'mvnw';
   const wrapperPath = path.join(backendDir, wrapperName);
   if (existsSync(wrapperPath)) {
@@ -107,7 +104,6 @@ function resolveBackendCommand() {
     };
   }
 
-  // 3) Sinon, on tente le Maven global
   if (isCommandAvailable('mvn')) {
     return {
       command: 'mvn',
@@ -116,9 +112,8 @@ function resolveBackendCommand() {
     };
   }
 
-  // 4) Rien trouvé → message clair
   throw new Error(
-      'Maven introuvable.\n' +
+    'Maven introuvable.\n' +
       "- Installez Maven et ajoutez-le au PATH, ou\n" +
       "- utilisez le wrapper Maven (mvnw / mvnw.cmd) dans MicroPanelScenes, ou\n" +
       "- définissez BACKEND_CMD vers votre exécutable mvn/mvnw.\n" +
@@ -126,27 +121,53 @@ function resolveBackendCommand() {
   );
 }
 
-console.log('================================');
-console.log(' Micro Panel Dev Environment');
-console.log('================================\n');
-
-let backendStarted = false;
-
-try {
-  const backend = resolveBackendCommand();
-  startProcess('backend', backend.command, backend.args, backend.options);
-  backendStarted = true;
-} catch (error) {
-  console.error(`\n[backend] ${error.message}`);
+function ensureFrontendTools() {
+  if (!isCommandAvailable('vite')) {
+    console.error(
+      '\n[Vite] Commande introuvable. Assurez-vous que les dépendances Node sont installées (npm install) ou utilisez npx vite.'
+    );
+    process.exit(1);
+  }
 }
 
-startProcess('frontend', 'vite', ['--host']);
+function startFrontend() {
+  console.log('================================');
+  console.log(' Micro Panel Frontend');
+  console.log('================================\n');
 
-console.log(' Micro Panel en cours de démarrage...');
-console.log('🟣 Frontend (Vite)       → http://localhost:5173');
-if (backendStarted) {
-  console.log('🟡 Backend (Spring Boot) → http://localhost:8080');
+  ensureFrontendTools();
+  startProcess('frontend', 'vite', ['--host']);
+
+  console.log(' Micro Panel frontend en cours de démarrage...');
+  console.log('🟣 Frontend (Vite) → http://localhost:5173');
+  console.log('\nArrêt : Ctrl + C\n');
+}
+
+function startBackend() {
+  console.log('================================');
+  console.log(' Micro Panel Backend');
+  console.log('================================\n');
+
+  try {
+    const backend = resolveBackendCommand();
+    startProcess('backend', backend.command, backend.args, backend.options);
+
+    console.log(' Micro Panel backend en cours de démarrage...');
+    console.log('🟡 Backend (Spring Boot) → http://localhost:8080');
+    console.log('\nArrêt : Ctrl + C\n');
+  } catch (error) {
+    console.error(`\n[backend] ${error.message}`);
+    shutdown(1);
+  }
+}
+
+const target = process.argv[2] ?? 'frontend';
+
+if (target === 'frontend') {
+  startFrontend();
+} else if (target === 'backend') {
+  startBackend();
 } else {
-  console.log('⚠️ Backend Spring Boot non démarré (Maven introuvable ou erreur).');
+  console.error(`Cible inconnue : ${target}. Utilisez "frontend" ou "backend".`);
+  process.exit(1);
 }
-console.log('\nArrêt : Ctrl + C\n');
