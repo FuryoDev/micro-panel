@@ -342,7 +342,8 @@ function pagerLabel(layer: SceneLayer): string {
 
 function layerColumnCount(layer: SceneLayer): number {
   const buttonCount = Array.isArray(layer.buttons) ? layer.buttons.length : 0
-  return Math.max(buttonCount, 1)
+  const maxSlots = Math.max(1, getPageSize() - (layer.hasPager ? PAGER_COLUMN_COUNT : 0))
+  return Math.max(Math.min(buttonCount, maxSlots), 1)
 }
 
 function normalizeKey(value: unknown): string {
@@ -1126,6 +1127,8 @@ function updatePageSizeFromWidth(containerWidth: number) {
   grid-auto-flow: column;
   column-gap: 4px;
   row-gap: 4px;
+  overflow: hidden;
+  max-width: 100%;
   min-width: 0;
 }
 
