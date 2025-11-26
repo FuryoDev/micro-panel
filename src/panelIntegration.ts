@@ -233,8 +233,3 @@ async function patchJson(url: string, body: unknown) {
   }
 }
 
-declare global {
-  interface Window {
-    MicroPanelUI?: PanelIntegrationBridge
-  }
-}
