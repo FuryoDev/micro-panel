@@ -342,8 +342,8 @@ function pagerLabel(layer: SceneLayer): string {
 
 function layerColumnCount(layer: SceneLayer): number {
   const buttonCount = Array.isArray(layer.buttons) ? layer.buttons.length : 0
-  const pagerCount = layer.kind === 'source' && layer.hasPager ? 1 : 0
-  return Math.max(buttonCount + pagerCount, 1)
+  const maxSlots = Math.max(1, getPageSize() - (layer.hasPager ? PAGER_COLUMN_COUNT : 0))
+  return Math.max(Math.min(buttonCount, maxSlots), 1)
 }
 
 function normalizeKey(value: unknown): string {
@@ -892,43 +892,46 @@ function updatePageSizeFromWidth(containerWidth: number) {
               {{ layer.id === 'delegation' ? 'Delegation' : layer.name }}
             </div>
 
-            <div class="layer-buttons">
-              <button
-                  v-for="button in layer.buttons"
-                  :key="button.id"
-                  class="panel-button"
-                  :class="[
-                  `variant-${buttonVariant(button)}`,
-                  {
-                    'is-selected':
-                      layer.kind === 'delegation'
-                        ? button.state === 'program'
-                        : layer.kind === 'source' && isButtonToggledOn(button),
-                  },
-                ]"
-                  type="button"
-                  :disabled="button.disabled"
-                  :aria-pressed="
-                  layer.kind === 'delegation' || layer.kind === 'source'
-                    ? isButtonToggledOn(button)
-                    : undefined
-                "
-                  :title="buttonTitle(layer, button)"
-                  @click="handleButtonClick(layer, button)"
-              >
-                <span class="button-label">{{ button.label }}</span>
-              </button>
+            <div class="layer-actions">
+              <div class="layer-buttons">
+                <button
+                    v-for="button in layer.buttons"
+                    :key="button.id"
+                    class="panel-button"
+                    :class="[
+                    `variant-${buttonVariant(button)}`,
+                    {
+                      'is-selected':
+                        layer.kind === 'delegation'
+                          ? button.state === 'program'
+                          : layer.kind === 'source' && isButtonToggledOn(button),
+                    },
+                  ]"
+                    type="button"
+                    :disabled="button.disabled"
+                    :aria-pressed="
+                    layer.kind === 'delegation' || layer.kind === 'source'
+                      ? isButtonToggledOn(button)
+                      : undefined
+                  "
+                    :title="buttonTitle(layer, button)"
+                    @click="handleButtonClick(layer, button)"
+                >
+                  <span class="button-label">{{ button.label }}</span>
+                </button>
+              </div>
 
-              <button
-                  v-if="layer.kind === 'source' && layer.hasPager"
-                  :key="`${layer.id}-pager`"
-                  class="panel-button pager-button variant-warning"
-                  type="button"
-                  :title="`Changer de page (${pagerLabel(layer)})`"
-                  @click="cycleLayerPage(layer)"
-              >
-                <span class="button-label">{{ pagerLabel(layer) }}</span>
-              </button>
+              <div v-if="layer.kind === 'source' && layer.hasPager" class="pager-container">
+                <button
+                    :key="`${layer.id}-pager`"
+                    class="panel-button pager-button variant-warning"
+                    type="button"
+                    :title="`Changer de page (${pagerLabel(layer)})`"
+                    @click="cycleLayerPage(layer)"
+                >
+                  <span class="button-label">{{ pagerLabel(layer) }}</span>
+                </button>
+              </div>
             </div>
           </article>
         </section>
@@ -1085,10 +1088,10 @@ function updatePageSizeFromWidth(containerWidth: number) {
 
 .panel-row {
   display: grid;
-  grid-template-columns: 140px repeat(var(--button-count), 44px);
+  grid-template-columns: 140px minmax(0, 1fr);
   align-items: center;
-  column-gap: 4px;
-  row-gap: 4px;
+  column-gap: 8px;
+  row-gap: 6px;
   padding: 4px 0;
 }
 
@@ -1109,8 +1112,35 @@ function updatePageSizeFromWidth(containerWidth: number) {
   text-align: left;
 }
 
+.layer-actions {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
 .layer-buttons {
-  display: contents;
+  display: grid;
+  grid-template-columns: repeat(var(--button-count), 44px);
+  grid-auto-flow: column;
+  column-gap: 4px;
+  row-gap: 4px;
+  overflow: hidden;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.pager-container {
+  position: sticky;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-left: 8px;
+  margin-left: 4px;
+  background: linear-gradient(90deg, rgba(24, 24, 24, 0) 0%, #181818 40%);
 }
 
 .panel-button {
