@@ -586,17 +586,25 @@ function buildVisibleLayers(parsedScenes: ParsedScene[], sceneId: string | null)
 }
 
 function buildDelegationLayer(parsedScenes: ParsedScene[], activeSceneId: string): SceneLayer {
+  const rowId = 'delegation'
+  const baseButtons = parsedScenes.map((scene) => ({
+    id: scene.id,
+    label: scene.name,
+    state: scene.id === activeSceneId ? 'program' : undefined,
+    raw: scene.raw,
+  }))
+  const pagination = paginateLayerButtons(rowId, baseButtons)
+
   return {
-    id: 'delegation',
+    id: rowId,
     name: 'Delegation',
     kind: 'delegation',
     sticky: true,
-    buttons: parsedScenes.map((scene) => ({
-      id: scene.id,
-      label: scene.name,
-      state: scene.id === activeSceneId ? 'program' : undefined,
-      raw: scene.raw,
-    })),
+    buttons: pagination.buttons,
+    pages: pagination.pages,
+    pageIndex: pagination.pageIndex,
+    pageCount: pagination.pageCount,
+    hasPager: pagination.hasPager,
     raw: { type: 'delegation' },
   }
 }
@@ -709,60 +717,99 @@ function buildPagedButtons(
 }
 
 function buildSnapshotsLayer(scene: ParsedScene): SceneLayer {
-  const buttons = padButtons(
-      scene.snapshots.map((button) => ({
-        ...button,
-        meta: {
-          kind: 'snapshot',
-          sceneId: scene.id,
-          uuid: button.id,
-        },
-      })),
-      `${scene.id}-snapshot-placeholder`,
-      getPageSize(),
-  )
+  const rowId = `snapshots-${scene.id}`
+  const baseButtons = scene.snapshots.map((button) => ({
+    ...button,
+    meta: {
+      kind: 'snapshot',
+      sceneId: scene.id,
+      uuid: button.id,
+    },
+  }))
+  const pagination = paginateLayerButtons(rowId, baseButtons)
 
   return {
-    id: `snapshots-${scene.id}`,
+    id: rowId,
     name: 'Snapshots',
     kind: 'snapshots',
-    buttons,
+    buttons: pagination.buttons,
+    pages: pagination.pages,
+    pageIndex: pagination.pageIndex,
+    pageCount: pagination.pageCount,
+    hasPager: pagination.hasPager,
     sticky: true,
     raw: { type: 'snapshots' },
   }
 }
 
 function buildMacrosLayer(scene: ParsedScene): SceneLayer {
-  const buttons = padButtons(
-      scene.macros.map((button) => ({
-        ...button,
-        meta: {
-          kind: 'macro',
-          sceneId: scene.id,
-          uuid: button.id,
-        },
-      })),
-      `${scene.id}-macro-placeholder`,
-      getPageSize(),
-  )
+  const rowId = `macros-${scene.id}`
+  const baseButtons = scene.macros.map((button) => ({
+    ...button,
+    meta: {
+      kind: 'macro',
+      sceneId: scene.id,
+      uuid: button.id,
+    },
+  }))
+  const pagination = paginateLayerButtons(rowId, baseButtons)
 
   return {
-    id: `macros-${scene.id}`,
+    id: rowId,
     name: 'Macros',
     kind: 'macros',
-    buttons,
+    buttons: pagination.buttons,
+    pages: pagination.pages,
+    pageIndex: pagination.pageIndex,
+    pageCount: pagination.pageCount,
+    hasPager: pagination.hasPager,
     sticky: true,
     raw: { type: 'macros' },
   }
 }
+function paginateLayerButtons(rowId: string, buttons: SceneButton[]): {
+  buttons: SceneButton[]
+  pages: SceneButton[][]
+  pageIndex: number
+  pageCount: number
+  hasPager: boolean
+} {
+  const availableSlots = getPageSize()
+  const needsPager = buttons.length > availableSlots
+  const pageSlotCount = needsPager
+      ? Math.max(1, availableSlots - PAGER_COLUMN_COUNT)
+      : Math.max(1, availableSlots)
+  const pages = chunkButtons(rowId, buttons, pageSlotCount)
+  const cachedIndex = pageIndexCache.get(rowId) ?? 0
+  const pageIndex = Math.min(cachedIndex, pages.length - 1)
 
-function padButtons(buttons: SceneButton[], prefix: string, pageSizeForRow: number): SceneButton[] {
-  const size = Math.max(1, pageSizeForRow)
-  const result = [...buttons]
-  while (result.length < size) {
-    result.push(createPlaceholderButton(`${prefix}-${result.length}`))
+  return {
+    buttons: pages[pageIndex] ?? [],
+    pages,
+    pageIndex,
+    pageCount: pages.length,
+    hasPager: pages.length > 1,
   }
-  return result.slice(0, size)
+}
+
+function chunkButtons(rowId: string, buttons: SceneButton[], pageSizeForRow: number): SceneButton[][] {
+  const size = Math.max(1, pageSizeForRow)
+  const totalPages = Math.max(Math.ceil(buttons.length / size), 1)
+  const pages: SceneButton[][] = []
+
+  for (let pageIndex = 0; pageIndex < totalPages; pageIndex += 1) {
+    const offset = pageIndex * size
+    const subset = buttons.slice(offset, offset + size)
+    const pageButtons = [...subset]
+
+    while (pageButtons.length < size) {
+      pageButtons.push(createPlaceholderButton(`${rowId}-placeholder-${pageIndex}-${pageButtons.length}`))
+    }
+
+    pages.push(pageButtons)
+  }
+
+  return pages
 }
 
 function createPlaceholderButton(id: string): SceneButton {
@@ -921,7 +968,7 @@ function updatePageSizeFromWidth(containerWidth: number) {
                 </button>
               </div>
 
-              <div v-if="layer.kind === 'source' && layer.hasPager" class="pager-container">
+              <div v-if="layer.hasPager" class="pager-container">
                 <button
                     :key="`${layer.id}-pager`"
                     class="panel-button pager-button variant-warning"
